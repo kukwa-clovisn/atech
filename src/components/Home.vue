@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="landing-page">
+    <div class="landing-page" id="home">
       <div id="blur"></div>
       <Header />
       <div class="title">
@@ -304,6 +304,10 @@
         </div>
       </form>
     </div>
+    <span class="to-landing-page"
+      ><router-link to="#home/" class="a"
+        ><i class="fa-solid fa-circle-arrow-up"></i></router-link
+    ></span>
     <Footer />
   </main>
 </template>
@@ -1162,6 +1166,27 @@ main {
       @media screen and (max-width: 905px) {
         width: 99vw;
       }
+    }
+  }
+
+  .to-landing-page {
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+    background: #13253e;
+    position: fixed;
+    right: 30px;
+    bottom: 50px;
+    z-index: 1;
+
+    .a {
+      text-decoration: none;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
     }
   }
 }

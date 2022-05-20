@@ -9,12 +9,15 @@
       </div>
       <div class="right-content">
         <ul>
-          <li><a href="/login">sign up</a></li>
-          <li><a href="/login">sign in</a></li>
-          <li><a href="/register">register</a></li>
-          <li><a href="/why-us"> why crypto?</a></li>
-          <li><a href="/course"> courses</a></li>
-          <li><a href="/#contact">contact us</a></li>
+          <li><router-link to="/login" class="route">sign up</router-link></li>
+          <li><router-link to="/login" class="route">sign in</router-link></li>
+          <li>
+            <router-link to="/why-us" class="route">why crypto?</router-link>
+          </li>
+          <li><router-link to="/course" class="route">courses</router-link></li>
+          <li>
+            <router-link to="/#contact" class="route">contact us</router-link>
+          </li>
         </ul>
       </div>
     </div>

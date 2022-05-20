@@ -1,6 +1,6 @@
 import {
   createRouter,
-  createWebHashHistory
+  createWebHistory
 } from 'vue-router'
 import Home from '../components/Home.vue'
 import Sign_in from '../components/sign_in.vue'
@@ -117,7 +117,7 @@ const routes = [{
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(process.env.BASE_URL),
   routes
 })
 

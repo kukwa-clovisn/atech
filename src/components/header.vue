@@ -24,7 +24,7 @@
           <router-link to="/course" class="route">courses</router-link>
           <router-link to="/why-us" class="route">why crypto?</router-link>
           <router-link to="/blog" class="route">blog</router-link>
-          <a href="/#contact" class="route">contact</a>
+          <router-link to="/#contact" class="route">contact</router-link>
         </nav>
         <nav>
           <button class="clear primary-btn">
