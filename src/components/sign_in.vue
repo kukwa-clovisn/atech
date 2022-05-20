@@ -180,14 +180,14 @@ export default {
         .then((res) => {
           if (res.statusText === "OK") {
             response.msg = res.data.msg;
-            response.sucess = true;
+            response.success = true;
 
             user.username = "";
             user.email = "";
             user.password = "";
 
             setTimeout(() => {
-              response.sucess = false;
+              response.success = false;
               response.swap = true;
               credentials.username = res.data.username;
             }, 2000);

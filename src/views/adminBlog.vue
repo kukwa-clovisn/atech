@@ -80,7 +80,6 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res);
           post.title = "";
           post.subTitle = "";
           post.message = "";

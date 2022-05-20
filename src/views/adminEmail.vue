@@ -31,16 +31,18 @@
       </button>
       <input type="reset" value="Clear Form" />
     </div>
-    <div class="response">
-      <div class="done" v-if="response.success">
-        <i class="fa-solid fa-circle-check"></i>
-        <span>post successfully uploaded.</span>
-      </div>
-      <div class="error" v-if="response.failed">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <span>error: post not uploaded.</span>
-      </div>
-    </div>
+    <transition name="pop">
+      <div class="response">
+        <div class="done" v-if="response.success">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>{{ response.msg }}</span>
+        </div>
+        <div class="error" v-if="response.failed">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span>error: post not uploaded.</span>
+        </div>
+      </div></transition
+    >
   </form>
 </template>
 
@@ -60,11 +62,12 @@ export default {
     let response = reactive({
       success: false,
       failed: false,
+      msg: "",
     });
 
     function sendEmail() {
       axios
-        .post("api/send", user, {
+        .post("api/admin/send", user, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -72,6 +75,7 @@ export default {
         .then((res) => {
           if (res.statusText === "OK") {
             response.success = true;
+            response.msg = res.data.msg;
 
             setTimeout(() => {
               response.success = false;
@@ -109,6 +113,40 @@ $baseColor: #072e54;
 $fallback: rgb(19, 37, 62);
 $col: #3d566f;
 $adminCol: rgb(21, 55, 101);
+
+.pop-enter-from {
+  opacity: 0;
+}
+.pop-enter-active {
+  opacity: 1;
+  animation: pop 2s linear alternate forwards;
+}
+.pop-enter-to {
+  opacity: 1;
+}
+.pop-leave-from {
+  opacity: 1;
+  transform: scale(0.7);
+}
+.pop-leave-active {
+  opacity: 1;
+  transition: 1s ease;
+}
+.pop-leave-to {
+  opacity: 0;
+  transform: translateX(150px);
+}
+
+@keyframes pop {
+  from {
+    opacity: 0.4;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(0.9);
+  }
+}
 
 form {
   width: 80%;

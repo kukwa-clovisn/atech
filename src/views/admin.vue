@@ -167,7 +167,6 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res);
           if (res.statusText === "OK") {
             auth.value = false;
             adminResponse.name = res.data.username;
@@ -175,7 +174,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err);
           auth.value = true;
           authError.value = true;
           adminResponse.status = err.response.data.msg;
