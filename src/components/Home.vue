@@ -219,7 +219,7 @@
           <i class="fa-solid fa-phone icon"></i>
           <p>+237682449347</p>
         </nav>
-        <nav>
+        <nav class="nav">
           <i class="fa-solid fa-envelope icon"></i>
           <p>kukwaclovisngong3@gmail.com</p>
         </nav>
@@ -442,7 +442,7 @@ main {
 
         h5 {
           width: 95%;
-          font: 700 19px Poppins, sans-serif;
+          font: 700 19px "Poppins", sans-serif;
           margin: auto;
           text-transform: capitalize;
           text-align: center;
@@ -456,7 +456,7 @@ main {
           margin: auto;
           text-align: center;
           color: #3d566f;
-          font: 500 14px Poppins, sans-serif;
+          font: 500 14px "Poppins", sans-serif;
         }
 
         button {
@@ -474,6 +474,10 @@ main {
             text-transform: capitalize;
             font: 600 18px Poppins, sans-serif;
           }
+        }
+
+        @media screen and (max-width: 400px) {
+          height: fit-content;
         }
       }
     }
@@ -502,7 +506,6 @@ main {
 
     .expo {
       width: 50%;
-
       height: fit-content;
       padding: 10px;
 
@@ -525,7 +528,7 @@ main {
 
         h3 {
           text-align: left;
-          font: 600 15px Nunito sans, sans-serif;
+          font: 600 15px "Nunito sans", sans-serif;
           text-transform: uppercase;
           padding: 5px;
           color: #e66581;
@@ -539,7 +542,7 @@ main {
 
           p {
             text-align: left;
-            font: 700 23px Poppins, sans-serif;
+            font: 700 23px "Poppins", sans-serif;
             width: 80%;
             color: #d4d3d3;
           }
@@ -559,6 +562,29 @@ main {
         }
       }
     }
+
+    @media screen and (max-width: 1000px) {
+      height: fit-content;
+      padding: 5px;
+      .img {
+        display: none;
+      }
+      .expo {
+        width: 90%;
+
+        @media screen and (max-width: 500px) {
+          width: 98%;
+
+          .expo-level {
+            padding: 0;
+
+            .content p {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+    }
   }
 
   .social-sample {
@@ -569,6 +595,7 @@ main {
     align-items: center;
     position: relative;
     margin: 10px auto;
+    margin-top: 0;
     padding: 20px 5px;
 
     .blur {
@@ -595,7 +622,7 @@ main {
       }
 
       h4 {
-        font: 600 25px Poppins, sans-serif;
+        font: 600 25px "Poppins", sans-serif;
         padding-bottom: 10px;
       }
 
@@ -653,6 +680,31 @@ main {
         }
       }
     }
+
+    @media screen and (max-width: 900px) {
+      width: 100vw;
+      background: url(../assets/group.jpeg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+
+      .blur {
+        display: block;
+      }
+
+      .left-content {
+        width: 98%;
+
+        h4,
+        p {
+          color: white;
+        }
+      }
+
+      .right-content {
+        display: none;
+      }
+    }
   }
   .section-2 {
     text-align: center;
@@ -676,6 +728,10 @@ main {
       padding: 15px;
       font: 700 30px "Poppins", sans-serif;
       text-transform: capitalize;
+
+      @media screen and (max-width: 400px) {
+        font-size: 20px;
+      }
     }
     p {
       text-align: center;
@@ -749,7 +805,7 @@ main {
           margin: 0;
           box-sizing: border-box;
           transition: all 0.3s ease;
-          font: 900 40px Nunito sans, Poppins, sans-serif;
+          font: 900 40px "Nunito sans", "Poppins", sans-serif;
           padding: 10px;
           color: #fff;
           text-align: left;
@@ -761,7 +817,7 @@ main {
         }
 
         p {
-          font: 400 15px Poppins, sans-serif;
+          font: 400 15px "Poppins", sans-serif;
           padding: 10px;
           text-align: left;
           color: #f3f2f2;
@@ -770,7 +826,7 @@ main {
 
         h2 {
           padding: 10px;
-          font: 700 26px Nunito sans, sans-serif;
+          font: 700 26px "Nunito sans", sans-serif;
           text-transform: capitalize;
           text-align: left;
           color: #e66581;
@@ -788,6 +844,27 @@ main {
           width: 100%;
           margin: auto;
           height: auto;
+        }
+      }
+
+      @media screen and (max-width: 1000px) {
+        width: 100vw;
+        .left-div {
+          width: 95%;
+        }
+        .right-div {
+          display: none;
+        }
+
+        @media screen and (max-width: 500px) {
+          padding: 7px;
+          .left-div {
+            width: 98%;
+
+            h1 {
+              font-size: 30px;
+            }
+          }
         }
       }
     }
@@ -834,7 +911,7 @@ main {
     h6 {
       color: #c2c2c2;
       padding: 10px;
-      font: 400 13px Poppins, sans-serif;
+      font: 400 13px "Poppins", sans-serif;
     }
 
     .contact-header {
@@ -862,6 +939,26 @@ main {
         p {
           padding: 0;
           color: #dbd9d9;
+        }
+      }
+
+      @media screen and (max-width: 868px) {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        nav {
+          width: 140px;
+          margin: 0;
+          padding: 0;
+          i,
+          p {
+            font-size: 12px;
+          }
+        }
+
+        .nav {
+          width: 47%;
+          width: 200px;
         }
       }
     }
@@ -966,6 +1063,18 @@ main {
             outline: none;
           }
         }
+
+        @media screen and (max-width: 600px) {
+          flex-direction: column;
+          .credentials,
+          .message {
+            width: 100%;
+
+            input {
+              height: 95px;
+            }
+          }
+        }
       }
 
       .bottom-form {
@@ -1000,6 +1109,14 @@ main {
               text-transform: capitalize;
               color: #16367b;
               font: 500 16px Poppins, sans-serif;
+
+              @media screen and (max-width: 600px) {
+                font-size: 10px;
+
+                @media screen and (max-width: 300px) {
+                  font-size: 8px;
+                }
+              }
             }
           }
         }
@@ -1033,6 +1150,17 @@ main {
             text-transform: capitalize;
           }
         }
+        @media screen and (max-width: 600px) {
+          flex-direction: column;
+          button {
+            width: 100%;
+            margin-bottom: 10px;
+          }
+        }
+      }
+
+      @media screen and (max-width: 905px) {
+        width: 99vw;
       }
     }
   }
