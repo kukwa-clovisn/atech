@@ -13,7 +13,7 @@
           crypto currency and also how to trade with crypto and forex
         </p>
         <button class="landing-page-btn">
-          <router-link to="/signup" class="homeBtn">sign up</router-link>
+          <router-link to="/login" class="homeBtn">sign up</router-link>
         </button>
         <!-- <img src="../assets/ch1.png" id="homeImg" alt="crypto chart" /> -->
 
@@ -21,10 +21,10 @@
           <h2>There is a reason</h2>
           <div class="words">
             <ul>
-              <li>you love music</li>
-              <li>you love graphics</li>
-              <li>you love the blockchain</li>
-              <li>you love technology</li>
+              <li>you love <span>music</span></li>
+              <li>you love <span>graphics</span></li>
+              <li>you love <span>the blockchain</span></li>
+              <li>you love <span>technology</span></li>
             </ul>
           </div>
         </section>
@@ -305,8 +305,7 @@
       </form>
     </div>
     <span class="to-landing-page"
-      ><router-link to="#home/" class="a"
-        ><i class="fa-solid fa-circle-arrow-up"></i></router-link
+      ><a href="#home" class="a"><i class="fa-solid fa-circle-arrow-up"></i></a
     ></span>
     <Footer />
   </main>

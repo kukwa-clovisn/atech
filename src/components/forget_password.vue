@@ -18,7 +18,9 @@
             required
           />
         </div>
+
         <button type="submit">submit</button>
+        <a href="/login" class="a">back</a>
       </form>
       <form @submit.prevent="verifyToken()" v-if="user.step2">
         <h1>Atech acadmey</h1>
@@ -274,6 +276,10 @@ main {
 
       .a {
         color: $col;
+      }
+
+      @media screen and (max-width: 530px) {
+        width: 97vw;
       }
     }
 

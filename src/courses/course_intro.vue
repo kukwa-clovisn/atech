@@ -9,7 +9,7 @@
           <router-link to="" class="route">courses</router-link>
         </li>
         <li>
-          <router-link to="/#contact" class="route">contact us</router-link>
+          <a href="/#contact" class="route">contact</a>
         </li>
       </nav>
       <button
@@ -84,10 +84,10 @@
         <h2>There is a reason:</h2>
         <div class="words">
           <ul>
-            <li>you love music</li>
-            <li>you love technology</li>
-            <li>you love the blockchain</li>
-            <li>you love graphics & paper</li>
+            <li>you love <span>music</span></li>
+            <li>you love <span>technology</span></li>
+            <li>you love <span>the blockchain</span></li>
+            <li>you love <span>graphics</span></li>
           </ul>
         </div>
       </section>
@@ -667,6 +667,11 @@ main {
             text-align: left;
             padding: 0 10px;
             font-family: "Nunito sans", sans-serif;
+
+            span {
+              color: $SecondaryColor;
+              padding: 0 4px;
+            }
           }
         }
       }

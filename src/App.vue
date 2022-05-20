@@ -5,7 +5,7 @@
 </template>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Jacques+Francois&family=Noto+Sans:wght@100;300;400;600;700;900&family=Nunito+Sans:ital,wght@0,300;0,600;0,700;0,900;1,300;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200&family=Russo+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jacques+Francois&family=Jacques+Francois+Shadow&family=Noto+Sans:wght@100;300;400;600;700;900&family=Nunito+Sans:ital,wght@0,300;0,600;0,700;0,900;1,300;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200&family=Russo+One&display=swap");
 
 $primaryColor: rgb(255, 255, 255);
 $SecondaryColor: rgba(230, 101, 129, 1);
@@ -23,6 +23,10 @@ $fallback: rgb(19, 37, 62);
 }
 * {
   transition: all 0.3s ease;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .routes-enter-from {
@@ -182,7 +186,6 @@ nav a.router-link-exact-active {
           height: 40px;
           position: relative;
           top: 0;
-          -webkit-animation: change 10s steps(4) infinite;
           animation: change 10s steps(4) infinite;
 
           li {
@@ -195,8 +198,31 @@ nav a.router-link-exact-active {
             text-transform: capitalize;
             text-align: left;
             padding: 0 10px;
-            font-family: Nunito sans, sans-serif;
+            font-family: "Nunito sans", sans-serif;
+
+            span {
+              color: $SecondaryColor;
+              font-weight: 600;
+              padding: 0 5px;
+              text-transform: capitalize;
+            }
           }
+        }
+      }
+
+      @keyframes change {
+        from {
+          top: 0;
+        }
+        to {
+          top: -160px;
+        }
+      }
+
+      @media screen and (max-width: 500px) {
+        h2,
+        .words ul li {
+          font-size: 14px;
         }
       }
     }

@@ -16,7 +16,7 @@
           </li>
           <li><router-link to="/course" class="route">courses</router-link></li>
           <li>
-            <router-link to="/#contact" class="route">contact us</router-link>
+            <a href="/#contact" class="route">contact us</a>
           </li>
         </ul>
       </div>

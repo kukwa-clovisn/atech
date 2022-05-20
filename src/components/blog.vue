@@ -157,6 +157,12 @@ main {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    height: fit-content;
+
+    .blur {
+      height: 100% !important;
+      bottom: 0;
+    }
 
     .title {
       top: 30px;
@@ -230,6 +236,10 @@ main {
       color: white;
       text-transform: capitalize;
       padding-top: 50px;
+
+      @media screen and (max-width: 400px) {
+        font-size: 35px;
+      }
     }
     p {
       width: 97%;
@@ -314,6 +324,7 @@ main {
 
       p {
         padding: 10px;
+        color: rgb(189, 187, 187);
       }
       button {
         width: 250px;
@@ -335,6 +346,13 @@ main {
           font: 500 19px "Poppins", sans-serif;
         }
       }
+      @media screen and (max-width: 768px) {
+        width: 95vw;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 97vw;
     }
   }
 

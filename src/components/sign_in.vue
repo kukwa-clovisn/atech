@@ -400,11 +400,12 @@ main {
     position: relative;
 
     h2 {
+      width: 730px;
       color: #a4a5a5;
       font: 500 27px "Poppins", sans-serif;
       padding: 10px;
+      margin: auto;
       text-align: left;
-      width: 730px;
       position: relative;
     }
 
@@ -541,16 +542,6 @@ main {
           }
         }
 
-        .errormsg {
-          width: 90%;
-          margin: auto;
-
-          p {
-            color: red;
-            padding: 5px;
-          }
-        }
-
         button {
           width: 89%;
           height: 50px;
@@ -594,6 +585,42 @@ main {
       }
     }
 
+    @media screen and (max-width: 760px) {
+      .form {
+        width: 97vw;
+      }
+      @media screen and (max-width: 600px) {
+        .form {
+          flex-direction: column-reverse;
+          height: fit-content;
+          .login {
+            width: 100%;
+            padding: 20px;
+          }
+          form {
+            width: 100%;
+            height: fit-content;
+            padding: 20px;
+
+            .input {
+              width: 97%;
+              margin: 20px auto;
+              height: fit-content;
+              input {
+                height: 65px;
+              }
+            }
+            button {
+              width: 97%;
+              height: 70px;
+            }
+          }
+        }
+        .form-signup {
+          flex-direction: column;
+        }
+      }
+    }
     .response-div {
       width: 100vw;
       height: fit-content;
