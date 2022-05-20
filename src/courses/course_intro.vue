@@ -5,11 +5,11 @@
         <span title="World of Technology and more"> AdvancedTechAcademy </span>
       </nav>
       <nav class="routes">
-        <li>
-          <a href="/course">courses</a>
+        <li @click="toCourses()">
+          <router-link to="" class="route">courses</router-link>
         </li>
         <li>
-          <a href="/#contact">contact us</a>
+          <router-link to="/#contact" class="route">contact us</router-link>
         </li>
       </nav>
       <button
@@ -17,7 +17,7 @@
         v-if="crypto.profileMenu"
         @click="hideProfileMenu()"
       >
-        <i class="fa-solid fa-bars-staggered"></i>
+        <i class="fa-solid fa-align-right"></i>
       </button>
       <nav
         class="profile"
@@ -26,7 +26,7 @@
         @click="showProfileMenu()"
       >
         <span>
-          <i class="fa-solid fa-bars"></i>
+          <i class="fa-solid fa-align-left"></i>
         </span>
         <p>{{ crypto.courseUser }}</p>
       </nav>
@@ -150,6 +150,9 @@ export default {
     function toHome() {
       router.push("/");
     }
+    function toCourses() {
+      router.push("/course");
+    }
 
     const showProfileMenu = () => {
       crypto.profileMenu = true;
@@ -195,6 +198,7 @@ export default {
     return {
       crypto,
       toHome,
+      toCourses,
       showProfileMenu,
       hideProfileMenu,
       showCourseIntroPage,
@@ -222,24 +226,22 @@ html {
 }
 
 .fade-enter-from {
-  opacity: 0;
+  transform: scale(0.2);
 }
 .fade-enter-active {
-  animation: display 1s linear alternate forwards;
-  // transition: all 2s ease;
+  transition: all 2s ease;
 }
 .fade-enter-to {
-  opacity: 1;
+  transform: scale(1);
 }
 
 @keyframes display {
   from {
     opacity: 0;
-    transform: scale(0.1);
+    transform: scale(2);
     border-radius: 100%;
   }
   to {
-    transform: rotateZ(360deg);
     border-radius: 0;
   }
 }
@@ -271,7 +273,7 @@ main {
         width: 200px;
         height: 50px;
 
-        a {
+        .route {
           width: 100%;
           height: 100%;
           display: flex;
@@ -285,7 +287,7 @@ main {
         }
         @media screen and (max-width: 1110px) {
           width: 140px;
-          a {
+          .route {
             font-size: 13px;
           }
         }
@@ -323,7 +325,7 @@ main {
     }
 
     .profile-menu-button {
-      width: 50px;
+      width: 80px;
       height: 50px;
       border-radius: 1px 0 0 1px;
       display: flex;
@@ -331,16 +333,16 @@ main {
       align-items: center;
       border: none;
       margin: 0;
-      background: white;
+      background: transparent;
       position: fixed;
-      right: 290px;
-      top: 40px;
+      right: 360px;
+      top: 30px;
       z-index: 1;
       animation: slice-in 0.3s linear forwards;
 
       i {
         font-size: 27px;
-        color: $col;
+        color: white;
       }
     }
 
@@ -349,7 +351,7 @@ main {
         right: -400px;
       }
       to {
-        right: 303px;
+        right: 345px;
       }
     }
 
@@ -583,6 +585,7 @@ main {
     height: fit-content;
     padding: 10px;
     padding-top: 50px;
+    background: transparent;
 
     h1 {
       font: 800 65px "Nunito sans", sans-serif;

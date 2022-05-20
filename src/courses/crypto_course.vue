@@ -2,6 +2,7 @@
   <main id="main">
     <transition name="slide">
       <div class="courses-div" v-if="crypto.courses">
+        <h1>Cryptocurrency courses</h1>
         <h2>Learn cryptocurrency today!</h2>
         <div class="courses">
           <div class="tutorial" @click="getCourse1()">
@@ -90,7 +91,7 @@
         </div>
       </div></transition
     >
-    <transition name="slide">
+    <transition name="move">
       <div class="single-tutorial course-1" v-if="crypto.course1">
         <a @click="backToCourses()" class="return">Back to crypto courses</a>
         <div class="logo">
@@ -180,7 +181,7 @@
         <Contact />
       </div>
     </transition>
-    <transition name="slide">
+    <transition name="move">
       <div class="single-tutorial course-2" v-if="crypto.course2">
         <a @click="backToCourses()" class="return">Back to crypto courses</a>
         <div class="logo">
@@ -248,7 +249,7 @@
         <Contact />
       </div>
     </transition>
-    <transition name="slide">
+    <transition name="move">
       <div class="single-tutorial" v-if="crypto.course3">
         <a @click="backToCourses()" class="return">Back to crypto courses</a>
         <div class="logo">
@@ -321,7 +322,7 @@
         <Contact />
       </div>
     </transition>
-    <transition name="slide">
+    <transition name="move">
       <div class="single-tutorial" v-if="crypto.course4">
         <a @click="backToCourses()" class="return">Back to crypto courses</a>
         <div class="logo">
@@ -382,7 +383,7 @@
         <Contact />
       </div>
     </transition>
-    <transition name="slide">
+    <transition name="move">
       <div class="single-tutorial" v-if="crypto.course5">
         <a @click="backToCourses()" class="return">Back to crypto courses</a>
         <div class="logo">
@@ -440,7 +441,7 @@
         <Contact />
       </div>
     </transition>
-    <transition name="slide">
+    <transition name="move">
       <div class="single-tutorial" v-if="crypto.course6">
         <a @click="backToCourses()" class="return">Back to crypto courses</a>
         <div class="logo">
@@ -510,43 +511,59 @@ export default {
     });
 
     function backToCourses() {
-      crypto.courses = true;
       crypto.course1 = false;
       crypto.course2 = false;
       crypto.course3 = false;
       crypto.course4 = false;
       crypto.course5 = false;
       crypto.course6 = false;
+
+      setTimeout(() => {
+        crypto.courses = true;
+      }, 1000);
     }
 
     const getCourse1 = () => {
       crypto.courses = false;
-      crypto.course1 = true;
+
+      setTimeout(() => {
+        crypto.course1 = true;
+      }, 1000);
     };
 
     const getCourse2 = () => {
       crypto.courses = false;
-      crypto.course2 = true;
+      setTimeout(() => {
+        crypto.course2 = true;
+      }, 1000);
     };
 
     function getCourse3() {
       crypto.courses = false;
-      crypto.course3 = true;
+      setTimeout(() => {
+        crypto.course3 = true;
+      }, 1000);
     }
 
     function getCourse4() {
       crypto.courses = false;
-      crypto.course4 = true;
+      setTimeout(() => {
+        crypto.course4 = true;
+      }, 1000);
     }
 
     function getCourse5() {
       crypto.courses = false;
-      crypto.course5 = true;
+      setTimeout(() => {
+        crypto.course5 = true;
+      }, 1000);
     }
 
     function getCourse6() {
       crypto.courses = false;
-      crypto.course6 = true;
+      setTimeout(() => {
+        crypto.course6 = true;
+      }, 1000);
     }
 
     return {
@@ -574,39 +591,50 @@ $col: #3d566f;
 
 main {
   width: 100%;
-}
-</style>
-<style lang="scss" scoped>
-.slide-enter-from {
-  transform: translateX(110vw);
-}
-.slide-enter-active {
-  // animation: slide 1s linear alternate forwards;
-  transition: all 2s ease;
-}
-
-.slide-enter-to {
-  transform: translateX(0);
-}
-
-.slide-leave-from {
-  transform: translateX(0);
-}
-
-.slide-leave-active {
-  transition: all 2s ease;
-}
-
-.slide-leave-to {
-  transform: translateX(110vw);
-}
-
-@keyframes slide {
-  from {
-    transform: translate(30px);
+  .slide-enter-from {
+    transform: translateX(110vw);
   }
-  to {
-    transform: scale(0.8);
+  .slide-enter-active {
+    transition: all 2s ease;
+  }
+
+  .slide-enter-to {
+    transform: translateX(0);
+  }
+
+  .slide-leave-from {
+    transform: translateX(0);
+  }
+
+  .slide-leave-active {
+    transition: all 2s ease;
+  }
+
+  .slide-leave-to {
+    transform: translateX(110vw);
+  }
+
+  .move-enter-from {
+    transform: translateY(110vw);
+  }
+  .move-enter-active {
+    transition: all 2s ease;
+  }
+
+  .move-enter-to {
+    transform: translateY(0);
+  }
+
+  .move-leave-from {
+    transform: translateY(0);
+  }
+
+  .move-leave-active {
+    transition: all 2s ease;
+  }
+
+  .move-leave-to {
+    transform: translateY(110vw);
   }
 }
 </style>

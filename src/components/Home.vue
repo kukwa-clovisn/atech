@@ -99,7 +99,9 @@
               therein.
             </p>
             <button>
-              <a href="/login"><i class="fa-solid fa-arrow-right"></i></a>
+              <router-link to="/login"
+                ><i class="fa-solid fa-arrow-right"></i
+              ></router-link>
             </button>
           </div>
         </div>
@@ -108,7 +110,9 @@
           <div class="content">
             <p>Trading strategies and market structures</p>
             <button>
-              <a href="/login"><i class="fa-solid fa-arrow-right"></i></a>
+              <router-link to="/login"
+                ><i class="fa-solid fa-arrow-right"></i
+              ></router-link>
             </button>
           </div>
         </div>
@@ -119,7 +123,9 @@
               Risk management and ways to become a profitable trader and more.
             </p>
             <button>
-              <a href="/login"><i class="fa-solid fa-arrow-right"></i></a>
+              <router-link to="/login"
+                ><i class="fa-solid fa-arrow-right"></i
+              ></router-link>
             </button>
           </div>
         </div>
@@ -136,7 +142,7 @@
         </p>
         <div class="btns">
           <button>
-            <a href="/login" class="route">start now!</a>
+            <router-link to="/login" class="route">start now!</router-link>
           </button>
         </div>
       </div>
@@ -152,7 +158,7 @@
         Why not try out our courses prepared to see you through your learning!
       </p>
       <button>
-        <a href="/login" class="route">start learning</a>
+        <router-link to="/login" class="route">start learning</router-link>
       </button>
     </div>
     <div class="bitquery">

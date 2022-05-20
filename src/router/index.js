@@ -4,6 +4,8 @@ import {
 } from 'vue-router'
 import Home from '../components/Home.vue'
 import Sign_in from '../components/sign_in.vue'
+import Course_intro from '../courses/course_intro'
+import axios from 'axios'
 
 const routes = [{
     path: '/',
@@ -76,8 +78,15 @@ const routes = [{
   {
     path: '/course',
     name: 'course_intro',
-    component: function () {
-      return import( /* webpackChunkName: "about" */ '../courses/course_intro.vue')
+    component: Course_intro,
+    beforeEnter(to, from, next) {
+      axios('api/token').then(res => {
+        if (res.statusText === 'OK') {
+          next()
+        } else {
+          next('/login')
+        }
+      }).catch(err => next('/login'))
     },
     children: [{
       path: '/course/crypto',

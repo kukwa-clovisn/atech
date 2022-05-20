@@ -35,10 +35,10 @@
             <button type="submit">sign in</button>
             <div class="forget-password">
               <span
-                ><a href="/forget_password" class="route"
-                  >forgot password?</a
+                ><router-link to="/forget_password" class="route"
+                  >forgot_password</router-link
                 ></span
-              ><span><a href="/" class="route">home</a></span>
+              ><span><router-link to="/" class="route">home</router-link></span>
             </div>
           </form>
           <div class="login">
@@ -471,6 +471,10 @@ main {
             align-items: center;
             color: #fff;
             font: 600 20px "Poppins", sans-serif;
+
+            i {
+              padding: 0 3px;
+            }
 
             &:hover {
               background: transparent;

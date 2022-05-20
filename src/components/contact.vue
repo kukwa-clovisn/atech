@@ -197,7 +197,8 @@ $col: #3d566f;
   @media screen and (max-width: 768px) {
     input,
     button {
-      width: 100%;
+      width: 100% !important;
+      border: 3px solid blue;
     }
   }
 }
