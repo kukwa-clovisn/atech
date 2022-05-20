@@ -51,7 +51,7 @@
             Register now to start your lessons
           </p>
           <button>
-            <a href="/login" class="route">Start course</a>
+            <router-link to="/login" class="route">Start course</router-link>
           </button>
         </div>
         <div class="course">
@@ -66,7 +66,7 @@
             register now to start your lessons
           </p>
           <button>
-            <a href="/login" class="route">Start course</a>
+            <router-link to="/login" class="route">Start course</router-link>
           </button>
         </div>
         <div class="course">
@@ -81,7 +81,7 @@
             register now to start your lessons
           </p>
           <button>
-            <a href="/login" class="route">Start course</a>
+            <router-link to="/login" class="route">Start course</router-link>
           </button>
         </div>
       </section>

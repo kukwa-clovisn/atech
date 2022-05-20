@@ -202,4 +202,28 @@ nav a.router-link-exact-active {
     opacity: 0.85;
   }
 }
+
+#main {
+  width: 100%;
+  margin: 0;
+  background: linear-gradient(180deg, #a9465b, #072e54);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+
+  .courses-div {
+    width: 100%;
+
+    height: fit-content;
+    padding: 20px;
+    padding-top: 30px;
+    background: #fff;
+
+    h2 {
+      text-transform: capitalize;
+      padding: 30px 20px;
+      font: 600 50px "Poppins", sans-serif;
+    }
+  }
+}
 </style>

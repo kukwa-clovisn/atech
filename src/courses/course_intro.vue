@@ -31,7 +31,7 @@
         <p>{{ crypto.courseUser }}</p>
       </nav>
     </header>
-    <div class="blur"></div>
+    <!-- <div class="blur"></div> -->
     <div class="profile-menu" v-if="crypto.profileMenu">
       <nav class="logo">
         <img src="../assets/logo-white.jpg" alt="" />
@@ -247,8 +247,8 @@ html {
 main {
   width: 100vw;
   margin: 0;
-  background: linear-gradient(to bottom, rgb(169, 70, 91), $baseColor);
-  background: url(../assets/pixel_sample.jpg);
+  // background: linear-gradient(to bottom, rgb(169, 70, 91), $baseColor);
+  background: url(../assets/course-background.jpeg);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;

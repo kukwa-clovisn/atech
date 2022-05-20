@@ -6,107 +6,116 @@
     </div>
     <div class="content">
       <h2>Atech</h2>
-      <div class="form">
-        <form>
-          <h1>sign in</h1>
-          <div class="input">
-            <label for="username">Name:</label
-            ><input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="Enter username...."
-              required=""
-            />
-          </div>
-          <div class="input">
-            <label for="password">password:</label
-            ><input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Enter Password...."
-              required=""
-            />
-          </div>
-          <button type="submit">sign in</button>
-          <div class="forget-password">
-            <span
-              ><a href="/forget_password" class="route"
-                >forgot password?</a
-              ></span
-            ><span><a href="/" class="route">home</a></span>
-          </div>
-        </form>
-        <div class="login">
-          <div class="welcome">
-            <h1>welcome again</h1>
-            <h3>advanced Tech academy</h3>
-            <p>invest in knowledge, invest in your future</p>
-            <button>
-              <a
-                aria-current="page"
-                href="/login"
-                class="router-link-active router-link-exact-active route"
-                >sign up</a
-              ></button
-            ><a href="/" class="hroute">home</a>
-          </div>
-        </div>
-      </div>
-      <div class="form form-signup">
-        <div class="login signup">
-          <div class="welcome">
-            <h1>welcome again</h1>
-            <h3>advanced tech academy</h3>
-            <p>discipline is a price for every success</p>
-            <button>
-              <a
-                aria-current="page"
-                href="/login"
-                class="router-link-active router-link-exact-active route"
-                >sign in</a
-              ></button
-            ><a href="/" class="hroute">home</a>
+      <transition name="fade">
+        <div class="form" v-if="response.to_signin">
+          <form @submit.prevent="signinFunc()">
+            <h1>sign in</h1>
+            <div class="input">
+              <label for="username">Name:</label
+              ><input
+                type="text"
+                name="username"
+                id="username"
+                v-model="credentials.username"
+                placeholder="Enter username...."
+                required=""
+              />
+            </div>
+            <div class="input">
+              <label for="password">password:</label
+              ><input
+                type="password"
+                name="password"
+                id="password"
+                v-model="credentials.password"
+                placeholder="Enter Password...."
+                required=""
+              />
+            </div>
+            <button type="submit">sign in</button>
+            <div class="forget-password">
+              <span
+                ><a href="/forget_password" class="route"
+                  >forgot password?</a
+                ></span
+              ><span><a href="/" class="route">home</a></span>
+            </div>
+          </form>
+          <div class="login">
+            <div class="welcome">
+              <h1>welcome again</h1>
+              <h3>advanced Tech academy</h3>
+              <p>invest in knowledge, invest in your future</p>
+              <button @click="swapSigninFunc()">
+                sign up <i class="fa-solid fa-hand-point-right"></i>
+              </button>
+              <router-link to="/" class="hroute">Home</router-link>
+            </div>
           </div>
         </div>
-        <form>
-          <h1>sign up</h1>
-          <div class="input">
-            <label for="username">Name:</label
-            ><input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="Enter username...."
-              required=""
-            />
+      </transition>
+      <transition name="slide">
+        <div class="form form-signup" v-if="response.to_signup">
+          <div class="login signup">
+            <div class="welcome">
+              <h1>welcome again</h1>
+              <h3>advanced tech academy</h3>
+              <p>discipline is a price for every success</p>
+              <button @click="swapSignupFunc()">
+                <i class="fa-solid fa-hand-point-left"></i> sign in
+              </button>
+              <router-link to="/" class="hroute">Home</router-link>
+            </div>
           </div>
-          <div class="input">
-            <label for="email">email:</label
-            ><input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Enter Email address...."
-              required=""
-            />
+          <form @submit.prevent="signupFunc()">
+            <h1>sign up</h1>
+            <div class="input">
+              <label for="username">Name:</label
+              ><input
+                type="text"
+                name="username"
+                id="username"
+                v-model="user.username"
+                placeholder="Enter username...."
+                required=""
+              />
+            </div>
+            <div class="input">
+              <label for="email">email:</label
+              ><input
+                type="email"
+                name="email"
+                id="email"
+                v-model="user.email"
+                placeholder="Enter Email address...."
+                required=""
+              />
+            </div>
+            <div class="input">
+              <label for="password">password:</label
+              ><input
+                type="password"
+                name="password"
+                id="password"
+                v-model="user.password"
+                placeholder="Enter Password...."
+                required=""
+              />
+            </div>
+            <button type="submit">sign up</button>
+          </form>
+        </div>
+      </transition>
+      <transition name="pop">
+        <div class="response-div" v-if="response.success || response.failed">
+          <div class="success" v-if="response.success">
+            <i class="fa-solid fa-circle-check"></i>{{ response.msg }}
           </div>
-          <div class="input">
-            <label for="password">password:</label
-            ><input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Enter Password...."
-              required=""
-            />
+          <div class="failed" v-if="response.failed">
+            <i class="fa-solid fa-triangle-exclamation"></i>{{ response.msg }}
           </div>
-          <button type="submit">sign up</button>
-        </form>
-      </div>
-      <!---->
-      <div class="response-div"><!----><!----></div>
+        </div>
+      </transition>
     </div>
     <footer>&copy;copyright_CodingHerald_2022</footer>
   </main>
@@ -114,10 +123,139 @@
 
 <script>
 import Header from "./header.vue";
+import { reactive } from "vue";
+import { useRouter } from "vue-router";
+import axios from "axios";
 export default {
   name: "Sign_in",
   components: {
     Header,
+  },
+  setup() {
+    const router = useRouter();
+
+    let user = reactive({
+      username: "",
+      email: "",
+      password: "",
+    });
+
+    let credentials = reactive({
+      username: "",
+      password: "",
+    });
+
+    let response = reactive({
+      msg: "",
+      success: false,
+      failed: false,
+      swap: true,
+      to_signin: true,
+      to_signup: false,
+    });
+
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    function swapSigninFunc() {
+      response.to_signin = false;
+      setTimeout(() => {
+        response.to_signup = true;
+      }, 1000);
+    }
+
+    function swapSignupFunc() {
+      response.to_signup = false;
+      setTimeout(() => {
+        response.to_signin = true;
+      }, 800);
+    }
+
+    function signupFunc() {
+      axios
+        .post("api/signup", user, config)
+        .then((res) => {
+          if (res.statusText === "OK") {
+            response.msg = res.data.msg;
+            response.sucess = true;
+
+            user.username = "";
+            user.email = "";
+            user.password = "";
+
+            setTimeout(() => {
+              response.sucess = false;
+              response.swap = true;
+              credentials.username = res.data.username;
+            }, 2000);
+          } else {
+            response.msg = res.data.msg;
+            response.failed = true;
+
+            setTimeout(() => {
+              response.failed = false;
+              response.swap = false;
+            }, 3000);
+          }
+        })
+        .catch((err) => {
+          response.msg = err.response.data.msg;
+          response.failed = true;
+
+          setTimeout(() => {
+            response.failed = false;
+            response.swap = false;
+          }, 3000);
+        });
+    }
+
+    function signinFunc() {
+      axios
+        .post("api/signin", credentials, config)
+        .then((res) => {
+          if (res.statusText === "OK") {
+            response.success = true;
+            response.msg = res.data.msg;
+
+            localStorage.setItem("accessToken", res.data.accessToken);
+
+            // res.
+
+            setTimeout(() => {
+              response.success = false;
+              router.push("/course");
+            }, 2000);
+          } else {
+            response.msg = res.data.msg;
+            response.failed = true;
+
+            setTimeout(() => {
+              response.failed = false;
+            }, 3000);
+          }
+        })
+        .catch((err) => {
+          response.msg = err.response.data.msg;
+          response.failed = true;
+
+          setTimeout(() => {
+            response.failed = false;
+          }, 3000);
+        });
+    }
+
+    return {
+      user,
+      credentials,
+      response,
+      swapSigninFunc,
+      swapSignupFunc,
+      signinFunc,
+      signupFunc,
+    };
   },
 };
 </script>
@@ -128,6 +266,76 @@ main {
   height: fit-content;
   background: #e7e7e7;
   background: #13253e;
+
+  .fade-enter-from {
+    transform: translateX(120vw);
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: all 1s ease;
+  }
+  .fade-enter-to {
+    transform: translateX(0);
+  }
+  .fade-leave-from {
+    transform: translateX(0);
+  }
+
+  .fade-leave-to {
+    transform: translateX(120vw);
+  }
+
+  .slide-enter-from {
+    transform: translateX(-120vw);
+  }
+  .slide-enter-active,
+  .slide-leave-active {
+    transition: all 1s ease;
+  }
+  .slide-enter-to {
+    transform: translateX(0);
+  }
+  .slide-leave-from {
+    transform: translateX(0);
+  }
+
+  .slide-leave-to {
+    transform: translateX(-120vw);
+  }
+
+  .pop-enter-from {
+    opacity: 0;
+  }
+  .pop-enter-active {
+    opacity: 1;
+    animation: pop 2s linear alternate forwards;
+  }
+  .pop-enter-to {
+    opacity: 1;
+  }
+  .pop-leave-from {
+    opacity: 1;
+    transform: scale(0.7);
+  }
+  .pop-leave-active {
+    opacity: 1;
+    transition: 1s ease;
+  }
+  .pop-leave-to {
+    opacity: 0;
+    transform: translateX(150px);
+  }
+
+  @keyframes pop {
+    from {
+      opacity: 0.4;
+      transform: scale(0.4);
+    }
+    to {
+      opacity: 1;
+      transform: scale(0.9);
+    }
+  }
 
   .landing-page-btn {
     width: 150px;
@@ -258,17 +466,11 @@ main {
             border-radius: 5px;
             margin-top: 20px;
             background: transparent;
-
-            .route {
-              width: 100%;
-              height: 100%;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              text-decoration: none;
-              color: #fff;
-              font: 600 20px "Poppins", sans-serif;
-            }
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font: 600 20px "Poppins", sans-serif;
 
             &:hover {
               background: transparent;
@@ -382,6 +584,43 @@ main {
     .form-signup {
       height: 450px;
       width: 750px;
+
+      .login {
+        border-radius: 0 0 0 60%;
+      }
+    }
+
+    .response-div {
+      width: 100vw;
+      height: fit-content;
+      position: fixed;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      top: 19vh;
+      left: 0;
+      div {
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        border-radius: 5px;
+        color: white;
+        background: rgb(40, 223, 122);
+        font: 600 18px "Poppins", sans-serif;
+
+        i {
+          color: white;
+          font-size: 25px;
+          padding: 0 3px;
+        }
+      }
+      div.failed {
+        background: crimson;
+        color: white;
+      }
     }
   }
 
