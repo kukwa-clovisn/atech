@@ -170,6 +170,7 @@ $tertiaryColor: rgba(65, 140, 228, 1);
 $footerColor: rgb(51, 2, 69);
 $primeColor: rgb(218, 121, 121);
 $baseColor: #072e54;
+$fallback: rgb(19, 37, 62);
 main {
   width: 100vw;
 
@@ -180,6 +181,11 @@ main {
     background-size: cover;
     height: fit-content;
     padding-bottom: 20px;
+    position: relative;
+
+    .blur {
+      height: 100%;
+    }
 
     .title {
       top: 30px;
@@ -193,6 +199,13 @@ main {
         text-transform: uppercase;
         color: rgb(222, 221, 221);
         font: 600 30px "Poppins", sans-serif;
+      }
+
+      button {
+        width: 200px;
+        height: 50px;
+        margin: 30px auto;
+        margin-bottom: 5px;
       }
     }
   }
