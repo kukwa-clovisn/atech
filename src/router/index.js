@@ -59,6 +59,12 @@ const routes = [{
         return import( /* webpackChunkName: "about" */ '../views/adminBlog.vue')
       }
     }, {
+      path: '/admin/email',
+      name: 'AdminEmail',
+      component: function () {
+        return import( /* webpackChunkName: "about" */ '../views/adminEmail.vue')
+      }
+    }, {
       path: '/admin/closed',
       name: 'adminEmpty',
       component: function () {

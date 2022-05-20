@@ -1,53 +1,42 @@
 <template>
-  <form @submit.prevent="postBlog()">
-    <h1>write a blog!</h1>
+  <form @submit.prevent="sendEmail()">
+    <h1>send email to users</h1>
     <div class="input">
+      <label for="user"> Recepient's Credentials:</label>
       <input
-        name="author"
-        id="author"
-        v-model="post.author"
-        placeholder="Author's name"
+        type="text"
+        name="user"
+        id="user"
+        v-model="user.username"
+        placeholder="Recipient's name...."
         required
       />
       <input
-        name="title"
-        id="title"
-        v-model="post.title"
-        required
-        placeholder="Post Title..."
-      />
-      <input
-        name="sub-title"
-        id="sub-title"
-        v-model="post.subTitle"
-        required
-        placeholder="sub title "
+        type="email"
+        name="email"
+        id="email"
+        v-model="user.email"
+        placeholder="Recepient's Email address..."
       />
       <textarea
         name="message"
         id="message"
         cols="30"
         rows="10"
-        v-model="post.message"
-        required
-        placeholder="write message here..."
+        v-model="user.message"
+        placeholder="Message...."
       ></textarea>
-      <input
-        name="tags"
-        id="tags"
-        v-model="post.tags"
-        required
-        placeholder="Seperate each tag with a comma(,)...."
-      /><button type="submit">submit</button
-      ><input type="reset" value="Cancel" />
+      <button type="submit">
+        <i class="fa-solid fa-email"></i> send email
+      </button>
+      <input type="reset" value="Clear Form" />
     </div>
-
     <div class="response">
-      <div class="done" v-if="success">
+      <div class="done" v-if="response.success">
         <i class="fa-solid fa-circle-check"></i>
         <span>post successfully uploaded.</span>
       </div>
-      <div class="error" v-if="postError">
+      <div class="error" v-if="response.failed">
         <i class="fa-solid fa-circle-exclamation"></i>
         <span>error: post not uploaded.</span>
       </div>
@@ -57,58 +46,62 @@
 
 <script>
 import axios from "axios";
-import { reactive, ref } from "vue";
+import { reactive } from "@vue/reactivity";
+
 export default {
-  name: "AdminBlog",
+  name: "AdminEmail",
   setup() {
-    const post = reactive({
-      author: "",
-      title: "",
-      subTitle: "",
+    let user = reactive({
+      username: "",
+      email: "",
       message: "",
-      tags: "",
     });
 
-    let success = ref(false);
-    let postError = ref(false);
+    let response = reactive({
+      success: false,
+      failed: false,
+    });
 
-    function postBlog() {
+    function sendEmail() {
       axios
-        .post("/api/admin/blog", post, {
+        .post("api/send", user, {
           headers: {
             "Content-Type": "application/json",
           },
         })
         .then((res) => {
-          console.log(res);
-          post.title = "";
-          post.subTitle = "";
-          post.message = "";
-          post.tags = "";
           if (res.statusText === "OK") {
-            success.value = true;
-            setTimeout(pop, 3000);
+            response.success = true;
+
+            setTimeout(() => {
+              response.success = false;
+            }, 4000);
           } else {
-            error.value = true;
-            setTimeout(post_error, 3000);
+            response.failed = true;
+
+            setTimeout(() => {
+              response.failed = false;
+            }, 4000);
           }
+        })
+        .catch((err) => {
+          response.failed = true;
+
+          setTimeout(() => {
+            response.failed = false;
+          }, 4000);
         });
     }
-
-    function pop() {
-      success.value = false;
-    }
-    function post_error() {
-      postError.value = false;
-    }
-
-    return { success, postError, post, postBlog };
+    return {
+      user,
+      response,
+      sendEmail,
+    };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-$primaryColor: rgb(255, 255, 255);
 $SecondaryColor: rgba(230, 101, 129, 1);
 $tertiaryColor: rgba(65, 140, 228, 1);
 $footerColor: rgb(51, 2, 69);
@@ -173,7 +166,7 @@ form {
       width: 100%;
       height: 200px;
       border-radius: 5px;
-      box-shadow: 0 0 2px 0.5px $baseColor;
+      box-shadow: 0 0 2px 1px $baseColor;
       outline: none;
       border: none;
       padding: 20px;
@@ -193,48 +186,48 @@ form {
       text-transform: capitalize;
     }
   }
-}
 
-.done,
-.error {
-  width: fit-content;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgb(71, 243, 151);
-  border-radius: 4px;
-  padding: 20px;
-  position: fixed;
-  left: 40vw;
-  top: 25vh;
-  z-index: 1;
-  animation: pop 2s linear alternate forwards;
-
-  i {
-    font-size: 30px;
-    margin-right: 10px;
-    color: white;
-  }
-
-  span {
-    color: black;
-  }
-}
-
-.error {
-  background: red;
-  span {
-    color: white;
-  }
-}
-
-@keyframes pop {
-  from {
-    top: 10vh;
-  }
-  to {
+  .done,
+  .error {
+    width: fit-content;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(71, 243, 151);
+    border-radius: 4px;
+    padding: 20px;
+    position: fixed;
+    left: 40vw;
     top: 25vh;
+    z-index: 1;
+    animation: pop 2s linear alternate forwards;
+
+    i {
+      font-size: 30px;
+      margin-right: 10px;
+      color: white;
+    }
+
+    span {
+      color: black;
+    }
+  }
+
+  .error {
+    background: red;
+    span {
+      color: white;
+    }
+  }
+
+  @keyframes pop {
+    from {
+      top: 10vh;
+    }
+    to {
+      top: 25vh;
+    }
   }
 }
 </style>

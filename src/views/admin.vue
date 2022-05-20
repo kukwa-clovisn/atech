@@ -31,6 +31,11 @@
             <span><i class="fa-solid fa-pen"></i></span>
             <p>blog post</p>
           </li></router-link
+        ><router-link to="/admin/email" class="route">
+          <li>
+            <span><i class="fa-solid fa-envelope"></i></span>
+            <p>Email client</p>
+          </li></router-link
         >
 
         <router-link to="/admin/closed" class="route">
