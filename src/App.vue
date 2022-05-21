@@ -101,7 +101,7 @@ nav a.router-link-exact-active {
 
 .landing-page {
   width: 100vw;
-  min-height: 100vh;
+  height: fit-content;
   background: url(./assets/social.jpg);
   background-attachment: fixed;
   background-size: cover;
