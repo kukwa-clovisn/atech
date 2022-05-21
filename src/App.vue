@@ -114,6 +114,7 @@ nav a.router-link-exact-active {
     position: relative;
     padding: 20px;
     top: 20px;
+    margin: auto;
 
     h1 {
       text-transform: capitalize;

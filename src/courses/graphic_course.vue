@@ -96,7 +96,7 @@
         <div class="logo">
           <img src="../assets/logo-white.jpg" alt="" />
         </div>
-        <h1>how to use the Binance app on mobile(Phone)</h1>
+        <h1>Figma crash course</h1>
         <h4>
           master course <br />
           by: AdvancedTechAcademy
@@ -104,22 +104,16 @@
         <ul>
           <h3>tutorial objectives:</h3>
           <li>
-            <a href="#b1"><span>1</span> setup and security</a>
+            <a href="#b1"><span>1</span> intro to figma</a>
           </li>
           <li>
-            <a href="#b2"><span>2</span>tokens tab</a>
+            <a href="#b2"><span>2</span>setup</a>
           </li>
           <li>
-            <a href="#b3"><span>3</span>send and receive tokens</a>
+            <a href="#b3"><span>3</span>tools</a>
           </li>
           <li>
-            <a href="#b4"><span>4</span>buy graphiccurrencies</a>
-          </li>
-          <li>
-            <a href="#b5"><span>5</span>finance tab and staking</a>
-          </li>
-          <li>
-            <a href="#b6"><span>6</span>How to swap and exchange coins</a>
+            <a href="#b4"><span>4</span>designing</a>
           </li>
         </ul>
         <div class="video">
@@ -133,6 +127,7 @@
             allowfullscreen
           ></iframe>
         </div>
+        <p>Figma crash course</p>
         <Contact />
       </div>
     </transition>
@@ -142,7 +137,7 @@
         <div class="logo">
           <img src="../assets/logo-white.jpg" alt="" />
         </div>
-        <h1>graphiccurrency for Beginners</h1>
+        <h1>Pixellab design on mobile(phone)</h1>
         <h4>
           master course <br />
           by: AdvancedTechAcademy
@@ -150,13 +145,13 @@
         <ul>
           <h3>tutorial objectives:</h3>
           <li>
-            <a href="#c1"><span>1</span>what are candlesticks in graphic</a>
+            <a href="#c1"><span>1</span>design intro</a>
           </li>
           <li>
-            <a href="#c2"><span>2</span>candlestick meaning</a>
+            <a href="#c2"><span>2</span>design basics</a>
           </li>
           <li>
-            <a href="#c2"><span>2</span>candlestick patterns</a>
+            <a href="#c2"><span>2</span>step by step guide</a>
           </li>
         </ul>
         <div class="video">
@@ -170,6 +165,7 @@
             allowfullscreen
           ></iframe>
         </div>
+        <p>MR logo design with pixellab</p>
         <Contact /></div
     ></transition>
     <transition name="move">
@@ -178,7 +174,7 @@
         <div class="logo">
           <img src="../assets/logo-white.jpg" alt="" />
         </div>
-        <h1>How to make money in graphic trading</h1>
+        <h1>pixellab banner design on mobile(phone)</h1>
         <h4>
           master course <br />
           by: AdvancedTechAcademy
@@ -186,13 +182,13 @@
         <ul>
           <h3>tutorial objectives:</h3>
           <li>
-            <a href="#c1"><span>1</span>what are candlesticks in graphic</a>
+            <a href="#c1"><span>1</span>design intro</a>
           </li>
           <li>
-            <a href="#c2"><span>2</span>candlestick meaning</a>
+            <a href="#c2"><span>2</span>step by step guide</a>
           </li>
           <li>
-            <a href="#c2"><span>2</span>candlestick patterns</a>
+            <a href="#c2"><span>2</span>final design</a>
           </li>
         </ul>
         <div class="video">
@@ -206,6 +202,7 @@
             allowfullscreen
           ></iframe>
         </div>
+        <p>Banner design with pixellab on mobile(phone)</p>
       </div>
     </transition>
   </main>
