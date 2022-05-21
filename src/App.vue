@@ -106,7 +106,6 @@ nav a.router-link-exact-active {
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
-  overflow: hidden;
   margin: 0;
   padding: 0;
   position: relative;
