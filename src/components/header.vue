@@ -9,7 +9,8 @@
         </div>
         <div class="right-topNav">
           <a href="/#contact">
-            <i class="fa-solid fa-envelope icon"></i>kcn.123.com@gmail.com</a
+            <i class="fa-solid fa-envelope icon"></i
+            >kukwaclovisngong3@gmail.com</a
           >
         </div>
       </nav>
@@ -43,7 +44,8 @@
         </div>
         <div class="right-topNav">
           <a href="">
-            <i class="fa-solid fa-envelope icon"></i>kcn.123.com@gmail.com</a
+            <i class="fa-solid fa-envelope icon"></i
+            >kukwaclovisngong3@gmail.com</a
           >
         </div>
       </nav>
