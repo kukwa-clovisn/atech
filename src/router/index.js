@@ -78,6 +78,7 @@ const routes = [{
     component: Course_intro,
     beforeEnter(to, from, next) {
       axios('api/token').then(res => {
+        console.log(res)
         if (res.statusText === 'OK') {
           next()
         } else {

@@ -127,14 +127,9 @@ export default {
     });
 
     const refreshpage = () => {
-      if (
-        !localStorage.getItem("accessToken") ||
-        localStorage.getItem("accessToken") == null
-      ) {
-        return router.push("/login");
-      }
       axios("api/token")
         .then((res) => {
+          console.log(res);
           crypto.courseUser = res.data.user.username;
           crypto.courseUserEmail = res.data.user.email;
         })

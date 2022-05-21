@@ -181,6 +181,7 @@ export default {
           if (res.statusText === "OK") {
             response.msg = res.data.msg;
             response.success = true;
+            response.to_signin = true;
 
             user.username = "";
             user.email = "";
@@ -221,8 +222,9 @@ export default {
             response.msg = res.data.msg;
 
             localStorage.setItem("accessToken", res.data.accessToken);
-
-            // res.
+            axios.defaults.headers.common[
+              "Authorization"
+            ] = `Bearer ${localStorage.getItem("accessToken")}`;
 
             setTimeout(() => {
               response.success = false;
