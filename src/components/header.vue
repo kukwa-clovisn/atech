@@ -158,6 +158,9 @@ header {
       text-decoration: none;
       font-size: 11px;
       text-transform: lowercase;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
 
       i {
         margin-right: 5px;
