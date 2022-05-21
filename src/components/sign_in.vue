@@ -2,7 +2,7 @@
   <main>
     <Header />
     <div class="c1">
-      <img src="../assets/bitcoin.png" alt="BTC" />
+      <img src="../assets/forex.jpg" alt="BTC" />
     </div>
     <div class="content">
       <h2>Atech</h2>
@@ -363,7 +363,7 @@ main {
   .c1 {
     width: 250px;
     height: 250px;
-    border-radius: 50%;
+
     background: transparent;
     position: fixed;
     overflow: hidden;
@@ -374,17 +374,19 @@ main {
     opacity: 0.6;
     top: 15vh;
     left: 0vw;
-    animation: turn 10s linear infinite alternate-reverse forwards;
+    animation: turn 10s linear infinite forwards;
 
     img {
       display: block;
       width: 100%;
+      height: 100%;
+      border-radius: 100%;
     }
   }
 
   @keyframes turn {
     to {
-      transform: rotateZ(360deg) translateY(150px);
+      transform: rotateZ(-360deg) translateY(100px);
     }
   }
 

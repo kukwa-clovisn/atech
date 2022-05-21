@@ -15,7 +15,6 @@
         <button class="landing-page-btn">
           <router-link to="/login" class="homeBtn">sign up</router-link>
         </button>
-        <!-- <img src="../assets/ch1.png" id="homeImg" alt="crypto chart" /> -->
 
         <section>
           <h2>There is a reason</h2>
