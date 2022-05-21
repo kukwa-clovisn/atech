@@ -94,20 +94,22 @@ nav a.router-link-exact-active {
   background: #1f1c2d;
   opacity: 0.7;
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
+  margin: 0;
 }
 
 .landing-page {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background: url(./assets/social.jpg);
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
   margin: 0;
-
+  padding: 0;
+  position: relative;
   .title {
     width: 100%;
     height: 83vh;
@@ -241,7 +243,7 @@ nav a.router-link-exact-active {
 
   #blur {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     background: #13253e;
     position: absolute;
     top: 0;

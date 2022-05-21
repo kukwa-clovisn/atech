@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="landing-page" id="home">
-      <div id="blur"></div>
+      <div class="blur"></div>
       <Header />
       <div class="title">
         <h1>
@@ -391,7 +391,7 @@ main {
       justify-content: space-evenly;
       align-items: center;
       flex-wrap: wrap;
-      width: 90vw;
+      width: 97vw;
       padding: 10px;
       margin: auto;
       position: relative;
@@ -480,7 +480,12 @@ main {
 
         @media screen and (max-width: 400px) {
           height: fit-content;
+          width: 97vw;
         }
+      }
+
+      @media screen and (max-width: 400px) {
+        width: 99vw;
       }
     }
   }
