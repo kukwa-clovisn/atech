@@ -101,17 +101,16 @@ nav a.router-link-exact-active {
 
 .landing-page {
   width: 100vw;
-  height: fit-content;
+  min-height: 100vh;
   background: url(./assets/social.jpg);
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
   margin: 0;
-  padding: 0;
   position: relative;
   .title {
     width: 100%;
-    height: 83vh;
+    height: fit-content;
     position: relative;
     padding: 20px;
     top: 20px;
