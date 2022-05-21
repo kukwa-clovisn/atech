@@ -398,7 +398,6 @@ main {
     align-items: center;
     flex-direction: column;
     padding: 0;
-    background: #13253e;
     margin: 0;
     padding-top: 30px;
     padding-bottom: 30px;

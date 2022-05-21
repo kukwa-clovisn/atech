@@ -77,6 +77,10 @@ export default {
             response.success = true;
             response.msg = res.data.msg;
 
+            user.username = "";
+            user.email = "";
+            user.message = "";
+
             setTimeout(() => {
               response.success = false;
             }, 4000);
