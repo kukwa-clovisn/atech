@@ -168,7 +168,7 @@ main {
       top: 30px;
 
       h1 {
-        padding: 25px;
+        padding: 25px 0;
         padding-bottom: 10px;
         width: 95%;
         margin: auto;

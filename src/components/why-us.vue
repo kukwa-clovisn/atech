@@ -192,7 +192,7 @@ main {
       height: fit-content;
 
       h1 {
-        padding: 30px;
+        padding: 30px 0;
         padding-bottom: 10px;
         width: 95%;
         margin: auto;
