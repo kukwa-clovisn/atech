@@ -429,6 +429,10 @@ nav a.router-link-exact-active {
       margin: 30px auto;
       font: 800 50px "Nunito Sans", "Poppins", sans-serif;
       text-transform: uppercase;
+
+      @media screen and (max-width: 660px) {
+        font-size: 35px;
+      }
     }
 
     h4 {

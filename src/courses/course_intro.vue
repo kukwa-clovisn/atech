@@ -129,7 +129,6 @@ export default {
     const refreshpage = () => {
       axios("api/token")
         .then((res) => {
-          console.log(res);
           crypto.courseUser = res.data.user.username;
           crypto.courseUserEmail = res.data.user.email;
         })
