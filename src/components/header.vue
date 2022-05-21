@@ -70,7 +70,6 @@
           <li><a href="/course">courses</a></li>
           <li><a href="/login">sign up</a></li>
           <li><a href="/login">sign in</a></li>
-          <li><a href="/signup">register</a></li>
           <li><a href="/why-us">why crypto?</a></li>
           <li><a href="/blog">blog</a></li>
           <li><a href="/#contact">contact</a></li>

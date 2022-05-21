@@ -116,8 +116,8 @@
           </div>
         </div>
       </transition>
+      <footer>&copy;copyright_CodingHerald_2022</footer>
     </div>
-    <footer>&copy;copyright_CodingHerald_2022</footer>
   </main>
 </template>
 
@@ -398,6 +398,7 @@ main {
     align-items: center;
     flex-direction: column;
     padding: 0;
+    background: #13253e;
     margin: 0;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -657,15 +658,17 @@ main {
         color: white;
       }
     }
-  }
 
-  footer {
-    width: 100vw;
-    height: 10vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgb(216, 216, 216);
+    footer {
+      width: 100vw;
+      height: 5vh;
+      padding: 30px auto;
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: rgb(216, 216, 216);
+    }
   }
 }
 </style>

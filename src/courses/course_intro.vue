@@ -167,21 +167,29 @@ export default {
     function showCryptoCourses() {
       router.push("/course/crypto");
       crypto.showCourseIntro = false;
+      crypto.profileMenu = false;
+      crypto.hideProfile = true;
     }
 
     function showForexCourses() {
       router.push("/course/forex");
       crypto.showCourseIntro = false;
+      crypto.profileMenu = false;
+      crypto.hideProfile = true;
     }
 
     function showWebCourses() {
       router.push("/course/web");
       crypto.showCourseIntro = false;
+      crypto.profileMenu = false;
+      crypto.hideProfile = true;
     }
 
     function showGraphicCourses() {
-      router.push("/course/graphic");
       crypto.showCourseIntro = false;
+      crypto.profileMenu = false;
+      crypto.hideProfile = true;
+      router.push("/course/graphic");
     }
 
     function toCourses() {

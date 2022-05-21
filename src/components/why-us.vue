@@ -14,7 +14,7 @@
         </p>
         <!-- <h1 class="title-head">why choose Crypto & Forex??</h1> -->
         <button class="primary-btn">
-          <router-link to="/signup" class="homeBtn">sign up</router-link>
+          <router-link to="/login" class="homeBtn">sign up</router-link>
         </button>
       </div>
     </div>
@@ -34,7 +34,7 @@
             this wind that is taking over the atmosphere.
           </p>
           <button>
-            <router-link to="/signup" class="route">start learning</router-link>
+            <router-link to="/login" class="route">start learning</router-link>
           </button>
         </div>
       </div>

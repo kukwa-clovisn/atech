@@ -151,6 +151,11 @@ nav a.router-link-exact-active {
           opacity: 0.3;
         }
       }
+
+      @media screen and (max-width: 550px) {
+        width: 90%;
+        border-radius: 7px;
+      }
     }
 
     section {
@@ -382,14 +387,23 @@ nav a.router-link-exact-active {
           }
         }
       }
-      @media screen and (max-width: 1285px) {
-        justify-content: center;
+    }
 
-        @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1285px) {
+      .courses {
+        justify-content: center;
+        .tutorial {
+          margin: 40px auto;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        padding: 10px;
+        .courses {
           width: 100%;
           padding: 10px;
           .tutorial {
-            width: 98%;
+            width: 100%;
           }
         }
       }
@@ -431,7 +445,8 @@ nav a.router-link-exact-active {
       text-transform: uppercase;
 
       @media screen and (max-width: 660px) {
-        font-size: 35px;
+        font-size: 30px;
+        white-space: pre-wrap;
       }
     }
 

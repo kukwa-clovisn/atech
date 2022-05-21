@@ -2,7 +2,7 @@
   <main id="main">
     <transition name="slide">
       <div class="courses-div" v-if="crypto.courses">
-        <h1>Cryptocurrency courses</h1>
+        <h1>Crypto courses</h1>
         <h2>Learn cryptocurrency today!</h2>
         <div class="courses">
           <div class="tutorial" @click="getCourse1()">

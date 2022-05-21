@@ -12,7 +12,7 @@
           Read the latest updates, research, and articles by our crypto team
         </p>
         <button class="primary-btn">
-          <router-link to="/signup" class="homeBtn">sign up</router-link>
+          <router-link to="/login" class="homeBtn">sign up</router-link>
         </button>
         <form @submit.prevent="searchPosts()" class="research">
           <input
@@ -76,7 +76,7 @@
           <br />
           Don't wait for tomorrow
         </p>
-        <button><a href="/signup">start now!</a></button>
+        <button><a href="/login">start now!</a></button>
       </section>
     </div>
     <div class="posts" id="posts">
@@ -214,6 +214,11 @@ main {
           i {
             font-size: 23px;
           }
+        }
+
+        @media screen and (max-width: 550px) {
+          width: 90vw;
+          margin-top: 40px;
         }
       }
     }
