@@ -168,8 +168,10 @@ main {
       top: 30px;
 
       h1 {
-        padding: 45px;
+        padding: 25px;
         padding-bottom: 10px;
+        width: 95%;
+        margin: auto;
       }
       p {
         padding: 10px;

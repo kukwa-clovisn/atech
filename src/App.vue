@@ -122,6 +122,8 @@ nav a.router-link-exact-active {
       color: white;
       padding: 10px;
       padding-top: 75px;
+      width: 95%;
+      margin: auto;
     }
 
     p {

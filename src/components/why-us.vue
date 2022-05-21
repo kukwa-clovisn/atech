@@ -194,11 +194,14 @@ main {
       h1 {
         padding: 30px;
         padding-bottom: 10px;
+        width: 95%;
+        margin: auto;
       }
       .title-head {
         text-transform: uppercase;
         color: rgb(222, 221, 221);
         font: 600 30px "Poppins", sans-serif;
+        margin: auto;
       }
 
       button {
