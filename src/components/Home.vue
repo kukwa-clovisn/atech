@@ -85,6 +85,17 @@
         </div>
       </section>
     </div>
+    <div class="mission">
+      <h1>our mission</h1>
+      <p>
+        The mission of Advanced Tech Academy is here to help you out with your
+        studies online and provide the best learning experience that you need
+        <br />Happy learning...
+      </p>
+      <div class="img">
+        <img src="../assets/logo-white.jpg" alt="" />
+      </div>
+    </div>
     <div class="course-expo">
       <div class="img">
         <img src="../assets/team.jpg" alt="" />
@@ -486,6 +497,43 @@ main {
 
       @media screen and (max-width: 400px) {
         width: 99vw;
+      }
+    }
+  }
+
+  .mission {
+    width: 100vw;
+    height: fit-content;
+    padding: 25px 15px;
+    background: #13253e;
+
+    h1 {
+      padding: 10px;
+      font: 800 30px "Poppins", sans-serif;
+      text-transform: capitalize;
+      color: white;
+    }
+
+    p {
+      width: 95%;
+      margin: auto;
+      padding: 10px;
+      font: 600 20px "Poppins", sans-serif;
+      white-space: pre-wrap;
+      color: rgb(200, 198, 198);
+    }
+
+    .img {
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        height: 70%;
+        width: auto;
+        border-radius: 100%;
       }
     }
   }
