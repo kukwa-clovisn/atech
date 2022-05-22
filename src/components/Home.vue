@@ -95,6 +95,22 @@
       <div class="img">
         <img src="../assets/logo-white.jpg" alt="" />
       </div>
+      <h1>our programs</h1>
+      <div class="programs">
+        <div class="program">
+          <i class="fa-solid fa-chart-line"></i>
+          <p>crypto & forex</p>
+        </div>
+        <div class="program">
+          <i class="fa-solid fa-code"></i>
+          <p>web development</p>
+        </div>
+        <div class="program">
+          <i class="fa-solid fa-object-group"></i>
+          <p>graphic design</p>
+        </div>
+      </div>
+      <button><a href="/login">take a course</a></button>
     </div>
     <div class="course-expo">
       <div class="img">
@@ -334,6 +350,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$baseColor: #13253e;
+$primaryColor: #e66581;
 * {
   transition: all 0.3s ease;
 }
@@ -431,7 +449,7 @@ main {
           width: 95%;
           margin: auto;
           padding: 10px;
-          color: #e66581;
+          color: $primaryColor;
           text-transform: capitalize;
           text-align: left;
           position: relative;
@@ -448,7 +466,7 @@ main {
             right: 0;
             top: 0;
             padding: 2px;
-            background: #e66581;
+            background: $primaryColor;
             font-size: 14px;
           }
         }
@@ -479,7 +497,7 @@ main {
           margin: 20px auto;
           margin-bottom: 10px;
           border: none;
-          background: #e66581;
+          background: $primaryColor;
 
           .route {
             color: #fff;
@@ -505,7 +523,7 @@ main {
     width: 100vw;
     height: fit-content;
     padding: 25px 15px;
-    background: #13253e;
+    background: $baseColor;
 
     h1 {
       padding: 10px;
@@ -525,7 +543,7 @@ main {
 
     .img {
       width: 100%;
-      height: 300px;
+      height: 200px;
       overflow: hidden;
       display: flex;
       justify-content: center;
@@ -536,12 +554,54 @@ main {
         border-radius: 100%;
       }
     }
+
+    .programs {
+      width: 95%;
+      height: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+
+      .program {
+        width: 300px;
+        padding: 10px;
+        margin-right: 10px;
+        i {
+          color: white;
+          font-size: 50px;
+        }
+        p {
+          text-transform: capitalize;
+        }
+      }
+    }
+    button {
+      width: 300px;
+      height: 55px;
+      border-radius: 5px;
+      background: white;
+      margin: 15px auto;
+
+      a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $primaryColor;
+        text-transform: capitalize;
+        font: 600 22px "Poppins", sans-serif;
+        text-decoration: none;
+      }
+    }
   }
 
   .course-expo {
     width: 100vw;
     height: 100vh;
-    background: #13253e;
+    background: $baseColor;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -575,7 +635,7 @@ main {
           width: 50px;
           height: 3px;
           border-radius: 0 30px 30px 0;
-          background: #e66581;
+          background: $primaryColor;
           position: absolute;
           top: -5px;
           left: 10px;
@@ -586,7 +646,7 @@ main {
           font: 600 15px "Nunito sans", sans-serif;
           text-transform: uppercase;
           padding: 5px;
-          color: #e66581;
+          color: $primaryColor;
         }
 
         .content {
@@ -605,7 +665,7 @@ main {
             width: 70px;
             height: 50px;
             transform: rotate(30deg);
-            background: #e66581;
+            background: $primaryColor;
             border: none;
             border-radius: 0 2px 2px 0;
 
@@ -673,7 +733,7 @@ main {
         padding-bottom: 3px;
         font: 800 40px poppins, sans-serif;
         text-transform: capitalize;
-        color: #e66581;
+        color: $primaryColor;
       }
 
       h4 {
@@ -701,7 +761,7 @@ main {
           display: block;
           border: none;
           margin-top: 10px;
-          background: #e66581;
+          background: $primaryColor;
 
           .route {
             text-decoration: none;
@@ -810,7 +870,7 @@ main {
       border: none;
       margin: 20px auto;
       background: transparent;
-      box-shadow: 0 0 1px 2px #e66581;
+      box-shadow: 0 0 1px 2px $primaryColor;
 
       a {
         padding: 0;
@@ -819,7 +879,7 @@ main {
         transition: all 0.3s ease;
         cursor: pointer;
         text-decoration: none;
-        color: #e66581;
+        color: $primaryColor;
         text-transform: uppercase;
       }
     }
@@ -835,7 +895,7 @@ main {
     width: 100vw;
     height: fit-content;
     padding: 10px;
-    background: #13253e;
+    background: $baseColor;
 
     .content {
       text-align: center;
@@ -867,7 +927,7 @@ main {
           text-transform: capitalize;
 
           sup {
-            color: #e66581;
+            color: $primaryColor;
           }
         }
 
@@ -884,7 +944,7 @@ main {
           font: 700 26px "Nunito sans", sans-serif;
           text-transform: capitalize;
           text-align: left;
-          color: #e66581;
+          color: $primaryColor;
         }
       }
 
@@ -931,7 +991,12 @@ main {
     padding: 30px 5px 20px 5px;
     position: relative;
     margin-bottom: 0;
-    background: linear-gradient(to bottom right, #390764, #b93e82, #e66581);
+    background: linear-gradient(
+      to bottom right,
+      #390764,
+      #b93e82,
+      $primaryColor
+    );
 
     .bubble {
       width: 200px;
@@ -953,7 +1018,7 @@ main {
       overflow: hidden;
       opacity: 1;
       border-radius: 70% 0 0 0;
-      background: linear-gradient(90deg, #2d548a, #13253e);
+      background: linear-gradient(90deg, #2d548a, $baseColor);
     }
 
     h1 {
@@ -1224,7 +1289,7 @@ main {
     width: 40px;
     height: 40px;
     border-radius: 3px;
-    background: #13253e;
+    background: $baseColor;
     position: fixed;
     right: 30px;
     bottom: 50px;

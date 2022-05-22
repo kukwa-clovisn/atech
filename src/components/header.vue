@@ -4,13 +4,14 @@
       <nav class="topNav">
         <div class="left-topNav">
           <a href="/#contact">
-            <i class="fa-solid fa-phone icon"></i>+237682449347</a
+            <i class="fa-solid fa-phone icon"></i><br />
+            +237682449347</a
           >
         </div>
         <div class="right-topNav">
           <a href="/#contact">
-            <i class="fa-solid fa-envelope icon"></i
-            >kukwaclovisngong3@gmail.com</a
+            <i class="fa-solid fa-envelope icon"></i><br />
+            kukwaclovisngong3@gmail.com</a
           >
         </div>
       </nav>
@@ -40,18 +41,21 @@
     <header class="small-screen-header">
       <nav class="topNav">
         <div class="left-topNav">
-          <a href="/"> <i class="fa-solid fa-phone icon"></i>+237682449347</a>
+          <a href="/">
+            <i class="fa-solid fa-phone icon"></i><br />
+            +237682449347</a
+          >
         </div>
         <div class="right-topNav">
           <a href="">
-            <i class="fa-solid fa-envelope icon"></i
-            >kukwaclovisngong3@gmail.com</a
+            <i class="fa-solid fa-envelope icon"></i><br />
+            kukwaclovisngong3@gmail.com</a
           >
         </div>
       </nav>
       <nav class="bottom-nav" v-if="noDropdown">
         <nav class="logo-nav" @click="toHome()">
-          <img src="../assets/logo-white.jpg" alt="" />
+          <span>Atech</span>
         </nav>
         <nav class="menu-bars">
           <button @click="menuFunction()">
