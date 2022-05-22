@@ -68,6 +68,20 @@
               <button>start tutorial</button>
             </div>
           </div>
+          <div class="tutorial" @click="getCourse5()">
+            <div class="video">
+              <img src="../assets/html-logo.jpg" alt="" />
+            </div>
+            <div class="video-title">
+              <span class="free-course"><i>free</i></span>
+              <h3>
+                <span>Algorithms: For loops</span> <br />learn looping in
+                algorithms and programming
+              </h3>
+              <p>3 videos</p>
+              <button>start tutorial</button>
+            </div>
+          </div>
         </div>
       </div>
     </transition>
@@ -307,6 +321,67 @@
         <Contact />
       </div>
     </transition>
+    <transition name="move">
+      <div class="single-tutorial course-4" v-if="web.course5">
+        <a @click="backToCourses()" class="return">Back to web courses</a>
+        <div class="logo">
+          <img src="../assets/logo-white.jpg" alt="" />
+        </div>
+        <h1>Algorithm: loops</h1>
+        <h4>
+          master course <br />
+          by: AdvancedTechAcademy
+        </h4>
+        <ul>
+          <h3>tutorial objectives:</h3>
+          <li>
+            <a href="#c"><span>1</span>understand the concept of looping</a>
+          </li>
+          <li>
+            <a href="#c"><span>2</span>applying loops</a>
+          </li>
+        </ul>
+        <h2>Algorithm: loops</h2>
+        <div class="video">
+          <iframe
+            width="560"
+            height="315"
+            id="c"
+            src="https://www.youtube.com/embed/tJlgRvE1m28"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p>Algorithm: Loops</p>
+        <h1>Javascript for loops</h1>
+        <div class="video">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/s9wW2PpJsmQ"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <h1>Javascript conditionals</h1>
+        <div class="video">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/IsG4Xd6LlsM"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <Contact />
+      </div>
+    </transition>
   </main>
 </template>
 
@@ -325,6 +400,7 @@ export default {
       course2: false,
       course3: false,
       course4: false,
+      course5: false,
     });
 
     function backToCourses() {
@@ -332,6 +408,7 @@ export default {
       web.course2 = false;
       web.course3 = false;
       web.course4 = false;
+      web.course5 = false;
 
       setTimeout(() => {
         web.courses = true;
@@ -367,6 +444,13 @@ export default {
       }, 1000);
     }
 
+    function getCourse5() {
+      web.courses = false;
+      setTimeout(() => {
+        web.course5 = true;
+      }, 1000);
+    }
+
     return {
       web,
       backToCourses,
@@ -374,6 +458,7 @@ export default {
       getCourse2,
       getCourse3,
       getCourse4,
+      getCourse5,
     };
   },
 };
