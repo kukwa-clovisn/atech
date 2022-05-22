@@ -112,6 +112,9 @@
       </div>
       <button><a href="/login">take a course</a></button>
     </div>
+    <div class="design">
+      <Carousel />
+    </div>
     <div class="course-expo">
       <div class="img">
         <img src="../assets/team.jpg" alt="" />
@@ -340,11 +343,13 @@
 <script>
 import Header from "./header.vue";
 import Footer from "./footer.vue";
+import Carousel from "./carousel.vue";
 export default {
   name: "Home",
   components: {
     Header,
     Footer,
+    Carousel,
   },
 };
 </script>

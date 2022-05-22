@@ -63,7 +63,7 @@
             <div class="video-title">
               <span class="free-course"><i>free</i></span>
               <h3><span>Photoshop</span> crash course</h3>
-              <p>1 video</p>
+              <p>132 video</p>
               <button>start tutorial</button>
             </div>
           </div>
@@ -217,48 +217,83 @@
       </div>
     </transition>
     <transition name="move">
-      <div class="video">
-        <div class="single-tutorial course-4" v-if="graphic.course5">
-          <a @click="backToCourses()" class="return">Back to graphic courses</a>
-          <div class="logo">
-            <img src="../assets/logo-white.jpg" alt="" />
-          </div>
-          <h1>
-            The Making of a Fantasy Photo-Manipulation using Stock Images |
-            Photoshop Tutorial
-          </h1>
-          <h4>
-            master course <br />
-            by: AdvancedTechAcademy
-          </h4>
-          <ul>
-            <h3>tutorial objectives:</h3>
-            <li>
-              <a href="#c1"><span>1</span>photoshop intro</a>
-            </li>
-            <li>
-              <a href="#c2"><span>2</span>step by step guide</a>
-            </li>
-            <li>
-              <a href="#c2"><span>2</span>final design</a>
-            </li>
-          </ul>
-          <div class="video">
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/6mm28NAxaXA"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-          <p>
-            The Making of a Fantasy Photo-Manipulation using Stock Images |
-            Photoshop Tutorial
-          </p>
+      <div class="single-tutorial course-4" v-if="graphic.course5">
+        <a @click="backToCourses()" class="return">Back to graphic courses</a>
+        <div class="logo">
+          <img src="../assets/logo-white.jpg" alt="" />
         </div>
+        <h1>
+          The Making of a Fantasy Photo-Manipulation using Stock Images |
+          Photoshop Tutorial
+        </h1>
+        <h4>
+          master course <br />
+          by: AdvancedTechAcademy
+        </h4>
+        <ul>
+          <h3>tutorial objectives:</h3>
+          <li>
+            <a href="#c1"><span>1</span>photoshop intro</a>
+          </li>
+          <li>
+            <a href="#c2"><span>2</span>step by step guide</a>
+          </li>
+          <li>
+            <a href="#c2"><span>2</span>final design</a>
+          </li>
+        </ul>
+        <div class="video">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/6mm28NAxaXA"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p>
+          The Making of a Fantasy Photo-Manipulation using Stock Images |
+          Photoshop Tutorial
+        </p>
+        <h1>Photoshop crash course</h1>
+        <div class="video">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/videoseries?list=PLB7pbNktGmfTbjJECrJruL8guRZmyDRKV"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="video">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/YDbazbJtIes"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <h1>playlist of photoshop tutorials</h1>
+        <h2>127 short tutorials</h2>
+        <div class="video">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/videoseries?list=PLSoOtQkDh8ByH7x6eQfjVt09V9GJMxL2Z"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <Carousel />
       </div>
     </transition>
   </main>
