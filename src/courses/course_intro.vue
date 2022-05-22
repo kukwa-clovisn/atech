@@ -64,7 +64,7 @@
           <span><i class="fa-solid fa-code"></i></span>
           <p>Web developement</p>
         </li>
-        <li>
+        <li @click="toContact()">
           <span><i class="fa-solid fa-phone"></i></span>
           <p>contact us</p>
         </li>
@@ -144,6 +144,9 @@ export default {
     function toHome() {
       router.push("/");
     }
+    function toContact() {
+      router.push("/#contact");
+    }
     function toCourses() {
       router.push("/course");
     }
@@ -209,6 +212,7 @@ export default {
       showWebCourses,
       showGraphicCourses,
       toCourses,
+      toContact,
     };
   },
 };

@@ -56,6 +56,17 @@
               <button>start tutorial</button>
             </div>
           </div>
+          <div class="tutorial" @click="getCourse5()">
+            <div class="video">
+              <img src="../assets/logo-white.jpg" alt="" />
+            </div>
+            <div class="video-title">
+              <span class="free-course"><i>free</i></span>
+              <h3><span>Photoshop</span> crash course</h3>
+              <p>1 video</p>
+              <button>start tutorial</button>
+            </div>
+          </div>
         </div>
       </div>
     </transition>
@@ -205,6 +216,51 @@
         <p>Banner design with pixellab on mobile(phone)</p>
       </div>
     </transition>
+    <transition name="move">
+      <div class="video">
+        <div class="single-tutorial course-4" v-if="graphic.course5">
+          <a @click="backToCourses()" class="return">Back to graphic courses</a>
+          <div class="logo">
+            <img src="../assets/logo-white.jpg" alt="" />
+          </div>
+          <h1>
+            The Making of a Fantasy Photo-Manipulation using Stock Images |
+            Photoshop Tutorial
+          </h1>
+          <h4>
+            master course <br />
+            by: AdvancedTechAcademy
+          </h4>
+          <ul>
+            <h3>tutorial objectives:</h3>
+            <li>
+              <a href="#c1"><span>1</span>photoshop intro</a>
+            </li>
+            <li>
+              <a href="#c2"><span>2</span>step by step guide</a>
+            </li>
+            <li>
+              <a href="#c2"><span>2</span>final design</a>
+            </li>
+          </ul>
+          <div class="video">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/6mm28NAxaXA"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p>
+            The Making of a Fantasy Photo-Manipulation using Stock Images |
+            Photoshop Tutorial
+          </p>
+        </div>
+      </div>
+    </transition>
   </main>
 </template>
 
@@ -223,6 +279,7 @@ export default {
       course2: false,
       course3: false,
       course4: false,
+      course5: false,
     });
 
     function backToCourses() {
@@ -230,6 +287,7 @@ export default {
       graphic.course2 = false;
       graphic.course3 = false;
       graphic.course4 = false;
+      graphic.course5 = false;
 
       setTimeout(() => {
         graphic.courses = true;
@@ -265,6 +323,13 @@ export default {
       }, 1000);
     }
 
+    function getCourse5() {
+      graphic.courses = false;
+      setTimeout(() => {
+        graphic.course5 = true;
+      }, 1000);
+    }
+
     return {
       graphic,
       backToCourses,
@@ -272,6 +337,7 @@ export default {
       getCourse2,
       getCourse3,
       getCourse4,
+      getCourse5,
     };
   },
 };

@@ -315,8 +315,8 @@ nav a.router-link-exact-active {
         width: 500px;
         margin-right: 40px;
         margin-bottom: 50px;
-        border-radius: 20px;
-        box-shadow: 0 0 2px 1px #3d566f;
+        border-radius: 20px !important;
+        // box-shadow: 0 0 2px 1px #3d566f;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
 
@@ -325,6 +325,7 @@ nav a.router-link-exact-active {
           height: 190px;
           overflow: hidden;
           background: white;
+          border-radius: 7px 7px 0 0;
 
           img {
             height: 100%;
@@ -342,6 +343,7 @@ nav a.router-link-exact-active {
           padding: 15px;
           padding-top: 35px;
           position: relative;
+          border-radius: 0 0 7px 7px;
           background: #072e54;
 
           .free-course {

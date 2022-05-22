@@ -583,6 +583,7 @@ main {
       border-radius: 5px;
       background: white;
       margin: 15px auto;
+      border: none;
 
       a {
         width: 100%;

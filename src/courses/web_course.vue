@@ -75,8 +75,8 @@
             <div class="video-title">
               <span class="free-course"><i>free</i></span>
               <h3>
-                <span>Algorithms: For loops</span> <br />learn looping in
-                algorithms and programming
+                <span>programming loops</span> <br />learn looping in
+                programming
               </h3>
               <p>3 videos</p>
               <button>start tutorial</button>
@@ -327,7 +327,7 @@
         <div class="logo">
           <img src="../assets/logo-white.jpg" alt="" />
         </div>
-        <h1>Algorithm: loops</h1>
+        <h1>programming loops</h1>
         <h4>
           master course <br />
           by: AdvancedTechAcademy
