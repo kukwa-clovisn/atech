@@ -1,11 +1,11 @@
 <template>
   <div class="carousel-div">
-    <div class="blur"></div>
     <div class="content">
       <h1>Hire us for your Designs</h1>
       <p>
         Here are some of our design samples
         <i class="fa-solid fa-hand-point-right"></i>
+        <span>View more Design samples</span>
       </p>
       <p>
         We do best to satisfy our clients. We do Get to us for your professional
@@ -21,15 +21,55 @@
       </ul>
       <button><a href="#contact">Hire</a></button>
     </div>
+
     <div class="img">
       <transition name="image">
         <img
-          :src="image_src"
-          alt="crypto and forex"
+          src="../assets/design.jpeg"
+          v-if="image1"
           class="carousel-image"
-          v-if="image"
+          alt=""
         />
       </transition>
+      <transition name="image">
+        <img
+          src="../assets/design.jpeg"
+          v-if="image1"
+          class="carousel-image"
+          alt=""
+        />
+      </transition>
+      <!-- <img :src="image_src" alt="Atech" v-if="image" /> -->
+
+      <transition name="image">
+        <img
+          src="../assets/design-3.jpeg"
+          v-if="image2"
+          class="carousel-image"
+          alt=""
+        />
+      </transition>
+      <div class="blur"></div>
+    </div>
+    <div class="img small-screen">
+      <transition name="image">
+        <img
+          src="../assets/design-1.jpeg"
+          v-if="image1"
+          class="small-screen-image"
+          alt=""
+        />
+      </transition>
+      <transition name="image">
+        <img
+          src="../assets/design-2.jpeg"
+          v-if="image2"
+          class="small-screen-image"
+          alt=""
+        />
+      </transition>
+
+      <div class="blur"></div>
     </div>
   </div>
 </template>
@@ -46,36 +86,35 @@ export default {
     // letting the images into an array
     let images = [];
 
-    let image = ref(true);
+    let image1 = ref(true);
+    let image2 = ref(false);
 
     // pushing the images into the image array
     images[0] = "/img/design.fd6dd75d.jpeg";
-    // images[1] = "/img/design-1.0530f8c9.jpeg";
-    // images[2] = "/img/design-2.d39b2fde.jpeg";
-    images[1] = "/img/design-3.c2905318.jpeg";
-
-    // giving a function called image_slide that will cause the image transition.
-
-    //     const image_slide =
+    // images[1] = "http://localhost:9003/img/design-1.0530f8c9.jpeg";
+    // images[2] = "http://localhost:9003/img/design-2.d39b2fde.jpeg";
 
     setInterval(() => {
-      // getImage.slide.src = images[i];
       image_src.value = images[i];
 
       // creationg a condition for looping throung the images
-      if (i < images.length - 1) {
-        image.value = false;
-        setTimeout(() => {
-          image.value = true;
-          i++;
-        }, 1000);
-      } else {
-        i = 0; //we want to make sure that the images actually starts from the first image which is images[0]
-      }
-    }, 4000);
-    //     image_slide();
+      // if (i < images.length - 1) {
+      //   image.value = false;
+      //   i++;
+      //   setTimeout(() => {
+      //     image.value = true;
+      //   }, 1000);
+      // } else {
+      //   i = 0; //we want to make sure that the images actually starts from the first image which is images[0]
+      // }
+      image1.value = !image1.value;
+      image2.value = !image2.value;
+      // setTimeout(() => {
+      //   image2.value = !image2.value;
+      // }, 6000);
+    }, 7000);
 
-    return { image_src, image };
+    return { image_src, image1, image2 };
   },
 };
 </script>
@@ -84,23 +123,26 @@ export default {
 $baseColor: #13253e;
 $primaryColor: #e66581;
 .image-enter-from {
-  transform: scale(1.3);
+  transform: scale(1.5);
+  opacity: 0.4;
 }
 .image-enter-active {
-  transition: all 3s ease;
+  opacity: 0.5;
+  transition: all 3s ease-in;
 }
 .image-enter-to {
-  transform: scale(1);
+  opacity: 1;
 }
 
 .image-leave-from {
   transform: translateX(0);
 }
 .image-leave-active {
-  transition: all 3s ease;
+  transition: all 2s ease;
 }
 .image-leave-to {
   transform: translateX(80vw);
+  opacity: 0;
 }
 
 .carousel-div {
@@ -113,19 +155,19 @@ $primaryColor: #e66581;
   align-items: center;
   overflow: hidden;
   position: relative;
-
-  .blur {
-    display: none;
-    z-index: 1;
-  }
+  background: $baseColor;
 
   .content {
-    width: 40%;
+    width: 35%;
     height: fit-content;
-    background: rgb(243, 242, 242);
     border-radius: 7px;
     z-index: 1;
 
+    h1,
+    p,
+    li {
+      color: white;
+    }
     h1 {
       padding: 20px 10px;
       text-transform: capitalize;
@@ -133,11 +175,34 @@ $primaryColor: #e66581;
 
     p {
       padding: 10px;
-      font: 500 17px "Poppins", sans-serif;
+      font: 500 15px "Poppins", sans-serif;
+      text-align: left;
+      width: 95%;
+      margin: auto;
 
       i {
         color: $primaryColor;
         font-size: 30px;
+      }
+
+      span {
+        display: block;
+        padding: 5px 20px;
+        width: fit-content;
+        font: 600 17px "Poppins", sans-serif;
+        color: color;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        border-radius: 5px;
+        background: $primaryColor;
+        margin: 10px auto;
+
+        &:active {
+          transform: scale(0.8);
+        }
       }
     }
 
@@ -156,7 +221,7 @@ $primaryColor: #e66581;
     }
     button {
       width: 80%;
-      height: 70px;
+      height: 50px;
       border-radius: 8px;
       margin: 20px auto;
       border: none;
@@ -178,34 +243,42 @@ $primaryColor: #e66581;
     }
   }
   .img {
-    width: 50%;
+    width: 60%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 0.5;
+    position: relative;
+    overflow: hidden;
 
+    .blur {
+      display: none;
+      height: 100%;
+      width: 100%;
+      // opacity: 0.7;
+    }
     .carousel-image {
       width: 100%;
       height: auto;
       border-radius: 5px;
+      position: absolute;
+      top: 5%;
+      left: 0;
     }
+  }
+  .img.small-screen {
+    display: none;
   }
 
   @media screen and (max-width: 1000px) {
     min-height: 90vh;
 
-    .blur {
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
     .img,
     .content {
       position: absolute;
-      top: 0;
       left: 0;
+      bottom: 0;
       width: 100%;
 
       h1,
@@ -213,15 +286,37 @@ $primaryColor: #e66581;
       li {
         color: white;
       }
+
+      .blur {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
     }
 
     .content {
       top: 10%;
       background: transparent;
     }
+    .img {
+      img {
+        height: 100%;
+        width: auto;
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .img {
+      display: none;
+    }
+    .img.small-screen {
+      display: block;
+    }
   }
   @media screen and (max-height: 750px) {
     height: 100vh;
+
     .content {
       top: 5%;
     }
