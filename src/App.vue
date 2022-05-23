@@ -14,6 +14,33 @@ $footerColor: rgb(51, 2, 69);
 $primeColor: rgb(218, 121, 121);
 $baseColor: #072e54;
 $fallback: rgb(19, 37, 62);
+
+.move-in-enter-active,
+.move-in-leave-active,
+.refresh-enter-active,
+.refresh-leave-active {
+  transition: all 3s ease;
+}
+
+.appear-enter-active,
+.appear-leave-active {
+  opacity: 0.3;
+  transition: all 4s ease;
+}
+
+.move-in-enter-from {
+  transform: translateY(-70vh);
+}
+
+.appear-enter-from {
+  opacity: 0;
+}
+
+.refresh-enter-from {
+  transform: translateX(80vw);
+}
+
+
 #app {
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;

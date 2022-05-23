@@ -5,7 +5,7 @@
       <p>
         Here are some of our design samples
         <i class="fa-solid fa-hand-point-right"></i>
-        <span>View more Design samples</span>
+        <a href="/samples">View more Design samples</a>
       </p>
       <p>
         We do best to satisfy our clients. We do Get to us for your professional
@@ -19,7 +19,7 @@
         <li>badges</li>
         <li>and many more.</li>
       </ul>
-      <button><a href="#contact">Hire</a></button>
+      <button><a href="/#contact">Hire</a></button>
     </div>
 
     <div class="img">
@@ -185,7 +185,8 @@ $primaryColor: #e66581;
         font-size: 30px;
       }
 
-      span {
+      a {
+        text-decoration: none;
         display: block;
         padding: 5px 20px;
         width: fit-content;
@@ -196,6 +197,7 @@ $primaryColor: #e66581;
         justify-content: center;
         align-items: center;
         height: 30px;
+        color: white;
         border-radius: 5px;
         background: $primaryColor;
         margin: 10px auto;

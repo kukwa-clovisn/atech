@@ -4,29 +4,35 @@
       <div class="blur"></div>
       <Header />
       <div class="title">
-        <h1>
-          Advanced <br />
-          Tech acadmey
-        </h1>
-        <p>
-          this is a crypto trading website where you get to learn all about
-          crypto currency and also how to trade with crypto and forex
-        </p>
-        <button class="landing-page-btn">
+        <transition name="move-in">
+          <h1 v-if="animate">
+            Advanced <br />
+            Tech acadmey
+          </h1>
+        </transition>
+        <transition name="appear">
+          <p v-if="animate">
+            this is a crypto trading website where you get to learn all about
+            crypto currency and also how to trade with crypto and forex
+          </p>
+        </transition>
+        <transition name="appear"> </transition>
+        <button class="landing-page-btn" v-if="animate">
           <router-link to="/login" class="homeBtn">sign up</router-link>
         </button>
-
-        <section>
-          <h2>There is a reason</h2>
-          <div class="words">
-            <ul>
-              <li>you love <span>music</span></li>
-              <li>you love <span>graphics</span></li>
-              <li>you love <span>the blockchain</span></li>
-              <li>you love <span>technology</span></li>
-            </ul>
-          </div>
-        </section>
+        <transition name="refresh">
+          <section v-if="animate">
+            <h2>There is a reason</h2>
+            <div class="words">
+              <ul>
+                <li>you love <span>music</span></li>
+                <li>you love <span>graphics</span></li>
+                <li>you love <span>the blockchain</span></li>
+                <li>you love <span>technology</span></li>
+              </ul>
+            </div>
+          </section>
+        </transition>
       </div>
     </div>
     <div class="courses-div">
@@ -341,6 +347,7 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
 import Header from "./header.vue";
 import Footer from "./footer.vue";
 import Carousel from "./carousel.vue";
@@ -351,14 +358,26 @@ export default {
     Footer,
     Carousel,
   },
+  setup() {
+    let animate = ref(false);
+    onMounted(() => {
+      setTimeout(() => {
+        animate.value = true;
+      }, 500);
+    });
+
+    return { animate };
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 $baseColor: #13253e;
 $primaryColor: #e66581;
+
+
 * {
-  transition: all 0.3s ease;
+  transition: all 1s ease;
 }
 .landing-page-btn {
   width: 150px;

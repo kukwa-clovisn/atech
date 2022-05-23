@@ -4,18 +4,23 @@
       <div class="blur"></div>
       <Header />
       <div class="title">
-        <h1>
-          Advanced <br />
-          Tech Academy
-        </h1>
-        <p>
-          this is a crypto trading website where you get to learn all about
-          crypto currency and also how to trade with crypto and forex
-        </p>
-        <!-- <h1 class="title-head">why choose Crypto & Forex??</h1> -->
-        <button class="primary-btn">
-          <router-link to="/login" class="homeBtn">sign up</router-link>
-        </button>
+        <transition name="move-n">
+          <h1 v-if="animate">
+            Advanced <br />
+            Tech Academy
+          </h1>
+        </transition>
+        <transition name="refresh">
+          <p v-if="animate">
+            this is a crypto trading website where you get to learn all about
+            crypto currency and also how to trade with crypto and forex
+          </p>
+        </transition>
+        <transition name="refresh">
+          <button class="primary-btn" v-if="animate">
+            <router-link to="/login" class="homeBtn">sign up</router-link>
+          </button>
+        </transition>
       </div>
     </div>
     <div class="why-us">
@@ -152,6 +157,7 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
 import Header from "./header.vue";
 import Footer from "./footer.vue";
 export default {
@@ -159,6 +165,17 @@ export default {
   components: {
     Header,
     Footer,
+  },
+  setup() {
+    let animate = ref(false);
+
+    onMounted(() => {
+      setTimeout(() => {
+        animate.value = true;
+      }, 3000);
+    });
+
+    return { animate };
   },
 };
 </script>

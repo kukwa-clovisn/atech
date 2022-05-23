@@ -4,29 +4,37 @@
       <div class="blur"></div>
       <Header />
       <div class="title">
-        <h1>
-          Advanced <br />
-          Tech Academy
-        </h1>
-        <p>
-          Read the latest updates, research, and articles by our crypto team
-        </p>
-        <button class="primary-btn">
-          <router-link to="/login" class="homeBtn">sign up</router-link>
-        </button>
-        <form @submit.prevent="searchPosts()" class="research">
-          <input
-            type="search"
-            name="search"
-            id="search"
-            v-model="post.title"
-            placeholder="Search...."
-            required
-          />
-          <button type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
+        <transition name="move-in">
+          <h1 v-if="animate">
+            Advanced <br />
+            Tech Academy
+          </h1>
+        </transition>
+        <transition name="appear">
+          <p v-if="animate">
+            Read the latest updates, research, and articles by our crypto team
+          </p>
+        </transition>
+        <transition name="refresh">
+          <button class="primary-btn" v-if="animate">
+            <router-link to="/login" class="homeBtn">sign up</router-link>
           </button>
-        </form>
+        </transition>
+        <transition name="appear">
+          <form @submit.prevent="searchPosts()" class="research" v-if="animate">
+            <input
+              type="search"
+              name="search"
+              id="search"
+              v-model="post.title"
+              placeholder="Search...."
+              required
+            />
+            <button type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+        </transition>
       </div>
     </div>
     <div class="section-1" v-if="post.open">
@@ -102,7 +110,7 @@
 
 <script>
 import axios from "axios";
-import { reactive, onMounted } from "vue";
+import { reactive, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import Header from "./header.vue";
 import Footer from "./footer.vue";
@@ -114,7 +122,7 @@ export default {
   },
   setup() {
     const router = useRouter();
-
+    let animate = ref(false);
     const post = reactive({
       title: "",
       postArr: [],
@@ -131,6 +139,10 @@ export default {
 
     onMounted(() => {
       getPosts();
+
+      setTimeout(() => {
+        animate.value = true;
+      }, 500);
     });
 
     function searchPosts() {
@@ -144,7 +156,7 @@ export default {
       router.push("#posts");
     }
 
-    return { post, searchPosts, getPosts };
+    return { post, animate, searchPosts, getPosts };
   },
 };
 </script>
