@@ -182,6 +182,7 @@ export default {
             response.msg = res.data.msg;
             response.success = true;
             response.to_signin = true;
+            response.to_signup = false;
 
             user.username = "";
             user.email = "";
