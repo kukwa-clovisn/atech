@@ -104,6 +104,10 @@
         <p class="author">author:{{ post.author }}</p>
       </div>
     </div>
+      <span class="to-landing-page reach"
+      ><a href="/#contact" class="a"
+        ><i class="fa-solid fa-person-circle-question"></i></a
+    ></span>
     <Footer />
   </main>
 </template>

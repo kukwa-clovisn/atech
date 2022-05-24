@@ -125,6 +125,10 @@
       </div>
     </div>
     <router-view></router-view>
+    <span class="to-landing-page reach"
+      ><a href="/#contact" class="a"
+        ><i class="fa-solid fa-person-circle-question"></i></a
+    ></span>
   </main>
 </template>
 

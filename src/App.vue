@@ -40,7 +40,6 @@ $fallback: rgb(19, 37, 62);
   transform: translateX(80vw);
 }
 
-
 #app {
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -112,6 +111,39 @@ nav a.router-link-exact-active {
     text-transform: capitalize;
     font: 700 20px "Poppins", sans-serif;
     text-decoration: none;
+  }
+}
+
+.to-landing-page {
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  background: $baseColor;
+  position: fixed;
+  right: 30px;
+  bottom: 50px;
+  z-index: 1;
+
+  .a {
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+}
+.reach {
+  left: 10px;
+  border-radius: 100%;
+  width: 55px;
+  height: 55px;
+  background: $SecondaryColor;
+  a {
+    i {
+      font-size: 20px;
+    }
   }
 }
 

@@ -39,6 +39,10 @@
         </div>
       </div>
     </div>
+    <span class="to-landing-page reach"
+      ><a href="/#contact" class="a"
+        ><i class="fa-solid fa-person-circle-question"></i></a
+    ></span>
     <Footer />
   </div>
 </template>

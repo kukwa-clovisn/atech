@@ -152,6 +152,10 @@
       <p>learn a skill today and brighten your future</p>
       <button><a href="/course"> start a course</a></button>
     </div>
+      <span class="to-landing-page reach"
+      ><a href="/#contact" class="a"
+        ><i class="fa-solid fa-person-circle-question"></i></a
+    ></span>
     <Footer />
   </main>
 </template>

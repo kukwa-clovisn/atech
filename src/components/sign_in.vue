@@ -118,6 +118,10 @@
       </transition>
       <footer>&copy;copyright_CodingHerald_2022</footer>
     </div>
+      <span class="to-landing-page reach"
+      ><a href="/#contact" class="a"
+        ><i class="fa-solid fa-person-circle-question"></i></a
+    ></span>
   </main>
 </template>
 

@@ -342,6 +342,10 @@
     <span class="to-landing-page"
       ><a href="#home" class="a"><i class="fa-solid fa-circle-arrow-up"></i></a
     ></span>
+    <span class="to-landing-page reach"
+      ><a href="/#contact" class="a"
+        ><i class="fa-solid fa-person-circle-question"></i></a
+    ></span>
     <Footer />
   </main>
 </template>
@@ -374,7 +378,6 @@ export default {
 <style lang="scss" scoped>
 $baseColor: #13253e;
 $primaryColor: #e66581;
-
 
 * {
   transition: all 1s ease;
@@ -1328,6 +1331,18 @@ main {
       justify-content: center;
       align-items: center;
       color: white;
+    }
+  }
+  .reach {
+    left: 10px;
+    border-radius: 100%;
+    width: 55px;
+    height: 55px;
+    background: $primaryColor;
+    a {
+      i {
+        font-size: 20px;
+      }
     }
   }
 }

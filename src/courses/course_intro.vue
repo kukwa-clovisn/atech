@@ -103,6 +103,10 @@
     <transition name="fade">
       <router-view></router-view>
     </transition>
+    <span class="to-landing-page reach"
+      ><a href="/#contact" class="a"
+        ><i class="fa-solid fa-person-circle-question"></i></a
+    ></span>
   </main>
 </template>
 
