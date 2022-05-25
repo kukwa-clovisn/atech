@@ -104,7 +104,7 @@
         <p class="author">author:{{ post.author }}</p>
       </div>
     </div>
-      <span class="to-landing-page reach"
+    <span class="to-landing-page reach"
       ><a href="/#contact" class="a"
         ><i class="fa-solid fa-person-circle-question"></i></a
     ></span>
@@ -250,7 +250,7 @@ main {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 40px 20px;
+    padding: 40px 5px;
 
     h1 {
       padding: 10px;
@@ -330,7 +330,7 @@ main {
     width: 100vw;
     height: 80vh;
     background: $fallback;
-    padding: 30px;
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -370,7 +370,7 @@ main {
         }
       }
       @media screen and (max-width: 768px) {
-        width: 95vw;
+        width: 100vw;
       }
     }
 
@@ -382,7 +382,7 @@ main {
   .posts {
     width: 100%;
     height: fit-content;
-    padding: 20px;
+    padding: 3px;
     background: $fallback;
 
     header {
@@ -430,6 +430,10 @@ main {
       }
       h5 {
         text-align: left;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
         span {
           padding: 5px;
           white-space: pre-wrap;

@@ -118,7 +118,7 @@
       </transition>
       <footer>&copy;copyright_CodingHerald_2022</footer>
     </div>
-      <span class="to-landing-page reach"
+    <span class="to-landing-page reach"
       ><a href="/#contact" class="a"
         ><i class="fa-solid fa-person-circle-question"></i></a
     ></span>
@@ -639,6 +639,7 @@ main {
       align-content: center;
       top: 19vh;
       left: 0;
+      z-index: 1;
       div {
         width: fit-content;
         height: fit-content;
@@ -648,6 +649,7 @@ main {
         padding: 20px;
         border-radius: 5px;
         color: white;
+        z-index: 1;
         background: rgb(40, 223, 122);
         font: 600 18px "Poppins", sans-serif;
 
@@ -660,6 +662,9 @@ main {
       div.failed {
         background: crimson;
         color: white;
+      }
+      @media screen and (max-width: 500px) {
+        top: 50vh;
       }
     }
 
