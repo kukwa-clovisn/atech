@@ -31,49 +31,51 @@
         <p>{{ crypto.courseUser }}</p>
       </nav>
     </header>
-    <!-- <div class="blur"></div> -->
-    <div class="profile-menu" v-if="crypto.profileMenu">
-      <nav class="logo">
-        <img src="../assets/logo-white.jpg" alt="" />
-      </nav>
-      <div class="profile-header">
-        <span>
-          <i class="fa-solid fa-user"></i>
-        </span>
-        <p>
-          {{ crypto.courseUser }} <br />
-          <i :title="crypto.courseUserEmail">{{ crypto.courseUserEmail }}</i>
-        </p>
-      </div>
-      <div class="profile-items">
-        <li @click="showCryptoCourses()">
-          <span><i class="fa-solid fa-bitcoin-sign"></i></span>
-          <p>cryptocurrency</p>
-        </li>
-        <li @click="showForexCourses()">
-          <span><i class="fa-solid fa-chart-line"></i></span>
-          <p>Forex</p>
-        </li>
-        <li @click="showGraphicCourses()">
+    <transition name="refresh">
+      <div class="profile-menu" v-if="crypto.profileMenu">
+        <nav class="logo">
+          <img src="../assets/logo-white.jpg" alt="" />
+        </nav>
+        <div class="profile-header">
           <span>
-            <i class="fa-brands fa-sketch"></i>
+            <i class="fa-solid fa-user"></i>
           </span>
-          <p>Graphic design</p>
-        </li>
-        <li @click="showWebCourses()">
-          <span><i class="fa-solid fa-code"></i></span>
-          <p>Web developement</p>
-        </li>
-        <li @click="toContact()">
-          <span><i class="fa-solid fa-phone"></i></span>
-          <p>contact us</p>
-        </li>
-        <li @click="toCourses()">
-          <span><i class="fa-solid fa-book"></i></span>
-          <p>courses</p>
-        </li>
+          <p>
+            {{ crypto.courseUser }} <br />
+            <i :title="crypto.courseUserEmail">{{ crypto.courseUserEmail }}</i>
+          </p>
+        </div>
+        <div class="profile-items">
+          <li @click="showCryptoCourses()">
+            <span><i class="fa-solid fa-bitcoin-sign"></i></span>
+            <p>cryptocurrency</p>
+          </li>
+          <li @click="showForexCourses()">
+            <span><i class="fa-solid fa-chart-line"></i></span>
+            <p>Forex</p>
+          </li>
+          <li @click="showGraphicCourses()">
+            <span>
+              <i class="fa-brands fa-sketch"></i>
+            </span>
+            <p>Graphic design</p>
+          </li>
+          <li @click="showWebCourses()">
+            <span><i class="fa-solid fa-code"></i></span>
+            <p>Web developement</p>
+          </li>
+          <li @click="toContact()">
+            <span><i class="fa-solid fa-phone"></i></span>
+            <p>contact us</p>
+          </li>
+          <li @click="toCourses()">
+            <span><i class="fa-solid fa-book"></i></span>
+            <p>courses</p>
+          </li>
+        </div>
       </div>
-    </div>
+    </transition>
+
     <div class="course-intro" v-if="crypto.showCourseIntro">
       <h1>courses</h1>
       <p>

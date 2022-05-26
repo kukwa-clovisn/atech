@@ -12,8 +12,8 @@
         </transition>
         <transition name="appear">
           <p v-if="animate">
-            this is a crypto trading website where you get to learn all about
-            crypto currency and also how to trade with crypto and forex
+            Learn about Crypto, Forex, Web developement, Graphic Design & Music
+            at the comfort of your home.
           </p>
         </transition>
         <transition name="appear"> </transition>
@@ -83,6 +83,20 @@
           <p>
             Learn phone and computer design and how to use design apps in less
             than a month. <br />
+            register now to start your lessons
+          </p>
+          <button>
+            <router-link to="/login" class="route">Start course</router-link>
+          </button>
+        </div>
+        <div class="course">
+          <div class="course-img">
+            <img src="../assets/piano.jpeg" alt="" />
+          </div>
+          <h3>one month <span>open</span></h3>
+          <h5>learn piano skills</h5>
+          <p>
+            Learn how to play the piano professionally <br />
             register now to start your lessons
           </p>
           <button>
@@ -195,6 +209,65 @@
       <button>
         <router-link to="/login" class="route">start learning</router-link>
       </button>
+    </div>
+    <div class="piano-expo large-screen">
+      <div class="left-expo"></div>
+      <div class="right-expo">
+        <div class="blur"></div>
+        <h1>
+          Learn from the basics of how to play the piano to an outstanding
+          professional
+        </h1>
+        <p>
+          Get to know more about <br />piona scales, piano chords, piano
+          structure and many more
+        </p>
+        <p>
+          Gender or age or size or anything, can't stop you from doing what
+          makes you happy and fulfilled.
+        </p>
+        <p>seize this opportunity and learn</p>
+        <button><a href="/login">start learning</a></button>
+      </div>
+      <div class="bottom-expo">
+        <div class="blur"></div>
+        <p>
+          Start your lessons today and migrat from a beginner to an outstanding
+          instrumentalist in your church or community.
+        </p>
+        <button><a href="/login">start a course</a></button>
+      </div>
+    </div>
+    <div class="piano-expo small-screen">
+      <transition name="appear">
+        <div class="right-expo" v-if="expo1">
+          <div class="blur"></div>
+          <h1>
+            Learn from the basics of how to play the piano to an outstanding
+            professional
+          </h1>
+          <p>
+            Get to know more about <br />piona scales, piano chords, piano
+            structure and many more
+          </p>
+          <p>
+            Gender or age or size or anything, can't stop you from doing what
+            makes you happy and fulfilled.
+          </p>
+          <p>seize this opportunity and learn</p>
+          <button><a href="/login">start learning</a></button>
+        </div>
+      </transition>
+      <transition name="appear">
+        <div class="bottom-expo" v-if="expo2">
+          <div class="blur"></div>
+          <p>
+            Start your lessons today and migrat from a beginner to an
+            outstanding instrumentalist in your church or community.
+          </p>
+          <button><a href="/login">start a course</a></button>
+        </div>
+      </transition>
     </div>
     <div class="bitquery">
       <div class="content">
@@ -364,13 +437,20 @@ export default {
   },
   setup() {
     let animate = ref(false);
+    let expo1 = ref(false);
+    let expo2 = ref(true);
     onMounted(() => {
       setTimeout(() => {
         animate.value = true;
       }, 500);
+
+      setInterval(() => {
+        expo1.value = !expo1.value;
+        expo2.value = !expo2.value;
+      }, 15000);
     });
 
-    return { animate };
+    return { animate, expo1, expo2 };
   },
 };
 </script>
@@ -447,8 +527,8 @@ main {
       justify-content: space-evenly;
       align-items: center;
       flex-wrap: wrap;
-      width: 97vw;
-      padding: 10px;
+      width: 99vw;
+      padding: 0;
       margin: auto;
       position: relative;
 
@@ -536,12 +616,15 @@ main {
 
         @media screen and (max-width: 400px) {
           height: fit-content;
-          width: 97vw;
+          width: 98vw !important;
+          margin: 0;
+          margin-bottom: 20px;
         }
       }
 
       @media screen and (max-width: 400px) {
-        width: 99vw;
+        padding: 0;
+        width: 100vw;
       }
     }
   }
@@ -909,6 +992,114 @@ main {
         text-decoration: none;
         color: $primaryColor;
         text-transform: uppercase;
+      }
+    }
+  }
+
+  .piano-expo {
+    width: 100vw;
+    height: 80vh;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+
+    .left-expo,
+    .right-expo,
+    .bottom-expo {
+      width: 32%;
+      border-radius: 10px;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: scroll;
+    }
+
+    .left-expo {
+      position: relative;
+      background: url(../assets/piano-female.jpeg);
+    }
+    .right-expo,
+    .bottom-expo {
+      background: url(../assets/piano-1.jpg);
+      position: relative;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+
+      .blur {
+        width: 100%;
+        height: 100%;
+      }
+
+      h1,
+      p,
+      button {
+        position: relative;
+      }
+
+      h1 {
+        color: white;
+        font: 700 21px "Poppins", sans-serif;
+        padding: 10px;
+        text-transform: capitalize;
+      }
+      p {
+        color: white;
+        padding: 5px;
+        font-size: 13px;
+      }
+      button {
+        width: 90%;
+        height: 40px;
+        border: none;
+        border-radius: 30px;
+        background: $primaryColor;
+
+        margin: 20px auto;
+
+        a {
+          color: white;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          text-decoration: none;
+          justify-content: center;
+          align-items: center;
+          text-transform: capitalize;
+        }
+      }
+    }
+    .bottom-expo {
+      background: url(../assets/piano.jpeg);
+    }
+  }
+  .piano-expo.small-screen {
+    display: none;
+  }
+
+  @media screen and (max-width: 780px) {
+    .piano-expo.large-screen {
+      display: none;
+    }
+    .piano-expo.small-screen {
+      display: flex;
+      position: relative;
+
+      .right-expo,
+      .bottom-expo {
+        width: 98%;
+        position: absolute;
+        left: 0.5%;
+        top: 0;
+      }
+
+      .right-expo {
+        background: url(../assets/piano-female.jpeg);
       }
     }
   }

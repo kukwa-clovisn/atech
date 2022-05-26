@@ -23,11 +23,46 @@
           <img src="../assets/logo-white.jpg" alt="" />
         </nav>
         <nav class="routes">
-          <router-link to="/course" class="route">courses</router-link>
+          <router-link to="#" class="route" @click="openDropdown()"
+            >courses</router-link
+          >
           <router-link to="/why-us" class="route">why crypto?</router-link>
           <router-link to="/blog" class="route">blog</router-link>
           <a href="/#contact" class="route">contact</a>
         </nav>
+        <transition name="fade">
+          <div id="courses-list" v-if="showCourses">
+            <h1>our courses and services</h1>
+            <ul>
+              <li>
+                <a href="/course"
+                  ><i class="fa-solid fa-chart-line"></i>cryptocurrency</a
+                >
+              </li>
+              <li>
+                <a href="/course"
+                  ><i class="fa-solid fa-chart-line"></i>forex trading</a
+                >
+              </li>
+              <li>
+                <a href="/course"
+                  ><i class="fa-solid fa-code"></i>web developement</a
+                >
+              </li>
+              <li>
+                <a href="/course"
+                  ><i class="fa-solid fa-object-group"></i>graphic design</a
+                >
+              </li>
+              <li>
+                <a href="/course"
+                  ><i class="fa-solid fa-music"></i>piano lessons</a
+                >
+              </li>
+            </ul>
+          </div>
+        </transition>
+
         <nav>
           <button class="clear primary-btn">
             <router-link to="/login" class="homeBtn">sign in</router-link>
@@ -67,20 +102,55 @@
         <nav class="logo-nav">
           <span>Atech</span>
         </nav>
+
         <nav class="menu-bars">
           <button @click="closeDropdown()">&times;</button>
         </nav>
       </nav>
-      <nav class="menu-dropdown" v-if="onDropdown">
-        <ul>
-          <li><a href="/course">courses</a></li>
-          <li><a href="/login">sign up</a></li>
-          <li><a href="/login">sign in</a></li>
-          <li><a href="/why-us">why crypto?</a></li>
-          <li><a href="/blog">blog</a></li>
-          <li><a href="/#contact">contact</a></li>
-        </ul>
-      </nav>
+      <transition name="fade">
+        <nav class="menu-dropdown" v-if="onDropdown">
+          <ul>
+            <li><a @click="openDropdown()">courses</a></li>
+            <li v-if="dropRoute"><a href="/login">sign up</a></li>
+            <li v-if="dropRoute"><a href="/login">sign in</a></li>
+            <li v-if="dropRoute"><a href="/why-us">why crypto?</a></li>
+            <li v-if="dropRoute"><a href="/blog">blog</a></li>
+            <li v-if="dropRoute"><a href="/#contact">contact</a></li>
+          </ul>
+        </nav>
+      </transition>
+      <transition name="fade">
+        <div id="courses-list" v-if="showCourses">
+          <h1>our courses and services</h1>
+          <ul>
+            <li>
+              <a href="/course"
+                ><i class="fa-solid fa-chart-line"></i>cryptocurrency</a
+              >
+            </li>
+            <li>
+              <a href="/course"
+                ><i class="fa-solid fa-chart-line"></i>forex trading</a
+              >
+            </li>
+            <li>
+              <a href="/course"
+                ><i class="fa-solid fa-code"></i>web developement</a
+              >
+            </li>
+            <li>
+              <a href="/course"
+                ><i class="fa-solid fa-object-group"></i>graphic design</a
+              >
+            </li>
+            <li>
+              <a href="/course"
+                ><i class="fa-solid fa-music"></i>piano lessons</a
+              >
+            </li>
+          </ul>
+        </div>
+      </transition>
     </header>
   </main>
 </template>
@@ -94,6 +164,8 @@ export default {
     const router = useRouter();
     let onDropdown = ref(false);
     let noDropdown = ref(true);
+    let dropRoute = ref(true);
+    let showCourses = ref(false);
 
     function menuFunction() {
       onDropdown.value = true;
@@ -105,11 +177,25 @@ export default {
       noDropdown.value = true;
     }
 
+    function openDropdown() {
+      showCourses.value = !showCourses.value;
+      dropRoute.value = !dropRoute.value;
+    }
+
     function toHome() {
       router.push("/");
     }
 
-    return { onDropdown, noDropdown, menuFunction, closeDropdown, toHome };
+    return {
+      dropRoute,
+      onDropdown,
+      noDropdown,
+      showCourses,
+      menuFunction,
+      closeDropdown,
+      openDropdown,
+      toHome,
+    };
   },
 };
 </script>
@@ -120,6 +206,21 @@ $SecondaryColor: rgba(230, 101, 129, 1);
 $tertiaryColor: rgba(65, 140, 228, 1);
 $footerColor: rgb(51, 2, 69);
 $fallback: rgb(19, 37, 62);
+
+.fade-enter-from {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s ease;
+}
+
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
 
 .primary-btn {
   width: 150px;
@@ -277,6 +378,52 @@ header {
         }
       }
     }
+    #courses-list {
+      width: 100%;
+      height: 17vh;
+      background: white;
+      position: absolute;
+      bottom: -100%;
+      left: 0;
+
+      h1 {
+        padding: 5px;
+        color: $SecondaryColor;
+        text-transform: capitalize;
+        font: 600 15px "Poppins", sans-serif;
+      }
+
+      ul {
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        li {
+          list-style-type: none;
+          width: 16%;
+          height: 9vh;
+
+          a {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            text-transform: capitalize;
+            font: 600 16px "Poppins", sans-serif;
+
+            i {
+              padding-right: 5px;
+              font-size: 19px;
+              color: $SecondaryColor;
+            }
+          }
+        }
+      }
+    }
   }
   .menu-nav {
     width: 90vw;
@@ -329,7 +476,8 @@ header {
       }
     }
 
-    .menu-dropdown {
+    .menu-dropdown,
+    #courses-list {
       width: 100%;
       height: fit-content;
       padding: 20px;
@@ -359,6 +507,20 @@ header {
             justify-content: flex-start;
             align-items: center;
           }
+        }
+      }
+    }
+    #courses-list {
+      width: 90%;
+      margin-left: 10%;
+      h1 {
+        color: $SecondaryColor;
+      }
+
+      ul {
+        li i {
+          padding-right: 20px;
+          color: $SecondaryColor;
         }
       }
     }

@@ -19,20 +19,20 @@ $fallback: rgb(19, 37, 62);
 .move-in-leave-active,
 .refresh-enter-active,
 .refresh-leave-active {
-  transition: all 3s ease;
+  transition: all 1s ease;
 }
 
 .appear-enter-active,
 .appear-leave-active {
   opacity: 0.3;
-  transition: all 4s ease;
+  transition: all 1s ease;
 }
 
 .move-in-enter-from {
   transform: translateY(-70vh);
 }
 
-.appear-enter-from {
+.appear-enter-to {
   opacity: 0;
 }
 

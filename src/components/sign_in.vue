@@ -664,7 +664,7 @@ main {
         color: white;
       }
       @media screen and (max-width: 500px) {
-        top: 50vh;
+        top: 60vh;
       }
     }
 
