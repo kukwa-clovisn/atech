@@ -35,27 +35,27 @@
             <h1>our courses and services</h1>
             <ul>
               <li>
-                <a href="/course"
+                <a href="/course/crypto"
                   ><i class="fa-solid fa-chart-line"></i>cryptocurrency</a
                 >
               </li>
               <li>
-                <a href="/course"
+                <a href="/course/forex"
                   ><i class="fa-solid fa-chart-line"></i>forex trading</a
                 >
               </li>
               <li>
-                <a href="/course"
+                <a href="/course/web"
                   ><i class="fa-solid fa-code"></i>web developement</a
                 >
               </li>
               <li>
-                <a href="/course"
+                <a href="/course/graphic"
                   ><i class="fa-solid fa-object-group"></i>graphic design</a
                 >
               </li>
               <li>
-                <a href="/course"
+                <a href="/music/piano"
                   ><i class="fa-solid fa-music"></i>piano lessons</a
                 >
               </li>
@@ -124,27 +124,27 @@
           <h1>our courses and services</h1>
           <ul>
             <li>
-              <a href="/course"
+              <a href="/course/crypto"
                 ><i class="fa-solid fa-chart-line"></i>cryptocurrency</a
               >
             </li>
             <li>
-              <a href="/course"
+              <a href="/course/forex"
                 ><i class="fa-solid fa-chart-line"></i>forex trading</a
               >
             </li>
             <li>
-              <a href="/course"
+              <a href="/course/web"
                 ><i class="fa-solid fa-code"></i>web developement</a
               >
             </li>
             <li>
-              <a href="/course"
+              <a href="/course/graphic"
                 ><i class="fa-solid fa-object-group"></i>graphic design</a
               >
             </li>
             <li>
-              <a href="/course"
+              <a href="/music/piano"
                 ><i class="fa-solid fa-music"></i>piano lessons</a
               >
             </li>
@@ -385,6 +385,7 @@ header {
       position: absolute;
       bottom: -100%;
       left: 0;
+      z-index: 1;
 
       h1 {
         padding: 5px;
@@ -404,6 +405,7 @@ header {
           list-style-type: none;
           width: 16%;
           height: 9vh;
+          cursor: pointer;
 
           a {
             width: 100%;

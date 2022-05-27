@@ -1012,7 +1012,7 @@ main {
       border-radius: 10px;
       height: 100%;
       background-repeat: no-repeat;
-      background-size: cover;
+      background-size: contain;
       background-attachment: scroll;
     }
 
@@ -1022,7 +1022,7 @@ main {
     }
     .right-expo,
     .bottom-expo {
-      background: url(../assets/piano-1.jpg);
+      background: url(../assets/k.jpeg);
       position: relative;
       padding: 10px;
       display: flex;

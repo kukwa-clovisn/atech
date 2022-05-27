@@ -5,6 +5,7 @@ import {
 import Home from '../components/Home.vue'
 import Sign_in from '../components/sign_in.vue'
 import Course_intro from '../courses/course_intro'
+import intro from '../music/intro'
 import axios from 'axios'
 
 const routes = [{
@@ -121,6 +122,21 @@ const routes = [{
         return import( /* webpackChunkName: "about" */ '../courses/web_course.vue')
       }
     }]
+  }, {
+    path: '/music/piano',
+    name: "Music",
+    component: intro,
+    beforeEnter(to, from, next) {
+      axios('api/token').then(res => {
+        if (res.statusText === 'OK') {
+          next()
+        } else {
+          next('/login')
+        }
+      }).catch(err => {
+        next('/login')
+      })
+    }
   }
 ]
 
