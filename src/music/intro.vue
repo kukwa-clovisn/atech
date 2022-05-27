@@ -166,7 +166,7 @@
       </header>
       <div class="blur"></div>
       <div class="title">
-        <h1>with Music</h1>
+        <h1>with Music,</h1>
         <transition name="refresh">
           <section v-if="animate">
             <h2>Feel the</h2>
@@ -349,6 +349,7 @@ main {
               text-decoration: none;
               text-transform: capitalize;
               font: 600 16px "Poppins", sans-serif;
+              color: $baseColor;
 
               i {
                 padding-right: 5px;
@@ -458,23 +459,46 @@ main {
       }
 
       h1 {
-        font-size: 21px;
+        font-size: 30px;
         padding: 0;
+        margin: 0;
+        font-family: "Grand Hotel", cursive;
       }
 
       section {
         h2 {
           color: $primaryColor;
           font-size: 23px;
+          font-family: "Jacques Francois Shadow", cursive;
         }
         ul {
           li {
             background: $primaryColor;
             border-radius: 0 5px 5px 0;
+            position: relative;
             // height
             span {
               font-size: 21px;
               color: white;
+              font-family: "Jacques Francois", cursive;
+            }
+
+            &::before {
+              content: "";
+              background: $primaryColor;
+              animation: close 2.5s infinite linear alternate forwards;
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
+
+            @keyframes close {
+              to {
+                left: 80%;
+                width: 20%;
+              }
             }
           }
         }

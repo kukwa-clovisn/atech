@@ -5,7 +5,7 @@
 </template>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Jacques+Francois&family=Jacques+Francois+Shadow&family=Noto+Sans:wght@100;300;400;600;700;900&family=Nunito+Sans:ital,wght@0,300;0,600;0,700;0,900;1,300;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200&family=Russo+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Jacques+Francois&family=Jacques+Francois+Shadow&family=Noto+Sans:wght@100;300;400;600;700;900&family=Nunito+Sans:ital,wght@0,300;0,600;0,700;0,900;1,300;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200&family=Russo+One&display=swap");
 
 $primaryColor: rgb(255, 255, 255);
 $SecondaryColor: rgba(230, 101, 129, 1);
@@ -253,7 +253,7 @@ nav a.router-link-exact-active {
           height: 40px;
           position: relative;
           top: 0;
-          animation: change 10s steps(4) infinite;
+          animation: change 20s steps(4) infinite;
 
           li {
             width: 100%;
@@ -333,7 +333,7 @@ nav a.router-link-exact-active {
     padding-top: 50px;
     background: transparent;
     h1 {
-      font: 800 35px "Poppins", sans-serif;
+      font: 800 40px "Poppins", sans-serif;
       padding-top: 30px;
       text-transform: capitalize;
       word-spacing: 13px;
@@ -341,12 +341,14 @@ nav a.router-link-exact-active {
       width: 95%;
       margin: 10px auto;
       margin-top: 20px;
+      position: relative;
       display: flex;
+      font-family: "Grand Hotel", cursive;
       justify-content: center;
       align-items: center;
       background: linear-gradient(
         to bottom,
-        $SecondaryColor 20%,
+        $SecondaryColor 40%,
         $tertiaryColor
       );
       background-clip: text;
@@ -357,8 +359,9 @@ nav a.router-link-exact-active {
     h2 {
       text-transform: capitalize;
       padding: 30px 20px;
-      font: 500 20px "Poppins", sans-serif;
+      font: 500 20px "Nunito Sans", sans-serif;
       color: white;
+      position: relative;
     }
 
     .courses {
@@ -385,10 +388,12 @@ nav a.router-link-exact-active {
           overflow: hidden;
           background: white;
           border-radius: 7px 7px 0 0;
+          position: relative;
 
           img {
             height: 100%;
             width: auto;
+            cursor: pointer;
           }
           .fullwidth {
             width: 100%;
@@ -477,7 +482,7 @@ nav a.router-link-exact-active {
   .single-tutorial {
     width: 100%;
     margin: 5px auto;
-
+    position: relative;
     height: fit-content;
     padding: 20px 0;
     background: #fff;

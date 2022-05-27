@@ -1,5 +1,6 @@
 <template>
   <main :class="{ squeeze: crypto.profileMenu }">
+    <div class="blur"></div>
     <header>
       <nav class="logo" @click="toHome()">
         <span title="World of Technology and more"> AdvancedTechAcademy </span>
@@ -9,7 +10,7 @@
           <router-link to="" class="route">courses</router-link>
         </li>
         <li>
-          <a href="/#contact" class="route">contact</a>
+          <a href="/music/piano" class="route">music</a>
         </li>
       </nav>
       <button
@@ -262,10 +263,20 @@ main {
   width: 100vw;
   margin: 0;
   // background: linear-gradient(to bottom, rgb(169, 70, 91), $baseColor);
-  background: url(../assets/course-background.jpeg);
+  background: url(../assets/book.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+
+  .blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    background-color: rgb(0, 0, 0);
+  }
 
   header {
     width: 98%;
@@ -274,6 +285,7 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 
     nav {
       display: flex;
@@ -598,12 +610,14 @@ main {
     padding: 10px;
     padding-top: 50px;
     background: transparent;
+    position: relative;
 
     h1 {
-      font: 800 65px "Nunito sans", sans-serif;
+      font: 800 65px "Nunito Sans", sans-serif;
       text-transform: uppercase;
       padding: 20px;
       color: rgb(239, 236, 236);
+      position: relative;
 
       @media screen and (max-width: 560px) {
         font-size: 45px;
@@ -647,6 +661,10 @@ main {
         justify-content: center;
         align-items: center;
         background: white;
+        font-family: "Grand Hotel", cursive;
+        font-size: 30px;
+        color: $col;
+        font-weight: 300;
         color: $fallback;
         border-radius: 10px 0 10px 0;
 
@@ -695,6 +713,7 @@ main {
       font: 600 23px "Poppins", sans-serif;
       padding: 20px;
       margin-top: 70px;
+      position: relative;
     }
 
     .course-choice {
@@ -705,6 +724,7 @@ main {
       justify-content: space-evenly;
       align-items: center;
       flex-wrap: wrap;
+      position: relative;
 
       button {
         width: 230px;
