@@ -263,7 +263,7 @@ main {
   width: 100vw;
   margin: 0;
   // background: linear-gradient(to bottom, rgb(169, 70, 91), $baseColor);
-  background: url(../assets/book.jpg);
+  background: url(../assets/book.jpeg);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
