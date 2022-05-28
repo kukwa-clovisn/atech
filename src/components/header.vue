@@ -35,6 +35,11 @@
             <h1>our courses and services</h1>
             <ul>
               <li>
+                <a href="https://codingherald.herokuapp.com"
+                  ><i class="fa-solid fa-chart-line"></i>apps</a
+                >
+              </li>
+              <li>
                 <a href="/course/crypto"
                   ><i class="fa-solid fa-chart-line"></i>cryptocurrency</a
                 >
@@ -123,6 +128,11 @@
         <div id="courses-list" v-if="showCourses">
           <h1>our courses and services</h1>
           <ul>
+            <li>
+              <a href="https://codingherald.herokuapp.com"
+                ><i class="fa-solid fa-chart-line"></i>apps</a
+              >
+            </li>
             <li>
               <a href="/course/crypto"
                 ><i class="fa-solid fa-chart-line"></i>cryptocurrency</a
@@ -415,7 +425,7 @@ header {
             align-items: center;
             text-decoration: none;
             text-transform: capitalize;
-            font: 600 16px "Poppins", sans-serif;
+            font: 600 14px "Poppins", sans-serif;
 
             i {
               padding-right: 5px;

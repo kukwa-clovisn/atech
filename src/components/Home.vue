@@ -412,6 +412,10 @@
         </div>
       </form>
     </div>
+    <div class="acta">
+      <div class="blur"></div>
+      <button><a href="/#contact">join academy now</a></button>
+    </div>
     <span class="to-landing-page"
       ><a href="#home" class="a"><i class="fa-solid fa-circle-arrow-up"></i></a
     ></span>
@@ -1500,6 +1504,52 @@ main {
 
       @media screen and (max-width: 905px) {
         width: 99vw;
+      }
+    }
+  }
+
+  .acta {
+    width: 100%;
+    height: 90vh;
+    background: url(../assets/book.jpeg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: scroll;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .blur {
+      opacity: 0.5;
+    }
+
+    button {
+      width: 400px;
+      height: 70px;
+      position: relative;
+
+      border-radius: 3px;
+
+      text-transform: capitalize;
+      border: none;
+      background: transparent;
+      box-shadow: 0 0 2px 1px white;
+
+      a {
+        color: white;
+        text-decoration: none;
+        font: 700 30px "Poppins", sans-serif;
+      }
+
+      &:active {
+        background: white;
+        color: $primaryColor;
+      }
+
+      @media screen and (max-width: 450px) {
+        width: 90vw;
       }
     }
   }
