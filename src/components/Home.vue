@@ -413,8 +413,23 @@
       </form>
     </div>
     <div class="acta">
-      <div class="blur"></div>
-      <button><a href="/#contact">join academy now</a></button>
+      <div class="left-div">
+        <p>We offer training and also buy an sell coins.</p>
+        <p>
+          contact us to join our academy or to buy or sell your cryptos at a
+          very cheap rate.
+        </p>
+        <button><a href="/#contact">contact us </a></button>
+      </div>
+
+      <div class="images">
+        <transition name="appear">
+          <img src="../assets/class.jpeg" v-if="expo1" alt="" />
+        </transition>
+        <transition name="appear">
+          <img src="../assets/swap.jpeg" v-if="expo2" alt="" />
+        </transition>
+      </div>
     </div>
     <span class="to-landing-page"
       ><a href="#home" class="a"><i class="fa-solid fa-circle-arrow-up"></i></a
@@ -1510,8 +1525,8 @@ main {
 
   .acta {
     width: 100%;
-    height: 90vh;
-    background: url(../assets/book.jpeg);
+    height: 98vh;
+    background: linear-gradient(90deg, #2d548a, $baseColor);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1521,35 +1536,82 @@ main {
     align-items: center;
     position: relative;
 
-    .blur {
-      opacity: 0.5;
+    .left-div {
+      width: 40%;
+      padding: 10px;
+
+      p {
+        color: white;
+        padding: 10px;
+      }
+      button {
+        width: 400px;
+        height: 70px;
+        position: relative;
+        z-index: 1;
+        border-radius: 3px;
+        text-transform: capitalize;
+        border: none;
+        background: white;
+
+        a {
+          color: $primaryColor;
+          text-decoration: none;
+          font: 700 25px "Poppins", sans-serif;
+        }
+
+        &:active {
+          background: white;
+          color: $primaryColor;
+        }
+
+        @media screen and (max-width: 450px) {
+          width: 90vw;
+        }
+      }
     }
 
-    button {
-      width: 400px;
-      height: 70px;
-      position: relative;
+    .images {
+      width: 50%;
+      height: 92%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
 
-      border-radius: 3px;
+      img {
+        height: 90%;
+        width: auto;
+        cursor: pointer;
+        transition: all 0.4s ease;
 
-      text-transform: capitalize;
-      border: none;
-      background: transparent;
-      box-shadow: 0 0 2px 1px white;
+        &:hover {
+          transform: scale(0.9);
+        }
 
-      a {
-        color: white;
-        text-decoration: none;
-        font: 700 30px "Poppins", sans-serif;
+        &:active {
+          transform: scale(0.8);
+        }
+      }
+    }
+    @media screen and (max-width: 1050px) {
+      flex-direction: column-reverse;
+      height: fit-content;
+      padding: 20px 0;
+
+      .left-div,
+      .images {
+        width: 100%;
+        justify-content: center;
       }
 
-      &:active {
-        background: white;
-        color: $primaryColor;
-      }
-
-      @media screen and (max-width: 450px) {
-        width: 90vw;
+      @media screen and (max-width: 800px) {
+        .images {
+          width: 100%;
+          img {
+            width: 97vw;
+            height: auto;
+          }
+        }
       }
     }
   }
