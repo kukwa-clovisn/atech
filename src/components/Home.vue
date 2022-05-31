@@ -332,7 +332,7 @@
           <p>kukwaclovisngong3@gmail.com</p>
         </nav>
       </div>
-      <form>
+      <form @submit.prevent="sendMessage()">
         <h2>contact us!</h2>
         <div class="top-form">
           <div class="credentials">
@@ -344,8 +344,9 @@
                   type="text"
                   name="name"
                   id="name"
+                  v-model="user.username"
                   placeholder="Enter name..."
-                  required=""
+                  required
                 />
               </div>
             </div>
@@ -357,8 +358,9 @@
                   type="email"
                   name="email"
                   id="email"
+                  v-model="user.email"
                   placeholder="Enter Email.."
-                  required=""
+                  required
                 />
               </div>
             </div>
@@ -370,8 +372,9 @@
                   type="text"
                   name="number"
                   id="phone"
+                  v-model="user.number"
                   placeholder="Enter whatsapp contact..."
-                  required=""
+                  required
                 />
               </div>
             </div>
@@ -383,8 +386,9 @@
               id="message"
               cols="30"
               rows="10"
+              v-model="user.message"
               placeholder="Your message here!"
-              required=""
+              required
             ></textarea>
           </div>
         </div>
@@ -412,6 +416,16 @@
         </div>
       </form>
     </div>
+    <transition name="pop">
+      <div class="response-div" v-if="response.success || response.failed">
+        <div class="success" v-if="response.success">
+          <i class="fa-solid fa-circle-check"></i>{{ response.msg }}
+        </div>
+        <div class="failed" v-if="response.failed">
+          <i class="fa-solid fa-triangle-exclamation"></i>{{ response.msg }}
+        </div>
+      </div>
+    </transition>
     <div class="acta">
       <div class="left-div">
         <p>We offer training and also buy an sell coins.</p>
@@ -443,10 +457,11 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import Header from "./header.vue";
 import Footer from "./footer.vue";
 import Carousel from "./carousel.vue";
+import axios from "axios";
 export default {
   name: "Home",
   components: {
@@ -458,6 +473,20 @@ export default {
     let animate = ref(false);
     let expo1 = ref(false);
     let expo2 = ref(true);
+
+    let response = reactive({
+      success: false,
+      failed: false,
+      msg: "",
+    });
+
+    let user = reactive({
+      username: "",
+      email: "",
+      message: "",
+      number: "",
+    });
+
     onMounted(() => {
       setTimeout(() => {
         animate.value = true;
@@ -469,7 +498,39 @@ export default {
       }, 15000);
     });
 
-    return { animate, expo1, expo2 };
+    function sendMessage() {
+      axios
+        .post("api/admin/contact", user, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          if (res.statusText === "OK") {
+            response.success = true;
+            response.msg = res.data.msg;
+
+            user.username = "";
+            user.email = "";
+            user.number = "";
+            user.message = "";
+
+            setTimeout(() => {
+              response.success = false;
+            }, 3000);
+          }
+        })
+        .catch((err) => {
+          response.failed = true;
+          response.msg = err.response.data.msg;
+
+          setTimeout(() => {
+            response.failed = false;
+          }, 3000);
+        });
+    }
+
+    return { animate, expo1, expo2, response, user, sendMessage };
   },
 };
 </script>
@@ -477,6 +538,29 @@ export default {
 <style lang="scss" scoped>
 $baseColor: #13253e;
 $primaryColor: #e66581;
+
+.pop-enter-from {
+  opacity: 0;
+}
+.pop-enter-active {
+  opacity: 1;
+  animation: pop 2s linear alternate forwards;
+}
+.pop-enter-to {
+  opacity: 1;
+}
+.pop-leave-from {
+  opacity: 1;
+  transform: scale(0.7);
+}
+.pop-leave-active {
+  opacity: 1;
+  transition: 1s ease;
+}
+.pop-leave-to {
+  opacity: 0;
+  transform: translateX(150px);
+}
 
 * {
   transition: all 1s ease;
@@ -1520,6 +1604,44 @@ main {
       @media screen and (max-width: 905px) {
         width: 99vw;
       }
+    }
+  }
+
+  .response-div {
+    width: 100vw;
+    height: fit-content;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    top: 19vh;
+    left: 0;
+    z-index: 1;
+    div {
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      border-radius: 5px;
+      color: white;
+      z-index: 1;
+      background: rgb(40, 223, 122);
+      font: 600 18px "Poppins", sans-serif;
+
+      i {
+        color: white;
+        font-size: 25px;
+        padding: 0 3px;
+      }
+    }
+    div.failed {
+      background: crimson;
+      color: white;
+    }
+    @media screen and (max-width: 500px) {
+      top: 60vh;
     }
   }
 
