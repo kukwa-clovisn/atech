@@ -448,9 +448,8 @@
     <span class="to-landing-page"
       ><a href="#home" class="a"><i class="fa-solid fa-circle-arrow-up"></i></a
     ></span>
-    <span class="to-landing-page reach"
-      ><a href="/#contact" class="a"
-        ><i class="fa-solid fa-person-circle-question"></i></a
+    <span class="to-landing-page reach beamerTrigger"
+      ><a href="/#contact" class="a"><i class="fa-solid fa-bell"></i></a
     ></span>
     <Footer />
   </main>
