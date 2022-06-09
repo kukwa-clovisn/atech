@@ -32,6 +32,10 @@ $fallback: rgb(19, 37, 62);
   transform: translateY(-70vh);
 }
 
+.move-in-leave-to {
+  transform: translateX(100vw);
+}
+
 .appear-enter-to {
   opacity: 0;
 }
