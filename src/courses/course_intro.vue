@@ -136,8 +136,8 @@ export default {
     const refreshpage = () => {
       axios("api/token")
         .then((res) => {
-          crypto.courseUser = res.data.user.username;
-          crypto.courseUserEmail = res.data.user.email;
+          crypto.courseUser = res.data.username;
+          crypto.courseUserEmail = res.data.email;
         })
         .catch((err) => {
           router.push("/login");
