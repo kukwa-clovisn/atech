@@ -91,6 +91,7 @@
         </div>
       </div></transition
     >
+    <Course id="62ab46ad2ba3cc5baf71b831" />
     <transition name="move">
       <div class="single-tutorial course-1" v-if="crypto.course1">
         <a @click="backToCourses()" class="return">Back to crypto courses</a>
@@ -494,10 +495,12 @@
 <script>
 import { reactive } from "vue";
 import Contact from "../components/contact.vue";
+import Course from "../courses/course.vue";
 export default {
   name: "Crypto_course",
   components: {
     Contact,
+    Course,
   },
   setup() {
     let crypto = reactive({

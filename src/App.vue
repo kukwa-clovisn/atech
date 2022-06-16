@@ -551,27 +551,26 @@ nav a.router-link-exact-active {
         list-style-type: none;
         height: 50px;
         margin-bottom: 10px;
-
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        span {
+          width: 40px;
+          height: 40px;
+          margin-right: 15px;
+          border-radius: 100%;
+          background: #418ce4;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: white;
+        }
         a {
-          width: 100%;
-          height: 100%;
+          width: 90%;
           text-decoration: none;
           text-align: left;
           color: #fff;
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-
-          span {
-            width: 40px;
-            height: 40px;
-            margin-right: 15px;
-            border-radius: 100%;
-            background: #418ce4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
+          text-transform: capitalize;
         }
       }
     }
@@ -597,13 +596,21 @@ nav a.router-link-exact-active {
         align-items: center;
       }
     }
+    .course-div {
+      width: 95%;
+      margin: auto;
+      text-align: left;
+      line-height: 30px;
+    }
 
     p {
+      width: 97%;
+      margin: 5px auto;
       font: 400 16px "Poppins", sans-serif;
       text-align: left;
-      padding: 10px;
+      padding: 5px;
       padding-left: 30px;
-      line-height: 30px;
+      line-height: 25px;
     }
 
     .video {
