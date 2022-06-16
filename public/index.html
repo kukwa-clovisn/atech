@@ -30,6 +30,10 @@
         overflow-y: scroll;
       }
     </style>
+    <script
+      src="https://cdn.tiny.cloud/1/gog1663olrdk4mdgv1aav0ettxyb60t4f6f1p23o4rt3wzfe/tinymce/6/tinymce.min.js"
+      referrerpolicy="origin"
+    ></script>
   </head>
   <body>
     <noscript>
@@ -43,10 +47,22 @@
     <!-- built files will be auto injected -->
     <!-- beamer notifications -->
     <script>
-	var beamer_config = {
-		product_id : 'ZpJWhEOe44777' //DO NOT CHANGE: This is your product code on Beamer
-	};
-</script>
-<script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer="defer"></script>
+      var beamer_config = {
+        product_id: "ZpJWhEOe44777", //DO NOT CHANGE: This is your product code on Beamer
+      };
+    </script>
+    <script
+      type="text/javascript"
+      src="https://app.getbeamer.com/js/beamer-embed.js"
+      defer="defer"
+    ></script>
+    <script>
+      tinymce.init({
+        selector: "textarea",
+        plugins:
+          "advlist autolink lists link image charmap preview anchor pagebreak",
+        toolbar_mode: "floating",
+      });
+    </script>
   </body>
 </html>

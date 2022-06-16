@@ -88,7 +88,7 @@ export default {
             success.value = true;
             setTimeout(pop, 3000);
           } else {
-            error.value = true;
+            postError.value = true;
             setTimeout(post_error, 3000);
           }
         });

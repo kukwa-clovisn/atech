@@ -41,34 +41,19 @@
         <router-link to="/admin/closed" class="route">
           <li>
             <span><i class="fa-solid fa-bitcoin-sign"></i></span>
-            <p>cryptocurrency</p>
+            <p>courses</p>
           </li></router-link
         >
-        <router-link to="/admin/closed" class="route">
-          <li>
-            <span><i class="fa-solid fa-chart-line"></i></span>
-            <p>Forex</p>
-          </li>
-        </router-link>
-
-        <router-link to="/admin/closed" class="route">
-          <li>
-            <span>
-              <i class="fa-brands fa-sketch"></i>
-            </span>
-            <p>Graphic design</p>
-          </li>
-        </router-link>
-        <router-link to="/admin/closed" class="route">
-          <li>
-            <span><i class="fa-solid fa-code"></i></span>
-            <p>Web developement</p>
-          </li>
-        </router-link>
         <router-link to="/blog" class="route">
           <li>
             <span><i class="fa-solid fa-blog"></i></span>
             <p>view posts</p>
+          </li>
+        </router-link>
+        <router-link to="/course" class="route">
+          <li>
+            <span><i class="fa-solid fa-blog"></i></span>
+            <p>view courses</p>
           </li>
         </router-link>
         <router-link to="/" class="small-screen-only route">
