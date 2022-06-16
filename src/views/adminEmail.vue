@@ -310,6 +310,16 @@ main {
       color: white;
       animation: dance 2s infinite linear alternate forwards;
     }
+
+    @media screen and (max-width: 600px) {
+      flex-direction: column;
+
+      button[type="button"] {
+        width: 90%;
+        margin: 10px auto;
+        font-size: 14px;
+      }
+    }
   }
 
   @keyframes dance {

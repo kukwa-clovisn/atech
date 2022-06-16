@@ -70,22 +70,22 @@
           <form @submit.prevent="signupFunc()">
             <h1>sign up</h1>
             <div class="input">
-              <label for="username">Name:</label
+              <label for="userName">Name:</label
               ><input
                 type="text"
                 name="username"
-                id="username"
+                id="userName"
                 v-model="user.username"
                 placeholder="Enter username...."
                 required=""
               />
             </div>
             <div class="input">
-              <label for="email">email:</label
+              <label for="Email">email:</label
               ><input
                 type="email"
                 name="email"
-                id="email"
+                id="Email"
                 v-model="user.email"
                 placeholder="Enter Email address...."
                 required=""

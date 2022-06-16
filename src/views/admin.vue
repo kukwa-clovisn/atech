@@ -5,7 +5,7 @@
         <i class="fa-solid fa-align-left"></i>
       </button>
       <button class="profile-menu-button" @click="expandPage()" v-if="!shrink">
-        <i class="fa-solid fa-align-right"></i>
+        <i class="fa-solid fa-align-left"></i>
       </button>
       <nav class="logo">
         <span title="World of Technology and more"> AdvancedTechAcademy </span>
@@ -38,9 +38,9 @@
           </li></router-link
         >
 
-        <router-link to="/admin/closed" class="route">
+        <router-link to="/admin/course" class="route">
           <li>
-            <span><i class="fa-solid fa-bitcoin-sign"></i></span>
+            <span><i class="fa-solid fa-book-bookmark"></i></span>
             <p>courses</p>
           </li></router-link
         >
@@ -52,7 +52,7 @@
         </router-link>
         <router-link to="/course" class="route">
           <li>
-            <span><i class="fa-solid fa-blog"></i></span>
+            <span><i class="fa-solid fa-book-open-reader"></i></span>
             <p>view courses</p>
           </li>
         </router-link>

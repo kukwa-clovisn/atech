@@ -1,6 +1,6 @@
 <template>
-  <div class="single-tutorial course-1">
-    <a class="return">Back to crypto courses</a>
+  <div id="tutorial">
+    <a href="/course" class="return">Back to crypto courses</a>
     <div class="logo">
       <img src="../assets/logo-white.jpg" alt="" />
     </div>
@@ -26,16 +26,15 @@
 <script>
 import axios from "axios";
 import Contact from "../components/contact.vue";
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
 export default {
   components: { Contact },
   name: "Course",
-  props: {
-    id: {
-      required: true,
-    },
-  },
-  setup(props) {
+  setup() {
+    const route = useRoute();
+    const router = useRouter();
+
     let response = reactive({
       title: "",
       course: "",
@@ -43,21 +42,31 @@ export default {
       description: "",
       objectives: [],
     });
-    axios(`/api/admin/course/${props.id}`)
-      .then((res) => {
-        response.title = res.data.title;
-        response.course = res.data.course;
-        response.objectives = res.data.objectives;
-        response.description = res.data.description;
-        response.videoUrl = res.data.videoUrl;
-      })
-      .catch((err) => console.log(err));
+
+    onMounted(() => {
+      console.log(route.params);
+      axios(`/api/admin/course/${route.params.course}`)
+        .then((res) => {
+          if (res.statusText === "OK") {
+            response.title = res.data.title;
+            response.course = res.data.course;
+            response.objectives = res.data.objectives;
+            response.description = res.data.description;
+            response.videoUrl = res.data.videoUrl;
+          } else {
+            router.push("/login");
+          }
+        })
+        .catch((err) => {
+          router.push("/login");
+          return err;
+        });
+    });
+
     return { response };
   },
 };
 </script>
+
 <style lang="scss" scoped>
-p {
-  color: red;
-}
 </style>

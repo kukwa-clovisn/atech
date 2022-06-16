@@ -87,7 +87,7 @@ import Editor from "@tinymce/tinymce-vue";
 import { ref, reactive } from "vue";
 import axios from "axios";
 export default {
-  name: "AdminEmpty",
+  name: "AdminCourse",
   components: {
     editor: Editor,
   },
@@ -115,7 +115,6 @@ export default {
         })
         .then((res) => {
           if (res.statusText === "OK") {
-            console.log(res.data);
             success.value = true;
             setTimeout(pop, 3000);
             courseFormat.name = "";

@@ -16,9 +16,6 @@
         </div>
       </nav>
       <nav class="bottom-nav">
-        <!-- <nav class="logo-nav">
-          <span>AC <i>&</i> FC</span>
-        </nav> -->
         <nav class="logo-nav" @click="toHome()">
           <img src="../assets/logo-white.jpg" alt="" />
         </nav>
