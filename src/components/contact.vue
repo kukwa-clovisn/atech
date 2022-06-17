@@ -8,15 +8,21 @@
       v-model="user.email"
       placeholder="Enter email address so we can reach you..."
     />
-    <textarea
+    <!-- <textarea
       name="question"
       id="question"
       cols="30"
       rows="10"
       v-model="user.message"
-      placeholder="Ask question(s) or leave a comment...."
+     
       required
-    ></textarea>
+    ></textarea> -->
+     <editor
+          :init="{
+            plugins: 'lists link image table code help wordcount',
+          }"
+          v-model="user.message" placeholder="Ask question(s) or leave a comment...." required
+        />
     <button type="submit">submit</button>
     <div class="response-div">
       <div class="done" v-if="response.success">

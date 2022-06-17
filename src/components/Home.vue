@@ -381,15 +381,22 @@
           </div>
           <div class="message">
             <label for="message">message:</label
-            ><textarea
+            ><!--<textarea
               name="message"
               id="message"
               cols="30"
               rows="10"
+             
+            ></textarea> -->
+            <editor
+              :init="{
+                plugins: 'lists link image table code help wordcount',
+              }"
+              name="message"
+              id="message"
               v-model="user.message"
               placeholder="Your message here!"
-              required
-            ></textarea>
+            />
           </div>
         </div>
         <div class="bottom-form">
@@ -460,12 +467,14 @@ import { ref, onMounted, reactive } from "vue";
 import Header from "./header.vue";
 import Footer from "./footer.vue";
 import Carousel from "./carousel.vue";
+import Editor from "@tinymce/tinymce-vue";
 import axios from "axios";
 export default {
   name: "Home",
   components: {
     Header,
     Footer,
+    editor: Editor,
     Carousel,
   },
   setup() {
