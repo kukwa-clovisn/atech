@@ -51,6 +51,7 @@
           :init="{
             plugins: 'lists link image table code help wordcount',
           }"
+          id="tinyeditor"
           v-model="courseFormat.description"
         />
         <label for="free">check if course is free.</label>

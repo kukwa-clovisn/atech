@@ -95,9 +95,7 @@
       <div class="post" v-for="post in post.postArr" :key="post.id">
         <h1 class="title">{{ post.title }}</h1>
         <h3 class="sub-title">{{ post.subTitle }}</h3>
-        <p>
-          {{ post.message }}
-        </p>
+        <p v-html="post.message"></p>
         <h5 class="tags">
           <span v-for="tag in post.tags" :key="tag.id">#{{ tag }}</span>
         </h5>

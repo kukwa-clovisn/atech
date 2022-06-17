@@ -10,7 +10,7 @@
       <div class="right-content">
         <ul>
           <li>
-            <router-link to="/https://codingherald.herokuapp.com" class="route"
+            <router-link to="https://codingherald.herokuapp.com" class="route"
               >apps</router-link
             >
           </li>
@@ -22,6 +22,9 @@
           <li><router-link to="/course" class="route">courses</router-link></li>
           <li>
             <a href="/#contact" class="route">contact us</a>
+          </li>
+          <li>
+            <a href="/admin/blog" class="route">admin</a>
           </li>
         </ul>
       </div>

@@ -23,15 +23,24 @@
         required
         placeholder="sub title "
       />
-      <textarea
-        name="message"
-        id="message"
+      <!-- <textarea
+      
+        id="tinyeditor"
         cols="30"
         rows="10"
+       
+       
+       
+      ></textarea> -->
+      <editor
+        :init="{
+          plugins: 'lists link image table code help wordcount',
+        }"
+        id="tinyeditor"
         v-model="post.message"
-        required
+        name="message"
         placeholder="write message here..."
-      ></textarea>
+      />
       <input
         name="tags"
         id="tags"
@@ -57,9 +66,13 @@
 
 <script>
 import axios from "axios";
+import Editor from "@tinymce/tinymce-vue";
 import { reactive, ref } from "vue";
 export default {
   name: "AdminBlog",
+  components: {
+    editor: Editor,
+  },
   setup() {
     const post = reactive({
       author: "",
