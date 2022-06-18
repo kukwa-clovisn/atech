@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../components/Home.vue";
 import Sign_in from "../components/sign_in.vue";
-import Course_intro from "../courses/course_intro";
+import Course_intro from "../courses/course_intro.vue";
+import Register from "../components/register.vue";
 import intro from "../music/intro";
 import axios from "axios";
 
@@ -15,6 +16,11 @@ const routes = [
     path: "/login",
     name: "Sign_in",
     component: Sign_in,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
   },
   {
     path: "/forget_password",

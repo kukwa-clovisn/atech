@@ -68,7 +68,12 @@
             </div>
           </div>
           <form @submit.prevent="signupFunc()">
-            <h1>sign up</h1>
+            <div class="form-header">
+              <h2>sign up {{ vue3GoogleOauth.isInit }}</h2>
+              <button type="button" @click="googleAuth()">
+                sign up with Google
+              </button>
+            </div>
             <div class="input">
               <label for="userName">Name:</label
               ><input
@@ -126,6 +131,8 @@
 </template>
 
 <script>
+// import { v4 as uuidv4 } from "uuid";
+import { inject } from "vue";
 import Header from "./header.vue";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
@@ -178,11 +185,21 @@ export default {
       }, 800);
     }
 
+    const vue3GoogleOauth = inject("Vue3GoogleOauth");
+    console.log(vue3GoogleOauth);
+    async function googleAuth() {
+      try {
+        await this.$gAuth.signIn().then((res) => console.log(res));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     function signupFunc() {
       axios
         .post("api/signup", user, config)
         .then((res) => {
-          if (res.statusText === "OK") {
+          if (res.statusText === "Created") {
             response.msg = res.data.msg;
             response.success = true;
             response.to_signin = true;
@@ -258,9 +275,11 @@ export default {
       user,
       credentials,
       response,
+      vue3GoogleOauth,
       swapSigninFunc,
       swapSignupFunc,
       signinFunc,
+      googleAuth,
       signupFunc,
     };
   },
@@ -366,9 +385,8 @@ main {
   }
 
   .c1 {
-    width: 250px;
-    height: 250px;
-
+    width: 200px;
+    height: 200px;
     background: transparent;
     position: fixed;
     overflow: hidden;
@@ -524,6 +542,32 @@ main {
           color: #e66581;
         }
 
+        .form-header {
+          width: 100%;
+          h2 {
+            font-size: 15px;
+            color: rgb(55, 54, 54);
+            font-weight: 700;
+            padding: 10px;
+          }
+          button {
+            width: 70%;
+            height: 30px;
+            margin: 5px auto;
+            border: 2px solid whitesmoke;
+            border-radius: 30px;
+            font: 500 14px "Nunito Sans", sans-serif;
+            color: rgb(99, 101, 101);
+            background: whitesmoke;
+
+            &:hover {
+              background: #e66581;
+              border: none;
+              color: white;
+            }
+          }
+        }
+
         .input {
           width: 90%;
           height: 80px;
@@ -534,7 +578,7 @@ main {
             display: block;
             text-align: left;
             text-transform: capitalize;
-            font: 550 22px "Poppins", sans-serif;
+            font: 550 20px "Poppins", sans-serif;
             color: #717070;
           }
 
@@ -545,7 +589,7 @@ main {
             padding: 3px 10px 3px 20px;
             font: 500 17px "Poppins", sans-serif;
             outline: none;
-            border: 1px solid #dedbdb;
+            border: 1px solid #f1efef;
             background: #fff;
             border-radius: 5px;
           }
@@ -591,6 +635,15 @@ main {
 
       .login {
         border-radius: 0 0 0 60%;
+      }
+      .input {
+        label {
+          font-size: 15px;
+        }
+        input {
+          height: 45px !important;
+          font-size: 13px !important;
+        }
       }
     }
 

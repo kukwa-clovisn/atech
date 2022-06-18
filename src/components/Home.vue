@@ -56,7 +56,7 @@
             Register now to start your lessons
           </p>
           <button>
-            <router-link to="/login" class="route">Start course</router-link>
+            <router-link to="/register" class="route">Start course</router-link>
           </button>
         </div>
         <div class="course">
@@ -71,7 +71,7 @@
             register now to start your lessons
           </p>
           <button>
-            <router-link to="/login" class="route">Start course</router-link>
+            <router-link to="/register" class="route">Start course</router-link>
           </button>
         </div>
         <div class="course">
@@ -86,7 +86,7 @@
             register now to start your lessons
           </p>
           <button>
-            <router-link to="/login" class="route">Start course</router-link>
+            <router-link to="/register" class="route">Start course</router-link>
           </button>
         </div>
         <div class="course">
@@ -100,7 +100,7 @@
             register now to start your lessons
           </p>
           <button>
-            <router-link to="/login" class="route">Start course</router-link>
+            <router-link to="/register" class="route">Start course</router-link>
           </button>
         </div>
       </section>
@@ -130,7 +130,7 @@
           <p>graphic design</p>
         </div>
       </div>
-      <button><a href="/login">take a course</a></button>
+      <button><a href="/register">take a course</a></button>
     </div>
     <div class="design">
       <Carousel />
@@ -387,7 +387,8 @@
               cols="30"
               rows="10"
               v-model="user.message"
-              placeholder="Your message here!" required
+              placeholder="Your message here!"
+              required
             ></textarea>
           </div>
         </div>

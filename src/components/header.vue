@@ -70,7 +70,7 @@
             <router-link to="/login" class="homeBtn">sign in</router-link>
           </button>
           <button class="current primary-btn">
-            <router-link to="/login" class="homeBtn">register</router-link>
+            <router-link to="/register" class="homeBtn">register</router-link>
           </button>
         </nav>
       </nav>
@@ -115,6 +115,7 @@
             <li><a @click="openDropdown()">courses</a></li>
             <li v-if="dropRoute"><a href="/login">sign up</a></li>
             <li v-if="dropRoute"><a href="/login">sign in</a></li>
+            <li v-if="dropRoute"><a href="/register">register</a></li>
             <li v-if="dropRoute"><a href="/why-us">why crypto?</a></li>
             <li v-if="dropRoute"><a href="/blog">blog</a></li>
             <li v-if="dropRoute"><a href="/#contact">contact</a></li>
@@ -177,11 +178,13 @@ export default {
     function menuFunction() {
       onDropdown.value = true;
       noDropdown.value = false;
+      dropRoute.value = true;
     }
 
     function closeDropdown() {
       onDropdown.value = false;
       noDropdown.value = true;
+      showCourses.value = false;
     }
 
     function openDropdown() {

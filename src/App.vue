@@ -96,6 +96,9 @@ label {
   &:hover {
     transform: scale(0.9);
   }
+  &:active {
+    transform: scale(0.8);
+  }
 }
 
 nav a {
