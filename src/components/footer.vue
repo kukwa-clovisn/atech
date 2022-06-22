@@ -24,7 +24,7 @@
             <a href="/#contact" class="route">contact us</a>
           </li>
           <li>
-            <a href="/admin/blog" class="route">admin</a>
+            <a href="/admin/dashboard" class="route">admin</a>
           </li>
         </ul>
       </div>

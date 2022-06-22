@@ -57,7 +57,7 @@
             <select
               name="course"
               id="course"
-              v-model="user.course"
+              v-model="user.subscription.course"
               placeholder="Select a course"
               title="Select a course"
               required
@@ -74,7 +74,7 @@
             <select
               name="plan"
               id="plan"
-              v-model="user.subscription"
+              v-model="user.subscription.plan"
               placeholder="Select a payment plan"
               title="Select a payment plan"
               required
@@ -119,8 +119,7 @@ export default {
       username: "",
       email: "",
       password: "",
-      course: "Cryptocurrency",
-      subscription: "free",
+      subscription: { plan: "free", course: "Cryptocurrency" },
     });
 
     const response = reactive({
@@ -159,7 +158,9 @@ export default {
         .catch((err) => {
           console.log(err);
           response.failed = true;
-          response.msg = err.response.data.msg;
+          response.msg = err.response.data.msg
+            ? err.response.data.msg
+            : "Registration Failed.";
           setTimeout(() => {
             response.failed = false;
           }, 4000);

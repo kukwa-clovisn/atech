@@ -5,7 +5,7 @@
 </template>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Jacques+Francois&family=Jacques+Francois+Shadow&family=Noto+Sans:wght@100;300;400;600;700;900&family=Nunito+Sans:ital,wght@0,300;0,600;0,700;0,900;1,300;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200&family=Russo+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,400;1,700&family=Grand+Hotel&family=Jacques+Francois&family=Jacques+Francois+Shadow&family=Noto+Sans:wght@100;300;400;600;700;900&family=Nunito+Sans:ital,wght@0,300;0,600;0,700;0,900;1,300;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200&family=Russo+One&display=swap");
 
 $primaryColor: rgb(255, 255, 255);
 $SecondaryColor: rgba(230, 101, 129, 1);
@@ -24,8 +24,8 @@ $fallback: rgb(19, 37, 62);
 
 .appear-enter-active,
 .appear-leave-active {
-  opacity: 0.3;
-  transition: all 1s ease;
+  opacity: 0;
+  transition: all 0.7s ease;
 }
 
 .move-in-enter-from {
@@ -52,6 +52,15 @@ $fallback: rgb(19, 37, 62);
 
 .refresh-in-leave-to {
   transform: translateX(90vw);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 30px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(177, 176, 176);
+  border-radius: 30px;
 }
 
 #app {

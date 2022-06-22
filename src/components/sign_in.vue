@@ -69,7 +69,7 @@
           </div>
           <form @submit.prevent="signupFunc()">
             <div class="form-header">
-              <h2>sign up {{ vue3GoogleOauth.isInit }}</h2>
+              <h2>sign up</h2>
               <button type="button" @click="googleAuth()">
                 sign up with Google
               </button>
@@ -242,6 +242,7 @@ export default {
           if (res.statusText === "OK") {
             response.success = true;
             response.msg = res.data.msg;
+            localStorage.setItem("accessId", res.data.accessId);
 
             localStorage.setItem("accessToken", res.data.accessToken);
             axios.defaults.headers.common[

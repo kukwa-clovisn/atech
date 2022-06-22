@@ -58,18 +58,36 @@ const routes = [
     },
   },
   {
-    path: "/admin/blog",
+    path: "/admin/dashboard",
     name: "Admin",
     component: function () {
       return import(/* webpackChunkName: "about" */ "../views/admin.vue");
     },
     children: [
       {
+        path: "/admin/dashboard",
+        name: "AdminDashboard",
+        component: function () {
+          return import(
+            /* webpackChunkName: "about" */ "../views/adminDashboard.vue"
+          );
+        },
+      },
+      {
         path: "/admin/blog",
         name: "adminBlog",
         component: function () {
           return import(
             /* webpackChunkName: "about" */ "../views/adminBlog.vue"
+          );
+        },
+      },
+      {
+        path: "/admin/guide",
+        name: "AdminGuide",
+        component: function () {
+          return import(
+            /* webpackChunkName: "about" */ "../views/adminGuide.vue"
           );
         },
       },
@@ -83,11 +101,20 @@ const routes = [
         },
       },
       {
-        path: "/admin/course",
-        name: "aAdminCourse",
+        path: "/admin/dashboard/course/:course",
+        name: "AdminCourse",
         component: function () {
           return import(
             /* webpackChunkName: "about" */ "../views/adminCourse.vue"
+          );
+        },
+      },
+      {
+        path: "/admin/course/courses/view",
+        name: "AdminCourseView",
+        component: function () {
+          return import(
+            /* webpackChunkName: "about" */ "../views/adminCourseView.vue"
           );
         },
       },
@@ -117,6 +144,15 @@ const routes = [
         component: function () {
           return import(
             /* webpackChunkName: "about" */ "../courses/courseHome.vue"
+          );
+        },
+      },
+      {
+        path: "/course/user/profile",
+        name: "Course_user",
+        component: function () {
+          return import(
+            /* webpackChunkName: "about" */ "../courses/course_user.vue"
           );
         },
       },

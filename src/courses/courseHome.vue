@@ -2,38 +2,22 @@
   <main :class="{ squeeze: course.profileMenu }">
     <div class="blur"></div>
     <header>
-      <nav class="logo" @click="toHome()">
-        <span title="World of Technology and more"> AdvancedTechAcademy </span>
-      </nav>
-      <nav class="routes">
-        <li @click="course.profileMenu = !course.profileMenu">
-          <router-link to="" class="route">courses</router-link>
-        </li>
-        <li>
-          <a href="/music/piano" class="route">music</a>
-        </li>
-      </nav>
-      <button
-        class="profile-menu-button"
-        v-if="course.profileMenu"
-        @click="hideProfileMenu()"
-      >
-        <i class="fa-solid fa-align-right"></i>
-      </button>
-      <nav
-        class="profile"
-        :title="'User:' + course.courseUser"
-        v-if="course.hideProfile"
-        @click="showProfileMenu()"
-      >
+      <nav class="profile" @click="showProfileMenu()">
         <span>
-          <i class="fa-solid fa-align-left"></i>
+          <i class="fa-solid fa-book-open"></i>
         </span>
-        <p>{{ course.courseUser }}</p>
+        view courses
       </nav>
     </header>
     <transition name="refresh-in">
       <div class="profile-menu" v-if="course.profileMenu">
+        <button
+          class="profile-menu-button"
+          v-if="course.profileMenu"
+          @click="hideProfileMenu()"
+        >
+          &times;
+        </button>
         <nav class="logo">
           <img src="../assets/logo-white.jpg" alt="" />
         </nav>
@@ -47,31 +31,23 @@
           </p>
         </div>
         <div class="profile-items">
-          <li @click="showCourseSamples('Cryptocurrency')">
+          <li @click="getCourse('Cryptocurrency')">
             <span><i class="fa-solid fa-bitcoin-sign"></i></span>
             <p>cryptocurrency</p>
           </li>
-          <li @click="showCourseSamples('Forex')">
+          <li @click="getCourse('Forex')">
             <span><i class="fa-solid fa-chart-line"></i></span>
             <p>Forex</p>
           </li>
-          <li @click="showCourseSamples('Graphic Design')">
+          <li @click="getCourse('Graphic Design')">
             <span>
               <i class="fa-brands fa-sketch"></i>
             </span>
             <p>Graphic design</p>
           </li>
-          <li @click="showCourseSamples('Web Development')">
+          <li @click="getCourse('Web Development')">
             <span><i class="fa-solid fa-code"></i></span>
             <p>Web developement</p>
-          </li>
-          <li @click="toContact()">
-            <span><i class="fa-solid fa-phone"></i></span>
-            <p>contact us</p>
-          </li>
-          <li @click="toCourses()">
-            <span><i class="fa-solid fa-book"></i></span>
-            <p>courses</p>
           </li>
         </div>
       </div>
@@ -99,21 +75,6 @@
       ><a href="/#contact" class="a"
         ><i class="fa-solid fa-person-circle-question"></i></a
     ></span>
-    <div class="course-samples">
-      <ul>
-        <li
-          v-for="(course, index) in response.courses"
-          :key="course.id"
-          @click="getCourse(course._id)"
-        >
-          <span class="index">{{ index + 1 }}</span>
-          <a>
-            <h3 class="title" v-html="course.title"></h3>
-            <button>start course</button>
-          </a>
-        </li>
-      </ul>
-    </div>
   </main>
 </template>
 
@@ -140,7 +101,7 @@ export default {
       free: true,
     });
 
-    const refreshpage = () => {
+    onMounted(() => {
       axios("api/token")
         .then((res) => {
           course.courseUser = res.data.username;
@@ -149,18 +110,8 @@ export default {
         .catch((err) => {
           router.push("/login");
         });
-    };
-
-    onMounted(() => {
-      refreshpage();
     });
 
-    function toHome() {
-      router.push("/");
-    }
-    function toContact() {
-      router.push("/#contact");
-    }
     function getCourse(courseId) {
       router.push(`/course/${courseId}`);
     }
@@ -175,22 +126,11 @@ export default {
       course.hideProfile = true;
     };
 
-    function showCourseSamples(name) {
-      axios(`/api/admin/course/all/${name}`)
-        .then((res) => {
-          response.courses = res.data;
-        })
-        .catch((err) => err);
-    }
-
     return {
       course,
       response,
-      toHome,
       showProfileMenu,
       hideProfileMenu,
-      showCourseSamples,
-      toContact,
       getCourse,
     };
   },
@@ -255,112 +195,20 @@ main {
     height: fit-content;
     margin: auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     position: relative;
 
-    nav {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-
-      li {
-        list-style-type: none;
-        width: 200px;
-        height: 50px;
-
-        .route {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 10px;
-          text-decoration: none;
-          text-transform: capitalize;
-          font: 500 15px "Poppins", sans-serif;
-          color: $primaryColor;
-        }
-        @media screen and (max-width: 1110px) {
-          width: 140px;
-          .route {
-            font-size: 13px;
-          }
-        }
-      }
-    }
-
-    .logo {
-      width: fit-content;
-      height: 90px;
-      border-radius: 0 0 10px 10px;
-      cursor: pointer;
-
-      span {
-        display: flex;
-        box-shadow: 0 2px 1px 1px rgb(200, 200, 200);
-        border-radius: 10px 0 10px 0;
-        padding: 10px;
-        font: 700 20px "Nunito Sans", sans-serif;
-        background: linear-gradient(
-          to bottom,
-          $SecondaryColor 20%,
-          $tertiaryColor,
-          $primaryColor
-        );
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-
-        i {
-          font-size: 23px;
-          padding: 0;
-          margin: 0;
-        }
-      }
-    }
-
-    .profile-menu-button {
-      width: 80px;
-      height: 50px;
-      border-radius: 1px 0 0 1px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: none;
-      margin: 0;
-      background: transparent;
-      position: fixed;
-      right: 360px;
-      top: 30px;
-      z-index: 1;
-      animation: slice-in 0.3s linear forwards;
-
-      i {
-        font-size: 27px;
-        color: white;
-      }
-    }
-
-    @keyframes slice-in {
-      from {
-        right: -400px;
-      }
-      to {
-        right: 345px;
-      }
-    }
-
     .profile {
-      width: 200px;
-      height: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
       background: transparent;
       position: relative;
-      right: 5%;
       cursor: pointer;
+      font: 600 17px "Nunito Sans", "Poppins", sans-serif;
+      color: whitesmoke;
+      padding: 10px;
 
       span {
         width: 40px;
@@ -369,19 +217,11 @@ main {
         justify-content: center;
         align-items: center;
         background: transparent;
+
         i {
-          font-size: 21px;
+          font-size: 25px;
           color: white;
         }
-      }
-      p {
-        width: 60%;
-        padding-left: 10px;
-        font: 600 15px "Nunito Sans", "Poppins", sans-serif;
-        color: white;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
       }
     }
 
@@ -428,13 +268,30 @@ main {
     width: 25vw;
     height: 100vh;
     position: fixed;
-    top: 0;
+    top: 10vh;
     right: 0;
     z-index: 1;
     background: white;
     box-shadow: 0 3px 2px 1px rgb(220, 219, 219);
     animation: slide-in 0.3s 1 linear forwards;
 
+    .profile-menu-button {
+      width: 35px;
+      height: 35px;
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      margin: 0;
+      background: rgba(230, 101, 129, 1);
+      color: white;
+      position: absolute;
+      right: 1%;
+      top: 1%;
+      z-index: 1;
+      font-size: 27px;
+    }
     .logo {
       width: 100%;
       height: fit-content;
@@ -446,15 +303,15 @@ main {
       align-items: center;
 
       img {
-        width: 110px;
-        height: 110px;
+        width: 70px;
+        height: 70px;
         margin: 0;
       }
     }
 
     .profile-header {
       width: 100%;
-      height: 17vh;
+      height: 14vh;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -495,16 +352,19 @@ main {
     .profile-items {
       width: 100%;
       height: fit-content;
+      padding-top: 20px;
 
       li {
         list-style-type: none;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
-        width: 80%;
-        margin: 5px auto;
-        height: 45px;
+        width: 100%;
+        margin: 0 auto;
+        height: 55px;
         cursor: pointer;
+        padding: 0;
+        border-bottom: 1px solid rgb(227, 227, 227);
 
         span {
           width: 40px;
@@ -513,14 +373,17 @@ main {
           display: flex;
           justify-content: center;
           align-items: center;
+          margin: auto;
+          background: #213c63;
 
           i {
-            font-size: 20px;
+            font-size: 15px;
+            color: white;
           }
         }
 
         p {
-          width: 70%;
+          width: 75%;
           text-transform: capitalize;
           text-align: left;
         }

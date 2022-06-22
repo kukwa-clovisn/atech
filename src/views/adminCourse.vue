@@ -1,67 +1,158 @@
 <template>
   <div class="course-editor">
     <div class="editor">
-      <h1>create a course</h1>
-      <form @submit.prevent="createCourse">
-        <label for="name">Select course type:</label>
-        <select name="name" id="name" v-model="courseFormat.name">
-          <option value="Cryptocurrency">Cryptocurrency</option>
-          <option value="Forex">Forex</option>
-          <option value="Web development">Web Development</option>
-          <option value="Graphic Design">Graphic Design</option>
-          <option value="Music">Music</option>
-        </select>
-        <label for="title">course Title:</label>
-        <input
-          type="text"
-          name="title"
-          id="title"
-          v-model="courseFormat.title"
-          placeholder="Course title"
-        />
-        <label for="objectives">Course Objectives:</label>
-        <textarea
-          name="objectives"
-          id="objectives"
-          placeholder="separate each course objective with a comma(,)"
-          cols="30"
-          rows="10"
-          v-model="objectives"
-        ></textarea>
-        <label for="course">course explanation:</label>
-        <editor
-          :init="{
-            plugins: 'lists link image table code help wordcount',
-          }"
-          v-model="courseFormat.course"
-        />
+      <h1>
+        create a <span>{{ courseFormat.name }}</span> course
+      </h1>
+      <p>
+        <i class="fa-solid fa-circle-exclamation"></i>
+        Please read the create course guildline before jumping in to create a
+        course so you won't get mixed up in creating courses.
+      </p>
+      <form @submit.prevent="createCourse()">
+        <input type="hidden" name="name" v-model="courseFormat.name" />
+        <div class="input">
+          <label for="title">course Title: <span>*</span></label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            v-model="courseFormat.title"
+            placeholder="Course title"
+            required
+          />
+        </div>
+        <div class="input">
+          <label for="objectives">Course Objectives: <span>*</span></label>
+          <textarea
+            name="objectives"
+            id="objectives"
+            placeholder="separate each course objective with a comma(,)"
+            cols="30"
+            rows="10"
+            v-model="objectives"
+            required
+          ></textarea>
+        </div>
+        <div class="input">
+          <label for="intro">course introduction: <span>*</span></label>
+          <textarea
+            name="intro"
+            id="intro"
+            cols="30"
+            rows="10"
+            v-model="courseFormat.intro"
+            placeholder="short and simple overview of the course..."
+            required
+          ></textarea>
+        </div>
+        <div class="input">
+          <label for="course">course explanation: <span>*</span></label>
+          <editor
+            :init="{
+              plugins: 'lists link image table code help wordcount',
+            }"
+            v-model="courseFormat.course"
+            name="course"
+          />
+        </div>
+        <div class="input">
+          <label for="video1">video 1:</label>
+          <input
+            type="text"
+            name="video1"
+            id="video1"
+            v-model="video.video1"
+            placeholder="First video after explanation..."
+          />
+        </div>
+        <div class="input">
+          <label for="description"
+            >Explanation after video 1: <span>*</span></label
+          >
+          <editor
+            :init="{
+              plugins: 'lists link image table code help wordcount',
+            }"
+            id="tinyeditor"
+            v-model="courseFormat.description"
+            name="description"
+          />
+        </div>
+        <div class="input">
+          <label for="video1">video 2:</label>
+          <input
+            type="text"
+            name="video2"
+            id="video2"
+            v-model="video.video2"
+            placeholder="First video after explanation..."
+          />
+        </div>
+        <div class="input">
+          <label for="desc1">Explanation after video 2: <span>*</span></label>
+          <editor
+            :init="{
+              plugins: 'lists link image table code help wordcount',
+            }"
+            id="tinyeditor1"
+            v-model="courseFormat.desc1"
+            naem="desc1"
+          />
+        </div>
+        <div class="input">
+          <label for="video1">video 3:</label>
+          <input
+            type="text"
+            name="video3"
+            id="video3"
+            v-model="video.video3"
+            placeholder="First video after explanation..."
+          />
+        </div>
+        <div class="input">
+          <label for="desc2">Explanation after video 3: <span>*</span></label>
+          <editor
+            :init="{
+              plugins: 'lists link image table code help wordcount',
+            }"
+            id="tinyeditor2"
+            v-model="courseFormat.desc2"
+            name="desc2"
+          />
+        </div>
 
-        <label for="videoUrl"
-          >video url (should be an iframe embedded video)</label
-        >
-        <input
-          type="text"
-          name="videoUrl"
-          id="vidoeUrl"
-          v-model="courseFormat.videoUrl"
-          placeholder="Video embed link...."
-        />
-        <label for="description">Explanation after video:</label>
-        <editor
-          :init="{
-            plugins: 'lists link image table code help wordcount',
-          }"
-          id="tinyeditor"
-          v-model="courseFormat.description"
-        />
-        <label for="free">check if course is free.</label>
-        <input
-          type="checkbox"
-          name="free"
-          v-model="courseFormat.free"
-          id="free"
-          placeholder="Is course free??"
-        />
+        <div class="input">
+          <label for="videoUrl"
+            >video url (should be an iframe embedded video)</label
+          >
+          <input
+            type="text"
+            name="videoUrl"
+            id="vidoeUrl"
+            v-model="courseFormat.videoUrl"
+            placeholder="Video embed link...."
+          />
+        </div>
+
+        <div class="input">
+          <label for="free">free or paid coure? <span>*</span></label>
+          <select name="free" id="free" v-model="courseFormat.free" required>
+            <option value="free">free</option>
+            <option value="paid">paid</option>
+          </select>
+        </div>
+        <div class="input">
+          <label for="conclusion">course conclusion/remarks:</label>
+          <textarea
+            name="conclusion"
+            id="conclusion"
+            cols="30"
+            rows="10"
+            v-model="courseFormat.conclusion"
+            placeholder="Course conclusion or remarks"
+          ></textarea>
+        </div>
         <button type="submit">create course</button>
         <div class="response">
           <div class="done" v-if="success">
@@ -85,7 +176,8 @@
 
 <script>
 import Editor from "@tinymce/tinymce-vue";
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
+import { useRoute } from "vue-router";
 import axios from "axios";
 export default {
   name: "AdminCourse",
@@ -93,10 +185,17 @@ export default {
     editor: Editor,
   },
   setup() {
+    const route = useRoute();
+
     let response = ref("");
     let success = ref(false);
     let postError = ref(false);
     let objectives = ref("");
+    let video = reactive({
+      video1: "",
+      video2: "",
+      video3: "",
+    });
 
     let courseFormat = reactive({
       name: "",
@@ -105,26 +204,41 @@ export default {
       videoUrl: "",
       objectives: [],
       description: "",
-      free: true,
+      desc1: "",
+      desc2: "",
+      free: "free",
+      intro: "",
+      conclusion: "",
+      firstvideolist: [],
+      secondvideolist: [],
+      thirdvideolist: [],
+    });
+    onMounted(() => {
+      courseFormat.name = route.params.course;
     });
 
     const createCourse = () => {
+      courseFormat.name = localStorage.getItem("courseId");
       courseFormat.objectives = objectives.value.split(",");
+      courseFormat.firstvideolist = video.video1.split(",");
+      courseFormat.secondvideolist = video.video2.split(",");
+      courseFormat.thirdvideolist = video.video3.split(",");
       axios
-        .post("/api/admin/course", courseFormat, {
-          headers: { "Content-Type": "application/json" },
-        })
+        .post(
+          `/api/admin/course/create/${localStorage.getItem("courseId")}`,
+          courseFormat
+        )
         .then((res) => {
+          console.log(res);
           if (res.statusText === "OK") {
             success.value = true;
             setTimeout(pop, 3000);
-            courseFormat.name = "";
-            courseFormat.title = "";
-            courseFormat.course = "";
-            courseFormat.description = "";
-            objectives.value = "";
-            courseFormat.videoUrl = "";
-            courseFormat.free = true;
+            // courseFormat.name = "";
+            // courseFormat.title = "";
+            // courseFormat.course = "";
+            // courseFormat.description = "";
+            // objectives.value = "";
+            // courseFormat.videoUrl = "";
           } else {
             error.value = true;
             setTimeout(post_error, 3000);
@@ -145,6 +259,7 @@ export default {
     return {
       courseFormat,
       response,
+      video,
       success,
       postError,
       objectives,
@@ -170,10 +285,40 @@ $adminCol: rgb(21, 55, 101);
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    h1 {
+      font-size: 20px;
+      padding: 20px;
+      color: rgb(118, 116, 116);
+      padding-bottom: 0;
+      span {
+        color: rgba(230, 101, 129, 1);
+        font-size: 26px;
+      }
+    }
+    p {
+      padding-bottom: 10px;
+      width: 95%;
+      margin: auto;
+
+      i {
+        font-size: 30px;
+        color: rgba(230, 101, 129, 1);
+      }
+    }
     form {
       width: 97%;
       height: fit-content;
       margin: auto;
+
+      .input {
+        margin: 20px auto;
+        width: 100%;
+        height: fit-content;
+        background: white;
+        border-radius: 5px;
+        box-shadow: 0 0 1px 6px rgb(241, 242, 244);
+      }
 
       label {
         width: 100%;
@@ -182,6 +327,11 @@ $adminCol: rgb(21, 55, 101);
         text-transform: capitalize;
         padding: 3px 10px;
         font-weight: 700;
+        font-family: "Nunito Sans", sans-serif;
+        color: rgb(117, 116, 116);
+        span {
+          color: rgba(230, 101, 129, 1);
+        }
       }
       input,
       select {
@@ -190,7 +340,7 @@ $adminCol: rgb(21, 55, 101);
         border: none;
         border-radius: 5px;
         background: white;
-        box-shadow: 0 0 3px 1px whitesmoke;
+
         padding: 3px 20px;
         margin: 20px auto;
         margin-top: 10px;
@@ -202,7 +352,8 @@ $adminCol: rgb(21, 55, 101);
         height: 30px;
         margin: 10px 0;
       }
-      textarea {
+      textarea,
+      editor {
         border: none;
         outline: none;
         width: 100%;
@@ -270,8 +421,9 @@ $adminCol: rgb(21, 55, 101);
       height: 55px;
       border: none;
       border-radius: 5px;
-      background: teal;
+      background: rgba(230, 101, 129, 1);
       margin: 20px auto;
+      font-size: 23px;
       color: white;
       text-transform: capitalize;
     }
