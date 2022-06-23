@@ -6,8 +6,10 @@
       </h1>
       <p>
         <i class="fa-solid fa-circle-exclamation"></i>
-        Please read the create course guildline before jumping in to create a
-        course so you won't get mixed up in creating courses.
+        Please read the
+        <router-link to="/admin/guide">admin guide</router-link> on how to
+        create a course before jumping in to create a course so you won't get
+        mixed up in creating your {{ courseFormat.name }} courses.
       </p>
       <form @submit.prevent="createCourse()">
         <input type="hidden" name="name" v-model="courseFormat.name" />
@@ -270,7 +272,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$adminCol: rgb(21, 55, 101);
+$primaryColor: white;
+$secondaryColor: rgb(232, 232, 232);
+$tertiaryColor: rgb(249, 249, 249);
+$textColor1: rgb(123, 122, 122);
+$baseColor: tomato;
+$fallback: teal;
+$misc: #072e54;
 .course-editor {
   max-width: 100%;
   height: 100%;
@@ -292,8 +300,9 @@ $adminCol: rgb(21, 55, 101);
       color: rgb(118, 116, 116);
       padding-bottom: 0;
       span {
-        color: rgba(230, 101, 129, 1);
+        color: $baseColor;
         font-size: 26px;
+        padding: 0 10px;
       }
     }
     p {
@@ -303,7 +312,7 @@ $adminCol: rgb(21, 55, 101);
 
       i {
         font-size: 30px;
-        color: rgba(230, 101, 129, 1);
+        color: $baseColor;
       }
     }
     form {
@@ -315,9 +324,9 @@ $adminCol: rgb(21, 55, 101);
         margin: 20px auto;
         width: 100%;
         height: fit-content;
-        background: white;
+        background: transparent;
         border-radius: 5px;
-        box-shadow: 0 0 1px 6px rgb(241, 242, 244);
+        border: 1px solid rgb(213, 213, 213);
       }
 
       label {
@@ -330,7 +339,7 @@ $adminCol: rgb(21, 55, 101);
         font-family: "Nunito Sans", sans-serif;
         color: rgb(117, 116, 116);
         span {
-          color: rgba(230, 101, 129, 1);
+          color: $baseColor;
         }
       }
       input,
@@ -339,7 +348,7 @@ $adminCol: rgb(21, 55, 101);
         height: 60px;
         border: none;
         border-radius: 5px;
-        background: white;
+        background: transparent;
 
         padding: 3px 20px;
         margin: 20px auto;
@@ -352,8 +361,8 @@ $adminCol: rgb(21, 55, 101);
         height: 30px;
         margin: 10px 0;
       }
-      textarea,
-      editor {
+      textarea {
+        background: transparent;
         border: none;
         outline: none;
         width: 100%;
@@ -380,7 +389,7 @@ $adminCol: rgb(21, 55, 101);
         i {
           font-size: 30px;
           margin-right: 10px;
-          color: white;
+          color: $primaryColor;
         }
 
         span {
@@ -391,7 +400,7 @@ $adminCol: rgb(21, 55, 101);
       .error {
         background: red;
         span {
-          color: white;
+          color: $primaryColor;
         }
       }
 
@@ -412,7 +421,7 @@ $adminCol: rgb(21, 55, 101);
       margin: 10px auto;
 
       p {
-        color: white;
+        color: $primaryColor;
       }
     }
 
@@ -421,10 +430,10 @@ $adminCol: rgb(21, 55, 101);
       height: 55px;
       border: none;
       border-radius: 5px;
-      background: rgba(230, 101, 129, 1);
+      background: rgb(113, 113, 113);
       margin: 20px auto;
       font-size: 23px;
-      color: white;
+      color: $primaryColor;
       text-transform: capitalize;
     }
     textarea {

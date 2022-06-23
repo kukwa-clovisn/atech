@@ -27,12 +27,12 @@
         <span title="World of Technology and more"> Atech</span>
       </nav>
       <div class="profile-header" @click="dashboard()">
-        <span>
+        <span class="span">
           <img src="../assets/book.jpeg" alt="" />
         </span>
         <p :title="adminResponse.name + '\n' + adminResponse.email">
           {{ adminResponse.name }}<br />
-          <i>{{ adminResponse.email }}</i>
+          <span class="profile-email">{{ adminResponse.email }}</span>
         </p>
       </div>
       <div class="profile-items">
@@ -49,7 +49,7 @@
         >
 
         <router-link
-          to="/admin/dashboard"
+          to="/admin/dashboard/course/course"
           class="route"
           :class="{ active: active }"
           @click="createCourse()"
@@ -73,7 +73,7 @@
         </router-link>
         <router-link to="/admin/guide" class="route">
           <li>
-            <span><i class="fa-solid fa-book-open-reader"></i></span>
+            <span><i class="fa-solid fa-circle-info"></i></span>
             <p>Admin guide</p>
           </li>
         </router-link>
@@ -202,10 +202,8 @@ export default {
     });
 
     onUpdated(() => {
-      console.log(route.params);
       if (route.params.course) {
         active.value = true;
-        console.log("present");
       } else {
         active.value = false;
       }
@@ -231,12 +229,13 @@ export default {
         })
         .then((res) => {
           if (res.statusText === "OK") {
+            console.log(res);
             auth.value = false;
             adminResponse.name = res.data.username;
             adminResponse.email = res.data.email;
             localStorage.setItem("adminId", res.data.id);
             localStorage.setItem("courseId", res.data.course);
-            router.push(`/admin/dashboard/course/${res.data.course}`);
+            router.push(`/admin/dashboard`);
           }
         })
         .catch((err) => {
@@ -283,14 +282,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$primaryColor: rgb(255, 255, 255);
-$SecondaryColor: rgba(230, 101, 129, 1);
-$tertiaryColor: rgba(65, 140, 228, 1);
-$footerColor: rgb(51, 2, 69);
-$baseColor: #072e54;
-$fallback: rgb(19, 37, 62);
-$col: #3d566f;
-$adminCol: rgb(21, 55, 101);
+$primaryColor: white;
+$secondaryColor: rgb(232, 232, 232);
+$tertiaryColor: rgb(249, 249, 249);
+$textColor1: rgb(123, 122, 122);
+$baseColor: tomato;
+$fallback: teal;
+$misc: #072e54;
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -304,7 +302,7 @@ $adminCol: rgb(21, 55, 101);
 main {
   width: 100vw;
   min-height: 100vh;
-  background: rgb(249, 249, 249);
+  background: $tertiaryColor;
   padding-top: 16vh;
   overflow-x: hidden;
 
@@ -312,8 +310,8 @@ main {
     width: 100%;
     height: 12vh;
     padding: 0 50px;
-    background: white;
-    border-bottom: 2px solid whitesmoke;
+    background: $primaryColor;
+    border-bottom: 1px solid rgb(235, 234, 234);
     position: fixed;
     top: 0;
     right: 0;
@@ -345,12 +343,12 @@ main {
       font: 600 28px "Comic Neue", cursive;
       cursor: pointer;
       span {
-        color: tomato;
+        color: $baseColor;
       }
     }
 
     .right-header {
-      width: 30%;
+      width: 45%;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -360,7 +358,7 @@ main {
       width: 50px;
       height: 50px;
       border-radius: 100%;
-      background: whitesmoke;
+      background: transparent;
 
       border: none;
 
@@ -374,7 +372,7 @@ main {
         align-items: center;
         i {
           font-size: 25px;
-          color: rgb(97, 97, 97);
+          color: $textColor1;
         }
       }
     }
@@ -384,10 +382,10 @@ main {
       height: 50px;
       border-radius: 3px;
       border: none;
-      background: whitesmoke;
+      background: $secondaryColor;
 
       i {
-        color: tomato;
+        color: $baseColor;
         font-size: 24px;
       }
     }
@@ -398,8 +396,8 @@ main {
       display: flex;
       justify-content: center;
       align-items: center;
-      background: $baseColor;
-      color: white;
+      background: $misc;
+      color: $primaryColor;
       border-radius: 100%;
       font: 500 16px "Poppins", sans-serif;
       text-transform: capitalize;
@@ -424,7 +422,7 @@ main {
     position: fixed;
     top: 0;
     left: 0;
-    background: white;
+    background: $primaryColor;
     box-shadow: 0 3px 2px 1px rgb(220, 219, 219);
     animation: slide-in 0.2s 1 linear alternate forwards;
 
@@ -457,9 +455,10 @@ main {
       align-items: center;
       flex-direction: column;
       padding: 5px 0;
-      background: white;
+      background: $primaryColor;
+      cursor: pointer;
 
-      span {
+      .span {
         width: 90px;
         height: 90px;
         display: flex;
@@ -483,10 +482,15 @@ main {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        line-height: 30px;
-        i {
+        line-height: 20px;
+        .profile-email {
           font-size: 12px;
         }
+      }
+
+      &:hover {
+        background: $secondaryColor;
+        border-left: 5px solid $baseColor;
       }
     }
 
@@ -503,24 +507,58 @@ main {
         width: 100%;
         text-transform: capitalize;
         text-align: left;
-        color: rgb(123, 122, 122);
+        color: $textColor1;
 
-        &.router-link-exact-active {
-          i {
-            color: tomato;
+        li {
+          list-style-type: none;
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+          width: 100%;
+          margin: 0 auto;
+          height: 50px;
+          cursor: pointer;
+
+          span {
+            width: 28%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            i {
+              font-size: 20px;
+              color: rgb(111, 110, 110);
+            }
           }
           p {
-            color: tomato;
+            text-align: left;
+            width: 70%;
+            color: rgb(112, 110, 110);
+          }
+
+          &:hover {
+            background: $secondaryColor;
+            border-left: 5px solid $baseColor;
+          }
+
+          @media screen and (max-width: 1000px) {
+            span i,
+            p {
+              font-size: 12px;
+            }
           }
         }
-      }
 
-      .route.active {
-        i {
-          color: tomato;
-        }
-        p {
-          color: tomato;
+        &.router-link-exact-active {
+          li {
+            background: $secondaryColor;
+            border-left: 5px solid $baseColor;
+            i {
+              color: $baseColor;
+            }
+            p {
+              color: $baseColor;
+            }
+          }
         }
       }
 
@@ -528,41 +566,15 @@ main {
         display: none;
       }
 
-      li {
-        list-style-type: none;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        width: 100%;
-        margin: 5px auto;
-        height: 45px;
-        cursor: pointer;
-
-        span {
-          width: 28%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+      .route.active {
+        li {
+          background: $secondaryColor;
+          border-left: 5px solid $baseColor;
           i {
-            font-size: 20px;
-            color: rgb(111, 110, 110);
+            color: $baseColor;
           }
-        }
-        p {
-          text-align: left;
-          width: 70%;
-          color: rgb(112, 110, 110);
-        }
-
-        &:hover {
-          background: whitesmoke;
-          border-left: 5px solid tomato;
-        }
-
-        @media screen and (max-width: 1000px) {
-          span i,
           p {
-            font-size: 12px;
+            color: $baseColor;
           }
         }
       }
@@ -609,7 +621,7 @@ main {
     top: 0;
     left: 0;
     padding: 0;
-    background: $fallback;
+    background: $secondaryColor;
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -618,7 +630,7 @@ main {
     form {
       width: 550px;
       height: fit-content;
-      background: white;
+      background: $primaryColor;
       border-radius: 5px;
       padding: 20px;
 
@@ -634,7 +646,7 @@ main {
           text-transform: capitalize;
           text-align: left;
           width: 30%;
-          color: $col;
+          color: $textColor1;
         }
         input,
         select {
@@ -642,8 +654,8 @@ main {
           height: 100%;
           border: none;
           outline: none;
-          background: whitesmoke;
-          color: $col;
+          background: $tertiaryColor;
+          color: $textColor1;
           padding: 3px 10px;
           border-radius: 3px;
         }
@@ -657,8 +669,8 @@ main {
         padding: 0 10px;
         height: 50px;
         margin: 10px auto;
-        background: $SecondaryColor;
-        color: white;
+        background: rgba(230, 101, 129, 1);
+        color: $primaryColor;
         text-transform: capitalize;
         border: none;
         border-radius: 3px;
@@ -674,7 +686,7 @@ main {
         a {
           text-decoration: none;
           text-transform: capitalize;
-          color: $col;
+          color: $textColor1;
           font: 500 13px "Poppins", sans-serif;
 
           &:hover {
@@ -710,7 +722,7 @@ main {
       display: flex;
       justify-content: center;
       align-items: center;
-      background: $SecondaryColor;
+      background: rgba(230, 101, 129, 1);
       border-radius: 4px;
       padding: 20px;
       position: fixed;
@@ -722,11 +734,11 @@ main {
       i {
         font-size: 30px;
         margin-right: 10px;
-        color: white;
+        color: $primaryColor;
       }
 
       span {
-        color: white;
+        color: $primaryColor;
       }
     }
 
