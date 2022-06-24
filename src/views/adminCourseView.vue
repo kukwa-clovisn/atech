@@ -162,6 +162,9 @@ $fallback: teal;
         font-size: 25px;
         color: $baseColor;
       }
+      @media screen and (max-width: 490px) {
+        width: 85%;
+      }
     }
   }
 
@@ -177,7 +180,7 @@ $fallback: teal;
       outline: none;
       background: transparent;
       height: 45px;
-      color: $textColor2;
+      color: $tertiaryColor;
       border: 1px solid $secondaryColor;
     }
 
@@ -194,6 +197,9 @@ $fallback: teal;
       border-left: none;
       cursor: pointer;
     }
+    @media screen and (max-width: 490px) {
+      width: 95%;
+    }
   }
 
   .main {
@@ -209,7 +215,7 @@ $fallback: teal;
         width: 80%;
         height: fit-content;
         padding: 10px;
-        border-radius: 17px;
+        border-radius: 5px;
         background: $secondaryColor;
         position: relative;
         margin: 10px auto;
@@ -243,12 +249,19 @@ $fallback: teal;
           height: 35px;
           border-radius: 30px;
           border: none;
+          margin: 7px;
           background: $fallback;
           color: $textColor2;
         }
 
         .delete {
           background: $baseColor;
+        }
+      }
+      @media screen and (max-width: 500px) {
+        width: 100%;
+        li {
+          width: 96%;
         }
       }
     }

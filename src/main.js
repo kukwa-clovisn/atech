@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import "./interceptors/axios";
+import store from "./store";
 // import GAuth from "vue3-google-oauth2";
 
 // const gAuthOptions = {
@@ -15,5 +16,5 @@ import "./interceptors/axios";
 const app = createApp(App);
 
 // app.use(GAuth, gAuthOptions);
-
+app.use(store);
 app.use(router).mount("#app");

@@ -272,24 +272,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// $primaryColor: white;
-// $secondaryColor: rgb(232, 232, 232);
-// $tertiaryColor: rgb(249, 249, 249);
-// $textColor1: rgb(123, 122, 122);
-// $baseColor: tomato;
-// $fallback: teal;
-// $misc: #072e54;
-
-$randomColor: rgba(230, 101, 129, 1);
-
-$primaryColor: #072e54;
-$secondaryColor: rgb(215, 214, 214);
-$tertiaryColor: #194e82;
-$textColor1: white;
-$textColor2: whitesmoke;
-$baseColor: rgba(230, 101, 129, 1);
-$misc: rgb(232, 232, 232);
+$primaryColor: white;
+$secondaryColor: #072e54;
+$tertiaryColor: rgb(3, 122, 59);
+$col1: white;
+$col2: rgb(232, 232, 232);
 $fallback: teal;
+$baseColor: rgba(230, 101, 129, 1);
+$text: rgb(84, 84, 84);
 .course-editor {
   max-width: 100%;
   height: 100%;
@@ -308,7 +298,7 @@ $fallback: teal;
     h1 {
       font-size: 20px;
       padding: 20px;
-      color: $textColor1;
+      color: $text;
       padding-bottom: 0;
       span {
         color: $baseColor;
@@ -320,7 +310,7 @@ $fallback: teal;
       padding-bottom: 10px;
       width: 95%;
       margin: auto;
-      color: $textColor2;
+      color: $text;
 
       i {
         font-size: 30px;
@@ -336,7 +326,7 @@ $fallback: teal;
         margin: 20px auto;
         width: 100%;
         height: fit-content;
-        background: transparent;
+        background: $col2;
         border-radius: 5px;
         border: 1px solid rgb(213, 213, 213);
       }
@@ -349,7 +339,7 @@ $fallback: teal;
         padding: 3px 10px;
         font-weight: 700;
         font-family: "Nunito Sans", sans-serif;
-        color: $textColor1;
+        color: $text;
         span {
           color: $baseColor;
         }
@@ -361,7 +351,7 @@ $fallback: teal;
         border: none;
         border-radius: 5px;
         background: transparent;
-        color: $textColor2;
+        color: $text;
         padding: 3px 20px;
         margin: 20px auto;
         margin-top: 10px;
@@ -380,7 +370,7 @@ $fallback: teal;
         width: 100%;
         padding: 10px;
         border-radius: 5px;
-        color: $textColor2;
+        color: $text;
       }
 
       .done,
@@ -442,11 +432,11 @@ $fallback: teal;
       width: 100%;
       height: 55px;
       border: none;
-      border-radius: 5px;
-      background: $secondaryColor;
+      border-radius: 30px;
+      background: rgb(186, 185, 185);
       margin: 20px auto;
       font-size: 23px;
-      color: $primaryColor;
+      color: $text;
       text-transform: capitalize;
     }
     textarea {

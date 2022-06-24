@@ -232,24 +232,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// $tertiaryColor: rgba(230, 101, 129, 1);
-// $tertiaryColor: rgba(65, 140, 228, 1);
-// $footerColor: rgb(51, 2, 69);
-// $baseColor: #072e54;
-// $fallback: rgb(19, 37, 62);
-// $misc: #3d566f;
-// $adminCol: rgb(21, 55, 101);
-
-$randomColor: rgba(230, 101, 129, 1);
-
 $primaryColor: #072e54;
-$tertiaryColor: rgb(215, 214, 214);
+$secondaryColor: rgb(215, 214, 214);
 $tertiaryColor: #194e82;
-$textColor1: white;
-$textColor2: whitesmoke;
 $baseColor: rgba(230, 101, 129, 1);
-$misc: rgb(232, 232, 232);
-$fallback: teal;
+$text: rgb(84, 84, 84);
 
 .pop-enter-from {
   opacity: 0;
@@ -310,15 +297,15 @@ main {
       padding: 0 25px;
       border: none;
       border-radius: 30px;
-      background: $primaryColor;
-      color: $textColor1;
+      background: $secondaryColor;
+      color: $text;
       margin: 10px auto;
       font: 600 16px "Poppins", sans-serif;
     }
 
     button[type="button"].active {
       background: $baseColor;
-      color: $textColor2;
+      color: $secondaryColor;
       animation: dance 2s infinite linear alternate forwards;
     }
 
@@ -349,7 +336,7 @@ main {
 
     h1 {
       text-transform: capitalize;
-      color: $textColor1;
+      color: $text;
       font: 600 25px "Poppins", sans-serif;
     }
 
@@ -362,7 +349,7 @@ main {
         display: block;
         text-align: left;
         padding-bottom: 10px;
-        color: $textColor2;
+        color: $text;
       }
 
       input {
@@ -370,7 +357,7 @@ main {
         height: 40px;
         outline: none;
         border: none;
-        border-bottom: 1px solid $textColor2;
+        border-bottom: 1px solid $text;
         background: transparent;
         margin: 5px auto;
       }
@@ -378,7 +365,7 @@ main {
         border: none;
         text-align: left;
         font-weight: 800;
-        color: $textColor2;
+        color: $text;
         cursor: pointer;
         width: fit-content;
         margin: 0;
@@ -396,9 +383,9 @@ main {
         width: 100%;
         height: 200px;
         border-radius: 5px;
-        box-shadow: 0 0 2px 1px $textColor2;
+        box-shadow: 0 0 2px 1px $text;
         outline: none;
-        color: $textColor2;
+        color: $text;
         border: none;
         padding: 20px;
         margin: 10px auto;
@@ -406,13 +393,13 @@ main {
       }
 
       button {
-        background: $misc;
+        background: $secondaryColor;
         height: 50px;
         width: 100%;
         margin: 20px auto;
         border: none;
-        border-radius: 5px;
-        color: $primaryColor;
+        border-radius: 30px;
+        color: $text;
         font: 600 19px "Poppins", sans-serif;
         text-transform: capitalize;
       }
@@ -437,7 +424,7 @@ main {
       i {
         font-size: 30px;
         margin-right: 10px;
-        color: $textColor2;
+        color: $text;
       }
 
       span {
@@ -448,7 +435,7 @@ main {
     .error {
       background: red;
       span {
-        color: $textColor2;
+        color: $text;
       }
     }
 

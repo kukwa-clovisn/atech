@@ -1,18 +1,23 @@
 <template>
-  <main :class="{ squeeze: shrink, 'dark-mode': dark }" class="light-mode">
+  <main
+    :class="{ squeeze: shrink, 'dark-mode': mode.dark, 'gray-mode': mode.gray }"
+    class="light-mode"
+  >
     <header>
-      <button class="profile-menu-button" @click="expandPage()" v-if="!shrink">
+      <button
+        class="profile-menu-button large-screen-only"
+        @click="expandPage()"
+        v-if="!shrink"
+      >
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <button
+        class="profile-menu-button small-screen-only"
+        @click="expandPage()"
+      >
         <i class="fa-solid fa-bars"></i>
       </button>
       <h1 @click="dashboard()">Dash<span>board</span></h1>
-      <button
-        class="mode"
-        title="Toggle Mode"
-        :class="{ switchMode: dark }"
-        @click="dark = !dark"
-      >
-        <span></span>
-      </button>
       <div class="right-header">
         <button class="guide">
           <router-link to="/admin/guide" class="route"
@@ -31,7 +36,12 @@
     </header>
     <div class="profile-menu" v-if="shrink">
       <nav class="logo">
-        <i class="fa-solid fa-bars" @click="shrinkPage()" v-if="shrink"></i>
+        <i
+          class="fa-solid fa-bars large-screen-only"
+          @click="shrinkPage()"
+          v-if="shrink"
+        ></i>
+        <i class="small-screen-only" @click="shrinkPage()">&times;</i>
         <span title="World of Technology and more"> Atech</span>
       </nav>
       <div class="profile-header" @click="dashboard()">
@@ -93,12 +103,6 @@
         </router-link>
       </div>
       <div class="profile-bottom">
-        <router-link to="/admin/blog" class="route">
-          <li>
-            <span><i class="fa-solid fa-gear"></i></span>
-            <p>setting</p>
-          </li></router-link
-        >
         <router-link to="/admin/blog" class="route">
           <li>
             <span><i class="fa-regular fa-message"></i></span>
@@ -185,12 +189,15 @@
 </template>
 
 <script>
-import { reactive, ref, onMounted, onUpdated } from "vue";
+import { useStore } from "vuex";
+import { reactive, ref, onUpdated, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import axios from "axios";
 export default {
   name: "Admin",
   setup() {
+    const Store = useStore();
+
     const shrink = ref(true);
     const router = useRouter();
     const route = useRoute();
@@ -214,22 +221,18 @@ export default {
       email: "",
       status: "",
     });
-    onMounted(() => {
-      axios("/api/color/admin")
-        .then((res) => {
-          if (res.statusText === "OK") {
-            localStorage.setItem("colormode", res.data);
-          }
-        })
-        .catch((err) => console.log(err));
-    }),
-      onUpdated(() => {
-        if (route.params.course) {
-          active.value = true;
-        } else {
-          active.value = false;
-        }
-      });
+
+    onUpdated(() => {
+      if (route.params.course) {
+        active.value = true;
+      } else {
+        active.value = false;
+      }
+    });
+
+    const mode = computed(() => Store.state.mode);
+
+    console.log(mode.value);
 
     const auth = ref(true);
     const authError = ref(false);
@@ -286,8 +289,10 @@ export default {
     function dashboard() {
       router.push("/admin/dashboard");
     }
+    console.log(computed(() => Store.state.task));
 
     return {
+      mode,
       dark,
       active,
       admin,
@@ -457,14 +462,19 @@ main {
       cursor: pointer;
     }
 
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 635px) {
       padding: 0 10px;
-      flex-direction: row-reverse;
+      flex-direction: row;
       .large-screen-only {
         display: none;
       }
       .logo span {
         font-size: 15px;
+      }
+      @media screen and (max-width: 500px) {
+        .right-header {
+          display: none;
+        }
       }
     }
   }
@@ -494,6 +504,15 @@ main {
         display: flex;
         padding: 10px;
         font: 700 20px "Comic Neue", cursive;
+      }
+      @media screen and (max-width: 635px) {
+        height: 9vh;
+        justify-content: space-around;
+
+        i {
+          text-decoration: none;
+          font-size: 29px;
+        }
       }
     }
 
@@ -533,6 +552,14 @@ main {
         line-height: 20px;
         .profile-email {
           font-size: 12px;
+        }
+      }
+      @media screen and (max-width: 635px) {
+        height: fit-content;
+
+        .span {
+          width: 140px;
+          height: 140px;
         }
       }
     }
@@ -599,7 +626,7 @@ main {
         }
       }
 
-      @media screen and (max-width: 500px) {
+      @media screen and (max-width: 635px) {
         .small-screen-only {
           display: flex;
         }
@@ -610,7 +637,7 @@ main {
       height: 17vh;
       .route {
         li {
-          height: 35px;
+          height: 40px;
         }
       }
     }
@@ -618,6 +645,8 @@ main {
     @media screen and (max-width: 770px) {
       position: relative;
       left: 0;
+      margin: 0;
+      top: 0;
       width: 100%;
       height: fit-content;
       padding: 15px;
@@ -740,6 +769,7 @@ main {
     }
 
     .error {
+      background: crimson;
       width: fit-content;
       height: 60px;
       display: flex;
@@ -768,8 +798,26 @@ main {
       }
     }
   }
+
+  @media screen and (max-width: 770px) {
+    padding-top: 12vh;
+  }
+}
+.large-screen-only {
+  display: block;
+}
+.small-screen-only {
+  display: none;
 }
 
+@media screen and (max-width: 770px) {
+  .large-screen-only {
+    display: none;
+  }
+  .small-screen-only {
+    display: block;
+  }
+}
 main.squeeze {
   width: 81vw;
   float: right;
@@ -806,6 +854,10 @@ main.light-mode {
   .route {
     color: rgb(105, 104, 104);
   }
+
+  .authentication {
+    background: rgb(1, 12, 40);
+  }
   .profile-items {
     border-bottom: 1px solid rgb(232, 232, 232);
   }
@@ -827,7 +879,7 @@ main.light-mode {
       }
     }
     nav .profile {
-      background: $primaryColor;
+      background: rgb(57, 57, 57);
       color: white;
     }
   }
@@ -946,6 +998,91 @@ main.dark-mode {
   .profile-menu,
   .profile-header {
     background: $primaryColor;
+  }
+}
+
+main.gray-mode {
+  background: rgb(27, 182, 99);
+  ::-webkit-scrollbar-thumb {
+    background: rgb(27, 182, 99);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  span,
+  i,
+  .route {
+    color: whitesmoke;
+  }
+
+  .authentication {
+    background: rgb(3, 122, 59);
+  }
+  .route.router-link-exact-active li {
+    background: rgb(27, 182, 99);
+  }
+  .profile-items {
+    border-bottom: 1px solid rgb(27, 182, 99);
+  }
+
+  .route li:hover {
+    border-left: 5px solid $baseColor;
+    background: rgb(27, 182, 99);
+  }
+  header {
+    background: rgb(3, 122, 59);
+    border-bottom: 1px solid rgb(27, 182, 99);
+    h1 span {
+      color: $baseColor;
+    }
+    .create-course {
+      background: rgb(27, 182, 99);
+      color: $textColor2;
+      i {
+        color: $baseColor;
+      }
+    }
+    nav .profile {
+      background: $misc;
+      color: rgb(27, 182, 99);
+    }
+  }
+  .profile-header {
+    border-bottom: 1px solid rgb(27, 182, 99);
+  }
+  .profile-menu {
+    border-right: 2px solid rgb(27, 182, 99);
+  }
+
+  .profile-header:hover {
+    background: rgb(27, 182, 99);
+    border-left: 5px solid $baseColor;
+  }
+
+  input,
+  select,
+  .route.active {
+    background: rgb(27, 182, 99);
+  }
+
+  h1 span,
+  .create-course i,
+  .route.router-link-exact-active li i,
+  .route.router-link-exact-active li p,
+  .route.active i,
+  .route.active p {
+    color: $baseColor;
+  }
+
+  .profile-menu,
+  .profile-header {
+    background: rgb(3, 122, 59);
   }
 }
 </style>

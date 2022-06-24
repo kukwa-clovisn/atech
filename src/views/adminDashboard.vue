@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="dashboard"
-    :class="{ dark: color.darkmode, light: color.lightmode }"
-  >
+  <div class="dashboard" :class="{ dark: mode.dark, gray: mode.gray }">
     <h1>Dashboard</h1>
     <div class="right-dashboard">
       <div class="profile">
@@ -13,7 +10,30 @@
           <h2>{{ response.name }}</h2>
           <p>{{ response.email }}</p>
           <button>edit profile</button>
-          <button>customize page setting</button>
+          <p>Choose color mode<i class="fa-regular fa-hand-point-down"></i></p>
+          <div class="page-modes">
+            <button
+              class="page-mode light"
+              :class="{ active: mode.light }"
+              @click="pagemode('light')"
+            >
+              <span><i class="fa-regular fa-circle-check"></i></span>
+            </button>
+            <button
+              class="page-mode dark"
+              :class="{ active: mode.dark }"
+              @click="pagemode('dark')"
+            >
+              <span><i class="fa-regular fa-circle-check"></i></span>
+            </button>
+            <button
+              class="page-mode gray"
+              :class="{ active: mode.gray }"
+              @click="pagemode('gray')"
+            >
+              <span><i class="fa-regular fa-circle-check"></i></span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -89,13 +109,15 @@
 </template>
 
 <script>
+import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import { onMounted, reactive } from "vue";
+import { computed, onMounted, reactive } from "vue";
 import axios from "axios";
 export default {
   name: "AdminDashboard",
   setup() {
     const router = useRouter();
+    const store = useStore();
 
     let response = reactive({
       name: "",
@@ -103,10 +125,12 @@ export default {
       data: [],
     });
 
-    let color = reactive({
-      darkmode: false,
-      lightmode: true,
-    });
+    const mode = computed(() => store.state.mode);
+
+    function pagemode(mode) {
+      console.log(mode);
+      store.dispatch("pagemode", mode);
+    }
 
     axios
       .get("api/color/admin")
@@ -128,30 +152,20 @@ export default {
       router.push(`admin/dashboard/course/${localStorage.getItem("courseId")}`);
     }
 
-    return { response, color, createCourse };
+    return { response, mode, createCourse, pagemode };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-// $primaryColor: white;
-// $secondaryColor: rgb(232, 232, 232);
-// $tertiaryColor: rgb(249, 249, 249);
-// $textColor1: rgb(123, 122, 122);
-// $baseColor: tomato;
-// $fallback: teal;
-// $misc: #072e54;
-
-$randomColor: rgba(230, 101, 129, 1);
-
-$primaryColor: #072e54;
-$secondaryColor: rgb(215, 214, 214);
-$tertiaryColor: #194e82;
-$textColor1: white;
-$textColor2: whitesmoke;
-$baseColor: rgba(230, 101, 129, 1);
-$misc: rgb(232, 232, 232);
+$primaryColor: white;
+$secondaryColor: #072e54;
+$tertiaryColor: rgb(3, 122, 59);
+$col1: white;
+$col2: rgb(232, 232, 232);
 $fallback: teal;
+$baseColor: rgba(230, 101, 129, 1);
+$text: rgb(84, 84, 84);
 
 .dashboard {
   width: 100%;
@@ -163,7 +177,7 @@ $fallback: teal;
     text-align: left;
     padding: 20px;
     font-family: "Nunito Sans", sans-serif;
-    color: $textColor1;
+    color: rgb(41, 42, 44);
   }
   .right-dashboard {
     width: 80%;
@@ -171,13 +185,6 @@ $fallback: teal;
     border-radius: 3px;
     height: fit-content;
     background: transparent;
-    //     box-shadow: 0 3px 2px 1px rgb(216, 215, 215);
-
-    h3 {
-      padding: 10px;
-      text-align: left;
-      color: $textColor2;
-    }
 
     .profile {
       width: 100%;
@@ -206,21 +213,96 @@ $fallback: teal;
         padding-left: 10px;
         h2,
         p {
-          color: $textColor2;
+          color: $col2;
           font-family: "Nunito Sans", sans-serif;
           text-align: left;
-          color: $textColor2;
+          color: $text;
         }
         button {
           width: 200px;
           height: 40px;
-          background: $primaryColor;
-          color: $textColor2;
+          background: rgb(141, 140, 140);
+          color: $col2;
           border: none;
           border-radius: 3px;
           display: block;
           margin: 10px 0;
         }
+
+        .page-modes {
+          width: 90%;
+          height: fit-content;
+          margin: 10px auto;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          flex-wrap: wrap;
+
+          .page-mode {
+            width: 60px;
+            height: 30px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background: rgb(215, 214, 214);
+            border: none;
+            border-radius: 3px;
+            padding: 2px;
+            span {
+              width: 25px;
+              height: 25px;
+              border-radius: 100%;
+              background: white;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              i {
+                font-size: 100%;
+                display: none;
+              }
+            }
+          }
+        }
+
+        .page-mode.dark {
+          background: $secondaryColor;
+          span {
+            background: #194e82;
+            box-shadow: 0 0 1px 1px #194e82;
+          }
+        }
+        .page-mode.gray {
+          background: rgb(27, 182, 99);
+          span {
+            background: $tertiaryColor;
+            box-shadow: 0 0 1px 1px rgb(27, 182, 99);
+          }
+        }
+        .page-mode.active {
+          position: relative;
+          span {
+            position: absolute;
+            top: 0;
+            // background: white;
+            right: 60%;
+            animation: mode 1s 1 linear alternate forwards;
+
+            i {
+              display: block;
+              color: rgba(230, 101, 129, 1);
+            }
+          }
+        }
+        @keyframes mode {
+          to {
+            right: 0;
+            top: 2px;
+          }
+        }
+      }
+      @media screen and (max-width: 635px) {
+        flex-direction: column;
       }
     }
   }
@@ -243,7 +325,7 @@ $fallback: teal;
         border: none;
         border-radius: 4px;
         margin: 10px;
-        background: white;
+        background: rgb(215, 214, 214);
 
         .route {
           text-decoration: none;
@@ -252,13 +334,18 @@ $fallback: teal;
           display: flex;
           justify-content: center;
           align-items: center;
-          color: $primaryColor;
+          color: $text;
         }
 
         i {
-          color: $primaryColor;
+          color: $text;
           padding-right: 5px;
           font-size: 21px;
+        }
+      }
+      @media screen and (max-width: 490px) {
+        button {
+          width: 95%;
         }
       }
     }
@@ -277,14 +364,14 @@ $fallback: teal;
         text-align: left;
         text-transform: capitalize;
         padding: 10px;
-        color: $textColor2;
+        color: $text;
       }
       h4 {
         text-align: left;
         width: 90%;
         margin: auto;
         padding: 10px;
-        color: $textColor2;
+        color: $text;
       }
       ul {
         width: 95%;
@@ -295,7 +382,7 @@ $fallback: teal;
         flex-wrap: wrap;
 
         li {
-          background: white;
+          background: rgb(215, 214, 214);
           list-style-type: none;
           width: 200px;
           height: 100px;
@@ -309,10 +396,43 @@ $fallback: teal;
           flex-direction: column;
 
           p {
-            color: $primaryColor;
+            color: $text;
+          }
+        }
+        @media screen and (max-width: 490px) {
+          width: 100%;
+          li {
+            width: 95%;
           }
         }
       }
+    }
+  }
+}
+
+.dashboard.dark,
+.dashboard.gray {
+  h1 {
+    color: $primaryColor;
+  }
+
+  .right-dashboard .profile .info {
+    h2,
+    p {
+      color: $col2;
+    }
+
+    button {
+      background: $col2;
+      color: $text;
+    }
+  }
+
+  .left-dashboard .left-content-main {
+    h2,
+    h3,
+    h4 {
+      color: $col2;
     }
   }
 }
