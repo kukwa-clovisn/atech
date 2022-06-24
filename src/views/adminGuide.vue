@@ -310,13 +310,24 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-$primaryColor: white;
-$secondaryColor: rgb(232, 232, 232);
-$tertiaryColor: rgb(249, 249, 249);
-$textColor1: rgb(123, 122, 122);
-$baseColor: tomato;
+// $primaryColor: white;
+// $secondaryColor: rgb(232, 232, 232);
+// $tertiaryColor: rgb(249, 249, 249);
+// $textColor1: rgb(123, 122, 122);
+// $baseColor: tomato;
+// $fallback: teal;
+// $misc: #072e54;
+
+$randomColor: rgba(230, 101, 129, 1);
+
+$primaryColor: #072e54;
+$secondaryColor: rgb(215, 214, 214);
+$tertiaryColor: #194e82;
+$textColor1: white;
+$textColor2: whitesmoke;
+$baseColor: rgba(230, 101, 129, 1);
+$misc: rgb(232, 232, 232);
 $fallback: teal;
-$misc: #072e54;
 .container {
   width: 100%;
   height: fit-content;
@@ -326,6 +337,7 @@ $misc: #072e54;
     margin: auto;
     text-transform: capitalize;
     text-align: left;
+    color: $textColor1;
     font: 600 30px "Nunito Sans", sans-serif;
   }
 

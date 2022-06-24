@@ -42,10 +42,12 @@
 </template>
 <script>
 import axios from "axios";
-import { onMounted, reactive } from "vue";
+import { useRouter } from "vue-router";
+import { reactive, onMounted } from "vue";
 export default {
   name: "AdminCourseView",
   setup() {
+    const router = useRouter();
     let response = reactive({
       name: "",
       data: [],
@@ -59,14 +61,18 @@ export default {
     });
 
     onMounted(() => {
-      axios
-        .get(`/api/admin/course/all/${localStorage.getItem("courseId")}`)
+      axios(`/api/admin/course/all/${localStorage.getItem("courseId")}`)
         .then((res) => {
-          response.name = localStorage.getItem("courseId");
-          response.data = res.data;
+          if (res.statusText === "OK") {
+            response.name = localStorage.getItem("courseId");
+            response.data = res.data;
+          } else {
+            router.push("/admin/dashboard");
+          }
+
           console.log(res);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => router.push("/admin/dashboard"));
     });
 
     function analyticsData() {
@@ -81,20 +87,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$primaryColor: white;
-$secondaryColor: rgb(232, 232, 232);
-$tertiaryColor: rgb(249, 249, 249);
-$textColor1: rgb(123, 122, 122);
-$baseColor: tomato;
+// $primaryColor: white;
+// $secondaryColor: rgb(232, 232, 232);
+// $tertiaryColor: rgb(249, 249, 249);
+// $textColor1: rgb(123, 122, 122);
+// $baseColor: tomato;
+// $fallback: teal;
+// $misc: #072e54;
+
+$randomColor: rgba(230, 101, 129, 1);
+
+$primaryColor: #072e54;
+$secondaryColor: rgb(215, 214, 214);
+$tertiaryColor: #194e82;
+$textColor1: white;
+$textColor2: whitesmoke;
+$baseColor: rgba(230, 101, 129, 1);
+$misc: rgb(232, 232, 232);
 $fallback: teal;
-$misc: #072e54;
 .container {
   width: 100%;
   height: fit-content;
   h1 {
     width: 95%;
     margin: auto;
-    color: rgb(79, 80, 80);
+    color: $textColor2;
     text-align: left;
     font-family: "Comic Neue", cursive;
     padding: 20px;
@@ -105,7 +122,7 @@ $misc: #072e54;
     padding: 10px;
     border-radius: 2px;
     border: none;
-    background: rgb(177, 176, 176);
+    background: $secondaryColor;
     color: $primaryColor;
   }
 
@@ -121,11 +138,11 @@ $misc: #072e54;
       width: 200px;
       height: 70px;
       border-radius: 15px;
-      background: $secondaryColor;
+      background: $misc;
       list-style-type: none;
       margin: 15px;
       position: relative;
-      color: rgb(111, 111, 111);
+      color: $primaryColor;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -160,7 +177,8 @@ $misc: #072e54;
       outline: none;
       background: transparent;
       height: 45px;
-      border: 1px solid rgb(214, 213, 213);
+      color: $textColor2;
+      border: 1px solid $secondaryColor;
     }
 
     input[type="search"] {
@@ -203,11 +221,12 @@ $misc: #072e54;
           position: absolute;
           left: 0;
           top: 0;
-          width: 20px;
-          height: 20px;
+          width: 25px;
+          font-size: 13px;
+          height: 25px;
           border-radius: 100%;
-          background: $fallback;
-          color: $primaryColor;
+          background: $tertiaryColor;
+          color: $textColor1;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -216,6 +235,7 @@ $misc: #072e54;
         p {
           font-size: 15px;
           padding: 5px;
+          color: $primaryColor;
         }
 
         button {
@@ -224,11 +244,11 @@ $misc: #072e54;
           border-radius: 30px;
           border: none;
           background: $fallback;
-          color: $primaryColor;
+          color: $textColor2;
         }
 
         .delete {
-          background: rgba(230, 101, 129, 1);
+          background: $baseColor;
         }
       }
     }

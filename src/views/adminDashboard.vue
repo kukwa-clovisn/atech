@@ -1,5 +1,8 @@
 <template>
-  <div class="dashboard">
+  <div
+    class="dashboard"
+    :class="{ dark: color.darkmode, light: color.lightmode }"
+  >
     <h1>Dashboard</h1>
     <div class="right-dashboard">
       <div class="profile">
@@ -10,6 +13,7 @@
           <h2>{{ response.name }}</h2>
           <p>{{ response.email }}</p>
           <button>edit profile</button>
+          <button>customize page setting</button>
         </div>
       </div>
     </div>
@@ -98,8 +102,19 @@ export default {
       email: "",
       data: [],
     });
+
+    let color = reactive({
+      darkmode: false,
+      lightmode: true,
+    });
+
+    axios
+      .get("api/color/admin")
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
     onMounted(() => {
-      axios(`/api/admin/getAdmin/${localStorage.getItem("adminId")}`)
+      axios(`api/admin/getAdmin/${localStorage.getItem("adminId")}`)
         .then((res) => {
           console.log(res);
           response.data = res.data.course;
@@ -110,24 +125,34 @@ export default {
     });
 
     function createCourse() {
-      router.push(
-        `/admin/dashboard/course/${localStorage.getItem("courseId")}`
-      );
+      router.push(`admin/dashboard/course/${localStorage.getItem("courseId")}`);
     }
 
-    return { response, createCourse };
+    return { response, color, createCourse };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-$primaryColor: white;
-$secondaryColor: rgb(232, 232, 232);
-$tertiaryColor: rgb(249, 249, 249);
-$textColor1: rgb(123, 122, 122);
-$baseColor: tomato;
+// $primaryColor: white;
+// $secondaryColor: rgb(232, 232, 232);
+// $tertiaryColor: rgb(249, 249, 249);
+// $textColor1: rgb(123, 122, 122);
+// $baseColor: tomato;
+// $fallback: teal;
+// $misc: #072e54;
+
+$randomColor: rgba(230, 101, 129, 1);
+
+$primaryColor: #072e54;
+$secondaryColor: rgb(215, 214, 214);
+$tertiaryColor: #194e82;
+$textColor1: white;
+$textColor2: whitesmoke;
+$baseColor: rgba(230, 101, 129, 1);
+$misc: rgb(232, 232, 232);
 $fallback: teal;
-$misc: #072e54;
+
 .dashboard {
   width: 100%;
   height: fit-content;
@@ -138,6 +163,7 @@ $misc: #072e54;
     text-align: left;
     padding: 20px;
     font-family: "Nunito Sans", sans-serif;
+    color: $textColor1;
   }
   .right-dashboard {
     width: 80%;
@@ -150,7 +176,7 @@ $misc: #072e54;
     h3 {
       padding: 10px;
       text-align: left;
-      //  color: rgb(124, 123, 123);
+      color: $textColor2;
     }
 
     .profile {
@@ -180,15 +206,16 @@ $misc: #072e54;
         padding-left: 10px;
         h2,
         p {
-          color: rgb(97, 96, 96);
+          color: $textColor2;
           font-family: "Nunito Sans", sans-serif;
           text-align: left;
+          color: $textColor2;
         }
         button {
           width: 200px;
           height: 40px;
-          background: rgb(135, 134, 134);
-          color: $primaryColor;
+          background: $primaryColor;
+          color: $textColor2;
           border: none;
           border-radius: 3px;
           display: block;
@@ -216,7 +243,7 @@ $misc: #072e54;
         border: none;
         border-radius: 4px;
         margin: 10px;
-        background: $misc;
+        background: white;
 
         .route {
           text-decoration: none;
@@ -225,7 +252,7 @@ $misc: #072e54;
           display: flex;
           justify-content: center;
           align-items: center;
-          color: rgb(183, 181, 181);
+          color: $primaryColor;
         }
 
         i {
@@ -250,12 +277,14 @@ $misc: #072e54;
         text-align: left;
         text-transform: capitalize;
         padding: 10px;
+        color: $textColor2;
       }
       h4 {
         text-align: left;
         width: 90%;
         margin: auto;
         padding: 10px;
+        color: $textColor2;
       }
       ul {
         width: 95%;
@@ -266,7 +295,7 @@ $misc: #072e54;
         flex-wrap: wrap;
 
         li {
-          background: $secondaryColor;
+          background: white;
           list-style-type: none;
           width: 200px;
           height: 100px;
@@ -280,7 +309,7 @@ $misc: #072e54;
           flex-direction: column;
 
           p {
-            color: rgb(135, 134, 134);
+            color: $primaryColor;
           }
         }
       }

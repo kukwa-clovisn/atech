@@ -120,14 +120,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$primaryColor: rgb(255, 255, 255);
-$SecondaryColor: rgba(230, 101, 129, 1);
-$tertiaryColor: rgba(65, 140, 228, 1);
-$footerColor: rgb(51, 2, 69);
-$baseColor: #072e54;
-$fallback: rgb(19, 37, 62);
-$col: #3d566f;
-$adminCol: rgb(21, 55, 101);
+// $primaryColor: rgb(255, 255, 255);
+// $baseColor: rgba(230, 101, 129, 1);
+// $tertiaryColor: rgba(65, 140, 228, 1);
+// $footerColor: rgb(51, 2, 69);
+// $baseColor: #072e54;
+// $fallback: rgb(19, 37, 62);
+// $col: #3d566f;
+// $adminCol: rgb(21, 55, 101);
+
+$randomColor: rgba(230, 101, 129, 1);
+
+$primaryColor: #072e54;
+$tertiaryColor: rgb(215, 214, 214);
+$tertiaryColor: #194e82;
+$textColor1: white;
+$textColor2: whitesmoke;
+$baseColor: rgba(230, 101, 129, 1);
+$misc: rgb(232, 232, 232);
+$fallback: teal;
 
 form {
   width: 80%;
@@ -139,19 +150,21 @@ form {
 
   h1 {
     text-transform: capitalize;
-    color: $SecondaryColor;
+    color: $textColor1;
     font: 600 25px "Poppins", sans-serif;
   }
 
   .input {
     width: 100%;
     height: fit-content;
+    color: $textColor2;
 
     label {
       width: 100%;
       display: block;
       text-align: left;
       padding-bottom: 10px;
+      color: $textColor2;
     }
 
     input {
@@ -159,15 +172,16 @@ form {
       height: 40px;
       outline: none;
       border: none;
-      border-bottom: 1px solid $baseColor;
+      border-bottom: 1px solid $textColor2;
       background: transparent;
+      color: $textColor2;
       margin: 5px auto;
     }
     input[type="reset"] {
       border: none;
       text-align: left;
       font-weight: 800;
-      color: $baseColor;
+      color: $textColor2;
       cursor: pointer;
       width: fit-content;
       margin: 0;
@@ -185,7 +199,7 @@ form {
       width: 100%;
       height: 200px;
       border-radius: 5px;
-      box-shadow: 0 0 2px 0.5px $baseColor;
+      box-shadow: 0 0 2px 0.5px $textColor2;
       outline: none;
       border: none;
       padding: 20px;
@@ -194,13 +208,13 @@ form {
     }
 
     button {
-      background: $SecondaryColor;
+      background: $misc;
       height: 50px;
       width: 100%;
       margin: 20px auto;
       border: none;
       border-radius: 5px;
-      color: white;
+      color: $primaryColor;
       font: 600 19px "Poppins", sans-serif;
       text-transform: capitalize;
     }

@@ -215,6 +215,11 @@ export default {
       secondvideolist: [],
       thirdvideolist: [],
     });
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
     onMounted(() => {
       courseFormat.name = route.params.course;
     });
@@ -228,19 +233,14 @@ export default {
       axios
         .post(
           `/api/admin/course/create/${localStorage.getItem("courseId")}`,
-          courseFormat
+          courseFormat,
+          config
         )
         .then((res) => {
           console.log(res);
           if (res.statusText === "OK") {
             success.value = true;
             setTimeout(pop, 3000);
-            // courseFormat.name = "";
-            // courseFormat.title = "";
-            // courseFormat.course = "";
-            // courseFormat.description = "";
-            // objectives.value = "";
-            // courseFormat.videoUrl = "";
           } else {
             error.value = true;
             setTimeout(post_error, 3000);
@@ -272,13 +272,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$primaryColor: white;
-$secondaryColor: rgb(232, 232, 232);
-$tertiaryColor: rgb(249, 249, 249);
-$textColor1: rgb(123, 122, 122);
-$baseColor: tomato;
+// $primaryColor: white;
+// $secondaryColor: rgb(232, 232, 232);
+// $tertiaryColor: rgb(249, 249, 249);
+// $textColor1: rgb(123, 122, 122);
+// $baseColor: tomato;
+// $fallback: teal;
+// $misc: #072e54;
+
+$randomColor: rgba(230, 101, 129, 1);
+
+$primaryColor: #072e54;
+$secondaryColor: rgb(215, 214, 214);
+$tertiaryColor: #194e82;
+$textColor1: white;
+$textColor2: whitesmoke;
+$baseColor: rgba(230, 101, 129, 1);
+$misc: rgb(232, 232, 232);
 $fallback: teal;
-$misc: #072e54;
 .course-editor {
   max-width: 100%;
   height: 100%;
@@ -297,7 +308,7 @@ $misc: #072e54;
     h1 {
       font-size: 20px;
       padding: 20px;
-      color: rgb(118, 116, 116);
+      color: $textColor1;
       padding-bottom: 0;
       span {
         color: $baseColor;
@@ -309,6 +320,7 @@ $misc: #072e54;
       padding-bottom: 10px;
       width: 95%;
       margin: auto;
+      color: $textColor2;
 
       i {
         font-size: 30px;
@@ -337,7 +349,7 @@ $misc: #072e54;
         padding: 3px 10px;
         font-weight: 700;
         font-family: "Nunito Sans", sans-serif;
-        color: rgb(117, 116, 116);
+        color: $textColor1;
         span {
           color: $baseColor;
         }
@@ -349,7 +361,7 @@ $misc: #072e54;
         border: none;
         border-radius: 5px;
         background: transparent;
-
+        color: $textColor2;
         padding: 3px 20px;
         margin: 20px auto;
         margin-top: 10px;
@@ -368,6 +380,7 @@ $misc: #072e54;
         width: 100%;
         padding: 10px;
         border-radius: 5px;
+        color: $textColor2;
       }
 
       .done,
@@ -430,7 +443,7 @@ $misc: #072e54;
       height: 55px;
       border: none;
       border-radius: 5px;
-      background: rgb(113, 113, 113);
+      background: $secondaryColor;
       margin: 20px auto;
       font-size: 23px;
       color: $primaryColor;

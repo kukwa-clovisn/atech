@@ -1,10 +1,18 @@
 <template>
-  <main :class="{ squeeze: shrink }">
+  <main :class="{ squeeze: shrink, 'dark-mode': dark }" class="light-mode">
     <header>
       <button class="profile-menu-button" @click="expandPage()" v-if="!shrink">
         <i class="fa-solid fa-bars"></i>
       </button>
       <h1 @click="dashboard()">Dash<span>board</span></h1>
+      <button
+        class="mode"
+        title="Toggle Mode"
+        :class="{ switchMode: dark }"
+        @click="dark = !dark"
+      >
+        <span></span>
+      </button>
       <div class="right-header">
         <button class="guide">
           <router-link to="/admin/guide" class="route"
@@ -177,7 +185,7 @@
 </template>
 
 <script>
-import { reactive, ref, onUpdated } from "vue";
+import { reactive, ref, onMounted, onUpdated } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import axios from "axios";
 export default {
@@ -187,6 +195,12 @@ export default {
     const router = useRouter();
     const route = useRoute();
     let active = ref(false);
+    let dark = ref(true);
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
     const admin = reactive({
       username: "",
@@ -200,14 +214,22 @@ export default {
       email: "",
       status: "",
     });
-
-    onUpdated(() => {
-      if (route.params.course) {
-        active.value = true;
-      } else {
-        active.value = false;
-      }
-    });
+    onMounted(() => {
+      axios("/api/color/admin")
+        .then((res) => {
+          if (res.statusText === "OK") {
+            localStorage.setItem("colormode", res.data);
+          }
+        })
+        .catch((err) => console.log(err));
+    }),
+      onUpdated(() => {
+        if (route.params.course) {
+          active.value = true;
+        } else {
+          active.value = false;
+        }
+      });
 
     const auth = ref(true);
     const authError = ref(false);
@@ -222,11 +244,7 @@ export default {
 
     async function authAdmin() {
       axios
-        .post("/api/admin/auth", admin, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+        .post("/api/admin/auth", admin, config)
         .then((res) => {
           if (res.statusText === "OK") {
             console.log(res);
@@ -241,7 +259,12 @@ export default {
         .catch((err) => {
           auth.value = true;
           authError.value = true;
-          adminResponse.status = err.response.data.msg;
+          if (err.response.data) {
+            adminResponse.status = err.response.data.msg;
+          } else {
+            adminResponse.status = "Something went wrong. Access Denied";
+          }
+
           setTimeout(post_error, 3000);
         });
 
@@ -265,6 +288,7 @@ export default {
     }
 
     return {
+      dark,
       active,
       admin,
       auth,
@@ -282,27 +306,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$primaryColor: white;
-$secondaryColor: rgb(232, 232, 232);
-$tertiaryColor: rgb(249, 249, 249);
-$textColor1: rgb(123, 122, 122);
-$baseColor: tomato;
+$randomColor: rgba(230, 101, 129, 1);
+
+$primaryColor: #072e54;
+$secondaryColor: rgb(215, 214, 214);
+$tertiaryColor: #194e82;
+$textColor1: white;
+$textColor2: whitesmoke;
+$baseColor: rgba(230, 101, 129, 1);
+$misc: rgb(232, 232, 232);
 $fallback: teal;
-$misc: #072e54;
 
 ::-webkit-scrollbar {
   width: 10px;
   border-radius: 30px;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgb(177, 176, 176);
   border-radius: 30px;
 }
 
 main {
   width: 100vw;
   min-height: 100vh;
-  background: $tertiaryColor;
   padding-top: 16vh;
   overflow-x: hidden;
 
@@ -310,8 +335,6 @@ main {
     width: 100%;
     height: 12vh;
     padding: 0 50px;
-    background: $primaryColor;
-    border-bottom: 1px solid rgb(235, 234, 234);
     position: fixed;
     top: 0;
     right: 0;
@@ -319,6 +342,45 @@ main {
     justify-content: space-between;
     align-items: center;
     z-index: 1;
+
+    .mode {
+      width: 50px;
+      height: 20px;
+      border-radius: 10px;
+      border: 1px solid $tertiaryColor;
+      background: rgb(232, 232, 232);
+      background: $primaryColor;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 2px;
+
+      span {
+        height: 20px;
+        width: 20px;
+        border-radius: 100%;
+        background: $tertiaryColor;
+      }
+    }
+    .mode.switchMode {
+      background: white;
+      border: none;
+      position: relative;
+
+      span {
+        position: absolute;
+        right: 80%;
+        top: 0;
+        background: rgb(206, 205, 205);
+        animation: switch 1s 1 linear alternate forwards;
+      }
+
+      @keyframes switch {
+        to {
+          right: 0;
+        }
+      }
+    }
 
     .profile-menu-button {
       width: 50px;
@@ -335,16 +397,12 @@ main {
 
       i {
         font-size: 27px;
-        color: rgb(73, 73, 73);
       }
     }
 
     h1 {
       font: 600 28px "Comic Neue", cursive;
       cursor: pointer;
-      span {
-        color: $baseColor;
-      }
     }
 
     .right-header {
@@ -372,7 +430,6 @@ main {
         align-items: center;
         i {
           font-size: 25px;
-          color: $textColor1;
         }
       }
     }
@@ -382,10 +439,8 @@ main {
       height: 50px;
       border-radius: 3px;
       border: none;
-      background: $secondaryColor;
 
       i {
-        color: $baseColor;
         font-size: 24px;
       }
     }
@@ -396,8 +451,6 @@ main {
       display: flex;
       justify-content: center;
       align-items: center;
-      background: $misc;
-      color: $primaryColor;
       border-radius: 100%;
       font: 500 16px "Poppins", sans-serif;
       text-transform: capitalize;
@@ -422,8 +475,6 @@ main {
     position: fixed;
     top: 0;
     left: 0;
-    background: $primaryColor;
-    box-shadow: 0 3px 2px 1px rgb(220, 219, 219);
     animation: slide-in 0.2s 1 linear alternate forwards;
 
     .logo {
@@ -442,7 +493,6 @@ main {
       span {
         display: flex;
         padding: 10px;
-        color: rgb(105, 104, 104) e;
         font: 700 20px "Comic Neue", cursive;
       }
     }
@@ -455,7 +505,6 @@ main {
       align-items: center;
       flex-direction: column;
       padding: 5px 0;
-      background: $primaryColor;
       cursor: pointer;
 
       .span {
@@ -478,7 +527,6 @@ main {
         width: 95%;
         padding-left: 10px;
         font: 700 15px "Nunito Sans", sans-serif;
-        color: rgb(105, 104, 104);
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -486,11 +534,6 @@ main {
         .profile-email {
           font-size: 12px;
         }
-      }
-
-      &:hover {
-        background: $secondaryColor;
-        border-left: 5px solid $baseColor;
       }
     }
 
@@ -500,14 +543,12 @@ main {
       height: 42vh;
       overflow: scroll;
       overflow-x: hidden;
-      border-bottom: 1px solid rgb(195, 194, 194);
 
       .route {
         text-decoration: none;
         width: 100%;
         text-transform: capitalize;
         text-align: left;
-        color: $textColor1;
 
         li {
           list-style-type: none;
@@ -526,18 +567,11 @@ main {
             align-items: center;
             i {
               font-size: 20px;
-              color: rgb(111, 110, 110);
             }
           }
           p {
             text-align: left;
             width: 70%;
-            color: rgb(112, 110, 110);
-          }
-
-          &:hover {
-            background: $secondaryColor;
-            border-left: 5px solid $baseColor;
           }
 
           @media screen and (max-width: 1000px) {
@@ -550,14 +584,7 @@ main {
 
         &.router-link-exact-active {
           li {
-            background: $secondaryColor;
             border-left: 5px solid $baseColor;
-            i {
-              color: $baseColor;
-            }
-            p {
-              color: $baseColor;
-            }
           }
         }
       }
@@ -568,14 +595,7 @@ main {
 
       .route.active {
         li {
-          background: $secondaryColor;
           border-left: 5px solid $baseColor;
-          i {
-            color: $baseColor;
-          }
-          p {
-            color: $baseColor;
-          }
         }
       }
 
@@ -588,7 +608,6 @@ main {
 
     .profile-bottom {
       height: 17vh;
-      border-bottom: none;
       .route {
         li {
           height: 35px;
@@ -621,7 +640,7 @@ main {
     top: 0;
     left: 0;
     padding: 0;
-    background: $secondaryColor;
+    background: #072e54;
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -630,13 +649,17 @@ main {
     form {
       width: 550px;
       height: fit-content;
-      background: $primaryColor;
+      background: white;
       border-radius: 5px;
       padding: 20px;
 
+      h1 {
+        color: rgb(47, 47, 47);
+      }
+
       .auth {
         width: 100%;
-        height: 50px;
+        height: 55px;
         margin: 20px auto;
         display: flex;
         justify-content: space-between;
@@ -646,31 +669,31 @@ main {
           text-transform: capitalize;
           text-align: left;
           width: 30%;
-          color: $textColor1;
+          font: 600 18px "Nunito Sans", sans-serif;
+          color: rgb(67, 67, 67);
         }
         input,
         select {
-          width: 70%;
+          width: 75%;
           height: 100%;
           border: none;
           outline: none;
-          background: $tertiaryColor;
-          color: $textColor1;
+          background: whitesmoke;
+          color: rgb(63, 63, 63);
+          font-weight: 500;
+          font-size: 16px;
           padding: 3px 10px;
           border-radius: 3px;
+          box-shadow: 0 3px 2px 1px rgb(207, 206, 206);
         }
-      }
-
-      p {
-        color: red;
       }
       button {
         width: 100%;
         padding: 0 10px;
         height: 50px;
         margin: 10px auto;
-        background: rgba(230, 101, 129, 1);
-        color: $primaryColor;
+        background: $randomColor;
+        color: white;
         text-transform: capitalize;
         border: none;
         border-radius: 3px;
@@ -686,7 +709,7 @@ main {
         a {
           text-decoration: none;
           text-transform: capitalize;
-          color: $textColor1;
+          color: rgb(99, 98, 98);
           font: 500 13px "Poppins", sans-serif;
 
           &:hover {
@@ -722,7 +745,6 @@ main {
       display: flex;
       justify-content: center;
       align-items: center;
-      background: rgba(230, 101, 129, 1);
       border-radius: 4px;
       padding: 20px;
       position: fixed;
@@ -734,11 +756,6 @@ main {
       i {
         font-size: 30px;
         margin-right: 10px;
-        color: $primaryColor;
-      }
-
-      span {
-        color: $primaryColor;
       }
     }
 
@@ -766,6 +783,169 @@ main.squeeze {
     header {
       width: 100%;
     }
+  }
+}
+
+main.light-mode {
+  background: rgb(243, 243, 243);
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(174, 173, 173);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  span,
+  i,
+  .route {
+    color: rgb(105, 104, 104);
+  }
+  .profile-items {
+    border-bottom: 1px solid rgb(232, 232, 232);
+  }
+
+  .route li:hover {
+    border-left: 6px solid $baseColor;
+    background: rgb(232, 232, 232);
+  }
+  header {
+    background: white;
+    border-bottom: 1px solid rgb(232, 232, 232);
+    h1 span {
+      color: $baseColor;
+    }
+    .create-course {
+      background: rgb(232, 232, 232);
+      i {
+        color: $randomColor;
+      }
+    }
+    nav .profile {
+      background: $primaryColor;
+      color: white;
+    }
+  }
+
+  .profile-menu {
+    border-right: 1px solid rgb(232, 232, 232);
+  }
+
+  .profile-header:hover {
+    background: rgb(232, 232, 232);
+    border-left: 5px solid $baseColor;
+  }
+
+  input,
+  select,
+  .route.active {
+    background: rgb(232, 232, 232);
+  }
+
+  h1 span,
+  .create-course i,
+  .route.router-link-exact-active li i,
+  .route.router-link-exact-active li p,
+  .route.active i,
+  .route.active p {
+    color: $baseColor;
+  }
+
+  .route.router-link-exact-active li {
+    background: rgb(232, 232, 232);
+  }
+
+  .profile-menu,
+  .profile-header {
+    background: white;
+    border-bottom: 1px solid rgb(232, 232, 232);
+  }
+}
+
+main.dark-mode {
+  background: $tertiaryColor;
+
+  ::-webkit-scrollbar-thumb {
+    background: $tertiaryColor;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  span,
+  i,
+  .route {
+    color: whitesmoke;
+  }
+  .route.router-link-exact-active li {
+    background: $tertiaryColor;
+  }
+  .profile-items {
+    border-bottom: 1px solid $tertiaryColor;
+  }
+
+  .route li:hover {
+    border-left: 5px solid $baseColor;
+    background: $tertiaryColor;
+  }
+  header {
+    background: $primaryColor;
+    border-bottom: 1px solid $tertiaryColor;
+    h1 span {
+      color: $baseColor;
+    }
+    .create-course {
+      background: $tertiaryColor;
+      color: $textColor2;
+      i {
+        color: $baseColor;
+      }
+    }
+    nav .profile {
+      background: $misc;
+      color: $primaryColor;
+    }
+  }
+  .profile-header {
+    border-bottom: 1px solid $tertiaryColor;
+  }
+  .profile-menu {
+    border-right: 2px solid $primaryColor;
+  }
+
+  .profile-header:hover {
+    background: $tertiaryColor;
+    border-left: 5px solid $baseColor;
+  }
+
+  input,
+  select,
+  .route.active {
+    background: $tertiaryColor;
+  }
+
+  h1 span,
+  .create-course i,
+  .route.router-link-exact-active li i,
+  .route.router-link-exact-active li p,
+  .route.active i,
+  .route.active p {
+    color: $baseColor;
+  }
+
+  .profile-menu,
+  .profile-header {
+    background: $primaryColor;
   }
 }
 </style>

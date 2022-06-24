@@ -11,4 +11,7 @@ axios.defaults.headers.common["accessId"] = `${localStorage.getItem(
   "accessId"
 )}`;
 
-axios.defaults.headers.common["Content-Type"] = "application/json";
+axios.defaults.headers.common["adminId"] = `${localStorage.getItem("adminId")}`;
+axios.defaults.headers.common["courseName"] = `${localStorage.getItem(
+  "courseId"
+)}`;
