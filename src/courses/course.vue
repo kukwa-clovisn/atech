@@ -66,7 +66,7 @@
 <script>
 import axios from "axios";
 import Contact from "../components/contact.vue";
-import { reactive, onMounted } from "vue";
+import { reactive, onBeforeMount } from "vue";
 import { useRoute, useRouter } from "vue-router";
 export default {
   components: { Contact },
@@ -87,10 +87,13 @@ export default {
       bookmarked: false,
     });
 
-    onMounted(() => {
-      axios(`/api/admin/course/all/${route.params.course}`)
+    onBeforeMount(() => {
+      axios(`/api/user/course/all/${localStorage.getItem("courseId")}`, {
+        headers: { private: false },
+      })
         .then((res) => {
           if (res.statusText === "OK") {
+            route.params.course = localStorage.getItem("courseId");
             console.log(res);
             response.courses = res.data;
             response.course = route.params.course;
@@ -274,8 +277,8 @@ export default {
           p {
             font-size: 15px;
           }
-          .course-bookmark{
-            left:95%;
+          .course-bookmark {
+            left: 95%;
           }
         }
       }

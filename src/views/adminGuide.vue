@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" :class="{ dark: mode.dark, gray: mode.gray }">
     <h1 class="admin">Admin user guide</h1>
     <div class="btns">
       <button
@@ -293,10 +293,13 @@
   </div>
 </template>
 <script>
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
+import { useStore } from "vuex";
+
 export default {
   name: "AdminGuide",
   setup() {
+    const store = useStore();
     let guide = reactive({
       guide1: true,
       guide2: false,
@@ -305,7 +308,9 @@ export default {
       guide5: false,
       guide6: false,
     });
-    return { guide };
+
+    const mode = computed(() => store.state.mode);
+    return { guide, mode };
   },
 };
 </script>
@@ -383,6 +388,13 @@ $text: rgb(84, 84, 84);
         list-style-position: outside;
       }
     }
+  }
+}
+
+.container.dark,
+.container.gray {
+  h1 {
+    color: $secondaryColor;
   }
 }
 </style>

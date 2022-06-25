@@ -1,5 +1,5 @@
 <template>
-  <div class="course-editor">
+  <div class="course-editor" :class="{ dark: mode.dark, gray: mode.gray }">
     <div class="editor">
       <h1>
         create a <span>{{ courseFormat.name }}</span> course
@@ -7,9 +7,9 @@
       <p>
         <i class="fa-solid fa-circle-exclamation"></i>
         Please read the
-        <router-link to="/admin/guide">admin guide</router-link> on how to
-        create a course before jumping in to create a course so you won't get
-        mixed up in creating your {{ courseFormat.name }} courses.
+        <router-link to="/admin/guide" class="route">admin guide</router-link>
+        on how to create a course before jumping in to create a course so you
+        won't get mixed up in creating your {{ courseFormat.name }} courses.
       </p>
       <form @submit.prevent="createCourse()">
         <input type="hidden" name="name" v-model="courseFormat.name" />
@@ -92,14 +92,16 @@
           />
         </div>
         <div class="input">
-          <label for="desc1">Explanation after video 2: <span>*</span></label>
+          <label for="firstdescription"
+            >Explanation after video 2: <span>*</span></label
+          >
           <editor
             :init="{
               plugins: 'lists link image table code help wordcount',
             }"
             id="tinyeditor1"
-            v-model="courseFormat.desc1"
-            naem="desc1"
+            v-model="courseFormat.firstdescription"
+            name="firstdescription"
           />
         </div>
         <div class="input">
@@ -113,14 +115,16 @@
           />
         </div>
         <div class="input">
-          <label for="desc2">Explanation after video 3: <span>*</span></label>
+          <label for="seconddescription"
+            >Explanation after video 3: <span>*</span></label
+          >
           <editor
             :init="{
               plugins: 'lists link image table code help wordcount',
             }"
             id="tinyeditor2"
-            v-model="courseFormat.desc2"
-            name="desc2"
+            v-model="courseFormat.seconddescription"
+            name="seconddescription"
           />
         </div>
 
@@ -155,7 +159,8 @@
             placeholder="Course conclusion or remarks"
           ></textarea>
         </div>
-        <button type="submit">create course</button>
+        <button type="submit" v-if="!mode.edit">create course</button>
+        <button type="submit" v-if="mode.edit">Submit Editing</button>
         <div class="response">
           <div class="done" v-if="success">
             <i class="fa-solid fa-circle-check"></i>
@@ -177,9 +182,10 @@
 </template>
 
 <script>
+import { useStore } from "vuex";
 import Editor from "@tinymce/tinymce-vue";
-import { ref, reactive, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { ref, reactive, onMounted, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
 export default {
   name: "AdminCourse",
@@ -188,6 +194,10 @@ export default {
   },
   setup() {
     const route = useRoute();
+    const router = useRouter();
+    const store = useStore();
+
+    const mode = computed(() => store.state.mode);
 
     let response = ref("");
     let success = ref(false);
@@ -206,14 +216,15 @@ export default {
       videoUrl: "",
       objectives: [],
       description: "",
-      desc1: "",
-      desc2: "",
+      firstdescription: "",
+      seconddescription: "",
       free: "free",
       intro: "",
       conclusion: "",
       firstvideolist: [],
       secondvideolist: [],
       thirdvideolist: [],
+      views: [],
     });
     let config = {
       headers: {
@@ -222,6 +233,41 @@ export default {
     };
     onMounted(() => {
       courseFormat.name = route.params.course;
+      console.log(mode.value.edit);
+      if (mode.value.edit) {
+        axios(`api/admin/course/${localStorage.getItem("courseId")}`, {
+          headers: {
+            editId: `${localStorage.getItem("editToken")}`,
+          },
+        })
+          .then((res) => {
+            if (res.statusText === "OK") {
+              for (let i = 0; i < res.data.objectives.length; i++) {
+                objectives.value += res.data.objectives[i] + ",";
+              }
+              for (let i = 0; i < res.data.firstvideolist.length; i++) {
+                video.video1 += res.data.firstvideolist[i] + ",";
+              }
+              for (let i = 0; i < res.data.secondvideolist.length; i++) {
+                video.video2 += res.data.secondvideolist[i] + ",";
+              }
+              for (let i = 0; i < res.data.thirdvideolist.length; i++) {
+                video.video3 += res.data.thirdvideolist[i] + ",";
+              }
+
+              courseFormat.name = res.data.name;
+              courseFormat.title = res.data.title;
+              courseFormat.conclusion = res.data.conclusion;
+              courseFormat.firstdescription = res.data.firstdescription;
+              courseFormat.seconddescription = res.data.seconddescription;
+              courseFormat.description = res.data.description;
+              courseFormat.free = res.data.free;
+              courseFormat.intro = res.data.intro;
+              courseFormat.videoUrl = res.data.videoUrl;
+            }
+          })
+          .catch((err) => console.log(err));
+      }
     });
 
     const createCourse = () => {
@@ -230,35 +276,61 @@ export default {
       courseFormat.firstvideolist = video.video1.split(",");
       courseFormat.secondvideolist = video.video2.split(",");
       courseFormat.thirdvideolist = video.video3.split(",");
-      axios
-        .post(
-          `/api/admin/course/create/${localStorage.getItem("courseId")}`,
-          courseFormat,
-          config
-        )
-        .then((res) => {
-          console.log(res);
-          if (res.statusText === "OK") {
-            success.value = true;
-            setTimeout(pop, 3000);
-          } else {
+      if (!mode.value.edit) {
+        axios
+          .post(
+            `/api/admin/course/create/${localStorage.getItem("courseId")}`,
+            courseFormat,
+            config
+          )
+          .then((res) => {
+            console.log(res);
+            if (res.statusText === "OK") {
+              success.value = true;
+              setTimeout(pop, 3000);
+            } else {
+              error.value = true;
+              setTimeout(post_error, 3000);
+            }
+          })
+          .catch((err) => {
+            postError.value = true;
+            setTimeout(post_error, 3000);
+          });
+      }
+      if (mode.value.edit) {
+        axios
+          .post(
+            `api/admin/course/edit/${localStorage.getItem("editToken")}`,
+            courseFormat,
+            config
+          )
+          .then((res) => {
+            if (res.statusText === "OK") {
+              success.value = true;
+              store.dispatch("edit_course", false);
+              setTimeout(pop, 3000);
+            } else {
+              error.value = true;
+              setTimeout(post_error, 3000);
+            }
+          })
+          .catch((err) => {
             error.value = true;
             setTimeout(post_error, 3000);
-          }
-        })
-        .catch((err) => {
-          postError.value = true;
-          setTimeout(post_error, 3000);
-        });
+          });
+      }
     };
 
     function pop() {
+      router.push("/admin/course/courses/view");
       success.value = false;
     }
     function post_error() {
       postError.value = false;
     }
     return {
+      mode,
       courseFormat,
       response,
       video,
@@ -314,6 +386,9 @@ $text: rgb(84, 84, 84);
 
       i {
         font-size: 30px;
+        color: $baseColor;
+      }
+      .route {
         color: $baseColor;
       }
     }
@@ -443,5 +518,33 @@ $text: rgb(84, 84, 84);
       width: 97%;
     }
   }
+}
+
+.course-editor.dark,
+.course-editor.gray {
+  h1 {
+    color: $primaryColor;
+  }
+  p {
+    color: $col2;
+  }
+
+  .editor form .input {
+    background: transparent;
+
+    label,
+    input,
+    textarea {
+      color: $col2;
+    }
+  }
+  button {
+    background: $secondaryColor;
+    color: $col2;
+  }
+}
+
+.course-editor.course-editor.gray .editor form button {
+  background: $tertiaryColor;
 }
 </style>

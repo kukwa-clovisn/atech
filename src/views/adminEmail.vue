@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main :class="{ dark: mode.dark, gray: mode.gray }">
     <div class="btns">
       <button type="button" :class="{ active: sendToSome }" @click="sender()">
         sending to specific client(s)...
@@ -108,11 +108,16 @@
 
 <script>
 import axios from "axios";
-import { reactive, ref } from "@vue/reactivity";
+import { reactive, ref, computed } from "vue";
+import { useStore } from "vuex";
 
 export default {
   name: "AdminEmail",
   setup() {
+    const store = useStore();
+
+    const mode = computed(() => store.state.mode);
+
     let user = reactive({
       username: "",
       email: "",
@@ -218,6 +223,7 @@ export default {
       }, 1000);
     }
     return {
+      mode,
       user,
       response,
       sendToSome,
@@ -446,6 +452,25 @@ main {
       to {
         top: 25vh;
       }
+    }
+  }
+}
+
+main.dark,
+main.gray {
+  form {
+    h1 {
+      color: $secondaryColor;
+    }
+    label,
+    input,
+    input[type="reset"],
+    textarea {
+      color: rgb(227, 227, 227);
+      border-bottom: 1px solid rgb(180, 179, 179);
+    }
+    textarea {
+      box-shadow: 0 0 2px 1px rgb(180, 179, 179);
     }
   }
 }

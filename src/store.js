@@ -7,6 +7,7 @@ const store = createStore({
         light: true,
         dark: false,
         gray: false,
+        edit: false,
       },
     };
   },
@@ -27,6 +28,13 @@ const store = createStore({
       state.mode.dark = false;
       state.mode.gray = true;
     },
+    EDIT_COURSE(state, editToken) {
+      if (editToken) {
+        state.mode.edit = true;
+      } else {
+        state.mode.edit = false;
+      }
+    },
   },
   actions: {
     pagemode({ commit }, pagemode) {
@@ -39,6 +47,9 @@ const store = createStore({
       } else {
         commit("LIGHT_MODE", pagemode);
       }
+    },
+    edit_course({ commit }, editToken) {
+      commit("EDIT_COURSE", editToken);
     },
   },
 });

@@ -157,7 +157,7 @@ const routes = [
         },
       },
       {
-        path: "/course/:course",
+        path: "/course/lesson",
         name: "Course",
         component: function () {
           return import(

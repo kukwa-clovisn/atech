@@ -39,7 +39,7 @@
             <span><i class="fa-solid fa-chart-line"></i></span>
             <p>Forex</p>
           </li>
-          <li @click="getCourse('Graphic Design')">
+          <li @click="getCourse('Design')">
             <span>
               <i class="fa-brands fa-sketch"></i>
             </span>
@@ -48,6 +48,10 @@
           <li @click="getCourse('Web Development')">
             <span><i class="fa-solid fa-code"></i></span>
             <p>Web developement</p>
+          </li>
+          <li @click="getCourse('Blockchain')">
+            <span><i class="fa-solid fa-code"></i></span>
+            <p>Blockchain</p>
           </li>
         </div>
       </div>
@@ -108,12 +112,14 @@ export default {
           course.courseUserEmail = res.data.email;
         })
         .catch((err) => {
+          console.log(err);
           router.push("/login");
         });
     });
 
     function getCourse(courseId) {
-      router.push(`/course/${courseId}`);
+      localStorage.setItem("courseId", courseId);
+      router.push(`/course/lesson`);
     }
 
     const showProfileMenu = () => {

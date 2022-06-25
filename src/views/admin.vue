@@ -232,8 +232,6 @@ export default {
 
     const mode = computed(() => Store.state.mode);
 
-    console.log(mode.value);
-
     const auth = ref(true);
     const authError = ref(false);
 
@@ -242,7 +240,7 @@ export default {
     };
 
     const expandPage = () => {
-      shrink.value = true;
+      shrink.value = !shrink.value;
     };
 
     async function authAdmin() {
@@ -404,6 +402,9 @@ main {
         font-size: 27px;
       }
     }
+    .profile-menu-button.small-screen-only {
+      display: none;
+    }
 
     h1 {
       font: 600 28px "Comic Neue", cursive;
@@ -467,6 +468,9 @@ main {
       flex-direction: row;
       .large-screen-only {
         display: none;
+      }
+      .profile-menu-button.small-screen-only {
+        display: block;
       }
       .logo span {
         font-size: 15px;
@@ -1002,9 +1006,9 @@ main.dark-mode {
 }
 
 main.gray-mode {
-  background: rgb(27, 182, 99);
+  background: rgb(5, 143, 69);
   ::-webkit-scrollbar-thumb {
-    background: rgb(27, 182, 99);
+    background: rgb(3, 122, 59);
   }
 
   h1,
@@ -1025,24 +1029,24 @@ main.gray-mode {
     background: rgb(3, 122, 59);
   }
   .route.router-link-exact-active li {
-    background: rgb(27, 182, 99);
+    background: rgb(3, 122, 59);
   }
   .profile-items {
-    border-bottom: 1px solid rgb(27, 182, 99);
+    border-bottom: 1px solid rgb(3, 122, 59);
   }
 
   .route li:hover {
     border-left: 5px solid $baseColor;
-    background: rgb(27, 182, 99);
+    background: rgb(3, 122, 59);
   }
   header {
-    background: rgb(3, 122, 59);
-    border-bottom: 1px solid rgb(27, 182, 99);
+    background: rgb(1, 112, 53);
+    border-bottom: 1px solid rgb(3, 122, 59);
     h1 span {
       color: $baseColor;
     }
     .create-course {
-      background: rgb(27, 182, 99);
+      background: rgb(3, 122, 59);
       color: $textColor2;
       i {
         color: $baseColor;
@@ -1050,25 +1054,25 @@ main.gray-mode {
     }
     nav .profile {
       background: $misc;
-      color: rgb(27, 182, 99);
+      color: rgb(3, 122, 59);
     }
   }
   .profile-header {
-    border-bottom: 1px solid rgb(27, 182, 99);
+    border-bottom: 1px solid rgb(3, 122, 59);
   }
   .profile-menu {
-    border-right: 2px solid rgb(27, 182, 99);
+    border-right: 2px solid rgb(1, 112, 53);
   }
 
   .profile-header:hover {
-    background: rgb(27, 182, 99);
+    background: rgb(3, 122, 59);
     border-left: 5px solid $baseColor;
   }
 
   input,
   select,
   .route.active {
-    background: rgb(27, 182, 99);
+    background: rgb(3, 122, 59);
   }
 
   h1 span,
@@ -1082,7 +1086,7 @@ main.gray-mode {
 
   .profile-menu,
   .profile-header {
-    background: rgb(3, 122, 59);
+    background: rgb(1, 112, 53);
   }
 }
 </style>

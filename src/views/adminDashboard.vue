@@ -16,22 +16,34 @@
               class="page-mode light"
               :class="{ active: mode.light }"
               @click="pagemode('light')"
+              title="Light mode"
             >
-              <span><i class="fa-regular fa-circle-check"></i></span>
+              <span
+                ><i class="fa-solid fa-power-off off"></i
+                ><i class="fa-solid fa-bahai"></i
+              ></span>
             </button>
             <button
               class="page-mode dark"
               :class="{ active: mode.dark }"
               @click="pagemode('dark')"
+              title="Dark mode"
             >
-              <span><i class="fa-regular fa-circle-check"></i></span>
+              <span
+                ><i class="fa-solid fa-power-off off"></i
+                ><i class="fa-solid fa-bahai"></i
+              ></span>
             </button>
             <button
               class="page-mode gray"
               :class="{ active: mode.gray }"
               @click="pagemode('gray')"
+              title="Gray mode"
             >
-              <span><i class="fa-regular fa-circle-check"></i></span>
+              <span
+                ><i class="fa-solid fa-power-off off"></i
+                ><i class="fa-solid fa-bahai"></i
+              ></span>
             </button>
           </div>
         </div>
@@ -131,11 +143,6 @@ export default {
       console.log(mode);
       store.dispatch("pagemode", mode);
     }
-
-    axios
-      .get("api/color/admin")
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
 
     onMounted(() => {
       axios(`api/admin/getAdmin/${localStorage.getItem("adminId")}`)
@@ -239,18 +246,18 @@ $text: rgb(84, 84, 84);
           flex-wrap: wrap;
 
           .page-mode {
-            width: 60px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             display: flex;
             justify-content: flex-start;
             align-items: center;
             background: rgb(215, 214, 214);
             border: none;
-            border-radius: 3px;
+            border-radius: 100%;
             padding: 2px;
             span {
-              width: 25px;
-              height: 25px;
+              width: 100%;
+              height: 100%;
               border-radius: 100%;
               background: white;
               display: flex;
@@ -258,8 +265,12 @@ $text: rgb(84, 84, 84);
               align-items: center;
 
               i {
-                font-size: 100%;
+                font-size: 24px;
                 display: none;
+              }
+              .off {
+                font-size: 100%;
+                display: block;
               }
             }
           }
@@ -281,23 +292,28 @@ $text: rgb(84, 84, 84);
         }
         .page-mode.active {
           position: relative;
+          order: 1;
+          width: 40px;
+          height: 40px;
+          border-radius: 100%;
+          animation: mode 2s infinite linear forwards;
           span {
-            position: absolute;
-            top: 0;
-            // background: white;
-            right: 60%;
-            animation: mode 1s 1 linear alternate forwards;
+            width: 100%;
+            height: 100%;
+            box-shadow: none;
 
             i {
               display: block;
               color: rgba(230, 101, 129, 1);
             }
+            .off {
+              display: none;
+            }
           }
         }
         @keyframes mode {
           to {
-            right: 0;
-            top: 2px;
+            transform: rotateZ(360deg);
           }
         }
       }

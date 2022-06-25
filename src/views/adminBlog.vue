@@ -1,5 +1,8 @@
 <template>
-  <form @submit.prevent="postBlog()">
+  <form
+    @submit.prevent="postBlog()"
+    :class="{ dark: mode.dark, gray: mode.gray }"
+  >
     <h1>write a blog!</h1>
     <div class="input">
       <input
@@ -67,13 +70,16 @@
 <script>
 import axios from "axios";
 import Editor from "@tinymce/tinymce-vue";
-import { reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
+import { useStore } from "vuex";
 export default {
   name: "AdminBlog",
   components: {
     editor: Editor,
   },
   setup() {
+    const store = useStore();
+    let mode = computed(() => store.state.mode);
     const post = reactive({
       author: "",
       title: "",
@@ -114,7 +120,7 @@ export default {
       postError.value = false;
     }
 
-    return { success, postError, post, postBlog };
+    return { success, postError, post, mode, postBlog };
   },
 };
 </script>
@@ -248,6 +254,23 @@ form {
   }
   to {
     top: 25vh;
+  }
+}
+
+form.dark,
+form.gray {
+  h1 {
+    color: $secondaryColor;
+  }
+  label,
+  input,
+  input[type="reset"],
+  textarea {
+    color: rgb(227, 227, 227);
+    border-bottom: 1px solid rgb(180, 179, 179);
+  }
+  textarea {
+    box-shadow: 0 0 2px 1px rgb(180, 179, 179);
   }
 }
 </style>
