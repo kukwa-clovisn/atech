@@ -43,17 +43,25 @@ import axios from "axios";
 import { reactive } from "vue";
 export default {
   name: "Contact",
-  setup() {
+  props: {
+    id: { type: String },
+    name: { type: String },
+  },
+  setup(props) {
     let user = reactive({
-      name: "",
-      email: "",
+      user: `${localStorage.getItem("userId")}`,
+      name: props.name,
+      id: props.id,
       message: "",
+      question: true,
     });
 
     let feedback = reactive({
-      name: "",
-      email: "",
+      name: `${localStorage.getItem("userId")}`,
+      id: props.id,
       message: "",
+      date: new Date(),
+      feedback: true,
     });
 
     let response = reactive({
@@ -76,15 +84,26 @@ export default {
             setTimeout(pop, 3000);
           }
         })
+        .catch((err) => {});
+    }
+
+    function sendFeedback() {
+      axios
+        .post(`api/user/status/${props.name}`, feedback)
+        .then((res) => {
+          console.log(res);
+          if (res.statusText === "OK") {
+            response.msg = "Feedback sent";
+            feedback.message = "";
+            response.success = true;
+            setTimeout(pop, 3000);
+          }
+        })
         .catch((err) => {
           response.msg = err.response.data.msg;
           response.failed = true;
           setTimeout(post_error, 3000);
         });
-    }
-
-    function sendFeedback() {
-      console.log(feedback);
     }
 
     function pop() {
@@ -219,6 +238,14 @@ $col: #3d566f;
         width: 100% !important;
         border: 3px solid blue;
       }
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    .formdata {
+      width: 97%;
+      margin: 20px auto;
     }
   }
 }

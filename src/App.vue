@@ -686,6 +686,10 @@ nav a.router-link-exact-active {
         margin-left: 3px;
         color: #072e54;
       }
+
+      @media screen and (max-width: 800px) {
+        width: 90%;
+      }
     }
     button.active {
       background: #072e54;

@@ -101,6 +101,24 @@ const routes = [
         },
       },
       {
+        path: "/admin/analytics",
+        name: "Analytics",
+        component: function () {
+          return import(
+            /* webpackChunkName: "about" */ "../views/adminAnalytics.vue"
+          );
+        },
+      },
+      {
+        path: "/admin/feedback",
+        name: "adminFeedback",
+        component: function () {
+          return import(
+            /* webpackChunkName: "about" */ "../views/adminFeedback.vue"
+          );
+        },
+      },
+      {
         path: "/admin/dashboard/course/:course",
         name: "AdminCourse",
         component: function () {

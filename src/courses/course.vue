@@ -126,7 +126,11 @@
           Dislike
           <i class="fa-solid fa-thumbs-down dislike"></i>
         </button>
-        <button @click="bookmarkFunc(course._id, course.name)">
+        <button
+          :disabled="response.bookmarked"
+          @click="bookmarkFunc(response.data._id, response.data.name)"
+          :class="{ active: response.bookmarked }"
+        >
           <i
             class="fa-solid fa-star"
             v-if="response.bookmarked"
@@ -140,7 +144,7 @@
           save as Bookmark
         </button>
       </div>
-      <Contact />
+      <Contact :id="response.data._id" :name="response.data.name" />
     </div>
   </div>
 </template>
@@ -204,6 +208,7 @@ export default {
           id: courseId,
           bookmarked: true,
           name: `${localStorage.getItem("userId")}`,
+          data: new Date(),
         })
         .then((res) => {
           console.log(res);
@@ -219,6 +224,7 @@ export default {
           console.log(res);
           response.showCourse = true;
           response.data = res.data;
+          response.bookmarked = false;
 
           let viewArr = response.data.views.map(
             (view) => view.name === localStorage.getItem("userId")
@@ -233,38 +239,44 @@ export default {
             });
           }
 
-          for (let i = 0; i < response.data.likes.length; i++) {
-            if (
-              response.data.likes[i].name === localStorage.getItem("userId") &&
-              response.data.likes.length
-            ) {
-              response.liked = true;
-              console.log(localStorage.getItem("userId"));
+          if (response.data.Bookmarks.length >= 1) {
+            for (let i = 0; i < response.data.Bookmarks.length; i++) {
+              if (
+                response.data.Bookmarks[i].name ===
+                localStorage.getItem("userId")
+              ) {
+                response.bookmarked = true;
+                console.log("bookmarks");
+              }
             }
           }
-          for (let i = 0; i < response.data.dislikes.length; i++) {
-            if (
-              response.data.dislikes[i].name ===
-                localStorage.getItem("userId") &&
-              response.data.dislikes.length
-            ) {
-              response.disliked = true;
-              console.log(localStorage.getItem("userId"));
+
+          if (response.data.likes.length >= 1) {
+            for (let i = 0; i < response.data.likes.length; i++) {
+              if (
+                response.data.likes[i].name === localStorage.getItem("userId")
+              ) {
+                response.liked = true;
+                console.log("likes");
+              }
             }
           }
-          for (let i = 0; i < response.data.Bookmarks.length; i++) {
-            if (
-              response.data.Bookmarks[i].name ===
-                localStorage.getItem("userId") &&
-              response.data.Bookmarks.length
-            ) {
-              response.bookmarked = true;
-              console.log(localStorage.getItem("userId"));
+
+          if (response.data.dislikes.length >= 1) {
+            for (let i = 0; i < response.data.dislikes.length; i++) {
+              if (
+                response.data.dislikes[i].name ===
+                localStorage.getItem("userId")
+              ) {
+                response.disliked = true;
+                console.log("dislikes");
+              }
             }
           }
         })
         .catch((err) => err);
     }
+
     let user = localStorage.getItem("userId");
     function setLike(id, course, title) {
       axios

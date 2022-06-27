@@ -20,8 +20,8 @@
       </li>
       <li v-if="analytics.comments" key="comments">
         <span class="close" @click="analytics.comments = false">&times;</span>
-        <span class="data">{{ response.comments.length }}</span
-        >comments
+        <span class="data">{{ response.comments }}</span
+        >feedback(s)
       </li>
       <li key="data">
         <span class="data">{{ response.data.length }} </span>course(s)
@@ -66,7 +66,7 @@
   </div>
 </template>
 <script>
-import AdminSingleCourse from "./adminSingleCourse.vue";
+import AdminSingleCourse from "./adminAnalytics.vue";
 import axios from "axios";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
@@ -87,7 +87,7 @@ export default {
       views: 0,
       likes: 0,
       dislikes: 0,
-      comments: [],
+      comments: 0,
     });
 
     let config = {
@@ -125,6 +125,9 @@ export default {
               response.dislikes =
                 parseInt(res.data[i].dislikes.length) +
                 parseInt(response.dislikes);
+              response.comments =
+                parseInt(res.data[i].comments.length) +
+                parseInt(response.comments);
             }
           } else {
             router.push("/admin/dashboard");
@@ -196,7 +199,8 @@ export default {
 
     function courseAnalytics(id) {
       localStorage.setItem("editToken", id);
-      analytics.show = false;
+      router.push("/admin/analytics");
+      // analytics.show = false;
     }
 
     return {

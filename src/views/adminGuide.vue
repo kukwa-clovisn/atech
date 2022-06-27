@@ -290,6 +290,7 @@
         all together and also the number of people subscribed to the course.
       </p>
     </div>
+    <footer>&copy;Atech2022</footer>
   </div>
 </template>
 <script>
@@ -388,6 +389,10 @@ $text: rgb(84, 84, 84);
         list-style-position: outside;
       }
     }
+  }
+  footer {
+    background: $secondaryColor;
+    width: 100%;
   }
 }
 

@@ -2,6 +2,7 @@
   <div class="container">
     <div class="left-content">
       <div class="user-logo">{{ profile.name.split("")[0] }}</div>
+      <h1>Dashboard</h1>
       <div class="top-content"></div>
       <div class="bottom-content">
         <span class="edit"><i class="fa-solid fa-pen"></i></span>
@@ -83,7 +84,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   width: 100%;
-  height: 100%;
+  height: fit-content;
   background: rgb(226, 226, 231);
   display: flex;
   justify-content: space-around;
@@ -93,7 +94,7 @@ export default {
   .left-content {
     width: 60%;
     height: 80%;
-    background: white;
+    // background: white;
     border-radius: 15px;
     box-shadow: 0 0 2px 2px rgb(226, 226, 231);
     position: relative;
@@ -103,7 +104,8 @@ export default {
       height: 80px;
       border-radius: 100%;
       position: absolute;
-      top: 30%;
+      top: 45%;
+      z-index: 1;
       left: 4%;
       border: 3px solid white;
       background: teal;
@@ -115,17 +117,24 @@ export default {
       cursor: pointer;
     }
 
+    h1 {
+      text-align: left;
+      padding: 10px;
+    }
+
     .top-content {
       width: 100%;
-      height: 40%;
+      height: 150px;
       background: url(../assets/book.jpeg);
       background-size: cover;
       background-repeat: no-repeat;
       background-attachment: scroll;
+      border-radius: 15px 15px 0 0;
     }
     .bottom-content {
       position: relative;
-
+      background: white;
+      padding: 30px 10px 5px 10px;
       .edit {
         width: 70px;
         height: 50px;
@@ -146,7 +155,19 @@ export default {
           }
         }
       }
-      padding: 30px 10px 5px 10px;
+      .info {
+        h1,
+        h5,
+        p {
+          text-align: left;
+          padding: 10px;
+        }
+        @media screen and (max-width: 400px) {
+          h1 {
+            font-size: 20px;
+          }
+        }
+      }
     }
   }
   .right-content {
@@ -207,6 +228,7 @@ export default {
     .left-content,
     .right-content {
       width: 95%;
+      height: fit-content;
     }
   }
 }

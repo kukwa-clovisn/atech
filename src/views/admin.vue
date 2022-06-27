@@ -83,10 +83,16 @@
             <p>view posts</p>
           </li>
         </router-link>
-        <router-link to="/admin/course/courses/view" class="route">
+        <!-- <router-link to="/admin/course/courses/view" class="route">
           <li>
             <span><i class="fa-solid fa-book-open-reader"></i></span>
             <p>view courses</p>
+          </li> </router-link
+        > -->
+        <router-link to="/admin/course/courses/view" class="route">
+          <li>
+            <span><i class="fa-solid fa-chart-simple"></i></span>
+            <p>Analytics</p>
           </li>
         </router-link>
         <router-link to="/admin/guide" class="route">
@@ -103,7 +109,7 @@
         </router-link>
       </div>
       <div class="profile-bottom">
-        <router-link to="/admin/blog" class="route">
+        <router-link to="/admin/feedback" class="route">
           <li>
             <span><i class="fa-regular fa-message"></i></span>
             <p>feedback</p>
