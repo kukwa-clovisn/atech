@@ -21,12 +21,12 @@
           >
         </li>
       </nav>
-      <button class="menu-btn"><i class="fa-solid fa-bars"></i></button>
-    </header>
-    <div class="menu-div">
-      <button class="close" @click="profile.dropdown = !profile.dropdown">
-        &times;
+      <button @click="menuBtn = !menuBtn" class="menu-btn">
+        <i class="fa-solid fa-bars"></i>
       </button>
+    </header>
+    <div class="menu-div" v-if="!menuBtn">
+      <button class="close" @click="menuBtn = !menuBtn">&times;</button>
       <div class="profile-header">
         <div class="profile-flex">
           <span>{{ profile.name.split("")[0] }}</span>
@@ -114,7 +114,7 @@
 
 <script>
 import axios from "axios";
-import { reactive, onBeforeMount } from "vue";
+import { reactive, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 export default {
   name: "Course_intro",
@@ -127,6 +127,8 @@ export default {
       savedCourses: [],
       dropdown: false,
     });
+
+    let menuBtn = ref(false);
 
     function checkToken() {
       axios("api/token")
@@ -141,7 +143,7 @@ export default {
         });
     }
 
-    onBeforeMount(() => {
+    onMounted(() => {
       checkToken();
     });
 
@@ -150,7 +152,7 @@ export default {
       router.push("/");
     }
 
-    return { profile, logoutFunc };
+    return { profile, menuBtn, logoutFunc };
   },
 };
 </script>
@@ -449,6 +451,11 @@ header {
     width: 100vw;
     right: 0;
     border-radius: 0;
+  }
+}
+.profile-div {
+  @media screen and (max-width: 500px) {
+    display: none;
   }
 }
 

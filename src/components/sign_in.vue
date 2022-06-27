@@ -244,6 +244,8 @@ export default {
             response.msg = res.data.msg;
             localStorage.setItem("accessId", res.data.accessId);
 
+            localStorage.setItem("userId", res.data.username);
+
             localStorage.setItem("accessToken", res.data.accessToken);
             axios.defaults.headers.common[
               "Authorization"

@@ -64,6 +64,7 @@
             >
               <option value="Cryptocurrency">Cryptocurrency</option>
               <option value="Forex">Forex</option>
+              <option value="Blockchain">Blockchain</option>
               <option value="Web Development">Web Development</option>
               <option value="Graphic Design">Graphic Design</option>
               <option value="Music">Music</option>

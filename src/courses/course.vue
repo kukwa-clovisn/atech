@@ -1,26 +1,30 @@
 <template>
   <div class="container">
-    <div class="courses">
+    <div class="courses" v-if="!response.showCourse">
       <div class="course-container">
+        <router-link to="/course" class="btn-courses"> Course page</router-link>
         <h2>{{ response.course }} courses</h2>
         <ul>
           <li v-for="(course, index) in response.courses" :key="index">
-            <span class="course-number">{{ index }}</span>
-            <span
-              class="course-bookmark"
-              title="Add to Bookmark"
-              @click="bookmarkFunc(course._id)"
-              ><i class="fa-regular fa-star"></i
-            ></span>
-            <!-- <span class="course-bookmark" title="Add to Bookmark"
-              ><i class="fa-solid fa-star"></i
-            ></span> -->
-            <p>{{ course.title }}</p>
-            <button>start course</button>
+            <span class="course-number">{{ index + 1 }}</span>
+
+            <p class="title">{{ course.title }}</p>
+            <p class="intro">{{ course.intro }}</p>
+            <button @click="getCourse(course._id, course.name)">
+              start course
+            </button>
+            <footer>By: {{ course.author }}</footer>
           </li>
         </ul>
       </div>
       <div class="description-container">
+        <div class="content">
+          <span class="close">&times;</span>
+          <h3><i class="fa-solid fa-book-open"></i>Courses</h3>
+          <p>
+            <a>{{ response.courses.length }}</a> Courses
+          </p>
+        </div>
         <div class="content">
           <span class="close">&times;</span>
           <h3><i class="fa-regular fa-star"></i>Boomark</h3>
@@ -40,24 +44,102 @@
       </div>
     </div>
     <div id="tutorial" v-if="response.showCourse">
+      <button @click="allCourses()" class="btn-courses">see all courses</button>
       <div class="logo">
         <img src="../assets/logo-white.jpg" alt="" />
       </div>
-      <h1 v-html="response.title"></h1>
+
+      <h1 v-html="response.data.title"></h1>
       <h4>
         master course <br />
-        by: AdvancedTechAcademy
+        by: {{ response.data.author }}
       </h4>
       <ul>
         <h3>tutorial objectives:</h3>
-        <li v-for="(objective, index) in response.objectives" :key="objective">
+        <li
+          v-for="(objective, index) in response.data.objectives"
+          :key="objective"
+        >
           <span>{{ index + 1 }}</span
           ><a v-html="objective"></a>
         </li>
       </ul>
-      <div class="course-div" v-html="response.course"></div>
-      <div class="video" v-html="response.videoUrl"></div>
-      <div class="course-div" v-html="response.description"></div>
+      <p v-html="response.data.intro"></p>
+      <div v-html="response.data.firstdescription"></div>
+      <div class="videos">
+        <div
+          class="video"
+          v-for="(video, index) in response.data.firstvideolist"
+          :key="index"
+          v-html="video"
+        ></div>
+      </div>
+
+      <div v-html="response.data.description"></div>
+      <h2>Video lessons:</h2>
+      <div class="videos">
+        <div
+          class="video"
+          v-for="(video, index) in response.data.secondvideolist"
+          :key="index"
+          v-html="video"
+        ></div>
+      </div>
+
+      <div v-html="response.data.seconddescription"></div>
+      <div class="videos">
+        <div
+          class="video"
+          v-for="(video, index) in response.data.thirdvideolist"
+          :key="index"
+          v-html="video"
+        ></div>
+      </div>
+
+      <div class="video" v-html="response.data.conclusion"></div>
+      <div class="feedback">
+        <button
+          :disabled="response.liked"
+          :class="{ active: response.liked }"
+          class="like"
+          title="I like this course"
+          @click="
+            setLike(response.data._id, response.data.name, response.data.title)
+          "
+        >
+          Like
+          <i class="fa-solid fa-thumbs-up like"></i>
+        </button>
+        <button
+          :disabled="response.disliked"
+          :class="{ active: response.disliked }"
+          class="dislike"
+          title="I Don't like this course"
+          @click="
+            setDislike(
+              response.data._id,
+              response.data.name,
+              response.data.title
+            )
+          "
+        >
+          Dislike
+          <i class="fa-solid fa-thumbs-down dislike"></i>
+        </button>
+        <button @click="bookmarkFunc(course._id, course.name)">
+          <i
+            class="fa-solid fa-star"
+            v-if="response.bookmarked"
+            title="Add to Bookmark"
+          ></i>
+          <i
+            class="fa-regular fa-star"
+            v-if="!response.bookmarked"
+            title="Add to Bookmark"
+          ></i>
+          save as Bookmark
+        </button>
+      </div>
       <Contact />
     </div>
   </div>
@@ -66,8 +148,8 @@
 <script>
 import axios from "axios";
 import Contact from "../components/contact.vue";
-import { reactive, onBeforeMount } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { reactive, onMounted } from "vue";
+import { useRoute, useRouter, viewDepthKey } from "vue-router";
 export default {
   components: { Contact },
   name: "Course",
@@ -76,6 +158,7 @@ export default {
     const router = useRouter();
 
     let response = reactive({
+      data: [],
       title: "",
       course: "",
       videoUrl: "",
@@ -85,31 +168,21 @@ export default {
       bookmarks: [],
       showCourse: false,
       bookmarked: false,
+      liked: false,
+      disliked: false,
     });
 
-    onBeforeMount(() => {
+    function allCourses() {
+      response.showCourse = false;
       axios(`/api/user/course/all/${localStorage.getItem("courseId")}`, {
         headers: { private: false },
       })
         .then((res) => {
           if (res.statusText === "OK") {
-            route.params.course = localStorage.getItem("courseId");
             console.log(res);
+            route.params.course = localStorage.getItem("courseId");
             response.courses = res.data;
             response.course = route.params.course;
-            console.log(localStorage.getItem("accessId"));
-            for (let i = 0; i < res.data.length; i++) {
-              console.log(res.data[i].Bookmarks);
-              for (let j = 0; j < res.data[i].Bookmarks.length; j++) {
-                console.log(res.data[i].Bookmarks[j]);
-                console.log(
-                  "true"
-                    ? res.data[i].Bookmarks[j].courseId ===
-                        "62ab50cf2ba3cc5baf71b83c"
-                    : false
-                );
-              }
-            }
           } else {
             router.push("/login");
           }
@@ -119,24 +192,118 @@ export default {
           console.log(err);
           return err;
         });
+    }
+
+    onMounted(() => {
+      allCourses();
     });
 
-    function bookmarkFunc(courseId) {
-      console.log(courseId);
+    function bookmarkFunc(courseId, name) {
       axios
-        .post(`/api/admin/course/${courseId}`, {
-          userId: localStorage.getItem("accessId"),
-          courseId,
+        .post(`/api/user/status/${name}`, {
+          id: courseId,
+          bookmarked: true,
+          name: `${localStorage.getItem("userId")}`,
         })
         .then((res) => {
           console.log(res);
-          if (res.statusText === "Created") {
+          if (res.statusText === "OK") {
             response.bookmarked = true;
           }
         });
     }
 
-    return { response, bookmarkFunc };
+    function getCourse(id, name) {
+      axios(`api/user/course/${id}`, { headers: { coursename: name } })
+        .then((res) => {
+          console.log(res);
+          response.showCourse = true;
+          response.data = res.data;
+
+          let viewArr = response.data.views.map(
+            (view) => view.name === localStorage.getItem("userId")
+          );
+          console.log(viewArr);
+          if (!viewArr.includes(true) || !viewArr.length) {
+            axios.post(`api/user/status/${response.data.name}`, {
+              name: `${localStorage.getItem("userId")}`,
+              viewed: true,
+              id: response.data._id,
+              title: response.data.title,
+            });
+          }
+
+          for (let i = 0; i < response.data.likes.length; i++) {
+            if (
+              response.data.likes[i].name === localStorage.getItem("userId") &&
+              response.data.likes.length
+            ) {
+              response.liked = true;
+              console.log(localStorage.getItem("userId"));
+            }
+          }
+          for (let i = 0; i < response.data.dislikes.length; i++) {
+            if (
+              response.data.dislikes[i].name ===
+                localStorage.getItem("userId") &&
+              response.data.dislikes.length
+            ) {
+              response.disliked = true;
+              console.log(localStorage.getItem("userId"));
+            }
+          }
+          for (let i = 0; i < response.data.Bookmarks.length; i++) {
+            if (
+              response.data.Bookmarks[i].name ===
+                localStorage.getItem("userId") &&
+              response.data.Bookmarks.length
+            ) {
+              response.bookmarked = true;
+              console.log(localStorage.getItem("userId"));
+            }
+          }
+        })
+        .catch((err) => err);
+    }
+    let user = localStorage.getItem("userId");
+    function setLike(id, course, title) {
+      axios
+        .post(`api/user/status/${course}`, {
+          name: user,
+          id,
+          title,
+          like: true,
+        })
+        .then((res) => {
+          response.liked = true;
+        })
+        .catch((err) => console.log(err));
+    }
+
+    function setDislike(id, course, title) {
+      axios
+        .post(`api/user/status/${course}`, {
+          name: user,
+          id,
+          title,
+          dislike: true,
+        })
+        .then((res) => {
+          if (res.statusText === "OK") {
+            response.disliked = true;
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+
+    return {
+      response,
+      bookmarkFunc,
+      getCourse,
+      allCourses,
+      setLike,
+      setDislike,
+    };
   },
 };
 </script>
@@ -148,7 +315,7 @@ export default {
 }
 .courses {
   width: 100%;
-  min-height: 90vh;
+  height: fit-content;
   background: rgb(241, 242, 244);
   display: flex;
   justify-content: space-evenly;
@@ -157,7 +324,6 @@ export default {
   .course-container {
     width: 65%;
     height: fit-content;
-
     h2 {
       width: 90%;
       height: 100px;
@@ -166,7 +332,7 @@ export default {
       justify-content: flex-start;
       align-items: center;
       text-transform: capitalize;
-      font: 700 19px "Nunito Sans", sans-serif;
+      font: 700 23px "Nunito Sans", sans-serif;
       color: rgb(34, 34, 34);
     }
     ul {
@@ -176,7 +342,8 @@ export default {
 
       li {
         width: 100%;
-        height: 90px;
+        height: fit-content;
+        padding: 10px 0;
         background: white;
         box-shadow: 0 0 2px 2px rgb(241, 242, 244);
         border-radius: 10px;
@@ -186,6 +353,7 @@ export default {
         justify-content: space-around;
         align-items: center;
         flex-direction: column;
+        box-shadow: 0 0 1px 1px rgb(225, 105, 7);
 
         .course-number,
         .course-bookmark {
@@ -208,21 +376,31 @@ export default {
           background: transparent;
 
           i {
-            color: teal;
+            color: #2d4a76;
             font-size: 25px;
             cursor: pointer;
           }
         }
         p {
           text-transform: capitalize;
-          font: 600 19px "Poppins", sans-serif;
+          font: 600 17px "Poppins", sans-serif;
+          padding: 5px;
+        }
+        .title {
+          color: rgb(225, 105, 7);
+        }
+        .intro {
+          font-size: 14px;
+          color: rgb(133, 131, 131);
+          color: #3d5272;
         }
         button {
           width: 200px;
-          height: 30px;
+          height: 35px;
+          margin: 5px auto;
           border: none;
           border-radius: 30px;
-          background: teal;
+          background: #2d4a76;
           color: white;
         }
       }
@@ -257,11 +435,16 @@ export default {
       }
       p {
         font-size: 13px;
+        a {
+          color: rgb(225, 105, 7);
+          font-size: 17px;
+        }
       }
     }
   }
 
   @media screen and (max-width: 900px) {
+    height: fit-content;
     flex-direction: column;
 
     .course-container,
@@ -272,8 +455,8 @@ export default {
 
     @media screen and (max-width: 400px) {
       .course-container {
-        ul li {
-          height: 110px;
+        ul {
+          height: fit-content;
           p {
             font-size: 15px;
           }
@@ -284,5 +467,20 @@ export default {
       }
     }
   }
+}
+.btn-courses {
+  width: max-content;
+  height: 35px;
+  padding: 0 10px;
+  border-radius: 5px;
+  margin: 10px;
+  background: #2d4a76;
+  color: white;
+  text-decoration: none;
+  text-transform: capitalize;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
 }
 </style>

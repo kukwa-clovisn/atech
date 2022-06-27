@@ -108,7 +108,10 @@ export default {
     });
 
     function allCourses() {
-      axios(`/api/admin/course/all/${localStorage.getItem("courseId")}`)
+      console.log(localStorage.getItem("courseId"));
+      axios(`/api/admin/course/all/${localStorage.getItem("courseId")}`, {
+        headers: { coursename: `${localStorage.getItem("courseId")}` },
+      })
         .then((res) => {
           if (res.statusText === "OK") {
             response.name = localStorage.getItem("courseId");

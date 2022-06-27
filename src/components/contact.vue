@@ -1,34 +1,42 @@
 <template>
-  <form class="question" @submit.prevent="userRequest()">
-    <label for="question">ask question(s) or leave a comment:</label>
-    <input
-      type="email"
-      name="email"
-      id=""
-      v-model="user.email"
-      placeholder="Enter email address so we can reach you..."
-    />
-    <textarea
-      name="question"
-      id="question"
-      cols="30"
-      rows="10"
-      v-model="user.message"
-      placeholder="Ask question(s) or leave a comment...."
-      required
-    ></textarea>
-    <button type="submit">submit</button>
-    <div class="response-div">
-      <div class="done" v-if="response.success">
-        <i class="fa-solid fa-circle-check"></i>
-        <span>{{ response.msg }}</span>
+  <div class="container">
+    <form class="formdata" @submit.prevent="userRequest()">
+      <label for="question">Question:</label>
+      <textarea
+        name="question"
+        id="question"
+        cols="30"
+        rows="10"
+        v-model="user.message"
+        placeholder="Ask question(s) or leave a comment...."
+        required
+      ></textarea>
+      <button type="submit">submit</button>
+      <div class="response-div">
+        <div class="done" v-if="response.success">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>{{ response.msg }}</span>
+        </div>
+        <div class="error" v-if="response.failed">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span>{{ response.msg }}</span>
+        </div>
       </div>
-      <div class="error" v-if="response.failed">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <span>{{ response.msg }}</span>
-      </div>
-    </div>
-  </form>
+    </form>
+    <form class="formdata" @submit.prevent="sendFeedback()">
+      <label for="feedback">send Feedback:</label>
+      <textarea
+        name="feedback"
+        id="feedback"
+        cols="30"
+        rows="10"
+        placeholder="Hi, how was your experience with our course?"
+        v-model="feedback.message"
+        required
+      ></textarea>
+      <button type="submit">submit</button>
+    </form>
+  </div>
 </template>
 <script>
 import axios from "axios";
@@ -37,6 +45,13 @@ export default {
   name: "Contact",
   setup() {
     let user = reactive({
+      name: "",
+      email: "",
+      message: "",
+    });
+
+    let feedback = reactive({
+      name: "",
       email: "",
       message: "",
     });
@@ -68,6 +83,10 @@ export default {
         });
     }
 
+    function sendFeedback() {
+      console.log(feedback);
+    }
+
     function pop() {
       response.success = false;
     }
@@ -75,7 +94,7 @@ export default {
       response.failed = false;
     }
 
-    return { user, response, userRequest };
+    return { user, feedback, response, userRequest, sendFeedback };
   },
 };
 </script>
@@ -89,116 +108,117 @@ $baseColor: #072e54;
 $fallback: rgb(19, 37, 62);
 $col: #3d566f;
 
-.question {
-  width: 90%;
-  margin: auto;
+.container {
+  width: 100%;
   height: fit-content;
-  padding: 10px;
-
-  label {
-    padding: 10px;
-    text-align: left;
-    display: block;
-    width: 100%;
-    text-transform: capitalize;
-    font: 600 23px "Poppins", sans-serif;
-  }
-
-  input {
-    width: 50%;
-    height: 50px;
-    outline: none;
-    border: none;
-    background: rgb(231, 229, 229);
-    border-radius: 5px;
-    padding: 3px 20px;
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  textarea {
-    width: 100%;
-    height: 300px;
-    border: none;
-    outline: none;
-    font-weight: 500;
-    color: $baseColor;
-    box-shadow: 0 0 2px 1px rgb(238, 238, 238);
-    padding: 20px;
-    background: rgb(234, 234, 234);
-  }
-
-  button {
-    display: block;
-    width: 50%;
-    height: 60px;
-    border: none;
-    background: $SecondaryColor;
-    color: $primaryColor;
-    border-radius: 5px;
-    margin-top: 15px;
-    text-transform: capitalize;
-    font: 600 20px "Nunito sans", sans-serif;
-  }
-
-  .response-div {
-    width: 90%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  .formdata {
+    width: 47%;
+    margin: auto;
     height: fit-content;
-    position: fixed;
-    left: 5%;
-    top: 5vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .done,
-  .error {
-    width: fit-content;
-    height: fit-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgb(71, 243, 151);
-    border-radius: 4px;
     padding: 20px;
-    z-index: 1;
-    position: relative;
-    animation: pop 1s linear alternate forwards;
+    background: $baseColor;
+    border-radius: 15px;
 
-    i {
-      font-size: 30px;
-      margin-right: 10px;
+    label {
+      padding: 10px;
+      text-align: left;
+      display: block;
+      width: 100%;
+      text-transform: capitalize;
+      font: 600 23px "Poppins", sans-serif;
       color: white;
     }
 
-    span {
-      color: white;
-      white-space: pre-wrap;
+    textarea {
+      width: 100%;
+      height: 300px;
+      border: none;
+      outline: none;
+      font-weight: 500;
+      font: 500 17px "Nunito Sans", sans-serif;
+      color: $baseColor;
+      border-radius: 10px;
+      box-shadow: 3px 3px 1px 1px rgb(235, 235, 235) !important;
+      padding: 20px;
+      background: white !important;
     }
-  }
 
-  .error {
-    background: $SecondaryColor;
-    span {
-      color: white;
-    }
-  }
-
-  @keyframes pop {
-    from {
-      top: 0;
-    }
-    to {
-      top: 15vh;
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-    input,
     button {
+      display: block;
       width: 100% !important;
-      border: 3px solid blue;
+      height: 60px;
+      border: none;
+      background: #174c81 !important;
+      color: rgb(216, 216, 216);
+      border-radius: 5px !important;
+      margin: 10px auto !important;
+      margin-bottom: 0 !important;
+      text-transform: capitalize;
+      font: 600 20px "Nunito sans", sans-serif;
+    }
+
+    .response-div {
+      width: 90%;
+      height: fit-content;
+      position: fixed;
+      left: 5%;
+      top: 5vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .done,
+    .error {
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgb(71, 243, 151);
+      border-radius: 4px;
+      padding: 20px;
+      z-index: 1;
+      position: relative;
+      animation: pop 1s linear alternate forwards;
+
+      i {
+        font-size: 30px;
+        margin-right: 10px;
+        color: white;
+      }
+
+      span {
+        color: white;
+        white-space: pre-wrap;
+      }
+    }
+
+    .error {
+      background: $SecondaryColor;
+      span {
+        color: white;
+      }
+    }
+
+    @keyframes pop {
+      from {
+        top: 0;
+      }
+      to {
+        top: 15vh;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      input,
+      button {
+        width: 100% !important;
+        border: 3px solid blue;
+      }
     }
   }
 }

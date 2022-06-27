@@ -37,7 +37,7 @@
                 >
               </li>
               <li>
-                <a href="/course/crypto"
+                <a href="/course/cryptocurrency"
                   ><i class="fa-solid fa-chart-line"></i>cryptocurrency</a
                 >
               </li>
@@ -47,12 +47,18 @@
                 >
               </li>
               <li>
+                <a href="/course/blockchain"
+                  ><i class="fa-solid fa-chart-line"></i>blockchain
+                  technology</a
+                >
+              </li>
+              <li>
                 <a href="/course/web"
                   ><i class="fa-solid fa-code"></i>web developement</a
                 >
               </li>
               <li>
-                <a href="/course/graphic"
+                <a href="/course/design"
                   ><i class="fa-solid fa-object-group"></i>graphic design</a
                 >
               </li>

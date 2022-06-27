@@ -210,6 +210,7 @@ export default {
     });
 
     let courseFormat = reactive({
+      author: `${localStorage.getItem("admin")}`,
       name: "",
       title: "",
       course: "",
@@ -241,6 +242,7 @@ export default {
           },
         })
           .then((res) => {
+            console.log(res);
             if (res.statusText === "OK") {
               for (let i = 0; i < res.data.objectives.length; i++) {
                 objectives.value += res.data.objectives[i] + ",";

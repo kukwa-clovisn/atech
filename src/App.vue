@@ -507,7 +507,7 @@ nav a.router-link-exact-active {
 }
 
 #tutorial {
-  width: 100%;
+  width: 96%;
   margin: 5px auto;
   position: relative;
   height: 100%;
@@ -536,9 +536,9 @@ nav a.router-link-exact-active {
   }
 
   h1 {
-    padding: 20px;
-    margin: 30px auto;
-    font: 800 50px "Nunito Sans", "Poppins", sans-serif;
+    padding: 10px;
+    margin: 20px auto;
+    font: 700 50px "Nunito Sans", "Poppins", sans-serif;
     text-transform: uppercase;
 
     @media screen and (max-width: 660px) {
@@ -636,18 +636,64 @@ nav a.router-link-exact-active {
     padding-left: 30px;
     line-height: 25px;
   }
-
+  .videos {
+    max-width: fit-content;
+    height: fit-content;
+    margin: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+  }
   .video {
-    width: 100%;
-    height: 80vh;
-    margin: 60px auto;
+    width: fit-content;
+    height: fit-content;
+    margin: 20px;
     margin-bottom: 20px;
 
     iframe {
-      width: 96% !important;
-      height: 80vh !important;
-      margin: auto;
+      width: 300px !important;
+      min-height: fit-content !important;
       border-radius: 2px;
+      box-shadow: 0 3px 2px 2px rgb(233, 232, 232);
+    }
+  }
+  .feedback {
+    width: fit-content;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    button {
+      width: 180px;
+      height: 50px;
+      padding: 10px;
+      border: none;
+      margin: 10px;
+      border-radius: 5px;
+      border: 1px solid #072e54;
+      font-weight: 700;
+      font-size: 20px;
+      background: transparent;
+      color: $baseColor;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      i {
+        font-size: 25px;
+        margin-left: 3px;
+        color: #072e54;
+      }
+    }
+    button.active {
+      background: #072e54;
+      color: white;
+
+      i {
+        color: #e66581;
+      }
     }
   }
 

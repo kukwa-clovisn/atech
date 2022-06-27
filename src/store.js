@@ -4,8 +4,8 @@ const store = createStore({
   state() {
     return {
       mode: {
-        light: true,
-        dark: false,
+        light: false,
+        dark: true,
         gray: false,
         edit: false,
       },

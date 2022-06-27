@@ -119,7 +119,7 @@ export default {
 
     function getCourse(courseId) {
       localStorage.setItem("courseId", courseId);
-      router.push(`/course/lesson`);
+      router.push(`/course/${courseId}`);
     }
 
     const showProfileMenu = () => {
