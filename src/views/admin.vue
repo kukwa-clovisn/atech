@@ -672,16 +672,17 @@ main {
 
   .authentication {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
-    padding: 0;
+    padding: 20px 5px;
     background: #072e54;
     z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    // overflow: scroll;
 
     form {
       width: 550px;
@@ -692,6 +693,9 @@ main {
 
       h1 {
         color: rgb(47, 47, 47);
+        @media screen and (max-width: 600px) {
+          font-size: 19px;
+        }
       }
 
       .auth {

@@ -67,10 +67,14 @@
             >
           </li>
           <li @click="menuBtn = !menuBtn">
-            <i class="fa-solid fa-gear"></i>setting & privacy
+            <router-link to="/course/setting%20privacy" class="link">
+              <i class="fa-solid fa-gear"></i>setting & privacy</router-link
+            >
           </li>
           <li @click="menuBtn = !menuBtn">
-            <i class="fa-regular fa-question"></i>help
+            <router-link to="/course/help" class="link">
+              <i class="fa-regular fa-question"></i>help</router-link
+            >
           </li>
           <li @click="logoutFunc()"><i class="fa-solid fa-ban"></i>logout</li>
         </ul>
