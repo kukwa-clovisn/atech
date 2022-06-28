@@ -70,9 +70,6 @@
           <form @submit.prevent="signupFunc()">
             <div class="form-header">
               <h2>sign up</h2>
-              <!-- <button type="button" @click="googleAuth()" disabled>
-                sign up with Google
-              </button> -->
             </div>
             <div class="input">
               <label for="userName">Name:</label
@@ -185,15 +182,6 @@ export default {
       }, 800);
     }
 
-    // const vue3GoogleOauth = inject("Vue3GoogleOauth");
-    // async function googleAuth() {
-    //   try {
-    //     await this.$gAuth.signIn().then((res) =>res);
-    //   } catch (err) {
-    //    return err;
-    //   }
-    // }
-
     function signupFunc() {
       axios
         .post("api/signup", user, config)
@@ -277,11 +265,9 @@ export default {
       user,
       credentials,
       response,
-      vue3GoogleOauth,
       swapSigninFunc,
       swapSignupFunc,
       signinFunc,
-      googleAuth,
       signupFunc,
     };
   },
