@@ -1124,7 +1124,7 @@ main {
     }
     .right-expo,
     .bottom-expo {
-      background: url(../assets/k.jpeg);
+      background: url(../assets/piano.jpeg);
       position: relative;
       padding: 10px;
       display: flex;

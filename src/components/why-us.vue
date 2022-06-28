@@ -27,7 +27,7 @@
       <h1>importance and future of blockchain</h1>
       <div class="logo-display">
         <div class="left-content">
-          <img src="../assets/logo-w.jpeg" alt="crypto & forex" />
+          <img src="../assets/logo-white.jpg" alt="crypto & forex" />
         </div>
         <div class="right-content">
           <h3>The future of Billionaires lies in the digital economy</h3>
@@ -152,7 +152,7 @@
       <p>learn a skill today and brighten your future</p>
       <button><a href="/course"> start a course</a></button>
     </div>
-      <span class="to-landing-page reach"
+    <span class="to-landing-page reach"
       ><a href="/#contact" class="a"
         ><i class="fa-solid fa-person-circle-question"></i></a
     ></span>
