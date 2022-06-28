@@ -210,7 +210,6 @@ export default {
       })
         .then((res) => {
           if (res.statusText === "OK") {
-            console.log(res);
             route.params.course = localStorage.getItem("courseId");
             response.courses = res.data;
             response.course = route.params.course;
@@ -220,7 +219,6 @@ export default {
         })
         .catch((err) => {
           router.push("/login");
-          console.log(err);
           return err;
         });
     }
@@ -229,7 +227,6 @@ export default {
       axios(`api/signup/subscription/${route.params.course}`)
         .then((res) => {
           if (res.statusText === "OK") {
-            console.log(res);
             allCourses();
           }
         })
@@ -248,7 +245,6 @@ export default {
           title: title,
         })
         .then((res) => {
-          console.log(res);
           if (res.statusText === "OK") {
             response.bookmarked = true;
           }
@@ -258,7 +254,6 @@ export default {
     function getCourse(id, name) {
       axios(`api/user/course/${id}`, { headers: { coursename: name } })
         .then((res) => {
-          console.log(res);
           response.showCourse = true;
           response.data = res.data;
           response.bookmarked = false;
@@ -268,7 +263,6 @@ export default {
           let viewArr = response.data.views.map(
             (view) => view.name === localStorage.getItem("userId")
           );
-          console.log(viewArr);
           if (!viewArr.includes(true) || !viewArr.length) {
             axios.post(`api/user/status/${response.data.name}`, {
               name: `${localStorage.getItem("userId")}`,
@@ -285,7 +279,6 @@ export default {
                 localStorage.getItem("userId")
               ) {
                 response.bookmarked = true;
-                console.log("bookmarks");
               }
             }
           }
@@ -296,7 +289,6 @@ export default {
                 response.data.likes[i].name === localStorage.getItem("userId")
               ) {
                 response.liked = true;
-                console.log("likes");
               }
             }
           }
@@ -308,7 +300,6 @@ export default {
                 localStorage.getItem("userId")
               ) {
                 response.disliked = true;
-                console.log("dislikes");
               }
             }
           }
@@ -328,7 +319,7 @@ export default {
         .then((res) => {
           response.liked = true;
         })
-        .catch((err) => console.log(err));
+        .catch((err) => err);
     }
 
     function setDislike(id, course, title) {
@@ -344,7 +335,7 @@ export default {
             response.disliked = true;
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => err);
     }
 
     return {

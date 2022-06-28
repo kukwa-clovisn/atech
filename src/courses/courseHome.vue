@@ -131,7 +131,6 @@ export default {
           course.courseUserEmail = res.data.email;
         })
         .catch((err) => {
-          console.log(err);
           router.push("/login");
         });
     });

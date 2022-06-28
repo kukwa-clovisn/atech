@@ -138,11 +138,9 @@ export default {
       axios
         .post("/api/register", user, config)
         .then((res) => {
-          console.log(res);
           if (res.statusText === "OK" || res.status === 201) {
             response.success = true;
             response.msg = res.data.msg;
-            console.log(res);
             setTimeout(() => {
               response.success = false;
 
@@ -157,7 +155,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err);
+          
           response.failed = true;
           response.msg = err.response.data.msg
             ? err.response.data.msg

@@ -108,7 +108,6 @@ export default {
     });
 
     function allCourses() {
-      console.log(localStorage.getItem("courseId"));
       axios(`/api/admin/course/all/${localStorage.getItem("courseId")}`, {
         headers: { coursename: `${localStorage.getItem("courseId")}` },
       })
@@ -132,8 +131,6 @@ export default {
           } else {
             router.push("/admin/dashboard");
           }
-
-          console.log(res);
         })
         .catch((err) => router.push("/admin/dashboard"));
     }
@@ -170,7 +167,7 @@ export default {
             }
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => err);
       searchVal.value = "";
     }
 
@@ -185,7 +182,7 @@ export default {
           .then((res) => {
             allCourses();
           })
-          .catch((err) => console.log(err));
+          .catch((err) => err);
       }
     }
 

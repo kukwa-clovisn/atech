@@ -234,7 +234,6 @@ export default {
     };
     onMounted(() => {
       courseFormat.name = route.params.course;
-      console.log(mode.value.edit);
       if (mode.value.edit) {
         axios(`api/admin/course/${localStorage.getItem("courseId")}`, {
           headers: {
@@ -242,7 +241,6 @@ export default {
           },
         })
           .then((res) => {
-            console.log(res);
             if (res.statusText === "OK") {
               for (let i = 0; i < res.data.objectives.length; i++) {
                 objectives.value += res.data.objectives[i] + ",";
@@ -268,7 +266,7 @@ export default {
               courseFormat.videoUrl = res.data.videoUrl;
             }
           })
-          .catch((err) => console.log(err));
+          .catch((err) => err);
       }
     });
 
@@ -286,7 +284,6 @@ export default {
             config
           )
           .then((res) => {
-            console.log(res);
             if (res.statusText === "OK") {
               success.value = true;
               setTimeout(pop, 3000);

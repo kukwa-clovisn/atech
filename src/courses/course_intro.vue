@@ -148,7 +148,6 @@ export default {
     function checkToken() {
       axios("api/token")
         .then((res) => {
-          console.log(res);
           profile.name = res.data.username;
           profile.subscriptions = res.data.subscription;
           profile.savedCourses = res.data.Bookmarks;

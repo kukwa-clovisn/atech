@@ -93,7 +93,6 @@ export default {
       axios
         .post(`api/user/status/${props.name}`, feedback)
         .then((res) => {
-          console.log(res);
           if (res.statusText === "OK") {
             response.msg = "Feedback sent";
             feedback.message = "";

@@ -185,15 +185,14 @@ export default {
       }, 800);
     }
 
-    const vue3GoogleOauth = inject("Vue3GoogleOauth");
-    console.log(vue3GoogleOauth);
-    async function googleAuth() {
-      try {
-        await this.$gAuth.signIn().then((res) => console.log(res));
-      } catch (err) {
-        console.log(err);
-      }
-    }
+    // const vue3GoogleOauth = inject("Vue3GoogleOauth");
+    // async function googleAuth() {
+    //   try {
+    //     await this.$gAuth.signIn().then((res) =>res);
+    //   } catch (err) {
+    //    return err;
+    //   }
+    // }
 
     function signupFunc() {
       axios

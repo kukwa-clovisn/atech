@@ -98,7 +98,6 @@ export default {
         },
       })
         .then((res) => {
-          console.log(res);
           response.data = res.data;
           response.title = res.data.title;
           response.views = res.data.views;

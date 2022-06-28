@@ -133,20 +133,18 @@ export default {
     const mode = computed(() => store.state.mode);
 
     function pagemode(mode) {
-      console.log(mode);
       store.dispatch("pagemode", mode);
     }
 
     onMounted(() => {
       axios(`api/admin/getAdmin/${localStorage.getItem("adminId")}`)
         .then((res) => {
-          console.log(res);
           localStorage.setItem("admin", res.data.username);
           response.data = res.data.course;
           response.name = res.data.username;
           response.email = res.data.email;
         })
-        .catch((err) => console.log(err));
+        .catch((err) => err);
     });
 
     function createCourse() {

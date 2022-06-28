@@ -103,7 +103,6 @@ export default {
     function checkToken() {
       axios("api/token")
         .then((res) => {
-          console.log(res);
           profile.name = res.data.username;
           profile.email = res.data.email;
           profile.subscriptions = res.data.subscription;
@@ -119,7 +118,6 @@ export default {
     });
 
     function pagemode(mode) {
-      console.log(mode);
       store.dispatch("pagemode", mode);
     }
 

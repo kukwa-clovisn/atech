@@ -254,7 +254,6 @@ export default {
         .post("/api/admin/auth", admin, config)
         .then((res) => {
           if (res.statusText === "OK") {
-            console.log(res);
             auth.value = false;
             adminResponse.name = res.data.username;
             adminResponse.email = res.data.email;
