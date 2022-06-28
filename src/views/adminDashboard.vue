@@ -148,7 +148,9 @@ export default {
     });
 
     function createCourse() {
-      router.push(`admin/dashboard/course/${localStorage.getItem("courseId")}`);
+      router.push(
+        `/admin/dashboard/course/${localStorage.getItem("courseId")}`
+      );
     }
 
     return { response, mode, createCourse, pagemode };
