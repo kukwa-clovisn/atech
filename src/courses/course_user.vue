@@ -148,7 +148,7 @@ export default {
       height: 80px;
       border-radius: 100%;
       position: absolute;
-      top: 45%;
+      top: 32%;
       z-index: 1;
       left: 4%;
       border: 3px solid white;
