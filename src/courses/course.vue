@@ -17,30 +17,39 @@
           </li>
         </ul>
       </div>
-      <div class="description-container">
-        <div class="content">
-          <span class="close">&times;</span>
-          <h3><i class="fa-solid fa-book-open"></i>Courses</h3>
-          <p>
-            <a>{{ response.courses.length }}</a> Courses
-          </p>
-        </div>
-        <div class="content">
-          <span class="close">&times;</span>
-          <h3><i class="fa-regular fa-star"></i>Boomark</h3>
-          <p>
-            Save some courses to study later. You can also find those courses in
-            your profile
-          </p>
-        </div>
-        <div class="content">
-          <span class="close">&times;</span>
-          <h3><i class="fa-regular fa-bookmark"></i>Subscriptions</h3>
-          <p>
-            Register for courses to be able to study them. You can find a list
-            of your registered courses in your profile
-          </p>
-        </div>
+      <div
+        class="description-container"
+        v-if="desc.course || desc.bookmrk || desc.subs"
+      >
+        <transition name="appear">
+          <div class="content" v-if="desc.course">
+            <span class="close" @click="desc.course = false">&times;</span>
+            <h3><i class="fa-solid fa-book-open"></i>Courses</h3>
+            <p>
+              <a>{{ response.courses.length }}</a> Courses
+            </p>
+          </div>
+        </transition>
+        <transition name="appear">
+          <div class="content" v-if="desc.bookmrk">
+            <span class="close" @click="desc.bookmrk = false">&times;</span>
+            <h3><i class="fa-regular fa-star"></i>Boomark</h3>
+            <p>
+              Save some courses to study later. You can also find those courses
+              in your profile
+            </p>
+          </div>
+        </transition>
+        <transition name="appear">
+          <div class="content" v-if="desc.subs">
+            <span class="close" @click="desc.subs = false">&times;</span>
+            <h3><i class="fa-regular fa-bookmark"></i>Subscriptions</h3>
+            <p>
+              Register for courses to be able to study them. You can find a list
+              of your registered courses in your profile
+            </p>
+          </div>
+        </transition>
       </div>
     </div>
     <div id="tutorial" v-if="response.showCourse">
@@ -107,8 +116,9 @@
             setLike(response.data._id, response.data.name, response.data.title)
           "
         >
-          Like
-          <i class="fa-solid fa-thumbs-up like"></i>
+          <i class="fa-solid fa-thumbs-up like" v-if="response.liked"></i
+          ><i class="fa-regular fa-thumbs-up" v-if="!response.liked"></i>
+          <span>like</span>
         </button>
         <button
           :disabled="response.disliked"
@@ -123,29 +133,40 @@
             )
           "
         >
-          Dislike
-          <i class="fa-solid fa-thumbs-down dislike"></i>
+          <i
+            class="fa-solid fa-thumbs-down dislike"
+            v-if="response.disliked"
+          ></i
+          ><i class="fa-regular fa-thumbs-down" v-if="!response.disliked"></i>
+          <span>Dislike</span>
         </button>
         <button
           :disabled="response.bookmarked"
-          @click="bookmarkFunc(response.data._id, response.data.name)"
+          @click="
+            bookmarkFunc(
+              response.data._id,
+              response.data.name,
+              response.data.title
+            )
+          "
           :class="{ active: response.bookmarked }"
         >
           <i
-            class="fa-solid fa-star"
+            class="fa-solid fa-bookmark"
+            title="Added to Bookmarks"
             v-if="response.bookmarked"
-            title="Add to Bookmark"
           ></i>
           <i
-            class="fa-regular fa-star"
+            class="fa-regular fa-bookmark"
+            title="Save to study later"
             v-if="!response.bookmarked"
-            title="Add to Bookmark"
-          ></i>
-          save as Bookmark
+          ></i
+          ><span> save as Bookmark</span>
         </button>
       </div>
       <Contact :id="response.data._id" :name="response.data.name" />
     </div>
+    <footer>&copy;Atech2022</footer>
   </div>
 </template>
 
@@ -153,7 +174,7 @@
 import axios from "axios";
 import Contact from "../components/contact.vue";
 import { reactive, onMounted } from "vue";
-import { useRoute, useRouter, viewDepthKey } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 export default {
   components: { Contact },
   name: "Course",
@@ -174,6 +195,12 @@ export default {
       bookmarked: false,
       liked: false,
       disliked: false,
+    });
+
+    let desc = reactive({
+      course: true,
+      subs: true,
+      bookmrk: true,
     });
 
     function allCourses() {
@@ -199,16 +226,26 @@ export default {
     }
 
     onMounted(() => {
-      allCourses();
+      axios(`api/signup/subscription/${route.params.course}`)
+        .then((res) => {
+          if (res.statusText === "OK") {
+            console.log(res);
+            allCourses();
+          }
+        })
+        .catch((err) => {
+          router.push("/course");
+        });
     });
 
-    function bookmarkFunc(courseId, name) {
+    function bookmarkFunc(courseId, name, title) {
       axios
         .post(`/api/user/status/${name}`, {
           id: courseId,
           bookmarked: true,
           name: `${localStorage.getItem("userId")}`,
           data: new Date(),
+          title: title,
         })
         .then((res) => {
           console.log(res);
@@ -225,6 +262,8 @@ export default {
           response.showCourse = true;
           response.data = res.data;
           response.bookmarked = false;
+          response.liked = false;
+          response.disliked = false;
 
           let viewArr = response.data.views.map(
             (view) => view.name === localStorage.getItem("userId")
@@ -310,6 +349,7 @@ export default {
 
     return {
       response,
+      desc,
       bookmarkFunc,
       getCourse,
       allCourses,
@@ -324,175 +364,178 @@ export default {
 .container {
   width: 100%;
   height: fit-content;
-}
-.courses {
-  width: 100%;
-  height: fit-content;
-  background: rgb(241, 242, 244);
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
-
-  .course-container {
-    width: 65%;
+  .courses {
+    width: 100%;
     height: fit-content;
-    h2 {
-      width: 90%;
-      height: 100px;
-      margin: auto;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      text-transform: capitalize;
-      font: 700 23px "Nunito Sans", sans-serif;
-      color: rgb(34, 34, 34);
-    }
-    ul {
-      width: 100%;
-      height: fit-content;
-      list-style: none;
+    background: rgb(241, 242, 244);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
 
-      li {
+    .course-container {
+      width: 65%;
+      height: fit-content;
+      h2 {
+        width: 90%;
+        height: 100px;
+        margin: auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-transform: capitalize;
+        font: 700 23px "Nunito Sans", sans-serif;
+        color: rgb(34, 34, 34);
+      }
+      ul {
         width: 100%;
         height: fit-content;
-        padding: 10px 0;
-        background: white;
-        box-shadow: 0 0 2px 2px rgb(241, 242, 244);
-        border-radius: 10px;
-        margin: 20px auto;
-        position: relative;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        flex-direction: column;
-        box-shadow: 0 0 1px 1px rgb(225, 105, 7);
+        list-style: none;
 
-        .course-number,
-        .course-bookmark {
-          position: absolute;
-          top: -2%;
-          left: -1%;
-          width: 20px;
-          height: 20px;
-          border-radius: 100%;
-          background: rgb(225, 105, 7);
-          color: white;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 9px;
-        }
-        .course-bookmark {
-          left: 97%;
-          top: 1%;
-          background: transparent;
-
-          i {
-            color: #2d4a76;
-            font-size: 25px;
-            cursor: pointer;
-          }
-        }
-        p {
-          text-transform: capitalize;
-          font: 600 17px "Poppins", sans-serif;
-          padding: 5px;
-        }
-        .title {
-          color: rgb(225, 105, 7);
-        }
-        .intro {
-          font-size: 14px;
-          color: rgb(133, 131, 131);
-          color: #3d5272;
-        }
-        button {
-          width: 200px;
-          height: 35px;
-          margin: 5px auto;
-          border: none;
-          border-radius: 30px;
-          background: #2d4a76;
-          color: white;
-        }
-      }
-    }
-  }
-
-  .description-container {
-    width: 23%;
-    height: fit-content;
-    padding-top: 50px;
-
-    .content {
-      width: 100%;
-      height: fit-content;
-      background: white;
-      padding: 20px;
-      position: relative;
-      border-radius: 10px;
-      margin: 20px auto;
-
-      span {
-        position: absolute;
-        top: 1%;
-        right: 5%;
-        font-size: 20px;
-        cursor: pointer;
-      }
-
-      h3 {
-        text-align: left;
-        padding: 10px;
-      }
-      p {
-        font-size: 13px;
-        a {
-          color: rgb(225, 105, 7);
-          font-size: 17px;
-        }
-      }
-    }
-  }
-
-  @media screen and (max-width: 900px) {
-    height: fit-content;
-    flex-direction: column;
-
-    .course-container,
-    .description-container {
-      width: 95%;
-      margin: auto;
-    }
-
-    @media screen and (max-width: 400px) {
-      .course-container {
-        ul {
+        li {
+          width: 100%;
           height: fit-content;
-          p {
-            font-size: 15px;
+          padding: 10px 0;
+          background: white;
+          box-shadow: 0 0 2px 2px rgb(241, 242, 244);
+          border-radius: 10px;
+          margin: 20px auto;
+          position: relative;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          flex-direction: column;
+          box-shadow: 0 0 1px 1px rgb(225, 105, 7);
+
+          .course-number,
+          .course-bookmark {
+            position: absolute;
+            top: -2%;
+            left: -1%;
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            background: rgb(225, 105, 7);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 9px;
           }
           .course-bookmark {
-            left: 95%;
+            left: 97%;
+            top: 1%;
+            background: transparent;
+
+            i {
+              color: #2d4a76;
+              font-size: 25px;
+              cursor: pointer;
+            }
+          }
+          p {
+            text-transform: capitalize;
+            font: 600 17px "Poppins", sans-serif;
+            padding: 5px;
+          }
+          .title {
+            color: rgb(225, 105, 7);
+          }
+          .intro {
+            font-size: 14px;
+            color: rgb(133, 131, 131);
+            color: #3d5272;
+          }
+          button {
+            width: 200px;
+            height: 35px;
+            margin: 5px auto;
+            border: none;
+            border-radius: 30px;
+            background: #2d4a76;
+            color: white;
+          }
+        }
+      }
+    }
+
+    .description-container {
+      width: 23%;
+      height: fit-content;
+      padding-top: 50px;
+
+      .content {
+        width: 100%;
+        height: fit-content;
+        background: white;
+        padding: 20px;
+        position: relative;
+        border-radius: 10px;
+        margin: 20px auto;
+
+        span {
+          position: absolute;
+          top: 1%;
+          right: 5%;
+          font-size: 20px;
+          cursor: pointer;
+        }
+
+        h3 {
+          text-align: left;
+          padding: 10px;
+        }
+        p {
+          font-size: 13px;
+          a {
+            color: rgb(225, 105, 7);
+            font-size: 17px;
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      height: fit-content;
+      flex-direction: column;
+
+      .course-container,
+      .description-container {
+        width: 95%;
+        margin: auto;
+      }
+
+      @media screen and (max-width: 400px) {
+        .course-container {
+          ul {
+            height: fit-content;
+            p {
+              font-size: 15px;
+            }
+            .course-bookmark {
+              left: 95%;
+            }
           }
         }
       }
     }
   }
-}
-.btn-courses {
-  width: max-content;
-  height: 35px;
-  padding: 0 10px;
-  border-radius: 5px;
-  margin: 10px;
-  background: #2d4a76;
-  color: white;
-  text-decoration: none;
-  text-transform: capitalize;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
+  .btn-courses {
+    width: max-content;
+    height: 35px;
+    padding: 0 10px;
+    border-radius: 5px;
+    margin: 10px;
+    background: #2d4a76;
+    color: white;
+    text-decoration: none;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+  }
+  footer {
+    font-family: "Grand Hotel", sans-serif;
+  }
 }
 </style>

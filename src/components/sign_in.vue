@@ -70,9 +70,9 @@
           <form @submit.prevent="signupFunc()">
             <div class="form-header">
               <h2>sign up</h2>
-              <button type="button" @click="googleAuth()">
+              <!-- <button type="button" @click="googleAuth()" disabled>
                 sign up with Google
-              </button>
+              </button> -->
             </div>
             <div class="input">
               <label for="userName">Name:</label
@@ -548,8 +548,8 @@ main {
         .form-header {
           width: 100%;
           h2 {
-            font-size: 15px;
-            color: rgb(55, 54, 54);
+            font-size: 21px;
+            color: #e66581;
             font-weight: 700;
             padding: 10px;
           }

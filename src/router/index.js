@@ -175,6 +175,24 @@ const routes = [
         },
       },
       {
+        path: "/course/user/help",
+        name: "CourseHelp",
+        component: function () {
+          return import(
+            /* webpackChunkName: "about" */ "../courses/courseHelp.vue"
+          );
+        },
+      },
+      {
+        path: "/course/user/setting%20privacy",
+        name: "CourseSetting",
+        component: function () {
+          return import(
+            /* webpackChunkName: "about" */ "../courses/courseSetting.vue"
+          );
+        },
+      },
+      {
         path: "/course/:course",
         name: "Course",
         component: function () {

@@ -293,7 +293,6 @@ export default {
     function dashboard() {
       router.push("/admin/dashboard");
     }
-    console.log(computed(() => Store.state.task));
 
     return {
       mode,

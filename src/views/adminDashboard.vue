@@ -74,8 +74,7 @@
 
         <button>
           <router-link to="/admin/course/courses/view" class="route">
-            <i class="fa-solid fa-book-open-reader"></i>view my
-            courses</router-link
+            <i class="fa-solid fa-book-open-reader"></i>Analytics</router-link
           >
         </button>
 
@@ -85,14 +84,8 @@
           >
         </button>
         <button>
-          <router-link to="/admin/dashboard" class="route"
+          <router-link to="/admin/feedback" class="route"
             ><i class="fa-solid fa-message"></i>feedback</router-link
-          >
-        </button>
-        <button>
-          <router-link to="/admin/dashboard" class="route">
-            <i class="fa-solid fa-gear"></i>customize your
-            dashboard</router-link
           >
         </button>
         <button>

@@ -1,7 +1,7 @@
 <template>
   <main :class="{ squeeze: course.profileMenu }">
     <div class="blur"></div>
-    <header>
+    <header @click="course.profileMenu = true">
       <nav class="profile" @click="showProfileMenu()">
         <span>
           <i class="fa-solid fa-book-open"></i>
@@ -9,6 +9,11 @@
         view courses
       </nav>
     </header>
+    <div
+      class="cover"
+      v-if="course.profileMenu"
+      @click="course.profileMenu = false"
+    ></div>
     <transition name="refresh-in">
       <div class="profile-menu" v-if="course.profileMenu">
         <button
@@ -57,7 +62,7 @@
       </div>
     </transition>
 
-    <div class="course-intro">
+    <div class="course-intro" @click="course.profileMenu = !course.profileMenu">
       <h1>courses</h1>
       <p>
         Welcome <span>{{ course.courseUser.split(" ")[0] }}!</span>
@@ -79,12 +84,25 @@
       ><a href="/#contact" class="a"
         ><i class="fa-solid fa-person-circle-question"></i></a
     ></span>
+    <transition name="appear">
+      <div class="not-allowed" v-if="no_access">
+        <div class="blur" @click="no_access = false"></div>
+        <div class="content">
+          <p>Access Denied. You're not registered for this course</p>
+          <span @click="no_access = false">&times;</span>
+          <button class="btn" @click="no_access = false">OK</button>
+          <button class="btn register">
+            <router-link to="/register" class="route">Register</router-link>
+          </button>
+        </div>
+      </div>
+    </transition>
   </main>
 </template>
 
 <script>
 import axios from "axios";
-import { reactive, onMounted } from "vue";
+import { reactive, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 export default {
   name: "CourseHome",
@@ -92,6 +110,7 @@ export default {
   setup() {
     const router = useRouter();
 
+    let no_access = ref(false);
     let course = reactive({
       courseUser: "",
       courseUserEmail: "",
@@ -118,8 +137,21 @@ export default {
     });
 
     function getCourse(courseId) {
+      course.profileMenu = false;
       localStorage.setItem("courseId", courseId);
-      router.push(`/course/${courseId}`);
+      axios
+        .get(`api/signup/subscription/${courseId}`)
+        .then((res) => {
+          if (res.statusText === "OK") {
+            router.push(`/course/${courseId}`);
+          } else {
+            no_access.value = true;
+          }
+        })
+        .catch((err) => {
+          no_access.value = true;
+          return err;
+        });
     }
 
     const showProfileMenu = () => {
@@ -135,6 +167,7 @@ export default {
     return {
       course,
       response,
+      no_access,
       showProfileMenu,
       hideProfileMenu,
       getCourse,
@@ -204,6 +237,8 @@ main {
     justify-content: center;
     align-items: center;
     position: relative;
+    margin-top: 20px;
+    cursor: pointer;
 
     .profile {
       display: flex;
@@ -270,6 +305,22 @@ main {
     }
   }
 
+  .cover {
+    position: fixed;
+    left: 0;
+    top: 10vh;
+    z-index: 1;
+    background: black;
+    opacity: 0.5;
+    width: 75vw;
+    height: 90vh;
+    cursor: pointer;
+
+    @media screen and (max-width: 770px) {
+      width: 100vw;
+    }
+  }
+
   .profile-menu {
     width: 25vw;
     height: 100vh;
@@ -290,13 +341,14 @@ main {
       align-items: center;
       border: none;
       margin: 0;
-      background: rgba(230, 101, 129, 1);
-      color: white;
+      color: rgb(49, 48, 48);
       position: absolute;
-      right: 1%;
+      background: none;
+      border: none;
       top: 1%;
+      left: 2%;
       z-index: 1;
-      font-size: 27px;
+      font-size: 30px;
     }
     .logo {
       width: 100%;
@@ -427,10 +479,10 @@ main {
     }
 
     @media screen and (max-width: 770px) {
-      position: relative;
+      // position: relative;
       left: 0;
+      top: 10vh;
       width: 100%;
-      height: fit-content;
       padding: 15px;
     }
   }
@@ -446,10 +498,10 @@ main {
 
   .course-intro {
     width: 90%;
-    margin: 20px auto;
+    margin: 0 auto;
     height: fit-content;
     padding: 10px;
-    padding-top: 50px;
+    padding-top: 20px;
     background: transparent;
     position: relative;
 
@@ -586,72 +638,66 @@ main {
     }
   }
 
-  .course-samples {
-    width: 100%;
-    height: fit-content;
+  .not-allowed {
+    width: 100vw;
+    height: 100vh;
+    // background: rgb(28, 28, 28);
+    // opacity: 0.6;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    flex-direction: column;
-    position: relative;
 
-    ul {
-      width: 100%;
+    .content {
+      width: 300px;
       height: fit-content;
-      list-style: none;
-      li {
-        width: 80%;
-        height: 100px;
-        background: white;
-        padding: 10px;
-        margin: 20px auto;
-        cursor: Pointer;
-        border-radius: 5px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
+      padding: 20px;
+      border-radius: 10px;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
 
-        .index {
+      p {
+        padding: 10px;
+      }
+
+      span {
+        color: tomato;
+        position: absolute;
+        top: 3px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 23px;
+      }
+
+      button {
+        width: 80%;
+        height: 40px;
+        margin: 10px auto;
+        border-radius: 5px;
+        background: rgb(1, 1, 73);
+        color: white;
+        border: none;
+
+        .route {
+          text-decoration: none;
+          color: white;
+          width: 100%;
           height: 100%;
-          width: 15%;
-          border-radius: 5px;
           display: flex;
           justify-content: center;
           align-items: center;
-          background: teal;
-          color: white;
-          font-weight: 700;
         }
+      }
 
-        a {
-          width: 80%;
-          height: 100%;
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-          flex-direction: column;
-
-          h3 {
-            font: 600 19px "Poppins", sans-serif;
-            text-transform: capitalize;
-          }
-
-          button {
-            width: 150px;
-            height: 30px;
-            border: none;
-            border-radius: 3px;
-            background: $col;
-            color: white;
-          }
-        }
-        &:hover {
-          transform: scale(1.1);
-          background: whitesmoke;
-        }
-        &:active {
-          transform: scale(0.8);
-        }
+      .btn.register {
+        background: tomato;
       }
     }
   }

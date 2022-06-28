@@ -667,7 +667,7 @@ nav a.router-link-exact-active {
     flex-wrap: wrap;
 
     button {
-      width: 180px;
+      min-width: 150px;
       height: 50px;
       padding: 10px;
       border: none;
@@ -683,7 +683,7 @@ nav a.router-link-exact-active {
       align-items: center;
       i {
         font-size: 25px;
-        margin-left: 3px;
+        margin-right: 5px;
         color: #072e54;
       }
 
@@ -692,11 +692,12 @@ nav a.router-link-exact-active {
       }
     }
     button.active {
-      background: #072e54;
+      background: #418ce4;
       color: white;
+      border: none;
 
       i {
-        color: #e66581;
+        color: rgb(3, 66, 118);
       }
     }
   }

@@ -25,51 +25,58 @@
         <i class="fa-solid fa-bars"></i>
       </button>
     </header>
-    <div class="menu-div" v-if="!menuBtn">
-      <button class="close" @click="menuBtn = !menuBtn">&times;</button>
-      <div class="profile-header">
-        <div class="profile-flex">
-          <span>{{ profile.name.split("")[0] }}</span>
-          <div class="info">
-            <h3>{{ profile.name }}</h3>
-            <p>student at seven academy</p>
+    <transition name="appear">
+      <div class="menu-div" v-if="!menuBtn">
+        <button class="close" @click="menuBtn = !menuBtn">&times;</button>
+        <div class="profile-header">
+          <div class="profile-flex">
+            <span>{{ profile.name.split("")[0] }}</span>
+            <div class="info">
+              <h3>{{ profile.name }}</h3>
+              <p>student at seven academy</p>
+            </div>
           </div>
+          <button @click="menuBtn = !menuBtn">
+            <router-link to="/course/user/profile" class="link"
+              >view profile</router-link
+            >
+          </button>
         </div>
-        <button @click="profile.dropdown = false">
-          <router-link to="/course/user/profile" class="link"
-            >edit profile</router-link
-          >
-        </button>
+        <hr />
+        <ul>
+          <li @click="menuBtn = !menuBtn">
+            <router-link to="/course/user/profile" class="link"
+              ><i class="fa-regular fa-user"></i>account</router-link
+            >
+          </li>
+          <li @click="menuBtn = !menuBtn">
+            <router-link to="/course" class="link"
+              ><i class="fa-solid fa-book-bookmark"></i>courses</router-link
+            >
+          </li>
+          <li @click="menuBtn = !menuBtn">
+            <router-link to="/course/user/profile" class="link">
+              <i class="fa-regular fa-bookmark"></i> Bookmarks
+              <span>{{ profile.savedCourses.length }}</span></router-link
+            >
+          </li>
+          <li @click="menuBtn = !menuBtn">
+            <router-link to="/course/user/profile" class="link">
+              <i class="fa-regular fa-square-plus"></i> subscriptions
+              <span>{{ profile.subscriptions.length }}</span></router-link
+            >
+          </li>
+          <li @click="menuBtn = !menuBtn">
+            <i class="fa-solid fa-gear"></i>setting & privacy
+          </li>
+          <li @click="menuBtn = !menuBtn">
+            <i class="fa-regular fa-question"></i>help
+          </li>
+          <li @click="logoutFunc()"><i class="fa-solid fa-ban"></i>logout</li>
+        </ul>
       </div>
-      <hr />
-      <ul>
-        <li>
-          <router-link to="/course/user/profile" class="link"
-            ><i class="fa-regular fa-user"></i>account</router-link
-          >
-        </li>
-        <li>
-          <router-link to="/course" class="link"
-            ><i class="fa-solid fa-book-bookmark"></i>courses</router-link
-          >
-        </li>
-        <li>
-          <router-link to="/course/user/profile" class="link">
-            <i class="fa-regular fa-bookmark"></i> Bookmarks
-            <span>{{ profile.savedCourses.length }}</span></router-link
-          >
-        </li>
-        <li>
-          <router-link to="/course/user/profile" class="link">
-            <i class="fa-regular fa-square-plus"></i> subscriptions
-            <span>{{ profile.subscriptions.length }}</span></router-link
-          >
-        </li>
-        <li><i class="fa-solid fa-gear"></i>setting & privacy</li>
-        <li><i class="fa-regular fa-question"></i>help</li>
-        <li @click="logoutFunc()"><i class="fa-solid fa-ban"></i>logout</li>
-      </ul>
-    </div>
+    </transition>
+
     <transition name="appear">
       <div class="profile-div" v-if="profile.dropdown">
         <button class="close" @click="profile.dropdown = !profile.dropdown">
@@ -85,27 +92,35 @@
           </div>
           <button @click="profile.dropdown = false">
             <router-link to="/course/user/profile" class="link"
-              >edit profile</router-link
+              >view profile</router-link
             >
           </button>
         </div>
         <hr />
         <ul>
-          <li>
+          <li @click="profile.dropdown = !profile.dropdown">
             <router-link to="/course/user/profile" class="link"
               >account</router-link
             >
           </li>
-          <li><router-link to="/course" class="link">courses</router-link></li>
-          <li>setting & privacy</li>
-          <li>help</li>
+          <li @click="profile.dropdown = !profile.dropdown">
+            <router-link to="/course" class="link">courses</router-link>
+          </li>
+          <li @click="profile.dropdown = !profile.dropdown">
+            <router-link to="/course/user/setting%20privacy" class="link">
+              setting & privacy</router-link
+            >
+          </li>
+          <li @click="profile.dropdown = !profile.dropdown">
+            <router-link to="/course/user/help" class="link">Help</router-link>
+          </li>
           <li @click="logoutFunc()">logout</li>
         </ul>
       </div>
     </transition>
 
     <router-view v-slot="{ Component }" class="router-view">
-      <transition name="fade" appear="">
+      <transition name="appear" appear>
         <component :is="Component" />
       </transition>
     </router-view>
@@ -136,7 +151,7 @@ export default {
           console.log(res);
           profile.name = res.data.username;
           profile.subscriptions = res.data.subscription;
-          profile.savedCourses = res.data.course;
+          profile.savedCourses = res.data.Bookmarks;
         })
         .catch((err) => {
           router.push("/login");
@@ -274,30 +289,28 @@ header {
 .profile-div,
 .menu-div {
   width: 300px;
-  height: fit-content;
-  border-radius: 8px;
+  height: 90vh;
   background: white;
   box-shadow: 0 0 1px 1px rgb(228, 228, 228);
   position: fixed;
   top: 10vh;
-  right: 5%;
+  right: 0;
   z-index: 1;
 
   .close {
     width: 30px;
     height: 30px;
-    border: 1px solid rgb(229, 228, 228);
     border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     top: 1%;
-    right: 3%;
-    font-size: 20px;
+    border: none;
+    left: 3%;
+    font-size: 30px;
     color: rgb(59, 59, 59);
-    color: white;
-    background: rgba(230, 101, 129, 1);
+    background: none;
   }
 
   .profile-header {
@@ -306,10 +319,12 @@ header {
 
     .profile-flex {
       width: 100%;
-      height: 90px;
+      height: fit-content;
       display: flex;
       justify-content: space-around;
       align-items: center;
+      flex-direction: column;
+      padding: 10px;
       span {
         width: 70px;
         height: 70px;
@@ -323,7 +338,7 @@ header {
         cursor: pointer;
       }
       .info {
-        width: 70%;
+        width: 100%;
         height: 100%;
         display: flex;
         justify-content: center;
@@ -332,8 +347,9 @@ header {
 
         h3,
         p {
-          text-align: left;
+          text-align: center;
           width: 98%;
+
           overflow: hidden;
           text-overflow: ellipsis;
         }
@@ -349,7 +365,7 @@ header {
 
     button {
       width: 90%;
-      height: 30px;
+      height: 35px;
       background: teal;
       border: none;
 
@@ -382,7 +398,7 @@ header {
 
     li {
       width: 100%;
-      height: 40px;
+      height: 45px;
       padding-left: 20px;
       cursor: pointer;
       display: flex;
@@ -449,7 +465,9 @@ header {
   @media screen and (max-width: 500px) {
     display: block;
     width: 100vw;
+    position: fixed;
     right: 0;
+    top: 10vh;
     border-radius: 0;
   }
 }

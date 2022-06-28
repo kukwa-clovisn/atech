@@ -49,7 +49,7 @@ export default {
   },
   setup(props) {
     let user = reactive({
-      user: `${localStorage.getItem("userId")}`,
+      username: `${localStorage.getItem("userId")}`,
       name: props.name,
       id: props.id,
       message: "",
@@ -57,7 +57,7 @@ export default {
     });
 
     let feedback = reactive({
-      name: `${localStorage.getItem("userId")}`,
+      username: `${localStorage.getItem("userId")}`,
       id: props.id,
       message: "",
       date: new Date(),
@@ -72,15 +72,17 @@ export default {
 
     function userRequest() {
       axios
-        .post("api/course/contact", user, {
+        .post("api/admin/contact", user, {
           headers: {
             "Content-Type": "application/json",
           },
         })
         .then((res) => {
           if (res.statusText === "OK") {
-            response.msg = res.data.msg;
+            response.msg =
+              "send successful. Question will be answered soonest.";
             response.success = true;
+            user.message = "";
             setTimeout(pop, 3000);
           }
         })
@@ -236,7 +238,6 @@ $col: #3d566f;
       input,
       button {
         width: 100% !important;
-        border: 3px solid blue;
       }
     }
   }

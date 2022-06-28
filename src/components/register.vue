@@ -66,7 +66,7 @@
               <option value="Forex">Forex</option>
               <option value="Blockchain">Blockchain</option>
               <option value="Web Development">Web Development</option>
-              <option value="Graphic Design">Graphic Design</option>
+              <option value="Design">Design</option>
               <option value="Music">Music</option>
             </select>
           </div>
@@ -183,7 +183,7 @@ export default {
 
   header {
     width: 100%;
-    background: rgb(161, 198, 181);
+    background: rgb(136, 174, 157);
   }
 
   .form-container {
