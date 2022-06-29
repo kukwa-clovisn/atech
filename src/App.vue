@@ -535,6 +535,19 @@ nav a.router-link-exact-active {
     }
   }
 
+  img {
+    display: block;
+    margin: 4px auto;
+    width: auto;
+    height: 400px;
+
+    @media screen and (max-width: 400px) {
+      width: 100%;
+      height: auto;
+      margin: auto;
+    }
+  }
+
   h1 {
     padding: 10px;
     margin: 20px auto;
@@ -628,13 +641,18 @@ nav a.router-link-exact-active {
   }
 
   p {
-    width: 97%;
+    width: 100%;
     margin: 5px auto;
     font: 400 16px "Poppins", sans-serif;
     text-align: left;
-    padding: 5px;
-    padding-left: 30px;
+    padding: 10px;
     line-height: 25px;
+  }
+  p.intro {
+    text-align: center;
+    font: 600 19px "Nunito Sans", sans-serif;
+    line-height: 30px;
+    padding: 10px;
   }
   .videos {
     max-width: fit-content;

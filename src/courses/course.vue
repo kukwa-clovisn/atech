@@ -63,6 +63,7 @@
         master course <br />
         by: {{ response.data.author }}
       </h4>
+      <p v-html="response.data.intro" class="intro"></p>
       <ul>
         <h3>tutorial objectives:</h3>
         <li
@@ -73,7 +74,8 @@
           ><a v-html="objective"></a>
         </li>
       </ul>
-      <p v-html="response.data.intro"></p>
+
+      <div v-html="response.data.course"></div>
       <div v-html="response.data.firstdescription"></div>
       <div class="videos">
         <div
