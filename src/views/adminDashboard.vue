@@ -112,7 +112,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
