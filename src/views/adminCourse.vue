@@ -310,12 +310,12 @@ export default {
               store.dispatch("edit_course", false);
               setTimeout(pop, 3000);
             } else {
-              error.value = true;
+              postError.value = true;
               setTimeout(post_error, 3000);
             }
           })
           .catch((err) => {
-            error.value = true;
+            postError.value = true;
             setTimeout(post_error, 3000);
           });
       }
