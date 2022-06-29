@@ -264,6 +264,7 @@ export default {
               courseFormat.free = res.data.free;
               courseFormat.intro = res.data.intro;
               courseFormat.videoUrl = res.data.videoUrl;
+              courseFormat.course = res.data.course;
             }
           })
           .catch((err) => err);
