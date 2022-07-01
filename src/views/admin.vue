@@ -1014,7 +1014,7 @@ main.dark-mode {
 }
 
 main.gray-mode {
-  background: rgb(5, 143, 69);
+  background: rgb(2, 134, 64);
   ::-webkit-scrollbar-thumb {
     background: rgb(3, 122, 59);
   }

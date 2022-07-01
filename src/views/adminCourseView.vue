@@ -93,7 +93,7 @@ export default {
     let config = {
       headers: {
         "Content-Type": "application/json",
-        searchid: `${localStorage.getItem("")}`,
+        coursename: `${localStorage.getItem("courseId")}`,
       },
     };
 
@@ -178,7 +178,7 @@ export default {
         )
       ) {
         axios
-          .post(`api/admin/delete/course/${id}`, { id: id })
+          .post(`api/admin/delete/course/${id}`, { id: id }, config)
           .then((res) => {
             allCourses();
           })
