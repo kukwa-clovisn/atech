@@ -53,17 +53,23 @@
       </div>
     </div>
     <div id="tutorial" v-if="response.showCourse">
-      <button @click="allCourses()" class="btn-courses">see all courses</button>
-      <div class="logo">
-        <img src="../assets/logo-white.jpg" alt="" />
+      <div class="tutorial-common">
+        <div class="fixed-img">
+          <img src="../assets/html-logo-removebg-preview.png" alt="" />
+        </div>
+        <button @click="allCourses()" class="btn-courses">
+          see all courses
+        </button>
+        <h1>{{ response.data.name }}</h1>
+        <div class="logo">
+          <img src="../assets/logo-white.jpg" alt="" />
+        </div>
+        <h2>Advanced Tech Academy</h2>
+        <h2 v-html="response.data.title" class="course-title"></h2>
+        <h4>By: {{ response.data.author }}</h4>
+        <p v-html="response.data.intro" class="intro"></p>
       </div>
 
-      <h1 v-html="response.data.title"></h1>
-      <h4>
-        master course <br />
-        by: {{ response.data.author }}
-      </h4>
-      <p v-html="response.data.intro" class="intro"></p>
       <ul>
         <h3>tutorial objectives:</h3>
         <li
@@ -167,8 +173,8 @@
         </button>
       </div>
       <Contact :id="response.data._id" :name="response.data.name" />
+      <footer>&copy;Atech2022</footer>
     </div>
-    <footer>&copy;Atech2022</footer>
   </div>
 </template>
 
@@ -266,12 +272,15 @@ export default {
             (view) => view.name === localStorage.getItem("userId")
           );
           if (!viewArr.includes(true) || !viewArr.length) {
-            axios.post(`api/user/status/${response.data.name}`, {
-              name: `${localStorage.getItem("userId")}`,
-              viewed: true,
-              id: response.data._id,
-              title: response.data.title,
-            });
+            axios
+              .post(`api/user/status/${response.data.name}`, {
+                name: `${localStorage.getItem("userId")}`,
+                viewed: true,
+                id: response.data._id,
+                title: response.data.title,
+              })
+              .then((res) => res)
+              .catch((err) => err);
           }
 
           if (response.data.Bookmarks.length >= 1) {
@@ -528,6 +537,7 @@ export default {
     border: none;
   }
   footer {
+    background: transparent;
     font-family: "Grand Hotel", sans-serif;
   }
 }

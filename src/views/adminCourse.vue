@@ -159,7 +159,9 @@
             placeholder="Course conclusion or remarks"
           ></textarea>
         </div>
-        <button type="submit" v-if="!mode.edit">create course</button>
+        <button type="submit" v-if="!mode.edit" :disabled="editing">
+          create course
+        </button>
         <button type="submit" v-if="mode.edit">Submit Editing</button>
         <div class="response">
           <div class="done" v-if="success">
@@ -199,6 +201,7 @@ export default {
 
     const mode = computed(() => store.state.mode);
 
+    let editing = ref(false);
     let response = ref("");
     let success = ref(false);
     let postError = ref(false);
@@ -230,6 +233,7 @@ export default {
     let config = {
       headers: {
         "Content-Type": "application/json",
+        coursename: `${localStorage.getItem("courseId")}`,
       },
     };
     onMounted(() => {
@@ -245,15 +249,19 @@ export default {
               for (let i = 0; i < res.data.objectives.length; i++) {
                 objectives.value += res.data.objectives[i] + ",";
               }
+
               for (let i = 0; i < res.data.firstvideolist.length; i++) {
                 video.video1 += res.data.firstvideolist[i] + ",";
               }
+
               for (let i = 0; i < res.data.secondvideolist.length; i++) {
                 video.video2 += res.data.secondvideolist[i] + ",";
               }
+
               for (let i = 0; i < res.data.thirdvideolist.length; i++) {
                 video.video3 += res.data.thirdvideolist[i] + ",";
               }
+              video.video3 = video.video3.slice(0, video.video3.length - 1);
 
               courseFormat.name = res.data.name;
               courseFormat.title = res.data.title;
@@ -265,6 +273,12 @@ export default {
               courseFormat.intro = res.data.intro;
               courseFormat.videoUrl = res.data.videoUrl;
               courseFormat.course = res.data.course;
+              objectives.value = objectives.value.slice(
+                0,
+                objectives.value.length - 1
+              );
+              video.video1 = video.video1.slice(0, video.video1.length - 1);
+              video.video2 = video.video2.slice(0, video.video2.length - 1);
             }
           })
           .catch((err) => err);
@@ -278,6 +292,7 @@ export default {
       courseFormat.secondvideolist = video.video2.split(",");
       courseFormat.thirdvideolist = video.video3.split(",");
       if (!mode.value.edit) {
+        editing.value = false;
         axios
           .post(
             `/api/admin/course/create/${localStorage.getItem("courseId")}`,
@@ -308,6 +323,7 @@ export default {
           .then((res) => {
             if (res.statusText === "OK") {
               success.value = true;
+              editing.value = true;
               store.dispatch("edit_course", false);
               setTimeout(pop, 3000);
             } else {
@@ -337,6 +353,7 @@ export default {
       success,
       postError,
       objectives,
+      editing,
       createCourse,
     };
   },

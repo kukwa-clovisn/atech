@@ -136,11 +136,11 @@ $col: #3d566f;
   align-items: center;
   .formdata {
     width: 47%;
-    margin: auto;
+    margin: 10px auto;
     height: fit-content;
     padding: 20px;
-    background: $baseColor;
-    border-radius: 15px;
+    background: rgb(228, 227, 227);
+    border-radius: 5px;
 
     label {
       padding: 10px;
@@ -149,7 +149,7 @@ $col: #3d566f;
       width: 100%;
       text-transform: capitalize;
       font: 600 23px "Poppins", sans-serif;
-      color: white;
+      color: rgb(87, 86, 86);
     }
 
     textarea {
@@ -161,7 +161,7 @@ $col: #3d566f;
       font: 500 17px "Nunito Sans", sans-serif;
       color: $baseColor;
       border-radius: 10px;
-      box-shadow: 3px 3px 1px 1px rgb(235, 235, 235) !important;
+      box-shadow: 0px 0px 1px 1px rgb(235, 235, 235) !important;
       padding: 20px;
       background: white !important;
     }
@@ -171,8 +171,10 @@ $col: #3d566f;
       width: 100% !important;
       height: 60px;
       border: none;
-      background: #174c81 !important;
-      color: rgb(216, 216, 216);
+      background: #174c81;
+      background: rgb(237, 238, 238) !important;
+      box-shadow: 0 0 2px 2px rgb(210, 210, 210);
+      color: rgb(91, 89, 89);
       border-radius: 5px !important;
       margin: 10px auto !important;
       margin-bottom: 0 !important;

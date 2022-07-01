@@ -507,19 +507,51 @@ nav a.router-link-exact-active {
 }
 
 #tutorial {
-  width: 96%;
-  margin: 5px auto;
+  width: 100%;
   position: relative;
+  margin: 0;
   height: 100%;
-  padding: 20px 0;
-  background: #fff;
+  padding: 0;
   position: relative;
+  background: rgb(8, 119, 119);
+  color: rgb(214, 211, 211);
 
-  .return {
-    color: #418ce4;
-    text-decoration: none;
-    padding: 10px;
-    font: 600 20px "Poppins", sans-serif;
+  .tutorial-common {
+    width: 100vw;
+    height: fit-content;
+    background: rgb(8, 119, 119);
+    margin: 0;
+    padding: 20px 10px;
+    position: relative;
+
+    .fixed-img {
+      width: 100px;
+      height: fit-content;
+      position: absolute;
+      bottom: 15%;
+      left: 5px;
+
+      img {
+        width: auto;
+        height: 100px;
+        cursor: pointer;
+        border-radius: 3px;
+        opacity: 0.8;
+      }
+    }
+
+    h1 {
+      color: rgb(238, 179, 30);
+    }
+
+    h2 {
+      text-align: center;
+      color: white;
+    }
+    .course-title {
+      font: 600 45px "Nunito Sans", sans-serif;
+      color: rgb(23, 197, 52);
+    }
   }
 
   .logo {
@@ -551,7 +583,7 @@ nav a.router-link-exact-active {
   h1 {
     padding: 10px;
     margin: 20px auto;
-    font: 700 50px "Nunito Sans", "Poppins", sans-serif;
+    font: 700 60px "Nunito Sans", "Poppins", sans-serif;
     text-transform: uppercase;
 
     @media screen and (max-width: 660px) {
@@ -563,12 +595,7 @@ nav a.router-link-exact-active {
   h4 {
     font: 600 19px "Poppins", sans-serif;
     padding: 10px;
-    color: #3d566f;
-
-    a {
-      display: block;
-      color: #e66581;
-    }
+    color: rgb(238, 179, 30);
   }
 
   ul {
@@ -613,25 +640,9 @@ nav a.router-link-exact-active {
   }
 
   h2 {
-    font: 600 25px "Nunito sans", sans-serif;
+    font: 600 28px "Nunito sans", sans-serif;
     text-transform: capitalize;
-    text-align: left;
     padding: 10px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-
-    span {
-      width: 70px;
-      height: 70px;
-      margin-right: 15px;
-      border-radius: 100%;
-      background: #e66581;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
   }
   .course-div {
     width: 95%;
@@ -647,6 +658,7 @@ nav a.router-link-exact-active {
     text-align: left;
     padding: 10px;
     line-height: 25px;
+    position: relative;
   }
   p.intro {
     text-align: center;
@@ -691,7 +703,7 @@ nav a.router-link-exact-active {
       border: none;
       margin: 10px;
       border-radius: 5px;
-      border: 1px solid #072e54;
+      border: 1px solid #bdbebe;
       font-weight: 700;
       font-size: 20px;
       background: transparent;
@@ -699,10 +711,11 @@ nav a.router-link-exact-active {
       display: flex;
       justify-content: center;
       align-items: center;
+      color: rgb(221, 218, 218);
       i {
         font-size: 25px;
         margin-right: 5px;
-        color: #072e54;
+        color: #fff;
       }
 
       @media screen and (max-width: 800px) {
@@ -710,12 +723,12 @@ nav a.router-link-exact-active {
       }
     }
     button.active {
-      background: #418ce4;
+      background: rgb(238, 179, 30);
       color: white;
       border: none;
 
       i {
-        color: rgb(3, 66, 118);
+        color: white;
       }
     }
   }
