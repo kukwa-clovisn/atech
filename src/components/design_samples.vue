@@ -1,8 +1,23 @@
 <template>
   <div class="samples">
     <Header />
-    <div class="carousel">
-      <Carousel />
+    <div class="container">
+      <div class="left-container">
+        <h1>Atech</h1>
+        <h2>Professional Graphic Design & Designers</h2>
+        <p>
+          Get a chance to learn Graphic Design from the best and professional
+          Graphic designers ever. <br />
+          Get the opportunity to have professional Designers work on your
+          project
+        </p>
+        <h4>made of #Graphics</h4>
+      </div>
+      <div class="right-container">
+        <button>
+          <router-link to="/#contact" class="link">Hire us</router-link>
+        </button>
+      </div>
     </div>
     <h1>
       We're exceptional in what we do and offer.
@@ -10,13 +25,6 @@
       <br />Samples
     </h1>
     <div class="images">
-      <div class="image no-flex">
-        <div class="desc">
-          <h1>online car business design</h1>
-          <a href="/#contact">Hire us</a>
-        </div>
-        <img src="../assets/design.jpeg" alt="" />
-      </div>
       <div class="image flex-left">
         <img src="../assets/design-1.jpeg" alt="" />
         <div class="desc">
@@ -66,9 +74,84 @@ $primaryColor: #e66581;
   background: $baseColor;
   padding: 0;
 
-  .carousel {
-    width: 95%;
-    padding: 20px 3px;
+  .container {
+    width: 100%;
+    height: 600px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    .left-container {
+      width: 40%;
+      height: 100%;
+      padding: 10px;
+      color: white;
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-direction: column;
+      h1 {
+        padding: 10px;
+        text-align: left;
+      }
+      p,
+      h2 {
+        text-align: left;
+      }
+
+      h4 {
+        color: rgb(13, 112, 188);
+      }
+    }
+    .right-container {
+      width: 55%;
+      height: 100%;
+      background: url(../assets/design.jpeg);
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-attachment: scroll;
+
+      button {
+        width: 200px;
+        height: 50px;
+        border: none;
+        background: white;
+        border-radius: 5px;
+        margin: 40% auto;
+
+        .link {
+          text-decoration: none;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font: 500 22px "Grand Hotel", sans-serif;
+        }
+      }
+    }
+    @media screen and (max-width: 800px) {
+      flex-direction: column;
+      height: fit-content;
+      .left-container,
+      .right-container {
+        width: 100%;
+      }
+      .left-container {
+        height: 400px;
+        align-items: center;
+
+        h1,
+        h2,
+        h4,
+        p {
+          text-align: center;
+        }
+      }
+    }
   }
 
   h1 {

@@ -56,7 +56,7 @@
             Register now to start your lessons
           </p>
           <button>
-            <router-link to="/register" class="route">Start course</router-link>
+            <router-link to="/register" class="route">Enroll Now</router-link>
           </button>
         </div>
         <div class="course">
@@ -71,7 +71,7 @@
             register now to start your lessons
           </p>
           <button>
-            <router-link to="/register" class="route">Start course</router-link>
+            <router-link to="/register" class="route">Enroll Now</router-link>
           </button>
         </div>
         <div class="course">
@@ -86,7 +86,7 @@
             register now to start your lessons
           </p>
           <button>
-            <router-link to="/register" class="route">Start course</router-link>
+            <router-link to="/register" class="route">Enroll Now</router-link>
           </button>
         </div>
         <div class="course">
@@ -100,7 +100,7 @@
             register now to start your lessons
           </p>
           <button>
-            <router-link to="/register" class="route">Start course</router-link>
+            <router-link to="/register" class="route">Enroll Now</router-link>
           </button>
         </div>
       </section>
@@ -131,6 +131,50 @@
         </div>
       </div>
       <button><a href="/register">take a course</a></button>
+    </div>
+    <div class="benefit">
+      <h1>Benefits of our programs and mentorships</h1>
+      <div class="container">
+        <div class="content">
+          <div class="img">
+            <img src="../assets/Person-Laptop_blue.png" alt="" />
+          </div>
+          <h2>Learn at your own convinience</h2>
+          <p>
+            Learning at the comfort of your home and at your pace with no
+            pressure. Learning at your convinience while gaining experience and
+            building up your portfolio
+          </p>
+        </div>
+        <div class="content">
+          <div class="img">
+            <img src="../assets/Responsive_blue.png" alt="" />
+          </div>
+          <h2>Learn with the device of your choice</h2>
+          <p>
+            Learning from all media devices. You can learn while shoping or
+            while taking a walk anywhere with any media device from a phone to a
+            computer.
+          </p>
+        </div>
+        <div class="content">
+          <div class="img">
+            <img src="../assets/Profile_blue-1.png" alt="" />
+          </div>
+          <h2>Build your portfolio</h2>
+          <p>
+            Build your portfolio that showcases your new abilities and
+            capabilities. Get certified
+          </p>
+        </div>
+        <div class="content">
+          <div class="img">
+            <img src="../assets/star_blue.png" alt="" />
+          </div>
+          <h2>Be the best.</h2>
+          <p>Learn a skill and stand out. Be the best in what your do.</p>
+        </div>
+      </div>
     </div>
     <div class="design">
       <Carousel />
@@ -807,6 +851,52 @@ main {
         text-transform: capitalize;
         font: 600 22px "Poppins", sans-serif;
         text-decoration: none;
+      }
+    }
+  }
+
+  .benefit {
+    width: 100%;
+    height: fit-content;
+    padding: 10px;
+    background: transparent;
+
+    h1 {
+      padding: 10px;
+      font: 600 30px "Nunito Sans", sans-serif;
+    }
+
+    .container {
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      flex-wrap: wrap;
+
+      .content {
+        width: 330px;
+        height: fit-content;
+        margin: 10px;
+
+        .img {
+          width: 100%;
+          height: 90px;
+
+          img {
+            height: 90px;
+            width: auto;
+            margin: 2px auto;
+            cursor: pointer;
+          }
+        }
+        h2 {
+          font: 650 23px "Nunito Sans", sans-serif;
+        }
+        p {
+          padding: 10px;
+          font-family: "Nunito Sans", sans-serif;
+        }
       }
     }
   }
