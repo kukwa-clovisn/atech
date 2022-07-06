@@ -54,13 +54,13 @@
     </div>
     <div id="tutorial" v-if="response.showCourse">
       <div class="tutorial-common">
-        <div class="fixed-img">
+        <!-- <div class="fixed-img">
           <img src="../assets/html-logo-removebg-preview.png" alt="" />
-        </div>
+        </div> -->
         <button @click="allCourses()" class="btn-courses">
           see all courses
         </button>
-        <h1>{{ response.data.name }}</h1>
+        <h1 class="course-name">{{ response.data.name }}</h1>
         <div class="logo">
           <img src="../assets/logo-white.jpg" alt="" />
         </div>

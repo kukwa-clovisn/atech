@@ -542,6 +542,7 @@ nav a.router-link-exact-active {
 
     h1 {
       color: rgb(238, 179, 30);
+      text-align: center;
     }
 
     h2 {
@@ -549,7 +550,7 @@ nav a.router-link-exact-active {
       color: white;
     }
     .course-title {
-      font: 600 45px "Nunito Sans", sans-serif;
+      font: 600 30px "Nunito Sans", sans-serif;
       color: rgb(23, 197, 52);
     }
   }
@@ -583,23 +584,29 @@ nav a.router-link-exact-active {
   h1 {
     padding: 10px;
     margin: 20px auto;
-    font: 700 60px "Nunito Sans", "Poppins", sans-serif;
+    font: 600 30px "Nunito Sans", "Poppins", sans-serif;
     text-transform: uppercase;
+    text-align: center;
 
     @media screen and (max-width: 660px) {
       font-size: 30px;
       white-space: pre-wrap;
     }
   }
+  .course-name {
+    text-align: center;
+  }
 
   h4 {
     font: 600 19px "Poppins", sans-serif;
     padding: 10px;
     color: rgb(238, 179, 30);
+    text-align: center;
   }
 
   ul {
     width: 100%;
+    height: fit-content;
     padding: 20px;
     background: #072e54;
 
@@ -613,7 +620,7 @@ nav a.router-link-exact-active {
 
     li {
       list-style-type: none;
-      height: 50px;
+      height: fit-content;
       margin-bottom: 10px;
       display: flex;
       justify-content: flex-start;
@@ -788,6 +795,13 @@ nav a.router-link-exact-active {
       margin-top: 15px;
       text-transform: capitalize;
       font: 600 20px "Nunito sans", sans-serif;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    p,
+    div {
+      width: 99%;
     }
   }
 }
