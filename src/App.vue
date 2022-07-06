@@ -652,7 +652,7 @@ nav a.router-link-exact-active {
   }
 
   p {
-    width: 100%;
+    width: 96%;
     margin: 5px auto;
     font: 400 16px "Poppins", sans-serif;
     text-align: left;
@@ -661,7 +661,7 @@ nav a.router-link-exact-active {
     position: relative;
   }
   p.intro {
-    text-align: center;
+    text-align: left;
     font: 600 19px "Nunito Sans", sans-serif;
     line-height: 30px;
     padding: 10px;
