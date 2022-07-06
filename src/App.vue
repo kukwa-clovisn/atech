@@ -653,12 +653,17 @@ nav a.router-link-exact-active {
 
   p {
     width: 96%;
-    margin: 5px auto;
+    margin: 3px auto;
     font: 400 16px "Poppins", sans-serif;
     text-align: left;
     padding: 10px;
     line-height: 25px;
     position: relative;
+  }
+  div {
+    width: 96%;
+    margin: 3px auto;
+    text-align: left;
   }
   p.intro {
     text-align: left;
