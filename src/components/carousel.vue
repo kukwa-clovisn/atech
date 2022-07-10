@@ -234,19 +234,24 @@ $primaryColor: #e66581;
       padding: 20px 10px;
       border: none;
 
-      background: $primaryColor;
+      background: white;
 
       a {
         text-transform: capitalize;
         text-decoration: none;
         width: 100%;
-        color: white;
+        color: $primaryColor;
         height: 100%;
         font-weight: 700;
         font-size: 16px;
         display: flex;
         justify-content: center;
         align-items: center;
+
+        i {
+          margin: 0 5px;
+          font-size: 22px;
+        }
       }
     }
   }

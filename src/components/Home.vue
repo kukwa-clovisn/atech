@@ -364,12 +364,10 @@
       </h6>
       <div class="contact-header">
         <nav>
-          <i class="fa-brands fa-whatsapp icon"></i>
-          <p>+237682449347</p>
-        </nav>
-        <nav>
-          <i class="fa-solid fa-phone icon"></i>
-          <p>+237682449347</p>
+          <a href="https://wa.link/geye6o" class="icon"
+            ><i class="fa-brands fa-whatsapp icon"></i>
+            <p>click to contact us on whatsapp</p></a
+          >
         </nav>
         <nav class="nav">
           <i class="fa-solid fa-envelope icon"></i>
@@ -477,7 +475,18 @@
           contact us to join our academy or to buy or sell your cryptos at a
           very cheap rate.
         </p>
-        <button><a href="/#contact">contact us </a></button>
+        <button>
+          <a href="https://wa.link/geye6o" class="route"
+            ><i class="fa-brands fa-whatsapp-square"></i>
+            click to chat us on whatsapp and join our academy
+          </a>
+        </button>
+        <button>
+          <a href="https://wa.link/geye6o" class="route"
+            ><i class="fa-brands fa-whatsapp-square"></i>
+            click to chat us on whatsapp lets buy and sell crypto
+          </a>
+        </button>
       </div>
 
       <div class="images">
@@ -489,11 +498,11 @@
         </transition>
       </div>
     </div>
-    <span class="to-landing-page"
+    <span class="to-landing-page reach"
       ><a href="#home" class="a"><i class="fa-solid fa-circle-arrow-up"></i></a
     ></span>
-    <span class="to-landing-page reach"
-      ><a href="/#contact" class="a"><i class="fa-solid fa-bell"></i></a
+    <span class="to-landing-page"
+      ><a href="/#contact" class="a"><i class="fa-solid fa-paper-plane"></i></a
     ></span>
     <span class="to-landing-page beamerTrigger"
       ><a href="/#contact" class="a"><i class="fa-solid fa-bell"></i></a
@@ -1458,14 +1467,32 @@ main {
       position: relative;
 
       nav {
-        width: 270px;
+        width: 350px;
         height: 70px;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-around;
         align-items: center;
         flex-direction: column;
         padding: 0;
         transition: all 0.3s ease;
+
+        a {
+          width: 100%;
+          height: 100%;
+          text-decoration: none;
+          color: white;
+          font-size: 24px;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          flex-direction: column;
+          padding: 0;
+          transition: all 0.3s ease;
+
+          p {
+            font-size: 16px;
+          }
+        }
 
         i {
           color: white;
@@ -1474,26 +1501,27 @@ main {
           padding: 0;
           color: #dbd9d9;
         }
+
+        &:hover {
+          background: rgb(216, 215, 215);
+          border-radius: 5px;
+          a {
+            i,
+            p {
+              color: $primaryColor;
+            }
+          }
+          i,
+          p {
+            color: $primaryColor;
+          }
+        }
       }
 
       @media screen and (max-width: 868px) {
         width: 100%;
         flex-wrap: wrap;
         justify-content: center;
-        nav {
-          width: 140px;
-          margin: 0;
-          padding: 0;
-          i,
-          p {
-            font-size: 12px;
-          }
-        }
-
-        .nav {
-          width: 47%;
-          width: 200px;
-        }
       }
     }
 
@@ -1759,19 +1787,31 @@ main {
         padding: 10px;
       }
       button {
-        width: 400px;
-        height: 70px;
+        width: 420px;
+        height: 100px;
         position: relative;
         z-index: 1;
         border-radius: 3px;
         text-transform: capitalize;
         border: none;
-        background: white;
+        background: linear-gradient(to bottom right, #3774c9, #2d548a);
+        margin: 10px auto;
 
         a {
-          color: $primaryColor;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          flex-direction: column;
+          color: white;
           text-decoration: none;
-          font: 700 25px "Poppins", sans-serif;
+          font: 700 16px "Poppins", sans-serif;
+          padding: 10px;
+          i {
+            font-size: 30px;
+            color: rgb(20, 227, 117);
+          }
         }
 
         &:active {
@@ -1831,13 +1871,13 @@ main {
   }
 
   .to-landing-page {
-    width: 40px;
-    height: 40px;
-    border-radius: 3px;
+    width: 55px;
+    height: 55px;
+    border-radius: 100%;
     background: $baseColor;
     position: fixed;
-    right: 30px;
-    bottom: 45%;
+    left: 10px;
+    bottom: 150px;
     z-index: 1;
 
     .a {
@@ -1851,12 +1891,14 @@ main {
     }
   }
   .reach {
-    left: 10px;
+    left: auto;
+    right: 10px;
     border-radius: 100%;
     width: 55px;
     height: 55px;
     background: $primaryColor;
-    bottom: 50px;
+    bottom: 130px;
+
     a {
       i {
         font-size: 20px;
@@ -1865,8 +1907,9 @@ main {
   }
 
   .beamerTrigger {
+    left: 10px;
     background: rgb(10, 234, 104);
-    bottom: 70%;
+    bottom: 50px;
   }
 }
 </style>

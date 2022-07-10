@@ -3,15 +3,14 @@
     <header class="large-screen-header">
       <nav class="topNav">
         <div class="left-topNav">
-          <a href="/#contact">
-            <i class="fa-solid fa-phone icon"></i><br />
-            +237682449347</a
+          <a href="https://wa.link/geye6o" class="route"
+            ><i class="fa-brands fa-whatsapp icon"></i> whatsapp</a
           >
         </div>
         <div class="right-topNav">
           <a href="/#contact">
-            <i class="fa-solid fa-envelope icon"></i><br />
-            kukwaclovisngong3@gmail.com</a
+            <i class="fa-solid fa-envelope icon"></i>
+            email us</a
           >
         </div>
       </nav>
@@ -275,16 +274,24 @@ header {
     position: relative;
 
     a {
+      height: 100%;
+      width: fit-content;
+      padding: 5px 10px;
       color: rgb(228, 228, 228);
       text-decoration: none;
       font-size: 11px;
-      text-transform: lowercase;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+      border-radius: 5px;
 
       i {
         margin-right: 5px;
+      }
+
+      &:hover {
+        background: linear-gradient(to bottom right, #3774c9, #2d548a);
       }
     }
   }
