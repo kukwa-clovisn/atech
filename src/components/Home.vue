@@ -492,7 +492,10 @@
     <span class="to-landing-page"
       ><a href="#home" class="a"><i class="fa-solid fa-circle-arrow-up"></i></a
     ></span>
-    <span class="to-landing-page reach beamerTrigger"
+    <span class="to-landing-page reach"
+      ><a href="/#contact" class="a"><i class="fa-solid fa-bell"></i></a
+    ></span>
+    <span class="to-landing-page beamerTrigger"
       ><a href="/#contact" class="a"><i class="fa-solid fa-bell"></i></a
     ></span>
     <Footer />
@@ -1834,7 +1837,7 @@ main {
     background: $baseColor;
     position: fixed;
     right: 30px;
-    bottom: 50px;
+    bottom: 45%;
     z-index: 1;
 
     .a {
@@ -1853,11 +1856,17 @@ main {
     width: 55px;
     height: 55px;
     background: $primaryColor;
+    bottom: 50px;
     a {
       i {
         font-size: 20px;
       }
     }
+  }
+
+  .beamerTrigger {
+    background: rgb(10, 234, 104);
+    bottom: 70%;
   }
 }
 </style>

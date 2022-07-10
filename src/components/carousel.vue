@@ -19,7 +19,12 @@
         <li>badges</li>
         <li>and many more.</li>
       </ul>
-      <button><a href="/#contact">Hire</a></button>
+      <button>
+        <a href="https://wa.link/geye6o" class="route"
+          >chat us on <i class="fa-brands fa-whatsapp"></i>whatsapp for your
+          designs</a
+        >
+      </button>
     </div>
 
     <div class="img">
@@ -223,9 +228,10 @@ $primaryColor: #e66581;
     }
     button {
       width: 80%;
-      height: 50px;
+      height: fit-content;
       border-radius: 8px;
       margin: 20px auto;
+      padding: 20px 10px;
       border: none;
 
       background: $primaryColor;
@@ -237,7 +243,7 @@ $primaryColor: #e66581;
         color: white;
         height: 100%;
         font-weight: 700;
-        font-size: 20px;
+        font-size: 16px;
         display: flex;
         justify-content: center;
         align-items: center;

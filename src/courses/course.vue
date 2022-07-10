@@ -93,7 +93,6 @@
       </div>
 
       <div v-html="response.data.description"></div>
-      <h2>Video lessons:</h2>
       <div class="videos">
         <div
           class="video"

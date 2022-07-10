@@ -24,6 +24,10 @@
           <li>
             <a href="/admin/dashboard" class="route">admin</a>
           </li>
+          <li>
+            <a href="https://wa.link/geye6o" class="route">whatsapp</a>
+          </li>
+          <div class="elfsight-app-ac18bf6d-0180-4ec2-831d-5638ec79d748"></div>
         </ul>
       </div>
     </div>
