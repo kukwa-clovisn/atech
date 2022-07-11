@@ -36,7 +36,6 @@
       </div>
     </div>
     <div class="courses-div">
-      <div class="blur"></div>
       <h1>Explore our top courses</h1>
       <p>
         Find out the best and outstanding courses in the area of your choice
@@ -44,12 +43,24 @@
         mentorship for your course of choice
       </p>
       <section class="courses">
+        <div class="course active">
+          <div class="course-img">
+            <img src="../assets/jugos.jpeg" alt="" />
+          </div>
+
+          <button>
+            <a href="https://wa.link/geye6o" class="route"
+              ><i class="fa-brands fa-whatsapp icon"></i>click here to register
+              through whatsapp
+            </a>
+          </button>
+        </div>
         <div class="course">
           <div class="course-img">
             <img src="../assets/ch1.png" alt="" />
           </div>
           <h3>one month <span class="open">open</span></h3>
-          <h5>Learn about crypto &amp; Forex</h5>
+          <h5>Learn about crypto</h5>
           <p>
             Start from a newbie into becomimg a profitable crypto trader in less
             than no time. <br />
@@ -370,8 +381,13 @@
           >
         </nav>
         <nav class="nav">
-          <i class="fa-solid fa-envelope icon"></i>
-          <p>kukwaclovisngong3@gmail.com</p>
+          <a
+            href="mailto:kukwaclovisngong3@gmail.com?subject=From Atech"
+            class="icon"
+          >
+            <i class="fa-solid fa-envelope icon"></i>
+            <p>kukwaclovisngong3@gmail.com</p>
+          </a>
         </nav>
       </div>
       <form @submit.prevent="sendMessage()">
@@ -653,16 +669,7 @@ main {
     padding-top: 30px;
     padding-bottom: 20px;
     position: relative;
-
-    .blur {
-      width: 100%;
-      height: 100%;
-      background: #1f1c2d;
-      opacity: 0.3;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
+    background: #ececec;
 
     h1 {
       padding: 10px;
@@ -779,7 +786,57 @@ main {
           margin-bottom: 20px;
         }
       }
+      .course.active {
+        width: 300px;
+        padding: 0;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: rgb(27, 136, 221);
 
+        .course-img {
+          width: 100%;
+          height: 89%;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+
+        button {
+          width: 100%;
+          height: 11%;
+          position: relative;
+          margin: 0;
+          background: rgb(27, 136, 221);
+          a {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            font-size: 13px;
+
+            i {
+              font-size: 18px;
+            }
+          }
+
+          &:hover {
+            transform: none;
+          }
+        }
+        @media screen and (max-width: 400px) {
+          height: fit-content;
+          width: 98vw !important;
+          margin: 0;
+          margin-bottom: 20px;
+        }
+      }
       @media screen and (max-width: 400px) {
         padding: 0;
         width: 100vw;
