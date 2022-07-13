@@ -155,7 +155,6 @@ export default {
           }
         })
         .catch((err) => {
-          
           response.failed = true;
           response.msg = err.response.data.msg
             ? err.response.data.msg
@@ -175,13 +174,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$baseColor: #1d375f;
 .container {
   width: 100%;
   height: fit-content;
+  background: $baseColor;
 
   header {
     width: 100%;
-    background: rgb(136, 174, 157);
+    background: $baseColor;
   }
 
   .form-container {
@@ -203,6 +204,7 @@ export default {
       background: rgb(19, 37, 62);
       border-radius: 5px;
       padding: 20px;
+      box-shadow: -10px -10px 15px #234270, 10px 10px 15px #1e3e6d;
 
       .form-header {
         width: 95%;
