@@ -125,7 +125,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$baseColor: #13253e;
+$baseColor: #1d375f;
 $primaryColor: #e66581;
 .image-enter-from {
   transform: scale(1.5);

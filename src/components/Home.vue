@@ -42,79 +42,141 @@
         with the best and experienced instructors online. Also get online
         mentorship for your course of choice
       </p>
-      <section class="courses">
-        <div class="course active">
-          <div class="course-img">
-            <img src="../assets/jugos.jpeg" alt="" />
-          </div>
-
-          <button>
-            <a href="https://wa.link/geye6o" class="route"
-              ><i class="fa-brands fa-whatsapp icon"></i>click here to register
-              through whatsapp
-            </a>
-          </button>
-        </div>
-        <div class="course">
-          <div class="course-img">
-            <img src="../assets/ch1.png" alt="" />
-          </div>
-          <h3>one month <span class="open">open</span></h3>
-          <h5>Learn about crypto</h5>
-          <p>
-            Start from a newbie into becomimg a profitable crypto trader in less
-            than no time. <br />
-            Register now to start your lessons
-          </p>
-          <button>
-            <router-link to="/register" class="route">Enroll Now</router-link>
-          </button>
-        </div>
-        <div class="course">
-          <div class="course-img">
-            <img src="../assets/web-dev.jpg" alt="" />
-          </div>
-          <h3>three months <span>open</span></h3>
-          <h5>Learn web development</h5>
-          <p>
-            Have you ever thought of learning web development and it seems hard?
-            here we have everything made easy for you. <br />
-            register now to start your lessons
-          </p>
-          <button>
-            <router-link to="/register" class="route">Enroll Now</router-link>
-          </button>
-        </div>
-        <div class="course">
-          <div class="course-img">
-            <img src="../assets/graphic-design.jpg" alt="" />
-          </div>
-          <h3>one month <span>open</span></h3>
-          <h5>learn graphic design</h5>
-          <p>
-            Learn phone and computer design and how to use design apps in less
-            than a month. <br />
-            register now to start your lessons
-          </p>
-          <button>
-            <router-link to="/register" class="route">Enroll Now</router-link>
-          </button>
-        </div>
-        <div class="course">
-          <div class="course-img">
-            <img src="../assets/piano.jpeg" alt="" />
-          </div>
-          <h3>one month <span>open</span></h3>
-          <h5>learn piano skills</h5>
-          <p>
-            Learn how to play the piano professionally <br />
-            register now to start your lessons
-          </p>
-          <button>
-            <router-link to="/register" class="route">Enroll Now</router-link>
-          </button>
-        </div>
-      </section>
+      <div id="container">
+        <swiper
+          :slidesPerView="1"
+          :spaceBetween="30"
+          :loop="true"
+          :pagination="{
+            clickable: true,
+          }"
+          :navigation="true"
+          :modules="modules"
+          class="mySwiper"
+        >
+          <swiper-slide class="card-container">
+            <div class="card-header">
+              <div class="img">
+                <img src="../assets/html-logo-removebg-preview.png" alt="" />
+              </div>
+              <div class="card-media">
+                <a href="https://www.facebook.com/237atech/" class="route">
+                  <i class="fa-brands fa-facebook"></i></a
+                ><a href="https://wa.link/geye6o" class="route"
+                  ><i class="fa-brands fa-whatsapp"></i></a
+                ><a href="https://twitter.com/KukwaNgong" class="route"
+                  ><i class="fa-brands fa-twitter"></i></a
+                ><a
+                  href="https://www.linkedin.com/in/codingherald/"
+                  class="route"
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h2 class="card-title">Learning web development</h2>
+              <p class="card-description">
+                this is an online web developmenet course for free to master and
+                get to learn new skills to add to your portfolio
+              </p>
+              <div class="card-buttons">
+                <router-link to="/login" class="btn">learn more</router-link>
+                <router-link to="/register" class="btn">Enroll Now</router-link>
+              </div>
+            </div></swiper-slide
+          >
+          <swiper-slide class="card-container">
+            <div class="card-header">
+              <div class="img">
+                <img src="../assets/pexels-pixabay-33597.jpg" alt="" />
+              </div>
+              <div class="card-media">
+                <a href="https://www.facebook.com/237atech/" class="route">
+                  <i class="fa-brands fa-facebook"></i
+                ></a>
+                <a href="https://wa.link/geye6o" class="route"
+                  ><i class="fa-brands fa-whatsapp"></i></a
+                ><a href="https://twitter.com/KukwaNgong" class="route"
+                  ><i class="fa-brands fa-twitter"></i></a
+                ><a
+                  href="https://www.linkedin.com/in/codingherald/"
+                  class="route"
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h2 class="card-title">Team Jesus Music</h2>
+              <p class="card-description">
+                Learn how to play instruments professionally. Learn more below
+              </p>
+              <div class="card-buttons">
+                <router-link to="/login" class="btn">learn more</router-link>
+                <router-link to="/register" class="btn">Enroll Now</router-link>
+              </div>
+            </div></swiper-slide
+          ><swiper-slide class="card-container">
+            <div class="card-header">
+              <div class="img">
+                <img src="../assets/team.jpg" alt="" />
+              </div>
+              <div class="card-media">
+                <a href="https://www.facebook.com/237atech/" class="route">
+                  <i class="fa-brands fa-facebook"></i></a
+                ><a href="https://wa.link/geye6o" class="route"
+                  ><i class="fa-brands fa-whatsapp"></i></a
+                ><a href="https://twitter.com/KukwaNgong" class="route"
+                  ><i class="fa-brands fa-twitter"></i></a
+                ><a
+                  href="https://www.linkedin.com/in/codingherald/"
+                  class="route"
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h2 class="card-title">JUGOS TRADING COMMUNITY</h2>
+              <p class="card-description">
+                Learn how to trade Forex professionally and profitably
+              </p>
+              <div class="card-buttons">
+                <router-link to="/login" class="btn">learn more</router-link>
+                <router-link to="/register" class="btn">Enroll Now</router-link>
+              </div>
+            </div></swiper-slide
+          >
+          <swiper-slide>
+            <div class="card-header">
+              <div class="img">
+                <img src="../assets/forex.jpg" alt="" />
+              </div>
+              <div class="card-media">
+                <a href="https://www.facebook.com/237atech/" class="route">
+                  <i class="fa-brands fa-facebook"></i></a
+                ><a href="https://wa.link/geye6o" class="route"
+                  ><i class="fa-brands fa-whatsapp"></i></a
+                ><a href="https://twitter.com/KukwaNgong" class="route"
+                  ><i class="fa-brands fa-twitter"></i></a
+                ><a
+                  href="https://www.linkedin.com/in/codingherald/"
+                  class="route"
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h2 class="card-title">Crypto Masterclass</h2>
+              <p class="card-description">
+                learn more about cryptocurrencies and its investments
+              </p>
+              <div class="card-buttons">
+                <router-link to="/login" class="btn">learn more</router-link>
+                <router-link to="/register" class="btn">Enroll Now</router-link>
+              </div>
+            </div>
+          </swiper-slide>
+        </swiper>
+      </div>
     </div>
     <div class="mission">
       <h1>our mission</h1>
@@ -521,8 +583,9 @@
       ><a href="/#contact" class="a"><i class="fa-solid fa-paper-plane"></i></a
     ></span>
     <span class="to-landing-page beamerTrigger"
-      ><a href="/#contact" class="a"><i class="fa-solid fa-bell"></i></a
+      ><a href="" class="a"><i class="fa-solid fa-bell"></i></a
     ></span>
+
     <Footer />
   </main>
 </template>
@@ -533,12 +596,28 @@ import Header from "./header.vue";
 import Footer from "./footer.vue";
 import Carousel from "./carousel.vue";
 import axios from "axios";
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from "swiper/vue";
+
+// Import Swiper styles
+import "swiper/css";
+
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import "../utils/style.css";
+
+// import required modules
+import { Pagination, Navigation } from "swiper";
+
 export default {
   name: "Home",
   components: {
     Header,
     Footer,
     Carousel,
+    Swiper,
+    SwiperSlide,
   },
   setup() {
     let animate = ref(false);
@@ -568,6 +647,8 @@ export default {
         expo2.value = !expo2.value;
       }, 15000);
     });
+
+    console.log(window.innerWidth);
 
     function sendMessage() {
       axios
@@ -601,13 +682,21 @@ export default {
         });
     }
 
-    return { animate, expo1, expo2, response, user, sendMessage };
+    return {
+      modules: [Pagination, Navigation],
+      animate,
+      expo1,
+      expo2,
+      response,
+      user,
+      sendMessage,
+    };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-$baseColor: #13253e;
+$baseColor: #1d375f;
 $primaryColor: #e66581;
 
 .pop-enter-from {
@@ -685,162 +774,6 @@ main {
       position: relative;
       margin: auto;
       color: #113b74;
-    }
-
-    .courses {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      flex-wrap: wrap;
-      width: 99vw;
-      padding: 0;
-      margin: auto;
-      position: relative;
-
-      .course {
-        width: 335px;
-        height: 450px;
-        padding-bottom: 10px;
-        background: #fff;
-        margin: 20px 20px;
-        border-radius: 3px;
-
-        .course-img {
-          width: 100%;
-          height: 180px;
-          overflow: hidden;
-          margin-bottom: 5px;
-
-          img {
-            width: 100%;
-            cursor: pointer;
-          }
-        }
-
-        h3 {
-          width: 95%;
-          margin: auto;
-          padding: 10px;
-          color: $primaryColor;
-          text-transform: capitalize;
-          text-align: left;
-          position: relative;
-
-          span {
-            width: 100px;
-            height: 40px;
-            border-radius: 0 10px 0 10px;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            right: 0;
-            top: 0;
-            padding: 2px;
-            background: $primaryColor;
-            font-size: 14px;
-          }
-        }
-
-        h5 {
-          width: 95%;
-          font: 700 19px "Poppins", sans-serif;
-          margin: auto;
-          text-transform: capitalize;
-          text-align: center;
-        }
-
-        p {
-          padding: 5px;
-          line-height: 25px;
-          width: 100%;
-          line-height: 26px;
-          margin: auto;
-          text-align: center;
-          color: #3d566f;
-          font: 500 14px "Poppins", sans-serif;
-        }
-
-        button {
-          width: 85%;
-          height: 50px;
-          border-radius: 2px;
-          margin: 20px auto;
-          margin-bottom: 10px;
-          border: none;
-          background: $primaryColor;
-
-          .route {
-            color: #fff;
-            text-decoration: none;
-            text-transform: capitalize;
-            font: 600 18px Poppins, sans-serif;
-          }
-        }
-
-        @media screen and (max-width: 400px) {
-          height: fit-content;
-          width: 98vw !important;
-          margin: 0;
-          margin-bottom: 20px;
-        }
-      }
-      .course.active {
-        width: 300px;
-        padding: 0;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        background: rgb(27, 136, 221);
-
-        .course-img {
-          width: 100%;
-          height: 89%;
-          img {
-            width: 100%;
-            height: auto;
-          }
-        }
-
-        button {
-          width: 100%;
-          height: 11%;
-          position: relative;
-          margin: 0;
-          background: rgb(27, 136, 221);
-          a {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            color: white;
-            font-size: 13px;
-
-            i {
-              font-size: 18px;
-            }
-          }
-
-          &:hover {
-            transform: none;
-          }
-        }
-        @media screen and (max-width: 400px) {
-          height: fit-content;
-          width: 98vw !important;
-          margin: 0;
-          margin-bottom: 20px;
-        }
-      }
-      @media screen and (max-width: 400px) {
-        padding: 0;
-        width: 100vw;
-      }
     }
   }
 
