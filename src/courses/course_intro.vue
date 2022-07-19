@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <header>
+    <header :class="{ 'gray-mode': mode.gray }">
       <nav class="logo"><a href="/" class="link">Atech</a></nav>
       <nav class="links">
         <li>
@@ -133,12 +133,14 @@
 
 <script>
 import axios from "axios";
-import { reactive, onMounted, ref } from "vue";
+import { reactive, onMounted, ref, computed } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 export default {
   name: "Course_intro",
   setup() {
     const router = useRouter();
+    const store = useStore();
     let profile = reactive({
       name: "",
       email: "",
@@ -146,6 +148,8 @@ export default {
       savedCourses: [],
       dropdown: false,
     });
+
+    const mode = computed(() => store.state.course_mode);
 
     let menuBtn = ref(false);
 
@@ -170,7 +174,7 @@ export default {
       router.push("/");
     }
 
-    return { profile, menuBtn, logoutFunc };
+    return { profile, mode, menuBtn, logoutFunc };
   },
 };
 </script>
@@ -287,6 +291,10 @@ header {
       display: flex;
     }
   }
+}
+
+header.gray-mode {
+  background: rgb(2, 83, 39);
 }
 
 .profile-div,

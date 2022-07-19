@@ -1,5 +1,8 @@
 <template>
-  <div class="container">
+  <div
+    class="container"
+    :class="{ 'light-mode': mode.light, 'gray-mode': mode.gray }"
+  >
     <div class="courses" v-if="!response.showCourse">
       <div class="course-container">
         <router-link to="/course" class="btn-courses"> Course page</router-link>
@@ -52,11 +55,13 @@
         </transition>
       </div>
     </div>
-    <div id="tutorial" v-if="response.showCourse">
+    <div
+      id="tutorial"
+      class="light-mode"
+      :class="{ 'light-mode': mode.light, 'gray-mode': mode.gray }"
+      v-if="response.showCourse"
+    >
       <div class="tutorial-common">
-        <!-- <div class="fixed-img">
-          <img src="../assets/html-logo-removebg-preview.png" alt="" />
-        </div> -->
         <button @click="allCourses()" class="btn-courses">
           see all courses
         </button>
@@ -180,14 +185,18 @@
 <script>
 import axios from "axios";
 import Contact from "../components/contact.vue";
-import { reactive, onMounted } from "vue";
+import { reactive, onMounted, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { useStore } from "vuex";
 export default {
   components: { Contact },
   name: "Course",
   setup() {
     const route = useRoute();
     const router = useRouter();
+    const store = useStore();
+
+    const mode = computed(() => store.state.course_mode);
 
     let response = reactive({
       data: [],
@@ -351,6 +360,7 @@ export default {
     return {
       response,
       desc,
+      mode,
       bookmarkFunc,
       getCourse,
       allCourses,
@@ -526,7 +536,7 @@ export default {
     padding: 0 10px;
     border-radius: 5px;
     margin: 10px;
-    background: #2d4a76;
+    background: #418ce4;
     color: white;
     text-decoration: none;
     text-transform: capitalize;

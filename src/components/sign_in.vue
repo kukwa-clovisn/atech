@@ -252,7 +252,9 @@ export default {
           }
         })
         .catch((err) => {
-          response.msg = err.response.data.msg;
+          response.msg = err.response.data.msg
+            ? err
+            : "Access Denied. Maybe network failure";
           response.failed = true;
 
           setTimeout(() => {

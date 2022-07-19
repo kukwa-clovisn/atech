@@ -513,32 +513,16 @@ nav a.router-link-exact-active {
   height: 100%;
   padding: 0;
   position: relative;
-  background: rgb(8, 119, 119);
+  background: linear-gradient(to left, rgb(23, 31, 36), #13253e);
   color: rgb(214, 211, 211);
 
   .tutorial-common {
     width: 100vw;
     height: fit-content;
-    background: rgb(8, 119, 119);
+    background: linear-gradient(to right, rgb(23, 31, 36), #13253e);
     margin: 0;
     padding: 20px 10px;
     position: relative;
-
-    .fixed-img {
-      width: 100px;
-      height: fit-content;
-      position: absolute;
-      bottom: 15%;
-      left: 5px;
-
-      img {
-        width: auto;
-        height: 100px;
-        cursor: pointer;
-        border-radius: 3px;
-        opacity: 0.8;
-      }
-    }
 
     h1 {
       color: rgb(238, 179, 30);
@@ -694,10 +678,17 @@ nav a.router-link-exact-active {
     margin-bottom: 20px;
 
     iframe {
-      width: 300px !important;
+      width: 500px !important;
       min-height: fit-content !important;
       border-radius: 2px;
-      box-shadow: 0 3px 2px 2px rgb(233, 232, 232);
+      // box-shadow: 0 3px 2px 2px rgb(233, 232, 232);
+      @media screen and (max-width: 540px) {
+        width: 95vw !important;
+        margin: 20px 0;
+      }
+    }
+    @media screen and (max-width: 540px) {
+      margin: 20px 0;
     }
   }
   .feedback {
@@ -802,6 +793,40 @@ nav a.router-link-exact-active {
     p,
     div {
       width: 99%;
+    }
+  }
+}
+
+#tutorial.gray-mode {
+  background: rgb(4, 104, 49);
+
+  .tutorial-common {
+    background: rgb(4, 138, 64);
+  }
+  ul {
+    background: rgb(3, 101, 47);
+  }
+}
+
+#tutorial.light-mode {
+  background: white;
+  color: rgb(51, 51, 51);
+
+  .tutorial-common {
+    background: white;
+  }
+  h2 {
+    color: rgb(32, 31, 31);
+  }
+
+  h3,
+  p,
+  h5 {
+    color: rgb(31, 30, 30);
+  }
+  ul {
+    h3 {
+      color: white;
     }
   }
 }

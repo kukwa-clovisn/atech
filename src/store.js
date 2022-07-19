@@ -9,6 +9,12 @@ const store = createStore({
         gray: false,
         edit: false,
       },
+      course_mode: {
+        light: false,
+        dark: true,
+        gray: false,
+        edit: false,
+      },
     };
   },
   gtters: {},
@@ -17,16 +23,28 @@ const store = createStore({
       state.mode.light = true;
       state.mode.dark = false;
       state.mode.gray = false;
+      // for course mode
+      state.course_mode.light = true;
+      state.course_mode.dark = false;
+      state.course_mode.gray = false;
     },
     DARK_MODE(state, pagemode) {
       state.mode.light = false;
       state.mode.dark = true;
       state.mode.gray = false;
+      // for course mode
+      state.course_mode.light = false;
+      state.course_mode.dark = true;
+      state.course_mode.gray = false;
     },
     GRAY_MODE(state, pagemode) {
       state.mode.light = false;
       state.mode.dark = false;
       state.mode.gray = true;
+      // for course mode
+      state.course_mode.light = false;
+      state.course_mode.dark = false;
+      state.course_mode.gray = true;
     },
     EDIT_COURSE(state, editToken) {
       if (editToken) {

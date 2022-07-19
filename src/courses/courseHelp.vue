@@ -1,5 +1,8 @@
 <template>
-  <div class="container">
+  <div
+    class="container"
+    :class="{ 'dark-mode': mode.dark, 'gray-mode': mode.gray }"
+  >
     <h1>How to navigate through your page</h1>
     <p>
       We're going to be walking you through some steps to help you maximize your
@@ -61,8 +64,16 @@
 </template>
 
 <script>
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
   name: "CourseHelp",
+  setup() {
+    const store = useStore();
+    const mode = computed(() => store.state.course_mode);
+
+    return { mode };
+  },
 };
 </script>
 
@@ -96,5 +107,26 @@ export default {
     text-align: left;
     padding: 10px;
   }
+}
+
+.container.dark-mode,
+.container.gray-mode {
+  background: rgb(4, 104, 49);
+
+  h1 {
+    color: white;
+  }
+
+  h2 {
+    color: rgb(227, 223, 223);
+  }
+
+  p {
+    color: rgb(197, 195, 195);
+  }
+}
+
+.container.dark-mode {
+  background: linear-gradient(to top, rgb(8, 58, 88), #13253e);
 }
 </style>

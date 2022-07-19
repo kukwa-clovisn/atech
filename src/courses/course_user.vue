@@ -1,18 +1,23 @@
 <template>
-  <div class="container">
+  <div
+    class="container"
+    :class="{ 'dark-mode': mode.dark, 'gray-mode': mode.gray }"
+  >
     <div class="left-content">
       <div class="user-logo">{{ profile.name.split("")[0] }}</div>
       <h1>Dashboard</h1>
-      <!-- <router-link to="/course"></router-link> -->
-      <div class="top-content"></div>
-      <div class="bottom-content">
-        <span class="edit"><i class="fa-solid fa-pen"></i></span>
-        <div class="info">
-          <h1>{{ profile.name }}</h1>
-          <p>{{ profile.email }}</p>
-          <h5>Douala</h5>
+      <div class="container-card">
+        <div class="top-content"></div>
+        <div class="bottom-content">
+          <span class="edit"><i class="fa-solid fa-pen"></i></span>
+          <div class="info">
+            <h1>{{ profile.name }}</h1>
+            <p>{{ profile.email }}</p>
+            <h5>Douala</h5>
+          </div>
         </div>
       </div>
+
       <h1>Select page color mode:</h1>
       <div class="page-modes">
         <button
@@ -91,7 +96,7 @@ export default {
   setup() {
     const router = useRouter();
     const store = useStore();
-    const mode = computed(() => store.state.mode);
+    const mode = computed(() => store.state.course_mode);
     let profile = reactive({
       name: "",
       email: "",
@@ -134,14 +139,14 @@ export default {
   justify-content: space-around;
   align-items: flex-start;
   padding-top: 25px;
+  padding-bottom: 20px;
 
   .left-content {
     width: 60%;
     height: 80%;
-    // background: white;
     border-radius: 15px;
-    box-shadow: 0 0 2px 2px rgb(226, 226, 231);
     position: relative;
+    padding: 10px;
 
     .user-logo {
       width: 80px;
@@ -166,6 +171,12 @@ export default {
       padding: 10px;
     }
 
+    .container-card {
+      width: 100%;
+      height: fit-content;
+      border-radius: 15px;
+      overflow: hidden;
+    }
     .top-content {
       width: 100%;
       height: 150px;
@@ -173,7 +184,6 @@ export default {
       background-size: cover;
       background-repeat: no-repeat;
       background-attachment: scroll;
-      border-radius: 15px 15px 0 0;
     }
     .bottom-content {
       position: relative;
@@ -362,6 +372,82 @@ export default {
     .right-content {
       width: 95%;
       height: fit-content;
+    }
+  }
+}
+
+.container.dark-mode,
+.container.gray-mode {
+  background: linear-gradient(to top, rgb(8, 58, 88), #13253e);
+
+  .left-content {
+    box-shadow: none;
+    border: 1px solid #153d75;
+
+    .user-logo {
+      border-color: rgb(8, 58, 88);
+      background: #153d75;
+    }
+
+    h1 {
+      color: white;
+    }
+
+    .bottom-content {
+      background: rgb(8, 58, 88);
+      .edit i {
+        color: white;
+      }
+      h1,
+      h5,
+      p {
+        color: rgb(227, 225, 225);
+      }
+    }
+  }
+  .right-content {
+    .top-content,
+    .bottom-content {
+      background: rgb(8, 58, 88);
+      box-shadow: 0 0 3px #102441;
+
+      h2 {
+        color: rgb(220, 217, 217);
+      }
+
+      ul {
+        background: #13253e;
+
+        li {
+          color: rgb(195, 194, 194);
+        }
+      }
+    }
+  }
+}
+
+.container.gray-mode {
+  background: rgb(4, 104, 49);
+
+  .left-content {
+    border-color: rgb(4, 138, 64);
+    .user-logo {
+      background: rgb(4, 104, 49);
+      border-color: rgb(4, 138, 64);
+    }
+    .bottom-content {
+      background: rgb(4, 138, 64);
+    }
+  }
+
+  .right-content {
+    .top-content,
+    .bottom-content {
+      background: rgb(4, 138, 64);
+
+      ul {
+        background: rgb(4, 104, 49);
+      }
     }
   }
 }
