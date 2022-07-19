@@ -57,7 +57,6 @@
     </div>
     <div
       id="tutorial"
-      class="light-mode"
       :class="{ 'light-mode': mode.light, 'gray-mode': mode.gray }"
       v-if="response.showCourse"
     >
