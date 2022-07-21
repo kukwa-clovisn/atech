@@ -122,10 +122,34 @@
           &:active {
             transform: scale(0.8);
           }
+
+          &:last-child {
+            background: transparent;
+            box-shadow: 0 0 1px 1px rgb(28, 160, 222);
+            color: rgb(28, 160, 222);
+          }
         }
       }
       &:hover {
         background: whitesmoke;
+      }
+    }
+
+    &:hover {
+      background: linear-gradient(to bottom left, rgb(28, 160, 222), #0c1725);
+
+      .card-header {
+        background: rgb(28, 160, 222);
+        background: linear-gradient(to top left, rgb(28, 160, 222), #0c1725);
+      }
+
+      .card-body {
+        background: linear-gradient(to bottom left, rgb(28, 160, 222), #0c1725);
+        color: white;
+        .card-title,
+        .card-description {
+          color: white;
+        }
       }
     }
 
