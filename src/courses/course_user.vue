@@ -382,8 +382,10 @@ export default {
 
   .left-content {
     box-shadow: none;
-    border: 1px solid #153d75;
-
+    box-shadow: 0 0 3px #102441;
+    .container-card {
+      box-shadow: 0 0 3px #102441;
+    }
     .user-logo {
       border-color: rgb(8, 58, 88);
       background: #153d75;
@@ -431,6 +433,11 @@ export default {
 
   .left-content {
     border-color: rgb(4, 138, 64);
+    box-shadow: 0 0 3px rgb(16, 81, 45);
+
+    .container-card {
+      box-shadow: 0 0 3px rgb(16, 81, 45);
+    }
     .user-logo {
       background: rgb(4, 104, 49);
       border-color: rgb(4, 138, 64);
@@ -444,6 +451,7 @@ export default {
     .top-content,
     .bottom-content {
       background: rgb(4, 138, 64);
+      box-shadow: 0 0 3px rgb(16, 81, 45);
 
       ul {
         background: rgb(4, 104, 49);

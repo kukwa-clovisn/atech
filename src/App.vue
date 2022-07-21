@@ -45,13 +45,22 @@ $fallback: rgb(19, 37, 62);
   transform: translateX(80vw);
 }
 
+.slide-in-enter-from {
+  transform: translateY(15vh);
+}
+
 .refresh-in-enter-active,
-.refresh-in-leave-active {
+.refresh-in-leave-active,
+.slide-in-active {
   transition: all 0.3s ease;
 }
 
 .refresh-in-leave-to {
   transform: translateX(90vw);
+}
+
+.slide-in-leave-to {
+  transform: translateY(20vh);
 }
 
 ::-webkit-scrollbar {
@@ -193,20 +202,110 @@ nav a.router-link-exact-active {
   background-repeat: no-repeat;
   margin: 0;
   position: relative;
+
+  .animation {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    canvas {
+      width: 20px;
+      height: 20px;
+      border: 1px solid white;
+      position: relative;
+    }
+
+    .animate1 {
+      position: relative;
+      border: 1px solid white;
+      border-top: none;
+      border-bottom: none;
+      animation: animate1 10s infinite linear alternate forwards;
+
+      &::before,
+      &::after {
+        content: "Atech";
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 7px;
+        background: linear-gradient(to bottom left, rgb(28, 160, 222), #0c1725);
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      &::after {
+        top: 100%;
+        left: 100%;
+      }
+    }
+    .animate2 {
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+      animation: animate2 18s linear infinite alternate forwards;
+      &::before,
+      &::after {
+        content: "Atech";
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 7px;
+        background: linear-gradient(to bottom left, rgb(28, 160, 222), #0c1725);
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      &::after {
+        top: 100%;
+        left: 100%;
+      }
+    }
+  }
+
+  @keyframes animate1 {
+    from {
+      width: 20px;
+      height: 20px;
+    }
+    50% {
+      width: 100px;
+      height: 100px;
+      transform: scale(2) translateZ(20%);
+    }
+    to {
+      transform: rotate(300deg);
+    }
+  }
+  @keyframes animate2 {
+    50% {
+      transform: translateX(200px) rotate(50deg);
+    }
+    to {
+      transform: translateY(300px) rotateX(90deg);
+    }
+  }
   .title {
     width: 100%;
     height: fit-content;
     position: relative;
-    padding: 20px;
-    top: 20px;
+    padding: 10px 20px;
     margin: auto;
 
     h1 {
       text-transform: capitalize;
-      font: 800 50px "Poppins", sans-serif;
+      font: 800 65px "Poppins", sans-serif;
       color: white;
       padding: 10px;
-      padding-top: 75px;
       width: 95%;
       margin: auto;
     }
@@ -216,27 +315,43 @@ nav a.router-link-exact-active {
       color: white;
     }
 
-    button {
-      width: 200px;
-      height: 50px;
+    .intro-btn {
+      width: 350px;
+      height: fit-content;
       margin: 30px auto;
-      margin-bottom: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
 
-      .homeBtn {
-        animation: blink 1.7s infinite alternate forwards;
-      }
-      &:hover {
-        background: transparent;
-        border: 1px solid white;
-      }
-      @keyframes blink {
-        from {
-          left: 0;
-          opacity: 1;
+      .start-btn {
+        text-decoration: none;
+        flex-basis: 1;
+        flex-grow: 1;
+        margin: 10px;
+        height: 45px;
+        border-radius: 7px;
+        background: rgb(20, 92, 125);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.3s ease;
+        &:hover {
+          background: linear-gradient(
+            to bottom right,
+            rgb(20, 92, 125),
+            #13253e
+          );
         }
-        to {
-          left: 60vw;
-          opacity: 0.3;
+
+        &:last-child {
+          background: transparent;
+          box-shadow: 0 0 0.5px 1px rgb(197, 196, 196);
+          &:hover {
+            box-shadow: 0 0 1px 1px rgb(25, 121, 165);
+            color: rgb(25, 115, 157);
+          }
         }
       }
 
@@ -335,7 +450,7 @@ nav a.router-link-exact-active {
   #blur {
     width: 100%;
     min-height: 100%;
-    background: #13253e;
+    background: linear-gradient(to bottom, rgb(20, 92, 125), #13253e);
     position: absolute;
     top: 0;
     left: 0;

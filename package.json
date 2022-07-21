@@ -8,11 +8,12 @@
   },
   "dependencies": {
     "@tinymce/tinymce-vue": "^4.0.7",
+    "@vueuse/motion": "^2.0.0-beta.12",
     "axios": "^0.27.2",
+    "swiper": "^8.0.0",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vue3-google-oauth2": "^1.0.6",
-    "swiper": "^8.0.0",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

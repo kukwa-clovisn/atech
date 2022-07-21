@@ -1,25 +1,27 @@
 <template>
-  <main>
+  <main @scroll="animateFunc()">
     <div class="landing-page" id="home">
-      <div class="blur"></div>
+      <div class="blur" id="blur"></div>
       <Header />
+      <div class="animation">
+        <div class="animate1"></div>
+        <div class="animate2"></div>
+      </div>
       <div class="title">
         <transition name="move-in">
-          <h1 v-if="animate">
-            Advanced <br />
-            Tech acadmey
-          </h1>
+          <h1 v-if="animate">Advanced Tech acadmey</h1>
         </transition>
         <transition name="appear">
           <p v-if="animate">
-            Learn about Crypto, Forex, Web developement, Graphic Design & Music
-            at the comfort of your home.
+            Welcome to your world of creativity and learning. Add more skills to
+            your skills!
           </p>
         </transition>
         <transition name="appear"> </transition>
-        <button class="landing-page-btn" v-if="animate">
-          <router-link to="/login" class="homeBtn">sign up</router-link>
-        </button>
+        <div class="intro-btn" v-if="animate">
+          <router-link to="/login" class="start-btn">start now!</router-link>
+          <router-link to="/login" class="start-btn">learn more</router-link>
+        </div>
         <transition name="refresh">
           <section v-if="animate">
             <h2>There is a reason</h2>
@@ -35,6 +37,21 @@
         </transition>
       </div>
     </div>
+    <div class="advertisement">some advertisement will be running here!</div>
+    <div class="learn-more">
+      <div class="info">
+        <h1>Learn advanced professional skills online.</h1>
+        <div class="image"><img src="../assets/mtn-computer.png" alt="" /></div>
+        <p>
+          Our academy has multiple courses to start your skill edifying journey.
+          <br />Choose any of the courses and start adding value to your
+          portfolio right away.
+        </p>
+        <button>
+          <router-link to="/login" class="btn-route">start now!</router-link>
+        </button>
+      </div>
+    </div>
     <div class="courses-div">
       <h1>Explore our top courses</h1>
       <p>
@@ -42,19 +59,9 @@
         with the best and experienced instructors online. Also get online
         mentorship for your course of choice
       </p>
-      <div id="container">
-        <swiper
-          :slidesPerView="1"
-          :spaceBetween="30"
-          :loop="true"
-          :pagination="{
-            clickable: true,
-          }"
-          :navigation="true"
-          :modules="modules"
-          class="mySwiper"
-        >
-          <swiper-slide class="card-container">
+      <transition name="slide-in">
+        <div id="container">
+          <div class="card-container">
             <div class="card-header">
               <div class="img">
                 <img src="../assets/html-logo-removebg-preview.png" alt="" />
@@ -83,9 +90,9 @@
                 <router-link to="/login" class="btn">learn more</router-link>
                 <router-link to="/register" class="btn">Enroll Now</router-link>
               </div>
-            </div></swiper-slide
-          >
-          <swiper-slide class="card-container">
+            </div>
+          </div>
+          <div class="card-container">
             <div class="card-header">
               <div class="img">
                 <img src="../assets/pexels-pixabay-33597.jpg" alt="" />
@@ -114,8 +121,9 @@
                 <router-link to="/login" class="btn">learn more</router-link>
                 <router-link to="/register" class="btn">Enroll Now</router-link>
               </div>
-            </div></swiper-slide
-          ><swiper-slide class="card-container">
+            </div>
+          </div>
+          <div class="card-container">
             <div class="card-header">
               <div class="img">
                 <img src="../assets/team.jpg" alt="" />
@@ -135,7 +143,7 @@
               </div>
             </div>
             <div class="card-body">
-              <h2 class="card-title">JUGOS TRADING COMMUNITY</h2>
+              <h2 class="card-title">FOREX TRADING COMMUNITY</h2>
               <p class="card-description">
                 Learn how to trade Forex professionally and profitably
               </p>
@@ -143,40 +151,10 @@
                 <router-link to="/login" class="btn">learn more</router-link>
                 <router-link to="/register" class="btn">Enroll Now</router-link>
               </div>
-            </div></swiper-slide
-          >
-          <swiper-slide>
-            <div class="card-header">
-              <div class="img">
-                <img src="../assets/forex.jpg" alt="" />
-              </div>
-              <div class="card-media">
-                <a href="https://www.facebook.com/237atech/" class="route">
-                  <i class="fa-brands fa-facebook"></i></a
-                ><a href="https://wa.link/geye6o" class="route"
-                  ><i class="fa-brands fa-whatsapp"></i></a
-                ><a href="https://twitter.com/KukwaNgong" class="route"
-                  ><i class="fa-brands fa-twitter"></i></a
-                ><a
-                  href="https://www.linkedin.com/in/codingherald/"
-                  class="route"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
             </div>
-            <div class="card-body">
-              <h2 class="card-title">Crypto Masterclass</h2>
-              <p class="card-description">
-                learn more about cryptocurrencies and its investments
-              </p>
-              <div class="card-buttons">
-                <router-link to="/login" class="btn">learn more</router-link>
-                <router-link to="/register" class="btn">Enroll Now</router-link>
-              </div>
-            </div>
-          </swiper-slide>
-        </swiper>
-      </div>
+          </div>
+        </div>
+      </transition>
     </div>
     <div class="mission">
       <h1>our mission</h1>
@@ -546,42 +524,12 @@
         </div>
       </div>
     </transition>
-    <div class="acta">
-      <div class="left-div">
-        <p>We offer training and also buy an sell coins.</p>
-        <p>
-          contact us to join our academy or to buy or sell your cryptos at a
-          very cheap rate.
-        </p>
-        <button>
-          <a href="https://wa.link/geye6o" class="route"
-            ><i class="fa-brands fa-whatsapp-square"></i>
-            click to chat us on whatsapp and join our academy
-          </a>
-        </button>
-        <button>
-          <a href="https://wa.link/geye6o" class="route"
-            ><i class="fa-brands fa-whatsapp-square"></i>
-            click to chat us on whatsapp lets buy and sell crypto
-          </a>
-        </button>
-      </div>
-
-      <div class="images">
-        <transition name="appear">
-          <img src="../assets/class.jpeg" v-if="expo1" alt="" />
-        </transition>
-        <transition name="appear">
-          <img src="../assets/swap.jpeg" v-if="expo2" alt="" />
-        </transition>
-      </div>
-    </div>
-    <span class="to-landing-page reach"
+    <!-- <span class="to-landing-page reach"
       ><a href="#home" class="a"><i class="fa-solid fa-circle-arrow-up"></i></a
-    ></span>
-    <span class="to-landing-page"
+    ></span> -->
+    <!-- <span class="to-landing-page"
       ><a href="/#contact" class="a"><i class="fa-solid fa-paper-plane"></i></a
-    ></span>
+    ></span> -->
     <span class="to-landing-page beamerTrigger"
       ><a href="" class="a"><i class="fa-solid fa-bell"></i></a
     ></span>
@@ -596,19 +544,8 @@ import Header from "./header.vue";
 import Footer from "./footer.vue";
 import Carousel from "./carousel.vue";
 import axios from "axios";
-// Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from "swiper/vue";
-
-// Import Swiper styles
-import "swiper/css";
-
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 
 import "../utils/style.css";
-
-// import required modules
-import { Pagination, Navigation } from "swiper";
 
 export default {
   name: "Home",
@@ -616,8 +553,6 @@ export default {
     Header,
     Footer,
     Carousel,
-    Swiper,
-    SwiperSlide,
   },
   setup() {
     let animate = ref(false);
@@ -637,6 +572,19 @@ export default {
       number: "",
     });
 
+    let slideIn = ref(false);
+
+    const animateFunc = () => {
+      console.log("scrolling");
+      if (window.scrollY >= 1100) {
+        slideIn.value = true;
+        console.log("true");
+      } else {
+        console.log("false");
+        slideIn.value = false;
+      }
+    };
+
     onMounted(() => {
       setTimeout(() => {
         animate.value = true;
@@ -647,8 +595,6 @@ export default {
         expo2.value = !expo2.value;
       }, 15000);
     });
-
-    console.log(window.innerWidth);
 
     function sendMessage() {
       axios
@@ -683,12 +629,13 @@ export default {
     }
 
     return {
-      modules: [Pagination, Navigation],
+      slideIn,
       animate,
       expo1,
       expo2,
       response,
       user,
+      animateFunc,
       sendMessage,
     };
   },
@@ -750,6 +697,81 @@ main {
   height: auto;
   padding: 0;
   margin: 0;
+  .advertisement {
+    width: 100vw;
+    height: 10vh;
+    background: #0c1725;
+    color: white;
+  }
+  .learn-more {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 10px;
+
+    .info {
+      width: 100%;
+      height: 100%;
+      display: block;
+      .image {
+        width: auto;
+        height: 200px;
+        overflow: hidden;
+        border-radius: 3px;
+        img {
+          height: 100%;
+          width: auto;
+          margin: auto;
+        }
+      }
+      h1 {
+        width: 90%;
+        margin: auto;
+        padding: 20px;
+        font: 800 55px "Poppins", sans-serif;
+        text-align: center;
+        color: #113b74;
+      }
+      p {
+        text-align: center;
+        padding: 10px;
+        font-size: 23px;
+        font-family: "Poppins", sans-serif;
+        line-height: 30px;
+        color: rgb(120, 119, 119);
+      }
+
+      button {
+        width: 200px;
+        height: 45px;
+        display: block;
+        border-radius: 7px;
+        background: rgb(28, 160, 222);
+        margin: 20px auto;
+        border: none;
+        .btn-route {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-decoration: none;
+          text-transform: capitalize;
+          padding: 5px 10px;
+          color: white;
+        }
+        &:hover {
+          background: linear-gradient(
+            to bottom left,
+            rgb(28, 160, 222),
+            #0c1725
+          );
+        }
+      }
+    }
+  }
 
   .courses-div {
     width: 100vw;
@@ -758,7 +780,7 @@ main {
     padding-top: 30px;
     padding-bottom: 20px;
     position: relative;
-    background: #ececec;
+    background: linear-gradient(to bottom, white, #ececec);
 
     h1 {
       padding: 10px;
@@ -1752,111 +1774,6 @@ main {
     }
     @media screen and (max-width: 500px) {
       top: 60vh;
-    }
-  }
-
-  .acta {
-    width: 100%;
-    height: 98vh;
-    background: linear-gradient(90deg, #2d548a, $baseColor);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: scroll;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-
-    .left-div {
-      width: 40%;
-      padding: 10px;
-
-      p {
-        color: white;
-        padding: 10px;
-      }
-      button {
-        width: 420px;
-        height: 100px;
-        position: relative;
-        z-index: 1;
-        border-radius: 3px;
-        text-transform: capitalize;
-        border: none;
-        background: linear-gradient(to bottom right, #3774c9, #2d548a);
-        margin: 10px auto;
-
-        a {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-          flex-direction: column;
-          color: white;
-          text-decoration: none;
-          font: 700 16px "Poppins", sans-serif;
-          padding: 10px;
-          i {
-            font-size: 30px;
-            color: rgb(20, 227, 117);
-          }
-        }
-
-        &:active {
-          background: white;
-          color: $primaryColor;
-        }
-
-        @media screen and (max-width: 450px) {
-          width: 90vw;
-        }
-      }
-    }
-
-    .images {
-      width: 50%;
-      height: 92%;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-
-      img {
-        height: 90%;
-        width: auto;
-        cursor: pointer;
-        transition: all 0.4s ease;
-
-        &:hover {
-          transform: scale(0.9);
-        }
-
-        &:active {
-          transform: scale(0.8);
-        }
-      }
-    }
-    @media screen and (max-width: 1050px) {
-      flex-direction: column-reverse;
-      height: fit-content;
-      padding: 20px 0;
-
-      .left-div,
-      .images {
-        width: 100%;
-        justify-content: center;
-      }
-
-      @media screen and (max-width: 800px) {
-        .images {
-          width: 100%;
-          img {
-            width: 97vw;
-            height: auto;
-          }
-        }
-      }
     }
   }
 

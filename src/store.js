@@ -17,7 +17,7 @@ const store = createStore({
       },
     };
   },
-  gtters: {},
+  getters: {},
   mutations: {
     LIGHT_MODE(state, pagemode) {
       state.mode.light = true;
