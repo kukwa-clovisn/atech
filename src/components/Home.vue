@@ -10,6 +10,13 @@
       <div class="title">
         <transition name="move-in">
           <h1 v-if="animate">Advanced Tech acadmey</h1>
+          <UseColorMode v-slot="{ colorMode }">
+            <button
+              @click="colorMode = colorMode === 'dark' ? 'light' : 'dark'"
+            >
+              colorMode {{ colorMode }}
+            </button>
+          </UseColorMode>
         </transition>
         <transition name="appear">
           <p v-if="animate">
@@ -544,6 +551,7 @@ import Header from "./header.vue";
 import Footer from "./footer.vue";
 import Carousel from "./carousel.vue";
 import axios from "axios";
+import { useColorMode } from "@vueuse/core";
 
 import "../utils/style.css";
 
@@ -558,6 +566,14 @@ export default {
     let animate = ref(false);
     let expo1 = ref(false);
     let expo2 = ref(true);
+    const colorMode = useColorMode({
+      attribute: "theme",
+      modes: {
+        // custom colors
+        dim: "dim",
+        cafe: "cafe",
+      },
+    });
 
     let response = reactive({
       success: false,
@@ -635,6 +651,7 @@ export default {
       expo2,
       response,
       user,
+      colorMode,
       animateFunc,
       sendMessage,
     };
