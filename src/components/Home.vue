@@ -7,6 +7,10 @@
         <div class="animate1"></div>
         <div class="animate2"></div>
       </div>
+      <div class="animation1">
+        <div class="animate3"></div>
+        <div class="animate4"></div>
+      </div>
       <div class="title">
         <transition name="move-in">
           <h1 v-if="animate">Advanced Tech acadmey</h1>
@@ -17,13 +21,13 @@
             Welcome to your world of creativity and learning. Add more skills to
             your skills!
           </p>
-          <!-- 81134479 -->
         </transition>
-        <transition name="appear"> </transition>
-        <div class="intro-btn" v-if="animate">
-          <router-link to="/login" class="start-btn">start now!</router-link>
-          <router-link to="/login" class="start-btn">learn more</router-link>
-        </div>
+        <transition name="appear">
+          <div class="intro-btn" v-if="animate">
+            <router-link to="/login" class="start-btn">start now!</router-link>
+            <router-link to="/login" class="start-btn">learn more</router-link>
+          </div>
+        </transition>
         <transition name="refresh">
           <section v-if="animate">
             <h2>There is a reason</h2>
@@ -39,7 +43,7 @@
         </transition>
       </div>
     </div>
-    <div class="advertisement">some advertisement will be running here!</div>
+    <div class="advertisement">Learning never ends!</div>
     <div class="learn-more">
       <div class="info">
         <h1>Learn advanced professional skills online.</h1>

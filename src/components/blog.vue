@@ -3,6 +3,10 @@
     <div class="landing-page">
       <div class="blur"></div>
       <Header />
+      <div class="animation">
+        <div class="animate1"></div>
+        <div class="animate2"></div>
+      </div>
       <div class="title">
         <transition name="move-in">
           <h1 v-if="animate">
@@ -12,13 +16,13 @@
         </transition>
         <transition name="appear">
           <p v-if="animate">
-            Read the latest updates, research, and articles by our crypto team
+            Read the latest updates, research, and articles by our team
           </p>
         </transition>
         <transition name="refresh">
-          <button class="primary-btn" v-if="animate">
-            <router-link to="/login" class="homeBtn">sign up</router-link>
-          </button>
+          <div class="intro-btn" v-if="animate">
+            <router-link to="/login" class="start-btn">sign up</router-link>
+          </div>
         </transition>
         <transition name="appear">
           <form @submit.prevent="searchPosts()" class="research" v-if="animate">
@@ -179,8 +183,6 @@ main {
     }
 
     .title {
-      top: 30px;
-
       h1 {
         padding: 25px 0;
         padding-bottom: 10px;

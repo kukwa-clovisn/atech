@@ -15,7 +15,7 @@
         </div>
       </nav>
       <nav class="bottom-nav">
-        <div class="logo-nav">
+        <div class="logo-nav" @click="toHome()">
           <h1>Atech</h1>
           <div class="logo-name">
             <span>Advanced</span><span>Tech</span><span>Acadmemy</span>
@@ -32,20 +32,28 @@
           <router-link to="/register" class="route register"
             >register</router-link
           >
-          <div class="pagemodes route">
+          <div class="pagemodes" title="change page mode">
             <button
-              class=" mode"
-              @click="colorMode = 'light'"
+              class="mode"
+              @click="
+                colorMode = 'cafe';
+                mode.light = true;
+                mode.cafe = false;
+              "
               v-if="mode.cafe"
             >
-              <i class="fa-solid fa-mug-saucer"></i>mode
+              <i class="fa-solid fa-mug-saucer"></i>
             </button>
             <button
-              class=" mode"
-              @click="colorMode = 'cafe'"
+              class="mode"
+              @click="
+                colorMode = 'light';
+                mode.light = false;
+                mode.cafe = true;
+              "
               v-if="mode.light"
             >
-              <i class="fa-solid fa-moon"></i> mode
+              <i class="fa-solid fa-moon"></i>
             </button>
           </div>
         </nav>
@@ -111,11 +119,35 @@
         </div>
       </nav>
       <nav class="bottom-nav" v-if="noDropdown">
-        <div class="logo-nav">
+        <div class="logo-nav" @click="toHome()">
           <h1>Atech</h1>
           <div class="logo-name">
             <span>Advanced</span><span>Tech</span><span>Acadmemy</span>
           </div>
+        </div>
+        <div class="pagemodes" title="change page mode">
+          <button
+            class="mode"
+            @click="
+              colorMode = 'cafe';
+              mode.light = true;
+              mode.cafe = false;
+            "
+            v-if="mode.cafe"
+          >
+            <i class="fa-solid fa-mug-saucer"></i> mode
+          </button>
+          <button
+            class="mode"
+            @click="
+              colorMode = 'light';
+              mode.light = false;
+              mode.cafe = true;
+            "
+            v-if="mode.light"
+          >
+            <i class="fa-solid fa-moon"></i> mode
+          </button>
         </div>
         <nav class="menu-bars">
           <button @click="menuFunction()">
@@ -124,10 +156,37 @@
         </nav>
       </nav>
       <nav class="bottom-nav menu-nav" v-if="onDropdown">
-        <nav class="logo-nav">
-          <span>Atech</span>
-        </nav>
-
+        <div class="logo-nav" @click="toHome()">
+          <h1>Atech</h1>
+          <div class="logo-name">
+            <span>Advanced</span><span>Tech</span><span>Acadmemy</span>
+          </div>
+        </div>
+        <!-- 681958002 -->
+        <div class="pagemodes" title="change page mode">
+          <button
+            class="mode"
+            @click="
+              colorMode = 'cafe';
+              mode.light = true;
+              mode.cafe = false;
+            "
+            v-if="mode.cafe"
+          >
+            <i class="fa-solid fa-mug-saucer"></i>mode
+          </button>
+          <button
+            class="mode"
+            @click="
+              colorMode = 'light';
+              mode.light = false;
+              mode.cafe = true;
+            "
+            v-if="mode.light"
+          >
+            <i class="fa-solid fa-moon"></i> mode
+          </button>
+        </div>
         <nav class="menu-bars">
           <button @click="closeDropdown()">&times;</button>
         </nav>
@@ -230,20 +289,9 @@ export default {
     });
 
     const mode = reactive({
-      light: true,
-      cafe: false,
+      light: false,
+      cafe: true,
     });
-
-    const switchColorMode = () => {
-      if (colorMode === "cafe") {
-        mode.light = true;
-        mode.cafe = false;
-      } else if (colorMode === "light") {
-        mode.light = false;
-        mode.cafe = true;
-      }
-    };
-
     return {
       dropRoute,
       onDropdown,
@@ -363,6 +411,7 @@ header {
       display: flex;
       justify-content: center;
       align-items: center;
+      cursor:pointer;
 
       h1 {
         text-transform: uppercase;
@@ -436,11 +485,24 @@ header {
           box-shadow: none;
         }
       }
-      .pagemodes{
-        button{
-          width:100%;
-          height:100%;
-          border:none;
+      .pagemodes {
+        width: max-content;
+        height: 60%;
+        border-radius: 3px;
+        padding: 0 5px;
+        margin: 0 10px;
+        background: linear-gradient(to bottom left, rgb(28, 160, 222), #0c1725);
+
+        .mode {
+          width: 100%;
+          height: 100%;
+          border: none;
+          color: white;
+          background: transparent;
+          i {
+            color: white;
+            padding: 0 2px;
+          }
         }
       }
     }
@@ -540,14 +602,40 @@ header {
       justify-content: space-between;
 
       .logo-nav {
-        width: 80%;
+        width: 40%;
+      }
+
+      .pagemodes {
+        width: max-content;
+        height: 70%;
+        border-radius: 3px;
+        padding: 0 5px;
+        margin: 0 10px;
+        background: linear-gradient(to bottom left, rgb(28, 160, 222), #0c1725);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .mode {
+          width: 100%;
+          height: 100%;
+          border: none;
+          color: white;
+          background: transparent;
+          font-size: 15px;
+          i {
+            color: white;
+            padding: 0 2px;
+            font-size: 18px;
+          }
+        }
       }
 
       .menu-bars {
         width: 100px;
-        position: absolute;
-        right: 20px;
-        top: 10px;
+        // position: absolute;
+        // right: 20px;
+        // top: 10px;
       }
 
       button {

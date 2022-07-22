@@ -3,6 +3,10 @@
     <div class="landing-page">
       <div class="blur"></div>
       <Header />
+      <div class="animation">
+        <div class="animate1"></div>
+        <div class="animate2"></div>
+      </div>
       <div class="title">
         <transition name="move-n">
           <h1 v-if="animate">
@@ -17,9 +21,9 @@
           </p>
         </transition>
         <transition name="refresh">
-          <button class="primary-btn" v-if="animate">
-            <router-link to="/login" class="homeBtn">sign up</router-link>
-          </button>
+          <div class="intro-btn" v-if="animate">
+            <router-link to="/login" class="start-btn">sign up</router-link>
+          </div>
         </transition>
       </div>
     </div>

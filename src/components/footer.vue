@@ -29,8 +29,29 @@
               ><i class="fa-brands fa-whatsapp"></i> whatsapp</a
             >
           </li>
-          <li @click="setCafeMode('cafe')">
-            <a><i class="fa-solid fa-mug-saucer"></i>cafe mode</a>
+          <li class="pagemodes" title="change page mode">
+            <button
+              class="mode"
+              @click="
+                colorMode = 'cafe';
+                mode.light = true;
+                mode.cafe = false;
+              "
+              v-if="mode.cafe"
+            >
+              <i class="fa-solid fa-mug-saucer"></i>mode
+            </button>
+            <button
+              class="mode"
+              @click="
+                colorMode = 'light';
+                mode.light = false;
+                mode.cafe = true;
+              "
+              v-if="mode.light"
+            >
+              <i class="fa-solid fa-moon"></i> mode
+            </button>
           </li>
           <div class="elfsight-app-ac18bf6d-0180-4ec2-831d-5638ec79d748"></div>
         </ul>
@@ -41,20 +62,25 @@
 </template>
 
 <script>
-import { computed } from "vue";
-import { useStore } from "vuex";
+import { reactive } from "vue";
+import { useColorMode } from "@vueuse/core";
 export default {
   name: "Footer",
   setup() {
-    const store = useStore();
-    const mode = computed(() => {
-      store.state.mode;
+    const colorMode = useColorMode({
+      attribute: "class",
+      modes: {
+        // custom colors
+        dim: "dim",
+        cafe: "cafe",
+      },
     });
-    const setCafeMode = (mode) => {
-      store.dispatch("pagemode", mode);
-      console.log(mode);
-    };
-    return { setCafeMode };
+
+    const mode = reactive({
+      light: false,
+      cafe: true,
+    });
+    return { mode, colorMode };
   },
 };
 </script>
@@ -138,6 +164,22 @@ $baseColor: #072e54;
             text-decoration: none;
             text-transform: capitalize;
             color: rgb(190, 190, 190);
+          }
+
+          .mode {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+            color: white;
+            border: none;
+
+            i {
+              color: white;
+              padding: 0 3px;
+            }
           }
         }
       }

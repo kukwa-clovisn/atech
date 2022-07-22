@@ -26,9 +26,8 @@
           @click="pagemode('light')"
           title="Light mode"
         >
-          <span
-            ><i class="fa-solid fa-power-off off"></i
-            ><i class="fa-solid fa-bahai"></i
+          <span>
+            <i class="fa-solid fa-moon off"></i><i class="fa-solid fa-bahai"></i
           ></span>
         </button>
         <button

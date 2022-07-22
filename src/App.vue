@@ -231,7 +231,8 @@ nav a.router-link-exact-active {
   margin: 0;
   position: relative;
 
-  .animation {
+  .animation,
+  .animation1 {
     position: absolute;
     top: 50%;
     left: 10%;
@@ -242,7 +243,8 @@ nav a.router-link-exact-active {
       position: relative;
     }
 
-    .animate1 {
+    .animate1,
+    .animation3 {
       position: relative;
       border: 1px solid white;
       border-top: none;
@@ -271,7 +273,8 @@ nav a.router-link-exact-active {
         left: 100%;
       }
     }
-    .animate2 {
+    .animate2,
+    .animation4 {
       width: 30px;
       height: 30px;
       border-radius: 100%;
@@ -298,6 +301,10 @@ nav a.router-link-exact-active {
         left: 100%;
       }
     }
+  }
+
+  .animation1 {
+    left: 90%;
   }
 
   @keyframes animate1 {
@@ -363,26 +370,27 @@ nav a.router-link-exact-active {
         margin: 10px;
         height: 45px;
         border-radius: 7px;
-        background: rgb(20, 92, 125);
+        box-shadow: 0 0 0.5px 1px rgb(197, 196, 196);
         color: white;
+        background: transparent;
         display: flex;
         justify-content: center;
         align-items: center;
         transition: 0.3s ease;
         &:hover {
-          background: linear-gradient(
-            to bottom right,
-            rgb(20, 92, 125),
-            #13253e
-          );
+          box-shadow: 0 0 1px 1px rgb(25, 121, 165);
+          color: rgb(25, 115, 157);
         }
 
         &:last-child {
-          background: transparent;
-          box-shadow: 0 0 0.5px 1px rgb(197, 196, 196);
+          background: rgb(20, 92, 125);
+          box-shadow: none;
           &:hover {
-            box-shadow: 0 0 1px 1px rgb(25, 121, 165);
-            color: rgb(25, 115, 157);
+            background: linear-gradient(
+              to bottom right,
+              rgb(20, 92, 125),
+              #13253e
+            );
           }
         }
       }
