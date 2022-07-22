@@ -8,6 +8,7 @@ const store = createStore({
         dark: true,
         gray: false,
         edit: false,
+        cafe: false,
       },
       course_mode: {
         light: false,
@@ -46,6 +47,9 @@ const store = createStore({
       state.course_mode.dark = false;
       state.course_mode.gray = true;
     },
+    CAFE_MODE(state, pagemode) {
+      state.mode.cafe = true;
+    },
     EDIT_COURSE(state, editToken) {
       if (editToken) {
         state.mode.edit = true;
@@ -62,6 +66,8 @@ const store = createStore({
         commit("DARK_MODE", pagemode);
       } else if (pagemode === "gray") {
         commit("GRAY_MODE", pagemode);
+      } else if (pagemode === "cafe") {
+        commit("CAFE_MODE", pagemode);
       } else {
         commit("LIGHT_MODE", pagemode);
       }

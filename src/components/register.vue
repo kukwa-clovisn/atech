@@ -62,11 +62,11 @@
               title="Select a course"
               required
             >
-              <option value="Cryptocurrency">Cryptocurrency</option>
+              <!-- <option value="Cryptocurrency">Cryptocurrency</option> -->
               <option value="Forex">Forex</option>
-              <option value="Blockchain">Blockchain</option>
+              <!-- <option value="Blockchain">Blockchain</option> -->
               <option value="Web Development">Web Development</option>
-              <option value="Design">Design</option>
+              <!-- <option value="Design">Design</option> -->
               <option value="Music">Music</option>
             </select>
           </div>
@@ -179,10 +179,13 @@ $baseColor: #1d375f;
   width: 100%;
   height: fit-content;
   background: $baseColor;
+  background: linear-gradient(to bottom, rgb(20, 92, 125), #13253e);
 
   header {
     width: 100%;
     background: $baseColor;
+    background: linear-gradient(to bottom, rgb(20, 92, 125), #13253e);
+    // background: transparent;
   }
 
   .form-container {

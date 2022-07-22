@@ -29,6 +29,9 @@
               ><i class="fa-brands fa-whatsapp"></i> whatsapp</a
             >
           </li>
+          <li @click="setCafeMode('cafe')">
+            <a><i class="fa-solid fa-mug-saucer"></i>cafe mode</a>
+          </li>
           <div class="elfsight-app-ac18bf6d-0180-4ec2-831d-5638ec79d748"></div>
         </ul>
       </div>
@@ -38,8 +41,21 @@
 </template>
 
 <script>
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
   name: "Footer",
+  setup() {
+    const store = useStore();
+    const mode = computed(() => {
+      store.state.mode;
+    });
+    const setCafeMode = (mode) => {
+      store.dispatch("pagemode", mode);
+      console.log(mode);
+    };
+    return { setCafeMode };
+  },
 };
 </script>
 

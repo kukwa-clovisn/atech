@@ -177,8 +177,8 @@
           <p>web development</p>
         </div>
         <div class="program">
-          <i class="fa-solid fa-object-group"></i>
-          <p>graphic design</p>
+          <i class="fa-solid fa-music"></i>
+          <p>Music</p>
         </div>
       </div>
       <button><a href="/register">take a course</a></button>
@@ -702,6 +702,9 @@ main {
     height: 10vh;
     background: #0c1725;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .learn-more {
     width: 100%;
@@ -733,6 +736,10 @@ main {
         font: 800 55px "Poppins", sans-serif;
         text-align: center;
         color: #113b74;
+
+        @media screen and (max-width: 768px) {
+          font-size: 40px;
+        }
       }
       p {
         text-align: center;
@@ -1818,5 +1825,8 @@ main {
     background: rgb(10, 234, 104);
     bottom: 50px;
   }
+}
+main.cafe-mode {
+  filter: sepia(0.9) hue-rotate(315deg) brightness(0.9);
 }
 </style>

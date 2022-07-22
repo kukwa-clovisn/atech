@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@tinymce/tinymce-vue": "^4.0.7",
+    "@vueuse/core": "^8.9.4",
     "@vueuse/motion": "^2.0.0-beta.12",
     "axios": "^0.27.2",
     "swiper": "^8.0.0",

@@ -2,16 +2,17 @@
 
 #container {
   width: 100vw;
-  height: 550px;
+  height: fit-content;
   padding: 10px 0;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   // filter: sepia(0.9) hue-rotate(315deg) brightness(0.9);
 
   .card-container {
-    width: 30%;
+    width: 330px;
     height: 500px;
     background: white;
     border-radius: 7px;
@@ -79,7 +80,7 @@
         text-align: center;
         font: 600 23px "Nunito Sans", sans-serif;
         color: rgb(73, 73, 73);
-        padding: 5px;
+        padding: 10px 5px;
         width: 90%;
         margin: auto;
       }
@@ -87,7 +88,7 @@
       .card-description {
         text-align: center;
         font: 500 13px "Poppins", sans-serif;
-        padding: 4px;
+        padding: 10px 4px;
         width: 90%;
         margin: auto;
         color: rgb(49, 49, 49);
@@ -150,6 +151,14 @@
         .card-description {
           color: white;
         }
+      }
+    }
+
+    @media screen and (max-width: 960px) {
+      width: 350px;
+
+      @media screen and (max-width: 750px) {
+        width: 95vw;
       }
     }
 

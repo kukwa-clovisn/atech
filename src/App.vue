@@ -1,8 +1,32 @@
 <template>
   <router-view v-slot="{ Component }">
-    <transition name="routes"> <component :is="Component" /> </transition>
+    <transition name="routes">
+      <component :is="Component" :class="{ 'cafe-mode': cafe }" />
+    </transition>
   </router-view>
 </template>
+<script >
+import { computed, ref } from "vue";
+import { useStore } from "vuex";
+
+export default {
+  name: "App",
+  setup() {
+    const store = useStore();
+
+    const page_mode = store.state.mode;
+    const cafe = ref(false);
+
+    computed(() => {
+      if (store.state.mode.cafe) {
+        cafe.value = true;
+      }
+    });
+
+    return { cafe };
+  },
+};
+</script>
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,400;1,700&family=Grand+Hotel&family=Jacques+Francois&family=Jacques+Francois+Shadow&family=Noto+Sans:wght@100;300;400;600;700;900&family=Nunito+Sans:ital,wght@0,300;0,600;0,700;0,900;1,300;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200&family=Russo+One&display=swap");
@@ -85,6 +109,10 @@ $fallback: rgb(19, 37, 62);
 
 html {
   scroll-behavior: smooth;
+}
+
+.cafe-mode {
+  filter: sepia(0.9) hue-rotate(315deg) brightness(0.9);
 }
 
 .routes-enter-from {
@@ -308,6 +336,10 @@ nav a.router-link-exact-active {
       padding: 10px;
       width: 95%;
       margin: auto;
+
+      @media screen and (max-width: 400px) {
+        font-size: 55px;
+      }
     }
 
     p {
