@@ -32,6 +32,22 @@
           <router-link to="/register" class="route register"
             >register</router-link
           >
+          <div class="pagemodes route">
+            <button
+              class=" mode"
+              @click="colorMode = 'light'"
+              v-if="mode.cafe"
+            >
+              <i class="fa-solid fa-mug-saucer"></i>mode
+            </button>
+            <button
+              class=" mode"
+              @click="colorMode = 'cafe'"
+              v-if="mode.light"
+            >
+              <i class="fa-solid fa-moon"></i> mode
+            </button>
+          </div>
         </nav>
         <transition name="fade">
           <div id="courses-list" v-if="showCourses">
@@ -171,8 +187,9 @@
 </template>
 
 <script>
+import { useColorMode } from "@vueuse/core";
 import { useRouter } from "vue-router";
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 export default {
   name: "Header",
   setup() {
@@ -203,11 +220,37 @@ export default {
       router.push("/");
     }
 
+    const colorMode = useColorMode({
+      attribute: "class",
+      modes: {
+        // custom colors
+        dim: "dim",
+        cafe: "cafe",
+      },
+    });
+
+    const mode = reactive({
+      light: true,
+      cafe: false,
+    });
+
+    const switchColorMode = () => {
+      if (colorMode === "cafe") {
+        mode.light = true;
+        mode.cafe = false;
+      } else if (colorMode === "light") {
+        mode.light = false;
+        mode.cafe = true;
+      }
+    };
+
     return {
       dropRoute,
       onDropdown,
       noDropdown,
       showCourses,
+      mode,
+      colorMode,
       menuFunction,
       closeDropdown,
       openDropdown,
@@ -391,6 +434,13 @@ header {
         &:hover {
           border: none;
           box-shadow: none;
+        }
+      }
+      .pagemodes{
+        button{
+          width:100%;
+          height:100%;
+          border:none;
         }
       }
     }
