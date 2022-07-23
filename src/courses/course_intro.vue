@@ -13,7 +13,7 @@
               mode.dark = false;
               pagemode('cafe');
             "
-            v-if="mode.cafe"
+            v-if="mode.dark"
           >
             <i class="fa-solid fa-mug-saucer"></i>
           </button>
@@ -26,7 +26,7 @@
               mode.dark = true;
               pagemode('light');
             "
-            v-if="mode.light"
+            v-if="mode.cafe"
           >
             <i class="fa-solid fa-moon"></i>
           </button>
@@ -39,6 +39,7 @@
               mode.dark = false;
               pagemode('dark');
             "
+            v-if="mode.light"
           >
             <i class="fa-solid fa-circle-half-stroke"></i>
           </button>
@@ -311,7 +312,18 @@ header {
       width: max-content;
       height: 90%;
       padding: 0 10px;
-      border: 1px solid white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      button {
+        border: none;
+        background: transparent;
+
+        i {
+          font-size: 25px;
+        }
+      }
     }
 
     .profile {

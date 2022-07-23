@@ -81,7 +81,7 @@
         <span>{{ user.msg }}</span>
       </div>
     </div>
-      <span class="to-landing-page reach"
+    <span class="to-landing-page reach"
       ><a href="/#contact" class="a"
         ><i class="fa-solid fa-person-circle-question"></i></a
     ></span>
@@ -217,6 +217,7 @@ $col: #3d566f;
 
 main {
   background: rgb(249, 225, 198);
+  background: linear-gradient(to bottom, rgb(20, 92, 125), #13253e);
   width: 100%;
   padding: 0;
 

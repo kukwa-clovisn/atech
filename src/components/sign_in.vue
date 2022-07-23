@@ -1,9 +1,6 @@
 <template>
   <main>
     <Header />
-    <div class="c1">
-      <img src="../assets/forex.jpg" alt="BTC" />
-    </div>
     <div class="content">
       <h2>Atech</h2>
       <transition name="fade">
@@ -375,35 +372,6 @@ main {
     }
   }
 
-  .c1 {
-    width: 200px;
-    height: 200px;
-    background: transparent;
-    position: fixed;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform: rotateZ(-90deg);
-    opacity: 0.6;
-    top: 15vh;
-    left: 0vw;
-    animation: turn 10s linear infinite forwards;
-
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      border-radius: 100%;
-    }
-  }
-
-  @keyframes turn {
-    to {
-      transform: rotateZ(-360deg) translateY(100px);
-    }
-  }
-
   .content {
     width: 100vw;
     height: fit-content;
@@ -416,6 +384,7 @@ main {
     padding-top: 30px;
     padding-bottom: 30px;
     position: relative;
+    animation: 8s background-change infinite linear forwards;
 
     h2 {
       width: 730px;
@@ -721,6 +690,21 @@ main {
       justify-content: center;
       align-items: center;
       color: rgb(216, 216, 216);
+    }
+  }
+
+  @keyframes background-change {
+    25% {
+      background: linear-gradient(to top left, rgb(20, 92, 125), #13253e);
+    }
+    50% {
+      background: linear-gradient(to bottom left, rgb(20, 92, 125), #13253e);
+    }
+    75% {
+      background: linear-gradient(to bottom, rgb(20, 92, 125), #13253e);
+    }
+    to {
+      background: linear-gradient(to bottom right, rgb(20, 92, 125), #13253e);
     }
   }
 }
