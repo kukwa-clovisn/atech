@@ -3,6 +3,46 @@
     <header :class="{ 'gray-mode': mode.gray }">
       <nav class="logo"><a href="/" class="link">Atech</a></nav>
       <nav class="links">
+        <li class="pagemodes" title="change page mode">
+          <button
+            class="mode"
+            @click="
+              colorMode = 'cafe';
+              mode.light = true;
+              mode.cafe = false;
+              mode.dark = false;
+              pagemode('cafe');
+            "
+            v-if="mode.cafe"
+          >
+            <i class="fa-solid fa-mug-saucer"></i>
+          </button>
+          <button
+            class="mode"
+            @click="
+              colorMode = 'light';
+              mode.light = false;
+              mode.cafe = false;
+              mode.dark = true;
+              pagemode('light');
+            "
+            v-if="mode.light"
+          >
+            <i class="fa-solid fa-moon"></i>
+          </button>
+          <button
+            class="mode"
+            @click="
+              colorMode = 'dark';
+              mode.light = false;
+              mode.cafe = true;
+              mode.dark = false;
+              pagemode('dark');
+            "
+          >
+            <i class="fa-solid fa-circle-half-stroke"></i>
+          </button>
+        </li>
         <li>
           <a href="/course/user/profile" class="link">
             Bookmarks <span>{{ profile.savedCourses.length }}</span>
@@ -136,6 +176,7 @@ import axios from "axios";
 import { reactive, onMounted, ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { useColorMode } from "@vueuse/core";
 export default {
   name: "Course_intro",
   setup() {
@@ -149,7 +190,7 @@ export default {
       dropdown: false,
     });
 
-    const mode = computed(() => store.state.course_mode);
+    const storeMode = computed(() => store.state.course_mode);
 
     let menuBtn = ref(false);
 
@@ -174,7 +215,34 @@ export default {
       router.push("/");
     }
 
-    return { profile, mode, menuBtn, logoutFunc };
+    const colorMode = useColorMode({
+      attribute: "class",
+      modes: {
+        // custom colors
+        dim: "dim",
+        cafe: "cafe",
+      },
+    });
+
+    const mode = reactive({
+      light: true,
+      cafe: false,
+      dark: false,
+    });
+
+    function pagemode(mode) {
+      store.dispatch("pagemode", mode);
+    }
+
+    return {
+      profile,
+      colorMode,
+      mode,
+      storeMode,
+      menuBtn,
+      pagemode,
+      logoutFunc,
+    };
   },
 };
 </script>
@@ -237,6 +305,13 @@ header {
         justify-content: center;
         align-items: center;
       }
+    }
+
+    .pagemodes {
+      width: max-content;
+      height: 90%;
+      padding: 0 10px;
+      border: 1px solid white;
     }
 
     .profile {

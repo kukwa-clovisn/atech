@@ -1,7 +1,11 @@
 <template>
   <div
     class="container"
-    :class="{ 'light-mode': mode.light, 'gray-mode': mode.gray }"
+    :class="{
+      'light-mode': storeMode.light,
+      'dark-mode': storeMode.dark,
+      'cafe-mode': storeMode.cafe,
+    }"
   >
     <div class="courses" v-if="!response.showCourse">
       <div class="course-container">
@@ -187,6 +191,7 @@ import Contact from "../components/contact.vue";
 import { reactive, onMounted, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { useColorMode } from "@vueuse/core";
 export default {
   components: { Contact },
   name: "Course",
@@ -195,8 +200,8 @@ export default {
     const router = useRouter();
     const store = useStore();
 
-    const mode = computed(() => store.state.course_mode);
-
+    const storeMode = computed(() => store.state.course_mode);
+    console.log(storeMode.value);
     let response = reactive({
       data: [],
       title: "",
@@ -356,9 +361,29 @@ export default {
         .catch((err) => err);
     }
 
+    const colorMode = useColorMode({
+      attribute: "class",
+      modes: {
+        // custom colors
+        dim: "dim",
+        cafe: "cafe",
+        dark: "dark",
+        light: "light",
+      },
+    });
+
+    console.log(colorMode.value);
+    const mode = reactive({
+      light: false,
+      cafe: true,
+    });
+
     return {
       response,
       desc,
+      mode,
+      colorMode,
+      storeMode,
       mode,
       bookmarkFunc,
       getCourse,
@@ -451,9 +476,10 @@ export default {
             color: rgb(225, 105, 7);
           }
           .intro {
-            font-size: 14px;
+            font-size: 12px;
             color: rgb(133, 131, 131);
             color: #3d5272;
+            font-family: "Poppins", sans-serif;
           }
           button {
             width: 200px;
@@ -547,6 +573,53 @@ export default {
   footer {
     background: transparent;
     font-family: "Grand Hotel", sans-serif;
+  }
+}
+
+.container.dark-mode {
+  .courses {
+    background: linear-gradient(to top, rgb(8, 58, 88), #13253e);
+
+    h2 {
+      color: white;
+    }
+
+    .course-container {
+      ul {
+        li {
+          background: rgb(8, 58, 88);
+          box-shadow: 0 0 3px #102441;
+
+          .title {
+            color: rgb(255, 128, 24);
+          }
+
+          .intro {
+            color: rgb(218, 217, 217);
+          }
+          footer {
+            color: rgb(147, 145, 145);
+          }
+        }
+      }
+    }
+    .description-container {
+      .content {
+        background: rgb(8, 58, 88);
+        box-shadow: 0 0 3px #102441;
+
+        h3 {
+          color: white;
+        }
+
+        p {
+          color: rgb(174, 174, 174);
+          a {
+            color: rgb(225, 105, 7);
+          }
+        }
+      }
+    }
   }
 }
 </style>

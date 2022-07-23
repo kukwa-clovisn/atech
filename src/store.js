@@ -13,6 +13,7 @@ const store = createStore({
       course_mode: {
         light: false,
         dark: true,
+        cafe: false,
         gray: false,
         edit: false,
       },
