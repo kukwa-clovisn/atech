@@ -608,6 +608,10 @@ export default {
         background: rgb(8, 58, 88);
         box-shadow: 0 0 3px #102441;
 
+        span {
+          color: white;
+        }
+
         h3 {
           color: white;
         }

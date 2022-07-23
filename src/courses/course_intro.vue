@@ -2,48 +2,48 @@
   <div class="container">
     <header :class="{ 'gray-mode': mode.gray }">
       <nav class="logo"><a href="/" class="link">Atech</a></nav>
+      <nav class="pagemodes" title="change page mode">
+        <button
+          class="mode"
+          @click="
+            colorMode = 'cafe';
+            mode.light = true;
+            mode.cafe = false;
+            mode.dark = false;
+            pagemode('cafe');
+          "
+          v-if="mode.dark"
+        >
+          <i class="fa-solid fa-mug-saucer"></i>
+        </button>
+        <button
+          class="mode"
+          @click="
+            colorMode = 'light';
+            mode.light = false;
+            mode.cafe = false;
+            mode.dark = true;
+            pagemode('light');
+          "
+          v-if="mode.cafe"
+        >
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <button
+          class="mode"
+          @click="
+            colorMode = 'dark';
+            mode.light = false;
+            mode.cafe = true;
+            mode.dark = false;
+            pagemode('dark');
+          "
+          v-if="mode.light"
+        >
+          <i class="fa-solid fa-circle-half-stroke"></i>
+        </button>
+      </nav>
       <nav class="links">
-        <li class="pagemodes" title="change page mode">
-          <button
-            class="mode"
-            @click="
-              colorMode = 'cafe';
-              mode.light = true;
-              mode.cafe = false;
-              mode.dark = false;
-              pagemode('cafe');
-            "
-            v-if="mode.dark"
-          >
-            <i class="fa-solid fa-mug-saucer"></i>
-          </button>
-          <button
-            class="mode"
-            @click="
-              colorMode = 'light';
-              mode.light = false;
-              mode.cafe = false;
-              mode.dark = true;
-              pagemode('light');
-            "
-            v-if="mode.cafe"
-          >
-            <i class="fa-solid fa-moon"></i>
-          </button>
-          <button
-            class="mode"
-            @click="
-              colorMode = 'dark';
-              mode.light = false;
-              mode.cafe = true;
-              mode.dark = false;
-              pagemode('dark');
-            "
-            v-if="mode.light"
-          >
-            <i class="fa-solid fa-circle-half-stroke"></i>
-          </button>
-        </li>
         <li>
           <a href="/course/user/profile" class="link">
             Bookmarks <span>{{ profile.savedCourses.length }}</span>
@@ -278,6 +278,24 @@ header {
     }
   }
 
+  .pagemodes {
+    width: max-content;
+    height: 90%;
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      border: none;
+      background: transparent;
+
+      i {
+        font-size: 20px;
+        color: white;
+      }
+    }
+  }
   .links {
     width: 70%;
     height: 100%;
@@ -305,24 +323,6 @@ header {
         display: flex;
         justify-content: center;
         align-items: center;
-      }
-    }
-
-    .pagemodes {
-      width: max-content;
-      height: 90%;
-      padding: 0 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      button {
-        border: none;
-        background: transparent;
-
-        i {
-          font-size: 25px;
-        }
       }
     }
 
@@ -369,7 +369,7 @@ header {
     flex-direction: row-reverse;
 
     .logo {
-      width: 85%;
+      width: 50%;
     }
     .links {
       display: none;

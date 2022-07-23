@@ -9,7 +9,9 @@
       <div class="container-card">
         <div class="top-content"></div>
         <div class="bottom-content">
-          <span class="edit"><i class="fa-solid fa-pen"></i></span>
+          <span class="edit" @click="updateProfile = true"
+            ><i class="fa-solid fa-pen"></i
+          ></span>
           <div class="info">
             <h1>{{ profile.name }}</h1>
             <p>{{ profile.email }}</p>
@@ -83,12 +85,80 @@
         <p v-if="!profile.savedCourses.length">No courses saved yet</p>
       </div>
     </div>
+    <transition name="appear">
+      <div class="update-container" v-if="updateProfile">
+        <div class="blur"></div>
+        <div class="form">
+          <form>
+            <h2>
+              update your profile
+              <span @click="updateProfile = !updateProfile">&times;</span>
+            </h2>
+            <div class="credentials">
+              <div class="input">
+                <div class="value">
+                  <label for="name" class="input-label">
+                    <i class="fa-solid fa-user"></i
+                  ></label>
+
+                  <input
+                    type="name"
+                    name="name"
+                    id="name"
+                    placeholder=" "
+                    autocomplete="off"
+                    required
+                  />
+                  <label for="name" class="active">new Name</label>
+                </div>
+              </div>
+              <div class="input">
+                <div class="value">
+                  <label for="email" class="input-label">
+                    <i class="fa-solid fa-envelope"></i>
+                  </label>
+
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder=" "
+                    autocomplete="off"
+                  />
+                  <label for="email" class="active">new email</label>
+                </div>
+              </div>
+              <div class="input">
+                <div class="value">
+                  <label for="password" class="input-label">
+                    <i class="fa-solid fa-key"></i>
+                  </label>
+
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder=" "
+                    autocomplete="off"
+                  />
+                  <label for="password" class="active">new Password</label>
+                </div>
+              </div>
+              <button type="submit">Update Profile</button>
+            </div>
+            <div class="footer">
+              &copy;<span>Advanced<span>Tech</span>Academy</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
 import axios from "axios";
 import { useRouter } from "vue-router";
-import { reactive, onBeforeMount, computed } from "vue";
+import { reactive, onBeforeMount, computed, ref } from "vue";
 import { useStore } from "vuex";
 export default {
   name: "Course_user",
@@ -103,6 +173,8 @@ export default {
       savedCourses: [],
       dropdown: false,
     });
+
+    let updateProfile = ref(false);
 
     function checkToken() {
       axios("api/token")
@@ -125,7 +197,7 @@ export default {
       store.dispatch("pagemode", mode);
     }
 
-    return { profile, mode, pagemode };
+    return { profile, updateProfile, mode, pagemode };
   },
 };
 </script>
@@ -139,6 +211,7 @@ export default {
   align-items: flex-start;
   padding-top: 25px;
   padding-bottom: 20px;
+  position: relative;
 
   .left-content {
     width: 60%;
@@ -371,6 +444,204 @@ export default {
     .right-content {
       width: 95%;
       height: fit-content;
+    }
+  }
+}
+.update-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .blur {
+    background: linear-gradient(to top, rgb(8, 58, 88), #13253e);
+    opacity: 0.9;
+    z-index: 1;
+  }
+  .form {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    form {
+      width: 500px;
+      height: fit-content;
+      border-radius: 7px;
+      background: white;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+
+      h2 {
+        width: 100%;
+        position: relative;
+        padding: 10px;
+        font: 600 30px "Nunito Sans", sans-serif;
+        color: rgb(65, 78, 83);
+
+        span {
+          position: absolute;
+          top: 0;
+          right: 15px;
+          color: tomato;
+          cursor: pointer;
+        }
+      }
+
+      .credentials {
+        width: 83%;
+        height: fit-content;
+        margin: 10px auto;
+
+        .input {
+          margin: 20px auto;
+          padding: 5px 0;
+          width: 100%;
+
+          .value {
+            width: 100%;
+            height: fit-content;
+            display: Flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 0.5px 1px #315589;
+            border-radius: 3px;
+            position: relative;
+            label {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 4px 3px;
+              cursor: text;
+              text-transform: capitalize;
+              transition: all 0.3s ease;
+            }
+
+            label.active {
+              position: absolute;
+              top: 20%;
+              left: 12%;
+            }
+
+            @keyframes inputwrite {
+              to {
+                transform: translateX(100%);
+              }
+            }
+
+            label.input-label {
+              position: relative;
+              width: 10%;
+              height: 35px;
+              background: transparent;
+              border-right: 1px solid rgb(207, 206, 206);
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 1px 0;
+              cursor: pointer;
+              i {
+                color: rgb(107, 132, 145);
+                position: relative;
+                left: 0;
+                animation: writing 5s linear infinite forwards;
+              }
+            }
+
+            input {
+              width: 90%;
+              height: 50px;
+              outline: none;
+              border: none;
+              padding-left: 15px;
+              background: transparent;
+              border-radius: 0 3px 3px 0;
+
+              &:active,
+              &:focus {
+                background: white;
+              }
+            }
+            @keyframes writing {
+              to {
+                transform: rotateY(360deg);
+              }
+            }
+
+            input:focus ~ label.active,
+            input:not(:focus):not(:placeholder-shown) ~ label.active {
+              top: -0.6rem;
+              left: 12%;
+              background: white;
+              font-size: 0.7em;
+              padding: 3px 6px;
+              box-shadow: none;
+              span {
+                display: none;
+              }
+            }
+          }
+        }
+        button {
+          width: 100%;
+          height: 50px;
+          margin: 10px auto;
+          border: none;
+          background: linear-gradient(to top, rgb(8, 58, 88), #13253e);
+          border-radius: 4px;
+          color: white;
+          font: 600 24px "Nunito Sans", sans-serif;
+        }
+      }
+
+      .footer {
+        width: 100%;
+        height: 70px;
+        background: rgb(240, 241, 241);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+          padding: 0 5px;
+          font: 600 23px "Nunito Sans", sans-serif;
+          color: rgb(65, 78, 83);
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          span {
+            color: tomato;
+            padding: 0;
+          }
+        }
+        .link {
+          text-decoration: none;
+          padding-left: 5px;
+          color: rgb(38, 51, 59);
+
+          &:hover {
+            color: tomato;
+            text-decoration: underline;
+          }
+        }
+
+        @media screen and (max-width: 320px) {
+          span {
+            font-size: 18px;
+          }
+        }
+      }
+
+      @media screen and (max-width: 522px) {
+        width: 99%;
+      }
     }
   }
 }
