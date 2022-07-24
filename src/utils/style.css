@@ -153,7 +153,7 @@
 @media screen and (max-width: 500px) {
   #container .card-container {
     width: 90vw !important;
-    height: 400px !important;
+    height: 430px !important;
   }
   #container .card-container .card-body .card-title {
     font-size: 19px;
