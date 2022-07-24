@@ -411,7 +411,7 @@ header {
       display: flex;
       justify-content: center;
       align-items: center;
-      cursor:pointer;
+      cursor: pointer;
 
       h1 {
         text-transform: uppercase;
@@ -628,6 +628,10 @@ header {
             padding: 0 2px;
             font-size: 18px;
           }
+        }
+
+        @media screen and (max-width: 450px) {
+          display: none;
         }
       }
 
