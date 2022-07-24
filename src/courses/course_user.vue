@@ -89,7 +89,7 @@
       <div class="update-container" v-if="updateProfile">
         <div class="blur"></div>
         <div class="form">
-          <form>
+          <form @submit.prevent="updateFunc()">
             <h2>
               update your profile
               <span @click="updateProfile = !updateProfile">&times;</span>
@@ -105,8 +105,8 @@
                     type="name"
                     name="name"
                     id="name"
+                    v-model="update_user.name"
                     placeholder=" "
-                    autocomplete="off"
                     required
                   />
                   <label for="name" class="active">new Name</label>
@@ -123,7 +123,7 @@
                     name="email"
                     id="email"
                     placeholder=" "
-                    autocomplete="off"
+                    v-model="update_user.email"
                   />
                   <label for="email" class="active">new email</label>
                 </div>
@@ -139,7 +139,7 @@
                     name="password"
                     id="password"
                     placeholder=" "
-                    autocomplete="off"
+                    v-model="update_user.password"
                   />
                   <label for="password" class="active">new Password</label>
                 </div>
@@ -174,6 +174,12 @@ export default {
       dropdown: false,
     });
 
+    let update_user = reactive({
+      name: "",
+      email: "",
+      password: "",
+    });
+
     let updateProfile = ref(false);
 
     function checkToken() {
@@ -197,7 +203,28 @@ export default {
       store.dispatch("pagemode", mode);
     }
 
-    return { profile, updateProfile, mode, pagemode };
+    function updateFunc() {
+      axios
+        .post(
+          `/api/user/update/${localStorage.getItem("accessId")}`,
+          update_user
+        )
+        .then((res) => {
+          if (res.statusText === "OK") {
+            localStorage.setItem("accessToken", res.data.accessToken);
+            axios.defaults.headers.common[
+              "Authorization"
+            ] = `Bearer ${localStorage.getItem("accessToken")}`;
+          }
+
+          update_user.name = "";
+          update_user.email = "";
+          update_user.password = "";
+        })
+        .catch((err) => console.log(err));
+    }
+
+    return { profile, update_user, updateFunc, updateProfile, mode, pagemode };
   },
 };
 </script>
@@ -448,14 +475,16 @@ export default {
   }
 }
 .update-container {
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: 0vh;
   left: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: auto;
+  z-index: 1;
 
   .blur {
     background: linear-gradient(to top, rgb(8, 58, 88), #13253e);
