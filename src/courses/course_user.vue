@@ -221,7 +221,7 @@ export default {
           update_user.email = "";
           update_user.password = "";
         })
-        .catch((err) => console.log(err));
+        .catch((err) => err);
     }
 
     return { profile, update_user, updateFunc, updateProfile, mode, pagemode };

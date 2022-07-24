@@ -201,7 +201,6 @@ export default {
     const store = useStore();
 
     const storeMode = computed(() => store.state.course_mode);
-    console.log(storeMode.value);
     let response = reactive({
       data: [],
       title: "",
@@ -372,7 +371,6 @@ export default {
       },
     });
 
-    console.log(colorMode.value);
     const mode = reactive({
       light: false,
       cafe: true,
