@@ -10,7 +10,7 @@
         <div class="right-topNav">
           <a href="/#contact">
             <i class="fa-solid fa-envelope icon"></i>
-            email us</a
+            email</a
           >
         </div>
       </nav>
@@ -358,7 +358,7 @@ header {
   position: relative;
 
   .topNav {
-    width: 100vw;
+    max-width: 100vw;
     height: 7vh;
     background: $fallback;
     background: linear-gradient(to top, rgb(20, 92, 125), #13253e);
@@ -367,14 +367,16 @@ header {
     align-items: center;
     padding: 0 25px;
     position: relative;
+    overflow: hidden;
 
     a {
+      flex-basis: 1;
       height: 100%;
       width: fit-content;
       padding: 5px 10px;
       color: rgb(228, 228, 228);
       text-decoration: none;
-      font-size: 11px;
+      font-size: 7px;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -438,6 +440,12 @@ header {
           font: 400 12px "Nunito Sans";
           color: rgb(213, 213, 213);
           opacity: 0.8;
+        }
+      }
+
+      @media screen and (max-width: 500px) {
+        h1 {
+          font-size: 25px;
         }
       }
     }

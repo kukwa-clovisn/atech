@@ -345,7 +345,7 @@ nav a.router-link-exact-active {
       margin: auto;
 
       @media screen and (max-width: 400px) {
-        font-size: 55px;
+        font-size: 40px;
       }
     }
 
