@@ -4,7 +4,9 @@
     :class="{ 'dark-mode': mode.dark, 'gray-mode': mode.gray }"
   >
     <div class="left-content">
-      <div class="user-logo">{{ profile.name.split("")[0] }}</div>
+      <div class="user-logo" @click="updateProfile = !updateProfile">
+        {{ profile.name.split("")[0] }}
+      </div>
       <h1>Dashboard</h1>
       <div class="container-card">
         <div class="top-content"></div>
@@ -153,6 +155,16 @@
         </div>
       </div>
     </transition>
+    <transition name="pop">
+      <div class="response-div" v-if="response.success || response.failed">
+        <div class="success" v-if="response.success">
+          <i class="fa-solid fa-circle-check"></i>{{ response.msg }}
+        </div>
+        <div class="failed" v-if="response.failed">
+          <i class="fa-solid fa-triangle-exclamation"></i>{{ response.msg }}
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
@@ -172,6 +184,12 @@ export default {
       subscriptions: [],
       savedCourses: [],
       dropdown: false,
+    });
+
+    let response = reactive({
+      msg: "",
+      success: false,
+      failed: false,
     });
 
     let update_user = reactive({
@@ -215,16 +233,44 @@ export default {
             axios.defaults.headers.common[
               "Authorization"
             ] = `Bearer ${localStorage.getItem("accessToken")}`;
-          }
+            updateProfile.value = false;
+            update_user.name = "";
+            update_user.email = "";
+            update_user.password = "";
+            setTimeout(() => {
+              response.success = false;
+              router.push("/login");
+            }, 2000);
+          } else {
+            response.msg = res.data.msg;
+            response.failed = true;
 
-          update_user.name = "";
-          update_user.email = "";
-          update_user.password = "";
+            setTimeout(() => {
+              response.failed = false;
+            }, 3000);
+          }
         })
-        .catch((err) => err);
+        .catch((err) => {
+          response.msg = err.response.data.msg
+            ? err
+            : "Access Denied. Maybe network failure";
+          response.failed = true;
+
+          setTimeout(() => {
+            response.failed = false;
+          }, 3000);
+        });
     }
 
-    return { profile, update_user, updateFunc, updateProfile, mode, pagemode };
+    return {
+      profile,
+      update_user,
+      updateFunc,
+      response,
+      updateProfile,
+      mode,
+      pagemode,
+    };
   },
 };
 </script>
@@ -252,12 +298,11 @@ export default {
       height: 80px;
       border-radius: 100%;
       position: absolute;
-      top: 32%;
-      z-index: 1;
+      top: 29%;
       left: 4%;
       border: 3px solid white;
-      background: teal;
-      color: white;
+      background: white;
+      color: teal;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -687,7 +732,7 @@ export default {
     }
     .user-logo {
       border-color: rgb(8, 58, 88);
-      background: #153d75;
+      background: rgb(8, 58, 88);
     }
 
     h1 {
@@ -756,6 +801,44 @@ export default {
         background: rgb(4, 104, 49);
       }
     }
+  }
+}
+
+.response-div {
+  width: 100vw;
+  height: fit-content;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  top: 19vh;
+  left: 0;
+  z-index: 1;
+  div {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 5px;
+    color: white;
+    z-index: 1;
+    background: rgb(40, 223, 122);
+    font: 600 18px "Poppins", sans-serif;
+
+    i {
+      color: white;
+      font-size: 25px;
+      padding: 0 3px;
+    }
+  }
+  div.failed {
+    background: crimson;
+    color: white;
+  }
+  @media screen and (max-width: 500px) {
+    top: 60vh;
   }
 }
 </style>

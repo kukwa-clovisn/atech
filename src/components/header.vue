@@ -356,7 +356,7 @@ header {
   margin: 0;
   height: fit-content;
   position: relative;
-
+  overflow-x: hidden;
   .topNav {
     max-width: 100vw;
     height: 7vh;
@@ -378,7 +378,7 @@ header {
       text-decoration: none;
       font-size: 7px;
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
       flex-direction: column;
       border-radius: 5px;
@@ -417,7 +417,7 @@ header {
 
       h1 {
         text-transform: uppercase;
-        font: 600 35px "Nunito Sans", sans-serif;
+        font: 600 30px "Nunito Sans", sans-serif;
         background: linear-gradient(to bottom left, rgb(28, 160, 222), #0c1725);
         background-clip: text;
         -webkit-background-clip: text;
@@ -445,7 +445,11 @@ header {
 
       @media screen and (max-width: 500px) {
         h1 {
-          font-size: 25px;
+          font-size: 19px;
+        }
+
+        .logo-name span {
+          font-size: 9px;
         }
       }
     }

@@ -741,7 +741,7 @@ main {
         padding: 20px;
         font: 800 55px "Poppins", sans-serif;
         text-align: center;
-        color: #113b74;
+        color: #393958;
 
         @media screen and (max-width: 768px) {
           font-size: 40px;
@@ -750,7 +750,7 @@ main {
       p {
         text-align: center;
         padding: 10px;
-        font-size: 23px;
+        font-size: 20px;
         font-family: "Poppins", sans-serif;
         line-height: 30px;
         color: rgb(120, 119, 119);
@@ -803,7 +803,7 @@ main {
       color: #113b74;
     }
     p {
-      width: 80vw;
+      width: 95vw;
       padding: 10px;
       padding-bottom: 40px;
       position: relative;
