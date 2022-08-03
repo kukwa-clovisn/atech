@@ -47,10 +47,32 @@
         </div>
       </div>
     </div>
+    <div class="test-form">
+      <img :src="image_url" v-show="image_url" alt="" id="textimg" />
+
+      <img :src="newImage" alt="this is response photo" />
+      <input
+        type="file"
+        name="file"
+        ref="file"
+        @change="onFileUpload"
+        style="display: none"
+      />
+
+      <button class="select" @click="$refs.file.click()">
+        <i class="fa-solid fa-cloud-arrow-up"></i> select profile image
+      </button>
+
+      <button v-show="image_url" @click="onFileSubmit">
+        <i class="fa-solid fa-upload"></i>update profile
+      </button>
+    </div>
+
     <span class="to-landing-page reach"
       ><a href="/#contact" class="a"
         ><i class="fa-solid fa-person-circle-question"></i></a
     ></span>
+
     <Footer />
   </div>
 </template>
@@ -59,15 +81,96 @@
 import Header from "./header.vue";
 import Carousel from "./carousel.vue";
 import Footer from "./footer.vue";
+import { ref, watch } from "vue";
+import axios from "axios";
+
 export default {
   name: "Design_samples",
   components: { Header, Carousel, Footer },
+  setup() {
+    let image_file = ref("");
+    let image_url = ref("");
+    let userImage = ref();
+    let newImage = ref("");
+    let selectedFile = ref(null);
+
+    const onFileUpload = (e) => {
+      image_file.value = e.target.files[0];
+      selectedFile.value = e.target.files[0];
+      console.log(e);
+      console.log(image_file.value);
+    };
+
+    const onFileSubmit = () => {
+      const fd = new FormData();
+
+      fd.append("file", selectedFile.value, selectedFile.value.name);
+      console.log(selectedFile.value);
+      console.log(fd);
+
+      axios
+        .post("api/image", fd, {
+          onUploadProgress: (uploadEvent) => {
+            console.log(
+              "uploaded percentage:" +
+                Math.round((uploadEvent.loaded / uploadEvent.total) * 100) +
+                "%"
+            );
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          newImage.value =
+            `data:image/png;base64,` + res.data.newImage.encoded_image;
+        })
+        .catch((err) => console.log(err));
+    };
+
+    watch(image_file, (image_file) => {
+      let fileReader = new FileReader();
+
+      fileReader.readAsDataURL(image_file);
+
+      fileReader.addEventListener("load", () => {
+        image_url.value = fileReader.result;
+      });
+    });
+
+    return { image_url, newImage, userImage, onFileUpload, onFileSubmit };
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 $baseColor: #13253e;
 $primaryColor: #e66581;
+
+#textimg {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  margin: 10px auto;
+  cursor: pointer;
+  border: 4px solid white;
+  object-fit: cover;
+}
+
+.select {
+  display: block;
+  width: 220px;
+  height: 220px;
+  border-radius: 100%;
+  padding: 10px;
+  background: white;
+  margin: 10px auto;
+  font: 600 20px "Nunito Sans", sans-serif;
+
+  i {
+    font-size: 40px;
+    display: block;
+    color: $primaryColor;
+  }
+}
 .samples {
   width: 100vw;
   height: fit-content;

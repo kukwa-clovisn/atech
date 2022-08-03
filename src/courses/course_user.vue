@@ -4,12 +4,41 @@
     :class="{ 'dark-mode': mode.dark, 'gray-mode': mode.gray }"
   >
     <div class="left-content">
-      <div class="user-logo" @click="updateProfile = !updateProfile">
+      <div class="user-logo">
         {{ profile.name.split("")[0] }}
       </div>
       <h1>Dashboard</h1>
       <div class="container-card">
-        <div class="top-content"></div>
+        <div class="top-content">
+          <div class="img">
+            <img :src="profile.image" v-if="!preview" alt="" />
+          </div>
+          <div class="img">
+            <img :src="profileImageUpdate.preview" v-show="preview" alt="" />
+          </div>
+          <div class="blur" @click="$refs.selectImg.click()"></div>
+          <div class="img profile-img">
+            <img
+              class="image-center"
+              :src="profile.image ? profile.image : profileImageUpdate.preview"
+              alt=""
+            />
+          </div>
+
+          <input
+            type="file"
+            @change="onChangeFunc"
+            ref="selectImg"
+            name="image"
+            style="display: none"
+          />
+          <button @click="$refs.selectImg.click()">
+            <i class="fa-solid fa-camera-retro"></i>select photo
+          </button>
+          <button @click="onFileSubmit" v-show="profileImageUpdate.preview">
+            <i class="fa-solid fa-cloud-arrow-up"></i>update profile
+          </button>
+        </div>
         <div class="bottom-content">
           <span class="edit" @click="updateProfile = true"
             ><i class="fa-solid fa-pen"></i
@@ -170,7 +199,7 @@
 <script>
 import axios from "axios";
 import { useRouter } from "vue-router";
-import { reactive, onBeforeMount, computed, ref } from "vue";
+import { reactive, onBeforeMount, computed, ref, watch } from "vue";
 import { useStore } from "vuex";
 export default {
   name: "Course_user",
@@ -181,9 +210,18 @@ export default {
     let profile = reactive({
       name: "",
       email: "",
+      image: "",
       subscriptions: [],
       savedCourses: [],
       dropdown: false,
+    });
+
+    let preview = ref(null);
+
+    let profileImageUpdate = reactive({
+      image: null,
+      preview: null,
+      selectedImage: null,
     });
 
     let response = reactive({
@@ -207,6 +245,10 @@ export default {
           profile.email = res.data.email;
           profile.subscriptions = res.data.subscription;
           profile.savedCourses = res.data.Bookmarks;
+
+          if (res.data.image) {
+            profile.image = `data:image/png;base64,` + res.data.image;
+          }
         })
         .catch((err) => {
           router.push("/login");
@@ -220,6 +262,45 @@ export default {
     function pagemode(mode) {
       store.dispatch("pagemode", mode);
     }
+
+    function onChangeFunc(e) {
+      profileImageUpdate.preview = e.target.files[0];
+      preview.value = e.target.files[0];
+      console.log(e);
+    }
+
+    watch(preview, (preview) => {
+      let fileReader = new FileReader();
+
+      fileReader.readAsDataURL(preview);
+
+      fileReader.addEventListener("load", () => {
+        profileImageUpdate.preview = fileReader.result;
+      });
+    });
+
+    const onFileSubmit = () => {
+      const formdata = new FormData();
+
+      formdata.append("image", preview.value, preview.value.name);
+      console.log(preview.value);
+
+      axios
+        .post(`api/user/upload/`, formdata, {
+          onUploadProgress: (uploadEvent) => {
+            console.log(
+              "uploaded percentage:" +
+                Math.round((uploadEvent.loaded / uploadEvent.total) * 100) +
+                "%"
+            );
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          checkToken();
+        })
+        .catch((err) => console.log(err));
+    };
 
     function updateFunc() {
       axios
@@ -264,12 +345,16 @@ export default {
 
     return {
       profile,
+      preview,
       update_user,
+      profileImageUpdate,
       updateFunc,
+      onChangeFunc,
       response,
       updateProfile,
       mode,
       pagemode,
+      onFileSubmit,
     };
   },
 };
@@ -323,11 +408,86 @@ export default {
     }
     .top-content {
       width: 100%;
-      height: 150px;
+      height: 250px;
       background: url(../assets/book.jpeg);
       background-size: cover;
       background-repeat: no-repeat;
       background-attachment: scroll;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      cursor: pointer;
+
+      .blur {
+        width: 100%;
+        height: 100%;
+        opacity: 0.7;
+      }
+      .img {
+        height: fit-content;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: auto;
+        overflow: hidden;
+        overflow-y: auto;
+        img {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+          cursor: pointer;
+        }
+      }
+
+      .img.profile-img {
+        position: absolute;
+        width: 230px;
+        height: 230px;
+        top: 7px;
+        left: 34%;
+        overflow: hidden;
+        border-radius: 100%;
+        border: 4px solid white;
+        .image-center {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      button {
+        position: relative;
+        z-index: 1;
+        width: 150px;
+        height: 50px;
+        border: none;
+        background: white;
+        box-shadow: 0 0 1px 1px white;
+        border-radius: 5px;
+        margin: 10px auto;
+        color: white;
+        color: #102441;
+        opacity: 0.85;
+        font: 25px 600 "Poppins", sans-serif;
+        i {
+          margin-right: 3px;
+          color: #e66581;
+          font-size: 30px;
+        }
+      }
+
+      &:hover {
+        button,
+        .blur {
+          display: block;
+        }
+
+        button {
+          color: white;
+          background: transparent;
+          opacity: 1;
+        }
+      }
     }
     .bottom-content {
       position: relative;

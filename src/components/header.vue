@@ -23,13 +23,19 @@
         </div>
         <nav class="routes">
           <router-link to="#" class="route" @click="openDropdown()"
-            >courses<i class="fa-solid fa-caret-down"></i
+            >courses<i class="fa-solid fa-caret-right"></i
           ></router-link>
-          <router-link to="/why-us" class="route">why crypto?</router-link>
-          <router-link to="/blog" class="route">blog</router-link>
-          <a href="/#contact" class="route">contact</a>
-          <router-link to="/login" class="route special">sign in</router-link>
-          <router-link to="/register" class="route register"
+          <router-link to="/why-us" class="route" v-if="!showCourses"
+            >why crypto?</router-link
+          >
+          <router-link to="/blog" class="route" v-if="!showCourses"
+            >blog</router-link
+          >
+          <a href="/#contact" class="route" v-if="!showCourses">contact</a>
+          <router-link to="/login" class="route special" v-if="!showCourses"
+            >sign in</router-link
+          >
+          <router-link to="/register" class="route register" v-if="!showCourses"
             >register</router-link
           >
           <div class="pagemodes" title="change page mode">
@@ -58,47 +64,23 @@
           </div>
         </nav>
         <transition name="fade">
-          <div id="courses-list" v-if="showCourses">
-            <span @click="openDropdown()" class="closeDropdown">&times;</span>
-            <h1>our courses and services</h1>
+          <div class="courses-list routes" v-if="showCourses">
             <ul>
-              <li>
-                <a href="https://codingherald.herokuapp.com"
-                  ><i class="fa-solid fa-chart-line"></i>apps</a
-                >
+              <li class="route">
+                <a href="https://codingherald.herokuapp.com">apps</a>
               </li>
-              <!-- <li>
-                <a href="/course/cryptocurrency"
-                  ><i class="fa-solid fa-chart-line"></i>cryptocurrency</a
-                >
-              </li> -->
-              <li>
-                <a href="/course/forex"
-                  ><i class="fa-solid fa-chart-line"></i>forex trading</a
-                >
+
+              <li class="route">
+                <a href="/course/forex">forex trading</a>
               </li>
-              <!-- <li>
-                <a href="/course/blockchain"
-                  ><i class="fa-solid fa-chart-line"></i>blockchain
-                  technology</a
-                >
-              </li> -->
-              <li>
-                <a href="/course/web"
-                  ><i class="fa-solid fa-code"></i>web developement</a
-                >
+              <li class="route">
+                <a href="/course/web">web developement</a>
               </li>
-              <!-- <li>
-                <a href="/course/design"
-                  ><i class="fa-solid fa-object-group"></i>graphic design</a
-                >
-              </li> -->
-              <li>
-                <a href="/music/piano"
-                  ><i class="fa-solid fa-music"></i>piano lessons</a
-                >
+              <li class="route">
+                <a href="/music/piano">piano lessons</a>
               </li>
             </ul>
+            <span @click="openDropdown()" class="closeDropdown">&times;</span>
           </div>
         </transition>
       </nav>
@@ -205,7 +187,7 @@
         </nav>
       </transition>
       <transition name="fade">
-        <div id="courses-list" v-if="showCourses">
+        <div class="courses-list" v-if="showCourses">
           <h1>our courses and services</h1>
           <ul>
             <li>
@@ -357,6 +339,7 @@ header {
   height: fit-content;
   position: relative;
   overflow-x: hidden;
+  z-index: 1;
   .topNav {
     max-width: 100vw;
     height: 7vh;
@@ -460,9 +443,10 @@ header {
       align-items: center;
       .route {
         flex-basis: 1;
-        flex-grow: 1;
+        flex-grow: 0.5;
         height: 70%;
         display: flex;
+        padding: 0 4px;
         justify-content: center;
         align-items: center;
         text-transform: capitalize;
@@ -477,19 +461,19 @@ header {
         }
 
         &:hover {
-          box-shadow: 0 0 2px 4px #1b3457;
-          border-radius: 7px;
+          border-bottom: 1px solid rgb(116, 116, 116);
         }
       }
       .route.special {
         color: #01b4fb;
         &:hover {
           border: none;
-          box-shadow: 0 0 2px 4px #1e3d68;
-          border-radius: 7px;
         }
       }
       .route.register {
+        width: max-content;
+        padding: 0 15px;
+
         background: linear-gradient(to bottom left, rgb(28, 160, 222), #101e32);
         border-radius: 7px;
         &:hover {
@@ -518,31 +502,29 @@ header {
         }
       }
     }
-    #courses-list {
+    .courses-list {
       width: 100%;
       height: fit-content;
-      background: white;
-      position: absolute;
+      background: transparent;
+      // position: absolute;
       bottom: -200%;
+      top: 0;
       left: 0;
       z-index: 1;
 
       .closeDropdown {
-        width: 30px;
+        width: 80px;
         height: 30px;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 27px;
-        color: rgb(20, 92, 125);
+        color: rgb(93, 171, 208);
         cursor: pointer;
         transition: all 0.5s ease;
-        margin-left: 20px;
         margin-top: 6px;
 
         &:hover {
-          border-radius: 100%;
-          background: linear-gradient(to bottom, rgb(20, 92, 125), #13253e);
           color: white;
         }
       }
@@ -577,14 +559,34 @@ header {
             align-items: center;
             text-decoration: none;
             text-transform: capitalize;
-            font: 600 14px "Poppins", sans-serif;
+            font: 600 11px "Poppins", sans-serif;
+            color: white;
 
             i {
               padding-right: 5px;
               font-size: 19px;
               color: $SecondaryColor;
             }
+            &:hover {
+              box-shadow: none;
+              border-bottom: 1px solid rgb(181, 179, 179);
+            }
           }
+        }
+      }
+    }
+
+    .large-screen-course-list.courses-list {
+      width: fit-content;
+      height: fit-content;
+      padding: 10px;
+      padding-right: 20px;
+
+      ul li {
+        height: 40px;
+        a {
+          color: white;
+          font-size: 10px;
         }
       }
     }
@@ -672,7 +674,7 @@ header {
     }
 
     .menu-dropdown,
-    #courses-list {
+    .courses-list {
       width: 100%;
       height: fit-content;
       padding: 20px;
@@ -703,7 +705,7 @@ header {
         }
       }
     }
-    #courses-list {
+    .courses-list {
       width: 90%;
       margin-left: 10%;
       h1 {
