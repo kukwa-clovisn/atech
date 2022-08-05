@@ -23,21 +23,15 @@
         </div>
         <nav class="routes">
           <router-link to="#" class="route standard" @click="openDropdown()"
-            >courses<i class="fa-solid fa-caret-right"></i
+            >courses<i class="fa-solid fa-caret-down"></i
           ></router-link>
-          <router-link to="/why-us" class="route standard" v-if="!showCourses"
+          <router-link to="/why-us" class="route standard"
             >why crypto?</router-link
           >
-          <router-link to="/blog" class="route standard" v-if="!showCourses"
-            >blog</router-link
-          >
-          <a href="/#contact" class="route standard" v-if="!showCourses"
-            >contact</a
-          >
-          <router-link to="/login" class="route special" v-if="!showCourses"
-            >sign in</router-link
-          >
-          <router-link to="/register" class="route register" v-if="!showCourses"
+          <router-link to="/blog" class="route standard">blog</router-link>
+          <a href="/#contact" class="route standard">contact</a>
+          <router-link to="/login" class="route special">sign in</router-link>
+          <router-link to="/register" class="route register"
             >register</router-link
           >
           <div class="pagemodes" title="change page mode">
@@ -65,27 +59,118 @@
             </button>
           </div>
         </nav>
-        <transition name="fade">
-          <div class="courses-list routes" v-if="showCourses">
-            <ul>
-              <li class="route">
-                <a href="https://codingherald.herokuapp.com">apps</a>
-              </li>
-
-              <li class="route">
-                <a href="/course/forex">forex trading</a>
-              </li>
-              <li class="route">
-                <a href="/course/web">web developement</a>
-              </li>
-              <li class="route">
-                <a href="/music/piano">piano lessons</a>
-              </li>
-            </ul>
-            <span @click="openDropdown()" class="closeDropdown">&times;</span>
-          </div>
-        </transition>
       </nav>
+      <transition name="fade">
+        <div class="courses-exp routes" v-if="showCourses">
+          <div class="blur" @click="showCourses = false">
+            <transition name="fade">
+              <div class="blur-container" v-show="course.app">
+                <h1>Get to use our applications</h1>
+                <p>
+                  we have a good number of applications ready and set for you to
+                  use them daily and improve you knowledge while learning
+                  online. Click on the button below to browse through our
+                  availble applications for free.
+                </p>
+                <button>
+                  <a href="https://codingherald.herokuapp.com">view apps</a>
+                </button>
+              </div>
+            </transition>
+
+            <transition name="fade">
+              <div class="blur-container" v-show="course.forex">
+                <h1>Learn Forex Trading</h1>
+                <p>
+                  The world today is goind digital earnig a skill an forex
+                  trading is a best idea. Having to work at home as part time
+                  and trading at your own convinience is a great idea. Your job
+                  can one day disappoint you but your investment in forex won't
+                  be affected by your job, government or anyone.
+                </p>
+                <button><a href="/course/forex">learn forex trading</a></button>
+              </div>
+            </transition>
+            <transition name="fade">
+              <div class="blur-container" v-show="course.web">
+                <h1>Become a web developer in less than no time</h1>
+                <p>
+                  we have a good number of applications ready and set for you to
+                  use them daily and improve you knowledge while learning
+                  online. Click on the button below to browse through our
+                  availble applications for free.
+                </p>
+                <button><a href="/course/web">continue</a></button>
+              </div>
+            </transition>
+
+            <transition name="fade">
+              <div class="blur-container" v-show="course.music">
+                <h1>Learn about music and how to play musical instruments</h1>
+                <p>
+                  we have a good number of applications ready and set for you to
+                  use them daily and improve you knowledge while learning
+                  online. Click on the button below to browse through our
+                  availble applications for free.
+                </p>
+                <button><a href="/music/piano">learn more</a></button>
+              </div>
+            </transition>
+          </div>
+          <ul>
+            <li
+              class="route"
+              :class="{ active: course.app }"
+              @click="
+                course.app = true;
+                course.forex = false;
+                course.web = false;
+                course.music = false;
+              "
+            >
+              <router-link to="#apps" class="link">apps</router-link>
+            </li>
+
+            <li
+              class="route"
+              :class="{ active: course.forex }"
+              @click="
+                course.app = false;
+                course.forex = true;
+                course.web = false;
+                course.music = false;
+              "
+            >
+              <router-link to="#forex" class="link">forex trading</router-link>
+            </li>
+            <li
+              class="route"
+              :class="{ active: course.web }"
+              @click="
+                course.app = false;
+                course.forex = false;
+                course.web = true;
+                course.music = false;
+              "
+            >
+              <router-link to="#web" class="link">web development</router-link>
+            </li>
+            <li
+              class="route"
+              :class="{ active: course.music }"
+              @click="
+                course.app = false;
+                course.forex = false;
+                course.web = false;
+                course.music = true;
+              "
+            >
+              <router-link to="#music" class="link">music</router-link>
+            </li>
+          </ul>
+          <span @click="openDropdown()" class="closeDropdown">&times;</span>
+        </div>
+      </transition>
     </header>
     <header class="small-screen-header" :class="{ active: onDropdown }">
       <nav class="topNav">
@@ -190,23 +275,25 @@
                 <h1>our courses and services</h1>
                 <ul>
                   <li>
-                    <a href="https://codingherald.herokuapp.com"
+                    <a href="https://codingherald.herokuapp.com" class="link"
                       ><i class="fa-solid fa-chart-line"></i>apps</a
                     >
                   </li>
                   <li>
-                    <a href="/course/forex"
-                      ><i class="fa-solid fa-chart-line"></i>forex trading</a
+                    <router-link to="/course/forex" class="link"
+                      ><i class="fa-solid fa-chart-line"></i>forex trading
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link to="/course/web" class="link"
+                      ><i class="fa-solid fa-code"></i>web
+                      developement</router-link
                     >
                   </li>
                   <li>
-                    <a href="/course/web"
-                      ><i class="fa-solid fa-code"></i>web developement</a
-                    >
-                  </li>
-                  <li>
-                    <a href="/music/piano"
-                      ><i class="fa-solid fa-music"></i>piano lessons</a
+                    <router-link to="/music/piano" class="link"
+                      ><i class="fa-solid fa-music"></i>piano
+                      lessons</router-link
                     >
                   </li>
                 </ul>
@@ -219,17 +306,34 @@
               <div class="courses-list" v-if="engagements">
                 <h1>Be a part of our academy</h1>
                 <ul>
-                  <li><a href="/login">sign up</a></li>
-                  <li><a href="/login">sign in</a></li>
-                  <li><a href="/register">register</a></li>
+                  <li>
+                    <router-link to="/login" class="link"
+                      ><i class="fa-solid fa-user-plus"></i>sign up</router-link
+                    >
+                  </li>
+                  <li>
+                    <router-link to="/login" class="link"
+                      ><i class="fa-solid fa-arrow-right-to-bracket"></i>sign
+                      in</router-link
+                    >
+                  </li>
+                  <li>
+                    <router-link to="/register" class="link"
+                      ><i class="fa-solid fa-registered"></i
+                      >register</router-link
+                    >
+                  </li>
                 </ul>
               </div>
             </transition>
 
-            <li><a href="/why-us">why crypto?</a></li>
-            <li><a href="/blog">blog</a></li>
-            <li><a href="/#contact">contact</a></li>
+            <li>
+              <router-link to="/why-us" class="link">why crypto?</router-link>
+            </li>
+            <li><router-link to="/blog" class="link">blog</router-link></li>
+            <li><a href="/#contact" class="link">contact</a></li>
           </ul>
+          <footer>&copy;atech2022</footer>
         </nav>
       </transition>
     </header>
@@ -249,6 +353,13 @@ export default {
     let dropRoute = ref(true);
     let showCourses = ref(false);
     let engagements = ref(true);
+
+    let course = reactive({
+      app: true,
+      forex: false,
+      web: false,
+      music: false,
+    });
 
     function menuFunction() {
       onDropdown.value = true;
@@ -292,6 +403,7 @@ export default {
       mode,
       colorMode,
       engagements,
+      course,
       menuFunction,
       closeDropdown,
       openDropdown,
@@ -508,7 +620,9 @@ header {
           }
         }
       }
-
+      .route.active {
+        background: rgba(230, 101, 129, 1);
+      }
       @keyframes hovering {
         from {
           width: 0;
@@ -561,113 +675,6 @@ header {
         }
       }
     }
-    .courses-list {
-      width: 100%;
-      height: fit-content;
-      background: transparent;
-      // position: absolute;
-      bottom: -200%;
-      top: 0;
-      left: 0;
-      z-index: 1;
-
-      .closeDropdown {
-        width: 80px;
-        height: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 27px;
-        color: rgb(93, 171, 208);
-        cursor: pointer;
-        transition: all 0.5s ease;
-        margin-top: 6px;
-
-        &:hover {
-          color: white;
-        }
-      }
-
-      h1 {
-        padding: 5px;
-        color: $SecondaryColor;
-        text-transform: capitalize;
-        font: 600 15px "Poppins", sans-serif;
-      }
-
-      ul {
-        width: 100%;
-        height: 10vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-
-        li {
-          list-style-type: none;
-          height: 100%;
-          cursor: pointer;
-          flex-basis: 1;
-          flex-grow: 0.5;
-
-          a {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            text-transform: capitalize;
-            font: 600 11px "Poppins", sans-serif;
-            color: white;
-
-            i {
-              padding-right: 5px;
-              font-size: 19px;
-              color: $SecondaryColor;
-            }
-            &:hover {
-              box-shadow: none;
-              border-bottom: 1px solid rgb(181, 179, 179);
-            }
-          }
-
-          &::before {
-            content: "";
-            width: 100%;
-            height: 3px;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            border-radius: 30px 0 0 30px;
-            background: rgb(186, 186, 186);
-            display: none;
-          }
-          &::after {
-            content: "";
-            width: 100%;
-            height: 3px;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            border-radius: 0 30px 30px 0;
-            background: white;
-            display: none;
-          }
-          &:hover {
-            animation: coloring 1s 1 linear alternate forwards;
-            &::before {
-              display: block;
-              animation: hovering 0.3s 1 linear alternate forwards;
-            }
-            &::after {
-              display: block;
-              animation: hovering 0.3s 1 linear alternate forwards;
-            }
-          }
-        }
-      }
-    }
 
     .large-screen-course-list.courses-list {
       width: fit-content;
@@ -684,6 +691,174 @@ header {
       }
     }
   }
+
+  .courses-exp {
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+
+    .blur {
+      width: 75%;
+      height: 100%;
+      position: relative;
+      cursor: pointer;
+      opacity: 0.95;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .blur-container {
+        width: 70%;
+        height: fit-content;
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+
+        h1 {
+          padding: 20px;
+          font: 50px 700 "Poppins", sans-serif;
+        }
+        p {
+          padding: 10px;
+          // color: white;
+        }
+        button {
+          min-width: 200px;
+          height: 50px;
+          border-radius: 10px;
+          margin: 10px auto;
+
+          overflow: hidden;
+          a {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-transform: capitalize;
+            background: white;
+            color: rgb(60, 59, 59);
+            text-decoration: none;
+
+            &:hover {
+              background: transparent;
+            }
+          }
+        }
+      }
+    }
+
+    .closeDropdown {
+      width: 80px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 35px;
+      color: rgb(93, 171, 208);
+      cursor: pointer;
+      transition: all 0.5s ease;
+      margin-top: 6px;
+      position: absolute;
+      top: 30px;
+      right: 30px;
+
+      &:hover {
+        color: white;
+      }
+    }
+
+    ul {
+      width: 25%;
+      height: 100%;
+      background: rgb(7, 43, 74);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      li {
+        width: 100%;
+        list-style-type: none;
+        height: 50px;
+        cursor: pointer;
+        flex-basis: 1;
+        flex-grow: 0.5;
+        position: relative;
+        margin: 0;
+
+        a {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-decoration: none;
+          text-transform: capitalize;
+          font: 600 17px "Poppins", sans-serif;
+          color: white;
+
+          i {
+            padding-right: 5px;
+            font-size: 19px;
+            color: $SecondaryColor;
+          }
+          &:hover {
+            box-shadow: none;
+          }
+        }
+
+        &::before {
+          content: "";
+          width: 100%;
+          height: 3px;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          border-radius: 30px 0 0 30px;
+          background: rgb(186, 186, 186);
+          display: none;
+        }
+        &::after {
+          content: "";
+          width: 100%;
+          height: 3px;
+          position: absolute;
+          top: 0;
+          right: 0;
+          border-radius: 0 30px 30px 0;
+          background: white;
+          display: none;
+        }
+        &:hover {
+          background: rgb(10, 56, 97);
+          &::before {
+            display: block;
+            animation: hovering 0.3s 1 linear alternate forwards;
+          }
+          &::after {
+            display: block;
+            animation: hovering 0.3s 1 linear alternate forwards;
+          }
+        }
+      }
+
+      li.active {
+        background: rgba(230, 101, 129, 1);
+        border-top: 1px solid white;
+        border-bottom: 1px solid white;
+      }
+    }
+  }
+
   .menu-nav {
     width: 90vw;
     margin: auto;
@@ -772,13 +947,12 @@ header {
       width: 360px;
       height: 83vh;
       padding: 20px 10px;
-
       background: rgb(7, 40, 67);
       border-radius: 0 7px 7px 0;
 
       ul {
         width: 100%;
-        height: 100%;
+        height: 97%;
         margin-top: 7px;
         overflow: hidden;
         overflow-y: auto;
@@ -826,12 +1000,16 @@ header {
               margin: 5px auto;
               background: rgb(11, 50, 83);
 
-              a {
+              .link {
                 font-size: 13px;
               }
             }
           }
         }
+      }
+
+      @media screen and (max-width: 400px) {
+        width: 100%;
       }
     }
     .courses-list {
@@ -856,6 +1034,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
+  bottom: 0;
   background: rgb(5, 30, 52);
   .topNav,
   .bottom-nav {
