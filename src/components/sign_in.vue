@@ -8,6 +8,25 @@
           <form @submit.prevent="signinFunc()">
             <h1>sign in</h1>
             <div class="input">
+              <div class="value">
+                <label for="username" class="input-label">
+                  <i class="fa-solid fa-user"></i
+                ></label>
+
+                <input
+                  type="username"
+                  name="username"
+                  id="username"
+                  placeholder=" "
+                  v-model="credentials.username"
+                  required
+                />
+                <label for="username" class="active"
+                  >Name <span>.....</span></label
+                >
+              </div>
+            </div>
+            <!-- <div class="input">
               <label for="username">Name:</label
               ><input
                 type="text"
@@ -15,10 +34,29 @@
                 id="username"
                 v-model="credentials.username"
                 placeholder="Enter username...."
-                required=""
+                
               />
-            </div>
+            </div> -->
             <div class="input">
+              <div class="value">
+                <label for="password" class="input-label">
+                  <i class="fa-solid fa-user"></i
+                ></label>
+
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder=" "
+                  v-model="credentials.password"
+                  required
+                />
+                <label for="password" class="active"
+                  >password <span>.....</span></label
+                >
+              </div>
+            </div>
+            <!-- <div class="input">
               <label for="password">password:</label
               ><input
                 type="password"
@@ -28,7 +66,7 @@
                 placeholder="Enter Password...."
                 required=""
               />
-            </div>
+            </div> -->
             <button type="submit">sign in</button>
             <div class="forget-password">
               <span
@@ -69,6 +107,25 @@
               <h2>sign up</h2>
             </div>
             <div class="input">
+              <div class="value">
+                <label for="userName" class="input-label">
+                  <i class="fa-solid fa-user"></i
+                ></label>
+
+                <input
+                  type="userName"
+                  name="userName"
+                  id="userName"
+                  placeholder=" "
+                  v-model="user.username"
+                  required
+                />
+                <label for="userName" class="active"
+                  >Name <span>.....</span></label
+                >
+              </div>
+            </div>
+            <!-- <div class="input">
               <label for="userName">Name:</label
               ><input
                 type="text"
@@ -78,8 +135,27 @@
                 placeholder="Enter username...."
                 required=""
               />
-            </div>
+            </div> -->
             <div class="input">
+              <div class="value">
+                <label for="Email" class="input-label">
+                  <i class="fa-solid fa-user"></i
+                ></label>
+
+                <input
+                  type="Email"
+                  name="Email"
+                  id="Email"
+                  placeholder=" "
+                  v-model="user.email"
+                  required
+                />
+                <label for="Email" class="active"
+                  >email <span>.....</span></label
+                >
+              </div>
+            </div>
+            <!-- <div class="input">
               <label for="Email">email:</label
               ><input
                 type="email"
@@ -89,8 +165,27 @@
                 placeholder="Enter Email address...."
                 required=""
               />
-            </div>
+            </div> -->
             <div class="input">
+              <div class="value">
+                <label for="password" class="input-label">
+                  <i class="fa-solid fa-user"></i
+                ></label>
+
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder=" "
+                  v-model="user.password"
+                  required
+                />
+                <label for="password" class="active"
+                  >password <span>.....</span></label
+                >
+              </div>
+            </div>
+            <!-- <div class="input">
               <label for="password">password:</label
               ><input
                 type="password"
@@ -100,7 +195,7 @@
                 placeholder="Enter Password...."
                 required=""
               />
-            </div>
+            </div> -->
             <button type="submit">sign up</button>
           </form>
         </div>
@@ -528,30 +623,141 @@ main {
           }
         }
 
+        // .input {
+        //   width: 90%;
+        //   height: 80px;
+        //   margin: 10px auto;
+
+        //   label {
+        //     width: 100%;
+        //     display: block;
+        //     text-align: left;
+        //     text-transform: capitalize;
+        //     font: 550 20px "Poppins", sans-serif;
+        //     color: #717070;
+        //   }
+
+        //   input {
+        //     display: block;
+        //     width: 98%;
+        //     height: 50px;
+        //     padding: 3px 10px 3px 20px;
+        //     font: 500 17px "Poppins", sans-serif;
+        //     outline: none;
+        //     border: 1px solid #f1efef;
+        //     background: #fff;
+        //     border-radius: 5px;
+        //   }
+        // }
         .input {
+          margin: 20px auto;
+          padding: 5px 0;
           width: 90%;
-          height: 80px;
-          margin: 10px auto;
 
-          label {
+          .value {
             width: 100%;
-            display: block;
-            text-align: left;
-            text-transform: capitalize;
-            font: 550 20px "Poppins", sans-serif;
-            color: #717070;
-          }
+            height: fit-content;
+            display: Flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 0.5px 1px #264f81;
+            border-radius: 3px;
+            position: relative;
+            label {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 4px 3px;
+              cursor: text;
+              text-transform: capitalize;
+              transition: all 0.3s ease;
+            }
 
-          input {
-            display: block;
-            width: 98%;
-            height: 50px;
-            padding: 3px 10px 3px 20px;
-            font: 500 17px "Poppins", sans-serif;
-            outline: none;
-            border: 1px solid #f1efef;
-            background: #fff;
-            border-radius: 5px;
+            label.active {
+              position: absolute;
+              top: 20%;
+              left: 12%;
+
+              span {
+                width: fit-content;
+                height: 20px;
+                position: relative;
+                background: white;
+                padding: 0;
+                padding-left: 2px;
+                &::before {
+                  content: "";
+                  width: 100%;
+                  height: 100%;
+                  background: white;
+
+                  letter-spacing: 2px;
+                  position: absolute;
+                  bottom: 0;
+                  left: 0;
+                  border-left: 1px solid rgb(70, 70, 70);
+                  border-radius: 1px;
+                  animation: inputwrite 2s steps(9, start) infinite alternate;
+                }
+              }
+            }
+
+            @keyframes inputwrite {
+              to {
+                transform: translateX(100%);
+              }
+            }
+
+            label.input-label {
+              position: relative;
+              width: 10%;
+              height: 35px;
+              background: transparent;
+              border-right: 1px solid rgb(207, 206, 206);
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 1px 0;
+              cursor: pointer;
+              i {
+                color: rgb(107, 132, 145);
+                position: relative;
+                left: 0;
+                animation: writing 5s linear infinite forwards;
+              }
+            }
+
+            input {
+              width: 90%;
+              height: 50px;
+              outline: none;
+              border: none;
+              padding-left: 15px;
+              background: transparent;
+              border-radius: 0 3px 3px 0;
+            }
+            @keyframes writing {
+              to {
+                transform: rotateY(360deg);
+              }
+            }
+
+            input:focus ~ label.active,
+            input:not(:focus):not(:placeholder-shown) ~ label.active {
+              top: -0.55rem;
+              left: 12%;
+              background: white;
+              font-size: 0.7em;
+              padding: 3px 6px;
+              box-shadow: none;
+              border-left: 2px solid #264f81;
+              border: 2px solid #264f81;
+              border-bottom: none;
+              border-radius: 3px;
+              span {
+                display: none;
+              }
+            }
           }
         }
 
