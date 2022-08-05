@@ -896,8 +896,7 @@ header {
         border-radius: 3px;
         padding: 0 5px;
         margin: 0 10px;
-        background: linear-gradient(to bottom left, rgb(28, 160, 222), #0c1725);
-        background: rgba(230, 101, 129, 1);
+        background: #3f6297;
         display: flex;
         justify-content: center;
         align-items: center;

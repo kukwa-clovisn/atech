@@ -15,74 +15,100 @@
         </div>
         <hr />
         <div class="form-inputs">
-          <div class="form-input">
-            <label for="username">Name:</label>
-            <input
-              type="text"
-              name="username"
-              id="username"
-              v-model="user.username"
-              placeholder="Enter your log in name"
-              title="Enter your log in Name"
-              required
-            />
-          </div>
-          <div class="form-input">
-            <label for="email">email:</label>
-            <input
-              type="email"
-              name="emial"
-              id="email"
-              v-model="user.email"
-              placeholder="Enter your log in email"
-              title="Enter your log in email"
-              required
-            />
-          </div>
+          <div class="input">
+            <div class="value">
+              <label for="username" class="input-label">
+                <i class="fa-solid fa-user"></i
+              ></label>
 
-          <div class="form-input">
-            <label for="password">password:</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              v-model="user.password"
-              placeholder="Enter your log in password"
-              title="Enter your log in password"
-              required
-            />
+              <input
+                type="username"
+                name="username"
+                id="username"
+                placeholder=" "
+                v-model="user.username"
+                autocomplete="off"
+                required
+              />
+              <label for="username" class="active"
+                >Name <span>.....</span></label
+              >
+            </div>
           </div>
-          <div class="form-input">
-            <label for="course">select a course:</label>
-            <select
-              name="course"
-              id="course"
-              v-model="user.subscription.course"
-              placeholder="Select a course"
-              title="Select a course"
-              required
-            >
-              <!-- <option value="Cryptocurrency">Cryptocurrency</option> -->
-              <option value="Forex">Forex</option>
-              <!-- <option value="Blockchain">Blockchain</option> -->
-              <option value="Web Development">Web Development</option>
-              <!-- <option value="Design">Design</option> -->
-              <option value="Music">Music</option>
-            </select>
+          <div class="input">
+            <div class="value">
+              <label for="email" class="input-label">
+                <i class="fa-solid fa-envelope"></i
+              ></label>
+
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder=" "
+                v-model="user.email"
+                required
+              />
+              <label for="email" class="active">email <span>.....</span></label>
+            </div>
           </div>
-          <div class="form-input">
-            <label for="plan">subscription plan:</label>
-            <select
-              name="plan"
-              id="plan"
-              v-model="user.subscription.plan"
-              placeholder="Select a payment plan"
-              title="Select a payment plan"
-              required
-            >
-              <option value="free">free</option>
-              <option value="paid">paid</option>
-            </select>
+          <div class="input">
+            <div class="value">
+              <label for="password" class="input-label">
+                <i class="fa-solid fa-key"></i
+              ></label>
+
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder=" "
+                v-model="user.password"
+                required
+              />
+              <label for="password" class="active"
+                >password <span>.....</span></label
+              >
+            </div>
+          </div>
+          <div class="input">
+            <label for="course" class="standard">select a course:</label>
+            <div class="value">
+              <label for="course" class="input-label"
+                ><i class="fa-solid fa-book"></i
+              ></label>
+              <select
+                name="course"
+                id="course"
+                v-model="user.subscription.course"
+                placeholder="Select a course"
+                title="Select a course"
+                required
+              >
+                <option value="Forex">Forex</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Music">Music</option>
+              </select>
+            </div>
+          </div>
+          <div class="input">
+            <label for="plan" class="standard">subscription plan:</label>
+            <div class="value">
+              <label for="course" class="input-label"
+                ><i class="fa-solid fa-dollar"></i
+              ></label>
+              <select
+                name="plan"
+                id="plan"
+                v-model="user.subscription.plan"
+                placeholder="Select a payment plan"
+                title="Select a payment plan"
+                required
+              >
+                <option value="free">free</option>
+                <option value="paid">paid</option>
+              </select>
+            </div>
           </div>
           <div class="form-input">
             <button type="submit">continue</button>
@@ -120,7 +146,7 @@ export default {
       username: "",
       email: "",
       password: "",
-      subscription: { plan: "free", course: "Cryptocurrency" },
+      subscription: { plan: "free", course: "Forex" },
     });
 
     const response = reactive({
@@ -185,7 +211,6 @@ $baseColor: #1d375f;
     width: 100%;
     background: $baseColor;
     background: linear-gradient(to bottom, rgb(20, 92, 125), #13253e);
-    // background: transparent;
   }
 
   .form-container {
@@ -264,7 +289,7 @@ $baseColor: #1d375f;
         }
       }
       hr {
-        background: linear-gradient(to bottom, rgb(206, 5, 163), gold);
+        background: linear-gradient(to bottom, #032f72, #7ca7e7);
       }
       .form-inputs {
         width: 100%;
@@ -295,17 +320,135 @@ $baseColor: #1d375f;
             cursor: pointer;
           }
           button {
-            width: 100%;
+            width: 90%;
             height: 50px;
             border-radius: 3px;
             border: none;
             background: transparent;
-            box-shadow: 0 0 2px 1px white;
+            box-shadow: 0 0 2px 1px #7ca7e7;
             color: white;
 
             &:hover {
-              background: rgba(230, 101, 129, 1);
+              background: #628ccb;
               box-shadow: none;
+            }
+          }
+        }
+        .input {
+          margin: 20px auto;
+          padding: 5px 0;
+          width: 90%;
+
+          .standard {
+            color: #7ca7e7;
+            text-transform: capitalize;
+          }
+
+          .value {
+            width: 100%;
+            height: fit-content;
+            display: Flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 0.5px 1px #264f81;
+            color: #6089c6;
+            border-radius: 3px;
+            position: relative;
+            label {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 4px 3px;
+              cursor: text;
+              text-transform: capitalize;
+              transition: all 0.3s ease;
+            }
+
+            label.active {
+              position: absolute;
+              top: 20%;
+              left: 12%;
+
+              span {
+                width: fit-content;
+                height: 20px;
+                position: relative;
+                background: rgb(19, 37, 62);
+                padding: 0;
+                padding-left: 2px;
+                &::before {
+                  content: "";
+                  width: 100%;
+                  height: 100%;
+                  background: rgb(19, 37, 62);
+                  letter-spacing: 2px;
+                  position: absolute;
+                  bottom: 0;
+                  left: 0;
+                  border-left: 1px solid rgb(32, 62, 103);
+                  border-radius: 1px;
+                  animation: inputwrite 2s steps(9, start) infinite alternate;
+                }
+              }
+            }
+
+            @keyframes inputwrite {
+              to {
+                transform: translateX(100%);
+              }
+            }
+
+            label.input-label {
+              position: relative;
+              width: 10%;
+              height: 35px;
+              background: transparent;
+              border-right: 1px solid rgb(52, 104, 175);
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 1px 0;
+              cursor: pointer;
+              i {
+                color: rgb(107, 132, 145);
+                position: relative;
+                left: 0;
+                animation: writing 5s linear infinite forwards;
+              }
+            }
+
+            input,
+            select {
+              width: 90%;
+              height: 50px;
+              outline: none;
+              border: none;
+              padding-left: 15px;
+              background: transparent;
+              color: #739ddb;
+              border-radius: 0 3px 3px 0;
+            }
+            @keyframes writing {
+              to {
+                transform: rotateY(360deg);
+              }
+            }
+
+            input:focus ~ label.active,
+            input:not(:focus):not(:placeholder-shown) ~ label.active {
+              top: -0.55rem;
+              left: 12%;
+              background: rgb(19, 37, 62);
+              font-size: 0.7em;
+              padding: 3px 6px;
+              box-shadow: none;
+              border-left: 2px solid #264f81;
+              border: 2px solid #264f81;
+              border-bottom: none;
+              border-radius: 3px;
+              span {
+                display: none;
+              }
             }
           }
         }
@@ -314,7 +457,7 @@ $baseColor: #1d375f;
           color: whitesmoke;
 
           .link {
-            color: rgba(230, 101, 129, 1);
+            color: #7ca7e7;
           }
         }
       }

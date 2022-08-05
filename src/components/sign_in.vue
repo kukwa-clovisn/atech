@@ -104,7 +104,7 @@
           </div>
           <form @submit.prevent="signupFunc()">
             <div class="form-header">
-              <h2>sign up</h2>
+              <h1>sign up</h1>
             </div>
             <div class="input">
               <div class="value">
@@ -125,17 +125,6 @@
                 >
               </div>
             </div>
-            <!-- <div class="input">
-              <label for="userName">Name:</label
-              ><input
-                type="text"
-                name="username"
-                id="userName"
-                v-model="user.username"
-                placeholder="Enter username...."
-                required=""
-              />
-            </div> -->
             <div class="input">
               <div class="value">
                 <label for="Email" class="input-label">
@@ -593,7 +582,7 @@ main {
         h1 {
           padding: 10px;
           padding-bottom: 0;
-          font: 700 40px Poppins, sans-serif;
+          font: 600 45px "Nunito Sans", sans-serif;
           color: #e66581;
         }
 
@@ -623,32 +612,6 @@ main {
           }
         }
 
-        // .input {
-        //   width: 90%;
-        //   height: 80px;
-        //   margin: 10px auto;
-
-        //   label {
-        //     width: 100%;
-        //     display: block;
-        //     text-align: left;
-        //     text-transform: capitalize;
-        //     font: 550 20px "Poppins", sans-serif;
-        //     color: #717070;
-        //   }
-
-        //   input {
-        //     display: block;
-        //     width: 98%;
-        //     height: 50px;
-        //     padding: 3px 10px 3px 20px;
-        //     font: 500 17px "Poppins", sans-serif;
-        //     outline: none;
-        //     border: 1px solid #f1efef;
-        //     background: #fff;
-        //     border-radius: 5px;
-        //   }
-        // }
         .input {
           margin: 20px auto;
           padding: 5px 0;
@@ -815,20 +778,23 @@ main {
 
     @media screen and (max-width: 760px) {
       .form {
-        width: 97vw;
+        width: 95vw;
       }
       @media screen and (max-width: 600px) {
         .form {
+          width: 400px;
           flex-direction: column-reverse;
           height: fit-content;
           .login {
             width: 100%;
             padding: 20px;
+            padding-bottom: 10px;
           }
           form {
             width: 100%;
             height: fit-content;
             padding: 20px;
+            padding-top: 10px;
 
             .input {
               width: 97%;
@@ -840,12 +806,18 @@ main {
             }
             button {
               width: 97%;
-              height: 70px;
+              height: 50px;
             }
           }
         }
         .form-signup {
           flex-direction: column;
+        }
+
+        @media screen and (max-width: 430px) {
+          .form {
+            width: 97vw;
+          }
         }
       }
     }
