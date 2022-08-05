@@ -17,7 +17,7 @@
             <img :src="profileImageUpdate.preview" v-show="preview" alt="" />
           </div>
           <div class="blur" @click="$refs.selectImg.click()"></div>
-          <div class="img profile-img">
+          <div class="profile-img">
             <img
               class="image-center"
               :src="profile.image ? profile.image : profileImageUpdate.preview"
@@ -416,7 +416,8 @@ export default {
       position: relative;
       overflow: hidden;
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
+      flex-wrap: wrap;
       align-items: center;
       cursor: pointer;
 
@@ -435,18 +436,19 @@ export default {
         overflow-y: auto;
         img {
           width: 100%;
-          height: auto;
+          height: 100%;
           object-fit: cover;
           cursor: pointer;
         }
       }
 
-      .img.profile-img {
+      .profile-img {
         position: absolute;
-        width: 230px;
-        height: 230px;
-        top: 7px;
-        left: 34%;
+        width: 200px;
+        height: 200px;
+        left: auto !important;
+        top: auto;
+
         overflow: hidden;
         border-radius: 100%;
         border: 4px solid white;
@@ -464,10 +466,10 @@ export default {
         background: white;
         box-shadow: 0 0 1px 1px white;
         border-radius: 5px;
-        margin: 10px auto;
+        margin: 15px;
         color: white;
         color: #102441;
-        opacity: 0.85;
+        opacity: 0.9;
         font: 25px 600 "Poppins", sans-serif;
         i {
           margin-right: 3px;

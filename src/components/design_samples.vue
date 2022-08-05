@@ -47,7 +47,7 @@
         </div>
       </div>
     </div>
-    <div class="test-form">
+    <!-- <div class="test-form">
       <img :src="image_url" v-show="image_url" alt="" id="textimg" />
 
       <img :src="newImage" alt="this is response photo" />
@@ -66,7 +66,7 @@
       <button v-show="image_url" @click="onFileSubmit">
         <i class="fa-solid fa-upload"></i>update profile
       </button>
-    </div>
+    </div> -->
 
     <span class="to-landing-page reach"
       ><a href="/#contact" class="a"

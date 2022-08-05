@@ -73,8 +73,8 @@
           <img src="../assets/logo-white.jpg" alt="" />
         </div>
         <h2>Advanced Tech Academy</h2>
-        <h2 v-html="response.data.title" class="course-title"></h2>
-        <h4>By: {{ response.data.author }}</h4>
+
+        -
         <p v-html="response.data.intro" class="intro"></p>
       </div>
 

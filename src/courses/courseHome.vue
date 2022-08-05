@@ -27,9 +27,10 @@
           <img src="../assets/logo-white.jpg" alt="" />
         </nav>
         <div class="profile-header">
-          <span>
+          <span v-if="!course.image">
             <i class="fa-solid fa-user"></i>
           </span>
+          <div class="img" v-else><img :src="course.image" alt="" /></div>
           <p>
             {{ course.courseUser }} <br />
             <i :title="course.courseUserEmail">{{ course.courseUserEmail }}</i>
@@ -114,6 +115,7 @@ export default {
     let course = reactive({
       courseUser: "",
       courseUserEmail: "",
+      image: null,
       profileMenu: false,
       hideProfile: true,
     });
@@ -127,8 +129,13 @@ export default {
     onMounted(() => {
       axios("api/token")
         .then((res) => {
+          console.log(res);
           course.courseUser = res.data.username;
           course.courseUserEmail = res.data.email;
+
+          if (res.data.image) {
+            course.image = `data:image/png;base64,` + res.data.image;
+          }
         })
         .catch((err) => {
           router.push("/login");
@@ -374,7 +381,8 @@ main {
       align-items: center;
       background: whitesmoke;
 
-      span {
+      span,
+      .img {
         width: 40px;
         height: 40px;
         display: flex;
@@ -389,6 +397,16 @@ main {
           color: white;
         }
       }
+
+      .img {
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
       p {
         width: 60%;
         padding-left: 10px;

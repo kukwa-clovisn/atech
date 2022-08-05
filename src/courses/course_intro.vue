@@ -57,9 +57,12 @@
           >
         </li>
         <li class="profile" @click="profile.dropdown = !profile.dropdown">
-          <i class="fa-solid fa-caret-down"
-            ><a class="me">{{ profile.name.split("")[0] }}</a></i
-          >
+          <i class="fa-solid fa-caret-down icon"
+            ><a class="me" v-if="!profile.photo">{{
+              profile.name.split("")[0]
+            }}</a
+            ><img :src="profile.image" v-else alt="" /></i
+          ><i class="fa-solid fa-caret-down"></i>
         </li>
       </nav>
       <button @click="menuBtn = !menuBtn" class="menu-btn">
@@ -71,7 +74,8 @@
         <button class="close" @click="menuBtn = !menuBtn">&times;</button>
         <div class="profile-header">
           <div class="profile-flex">
-            <span>{{ profile.name.split("")[0] }}</span>
+            <span v-if="!profile.photo">{{ profile.name.split("")[0] }}</span>
+            <div class="img" v-else><img :src="profile.image" alt="" /></div>
             <div class="info">
               <h3>{{ profile.name }}</h3>
               <p>student at seven academy</p>
@@ -129,7 +133,8 @@
         </button>
         <div class="profile-header">
           <div class="profile-flex">
-            <span>{{ profile.name.split("")[0] }}</span>
+            <span v-if="!profile.photo">{{ profile.name.split("")[0] }}</span>
+            <div class="img" v-else><img :src="profile.image" alt="" /></div>
             <div class="info">
               <h3>{{ profile.name }}</h3>
               <p>student at seven academy</p>
@@ -186,6 +191,8 @@ export default {
     let profile = reactive({
       name: "",
       email: "",
+      image: null,
+      photo: false,
       subscriptions: [],
       savedCourses: [],
       dropdown: false,
@@ -201,6 +208,11 @@ export default {
           profile.name = res.data.username;
           profile.subscriptions = res.data.subscription;
           profile.savedCourses = res.data.Bookmarks;
+
+          if (res.data.image) {
+            profile.photo = true;
+            profile.image = `data:image/png;base64,` + res.data.image;
+          }
         })
         .catch((err) => {
           router.push("/login");
@@ -328,21 +340,32 @@ header {
 
     .profile {
       width: fit-content;
+      height: fit-content;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      flex-direction: column;
+      // flex-direction: column;
+      overflow: hidden;
+      position: relative;
 
-      i {
+      .icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         color: white;
         cursor: pointer;
-        .me {
+        position: relative;
+        overflow: hidden;
+        .me,
+        img {
           width: 30px;
           height: 30px;
-          border-radius: 100%;
+          position: absolute;
+          top: auto;
+          left: auto;
           background: white;
           display: flex;
           justify-content: center;
@@ -352,7 +375,6 @@ header {
       }
     }
   }
-
   .menu-btn {
     height: 100%;
     display: none;
@@ -423,7 +445,8 @@ header.gray-mode {
       align-items: center;
       flex-direction: column;
       padding: 10px;
-      span {
+      span,
+      .img {
         width: 70px;
         height: 70px;
         background: teal;
@@ -434,6 +457,14 @@ header.gray-mode {
         color: white;
         font-size: 28px;
         cursor: pointer;
+      }
+      .img {
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       }
       .info {
         width: 100%;

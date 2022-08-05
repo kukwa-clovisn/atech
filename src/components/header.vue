@@ -22,16 +22,18 @@
           </div>
         </div>
         <nav class="routes">
-          <router-link to="#" class="route" @click="openDropdown()"
+          <router-link to="#" class="route standard" @click="openDropdown()"
             >courses<i class="fa-solid fa-caret-right"></i
           ></router-link>
-          <router-link to="/why-us" class="route" v-if="!showCourses"
+          <router-link to="/why-us" class="route standard" v-if="!showCourses"
             >why crypto?</router-link
           >
-          <router-link to="/blog" class="route" v-if="!showCourses"
+          <router-link to="/blog" class="route standard" v-if="!showCourses"
             >blog</router-link
           >
-          <a href="/#contact" class="route" v-if="!showCourses">contact</a>
+          <a href="/#contact" class="route standard" v-if="!showCourses"
+            >contact</a
+          >
           <router-link to="/login" class="route special" v-if="!showCourses"
             >sign in</router-link
           >
@@ -85,7 +87,7 @@
         </transition>
       </nav>
     </header>
-    <header class="small-screen-header">
+    <header class="small-screen-header" :class="{ active: onDropdown }">
       <nav class="topNav">
         <div class="left-topNav">
           <a href="/">
@@ -101,12 +103,6 @@
         </div>
       </nav>
       <nav class="bottom-nav" v-if="noDropdown">
-        <div class="logo-nav" @click="toHome()">
-          <h1>Atech</h1>
-          <div class="logo-name">
-            <span>Advanced</span><span>Tech</span><span>Acadmemy</span>
-          </div>
-        </div>
         <div class="pagemodes" title="change page mode">
           <button
             class="mode"
@@ -117,7 +113,7 @@
             "
             v-if="mode.cafe"
           >
-            <i class="fa-solid fa-mug-saucer"></i> mode
+            <i class="fa-solid fa-mug-saucer"></i> cafe
           </button>
           <button
             class="mode"
@@ -128,9 +124,16 @@
             "
             v-if="mode.light"
           >
-            <i class="fa-solid fa-moon"></i> mode
+            <i class="fa-solid fa-moon"></i> light
           </button>
         </div>
+        <div class="logo-nav" @click="toHome()">
+          <h1>Atech</h1>
+          <div class="logo-name">
+            <span>Advanced</span><span>Tech</span><span>Acadmemy</span>
+          </div>
+        </div>
+
         <nav class="menu-bars">
           <button @click="menuFunction()">
             <i class="fa-solid fa-bars"></i>
@@ -138,13 +141,6 @@
         </nav>
       </nav>
       <nav class="bottom-nav menu-nav" v-if="onDropdown">
-        <div class="logo-nav" @click="toHome()">
-          <h1>Atech</h1>
-          <div class="logo-name">
-            <span>Advanced</span><span>Tech</span><span>Acadmemy</span>
-          </div>
-        </div>
-        <!-- 681958002 -->
         <div class="pagemodes" title="change page mode">
           <button
             class="mode"
@@ -155,7 +151,7 @@
             "
             v-if="mode.cafe"
           >
-            <i class="fa-solid fa-mug-saucer"></i>mode
+            <i class="fa-solid fa-mug-saucer"></i>cafe
           </button>
           <button
             class="mode"
@@ -166,9 +162,17 @@
             "
             v-if="mode.light"
           >
-            <i class="fa-solid fa-moon"></i> mode
+            <i class="fa-solid fa-moon"></i> light
           </button>
         </div>
+        <div class="logo-nav" @click="toHome()">
+          <h1>Atech</h1>
+          <div class="logo-name">
+            <span>Advanced</span><span>Tech</span><span>Acadmemy</span>
+          </div>
+        </div>
+        <!-- 681958002 -->
+
         <nav class="menu-bars">
           <button @click="closeDropdown()">&times;</button>
         </nav>
@@ -176,52 +180,57 @@
       <transition name="fade">
         <nav class="menu-dropdown" v-if="onDropdown">
           <ul>
-            <li><a @click="openDropdown()">courses</a></li>
-            <li v-if="dropRoute"><a href="/login">sign up</a></li>
-            <li v-if="dropRoute"><a href="/login">sign in</a></li>
-            <li v-if="dropRoute"><a href="/register">register</a></li>
-            <li v-if="dropRoute"><a href="/why-us">why crypto?</a></li>
-            <li v-if="dropRoute"><a href="/blog">blog</a></li>
-            <li v-if="dropRoute"><a href="/#contact">contact</a></li>
+            <li>
+              <a @click="openDropdown()"
+                >courses <i class="fa-solid fa-caret-down"></i
+              ></a>
+            </li>
+            <transition name="fade">
+              <div class="courses-list" v-if="!showCourses">
+                <h1>our courses and services</h1>
+                <ul>
+                  <li>
+                    <a href="https://codingherald.herokuapp.com"
+                      ><i class="fa-solid fa-chart-line"></i>apps</a
+                    >
+                  </li>
+                  <li>
+                    <a href="/course/forex"
+                      ><i class="fa-solid fa-chart-line"></i>forex trading</a
+                    >
+                  </li>
+                  <li>
+                    <a href="/course/web"
+                      ><i class="fa-solid fa-code"></i>web developement</a
+                    >
+                  </li>
+                  <li>
+                    <a href="/music/piano"
+                      ><i class="fa-solid fa-music"></i>piano lessons</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </transition>
+            <li @click="engagements = !engagements">
+              <a>engagements <i class="fa-solid fa-caret-down"></i></a>
+            </li>
+            <transition name="fade">
+              <div class="courses-list" v-if="engagements">
+                <h1>Be a part of our academy</h1>
+                <ul>
+                  <li><a href="/login">sign up</a></li>
+                  <li><a href="/login">sign in</a></li>
+                  <li><a href="/register">register</a></li>
+                </ul>
+              </div>
+            </transition>
+
+            <li><a href="/why-us">why crypto?</a></li>
+            <li><a href="/blog">blog</a></li>
+            <li><a href="/#contact">contact</a></li>
           </ul>
         </nav>
-      </transition>
-      <transition name="fade">
-        <div class="courses-list" v-if="showCourses">
-          <h1>our courses and services</h1>
-          <ul>
-            <li>
-              <a href="https://codingherald.herokuapp.com"
-                ><i class="fa-solid fa-chart-line"></i>apps</a
-              >
-            </li>
-            <!-- <li>
-              <a href="/course/crypto"
-                ><i class="fa-solid fa-chart-line"></i>cryptocurrency</a
-              >
-            </li> -->
-            <li>
-              <a href="/course/forex"
-                ><i class="fa-solid fa-chart-line"></i>forex trading</a
-              >
-            </li>
-            <li>
-              <a href="/course/web"
-                ><i class="fa-solid fa-code"></i>web developement</a
-              >
-            </li>
-            <!-- <li>
-              <a href="/course/graphic"
-                ><i class="fa-solid fa-object-group"></i>graphic design</a
-              >
-            </li> -->
-            <li>
-              <a href="/music/piano"
-                ><i class="fa-solid fa-music"></i>piano lessons</a
-              >
-            </li>
-          </ul>
-        </div>
       </transition>
     </header>
   </main>
@@ -239,6 +248,7 @@ export default {
     let noDropdown = ref(true);
     let dropRoute = ref(true);
     let showCourses = ref(false);
+    let engagements = ref(true);
 
     function menuFunction() {
       onDropdown.value = true;
@@ -281,6 +291,7 @@ export default {
       showCourses,
       mode,
       colorMode,
+      engagements,
       menuFunction,
       closeDropdown,
       openDropdown,
@@ -443,10 +454,10 @@ header {
       align-items: center;
       .route {
         flex-basis: 1;
-        flex-grow: 0.5;
+        padding: 0 7px;
         height: 70%;
         display: flex;
-        padding: 0 4px;
+        width: max-content;
         justify-content: center;
         align-items: center;
         text-transform: capitalize;
@@ -454,18 +465,66 @@ header {
         color: white;
         font-size: 12px;
         font-weight: 500;
+        position: relative;
 
         i {
           color: white;
           padding-left: 2px;
         }
+      }
 
+      .route.standard {
+        &::before {
+          content: "";
+          width: 100%;
+          height: 3px;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          border-radius: 30px 0 0 30px;
+          background: rgb(186, 186, 186);
+          display: none;
+        }
+        &::after {
+          content: "";
+          width: 100%;
+          height: 3px;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          border-radius: 0 30px 30px 0;
+          background: white;
+          display: none;
+        }
         &:hover {
-          border-bottom: 1px solid rgb(116, 116, 116);
+          animation: coloring 1s 1 linear alternate forwards;
+          &::before {
+            display: block;
+            animation: hovering 0.3s 1 linear alternate forwards;
+          }
+          &::after {
+            display: block;
+            animation: hovering 0.3s 1 linear alternate forwards;
+          }
+        }
+      }
+
+      @keyframes hovering {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+          // background: rgb(213, 246, 254);
+        }
+      }
+      @keyframes coloring {
+        to {
+          color: rgb(186, 239, 250);
         }
       }
       .route.special {
-        color: #01b4fb;
+        color: #36c5fe;
         &:hover {
           border: none;
         }
@@ -538,7 +597,7 @@ header {
 
       ul {
         width: 100%;
-        height: fit-content;
+        height: 10vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -546,10 +605,10 @@ header {
 
         li {
           list-style-type: none;
-          height: 9vh;
+          height: 100%;
           cursor: pointer;
           flex-basis: 1;
-          flex-grow: 1;
+          flex-grow: 0.5;
 
           a {
             width: 100%;
@@ -570,6 +629,40 @@ header {
             &:hover {
               box-shadow: none;
               border-bottom: 1px solid rgb(181, 179, 179);
+            }
+          }
+
+          &::before {
+            content: "";
+            width: 100%;
+            height: 3px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            border-radius: 30px 0 0 30px;
+            background: rgb(186, 186, 186);
+            display: none;
+          }
+          &::after {
+            content: "";
+            width: 100%;
+            height: 3px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            border-radius: 0 30px 30px 0;
+            background: white;
+            display: none;
+          }
+          &:hover {
+            animation: coloring 1s 1 linear alternate forwards;
+            &::before {
+              display: block;
+              animation: hovering 0.3s 1 linear alternate forwards;
+            }
+            &::after {
+              display: block;
+              animation: hovering 0.3s 1 linear alternate forwards;
             }
           }
         }
@@ -611,21 +704,25 @@ header {
     display: block;
 
     .bottom-nav {
+      width: 95%;
+      margin: 0 auto;
       padding: 0 10px;
       position: relative;
       justify-content: space-between;
+      flex-direction: row-reverse;
 
       .logo-nav {
-        width: 40%;
+        width: 50%;
       }
 
       .pagemodes {
-        width: max-content;
+        width: 20%;
         height: 70%;
         border-radius: 3px;
         padding: 0 5px;
         margin: 0 10px;
         background: linear-gradient(to bottom left, rgb(28, 160, 222), #0c1725);
+        background: rgba(230, 101, 129, 1);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -636,11 +733,11 @@ header {
           border: none;
           color: white;
           background: transparent;
-          font-size: 15px;
+          font-size: 12px;
           i {
             color: white;
             padding: 0 2px;
-            font-size: 18px;
+            font-size: 15px;
           }
         }
 
@@ -651,9 +748,7 @@ header {
 
       .menu-bars {
         width: 100px;
-        // position: absolute;
-        // right: 20px;
-        // top: 10px;
+        font-size: 15px;
       }
 
       button {
@@ -668,39 +763,73 @@ header {
 
         i {
           color: white;
-          font-size: 35px;
+          font-size: 25px;
         }
       }
     }
 
-    .menu-dropdown,
-    .courses-list {
-      width: 100%;
-      height: fit-content;
-      padding: 20px;
+    .menu-dropdown {
+      width: 360px;
+      height: 83vh;
+      padding: 20px 10px;
+
+      background: rgb(7, 40, 67);
+      border-radius: 0 7px 7px 0;
 
       ul {
         width: 100%;
-        height: fit-content;
+        height: 100%;
+        margin-top: 7px;
+        overflow: hidden;
+        overflow-y: auto;
 
         li {
           list-style-type: none;
-          width: 90%;
+          width: 96%;
           height: 50px;
-          margin: 10px auto;
-          border-bottom: 1px solid white;
-          list-style-position: outside;
-          color: white;
+          margin: auto;
+          padding: 10px;
+          position: relative;
 
           a {
             text-decoration: none;
             text-transform: capitalize;
             color: $primaryColor;
             width: 100%;
+            font: 14px 400 "Nunito Sans", sans-serif !important;
             height: 100%;
             display: flex;
             justify-content: flex-start;
             align-items: center;
+
+            i {
+              padding-left: 3px;
+            }
+          }
+        }
+
+        .courses-list {
+          width: 85%;
+          height: fit-content;
+
+          h1 {
+            font-size: 14px;
+          }
+          ul {
+            width: 100%;
+            height: fit-content;
+
+            li {
+              width: 100%;
+              height: 40px;
+              border-radius: 10px;
+              margin: 5px auto;
+              background: rgb(11, 50, 83);
+
+              a {
+                font-size: 13px;
+              }
+            }
           }
         }
       }
@@ -720,6 +849,17 @@ header {
         }
       }
     }
+  }
+}
+.small-screen-header.active {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgb(5, 30, 52);
+  .topNav,
+  .bottom-nav {
+    background: transparent;
   }
 }
 </style>
