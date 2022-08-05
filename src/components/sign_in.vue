@@ -56,17 +56,6 @@
                 >
               </div>
             </div>
-            <!-- <div class="input">
-              <label for="password">password:</label
-              ><input
-                type="password"
-                name="password"
-                id="password"
-                v-model="credentials.password"
-                placeholder="Enter Password...."
-                required=""
-              />
-            </div> -->
             <button type="submit">sign in</button>
             <div class="forget-password">
               <span
@@ -128,7 +117,7 @@
             <div class="input">
               <div class="value">
                 <label for="Email" class="input-label">
-                  <i class="fa-solid fa-user"></i
+                  <i class="fa-solid fa-envelope"></i
                 ></label>
 
                 <input
@@ -147,7 +136,7 @@
             <div class="input">
               <div class="value">
                 <label for="password" class="input-label">
-                  <i class="fa-solid fa-user"></i
+                  <i class="fa-solid fa-key"></i
                 ></label>
 
                 <input
@@ -166,7 +155,7 @@
             <div class="input">
               <div class="value">
                 <label for="confirm_password" class="input-label">
-                  <i class="fa-solid fa-user"></i
+                  <i class="fa-solid fa-key"></i
                 ></label>
 
                 <input
@@ -262,43 +251,67 @@ export default {
     }
 
     function signupFunc() {
-      axios
-        .post("api/signup", user, config)
-        .then((res) => {
-          if (res.statusText === "Created") {
-            response.msg = res.data.msg;
-            response.success = true;
-            response.to_signin = true;
-            response.to_signup = false;
+      if (user.password === user.confirm_password) {
+        axios
+          .post("api/signup", user, config, {
+            onUploadProgress: (uploadEvent) => {
+              response.success = true;
+              response.msg = `processing data: ${Math.round(
+                (uploadEvent.loaded / uploadEvent.total) * 100
+              )} %`;
 
-            user.username = "";
-            user.email = "";
-            user.password = "";
+              if (
+                Math.round((uploadEvent.loaded / uploadEvent.total) * 100) ===
+                100
+              ) {
+                setTimeout(() => {
+                  response.success = false;
+                }, 3000);
+              }
+            },
+          })
+          .then((res) => {
+            if (res.statusText === "Created") {
+              response.msg = res.data.msg;
+              response.success = true;
+              response.to_signin = true;
+              response.to_signup = false;
 
-            setTimeout(() => {
-              response.success = false;
-              response.swap = true;
-              credentials.username = res.data.username;
-            }, 2000);
-          } else {
-            response.msg = res.data.msg;
+              user.username = "";
+              user.email = "";
+              user.password = "";
+
+              setTimeout(() => {
+                response.success = false;
+                response.swap = true;
+                credentials.username = res.data.username;
+              }, 2000);
+            } else {
+              response.msg = res.data.msg;
+              response.failed = true;
+
+              setTimeout(() => {
+                response.failed = false;
+                response.swap = false;
+              }, 3000);
+            }
+          })
+          .catch((err) => {
+            response.msg = err.response.data.msg;
             response.failed = true;
 
             setTimeout(() => {
               response.failed = false;
               response.swap = false;
             }, 3000);
-          }
-        })
-        .catch((err) => {
-          response.msg = err.response.data.msg;
-          response.failed = true;
-
-          setTimeout(() => {
-            response.failed = false;
-            response.swap = false;
-          }, 3000);
-        });
+          });
+      } else {
+        response.failed = true;
+        response.msg = "Error: Your passwords don't match.";
+        setTimeout(() => {
+          response.failed = false;
+        }, 3000);
+      }
     }
 
     function signinFunc() {
