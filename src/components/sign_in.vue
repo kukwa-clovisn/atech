@@ -144,17 +144,6 @@
                 >
               </div>
             </div>
-            <!-- <div class="input">
-              <label for="Email">email:</label
-              ><input
-                type="email"
-                name="email"
-                id="Email"
-                v-model="user.email"
-                placeholder="Enter Email address...."
-                required=""
-              />
-            </div> -->
             <div class="input">
               <div class="value">
                 <label for="password" class="input-label">
@@ -174,17 +163,25 @@
                 >
               </div>
             </div>
-            <!-- <div class="input">
-              <label for="password">password:</label
-              ><input
-                type="password"
-                name="password"
-                id="password"
-                v-model="user.password"
-                placeholder="Enter Password...."
-                required=""
-              />
-            </div> -->
+            <div class="input">
+              <div class="value">
+                <label for="confirm_password" class="input-label">
+                  <i class="fa-solid fa-user"></i
+                ></label>
+
+                <input
+                  type="confirm_password"
+                  name="confirm_password"
+                  id="confirm_password"
+                  placeholder=" "
+                  v-model="user.confirm_password"
+                  required
+                />
+                <label for="confirm_password" class="active"
+                  >confirm password <span>.....</span></label
+                >
+              </div>
+            </div>
             <button type="submit">sign up</button>
           </form>
         </div>
@@ -227,6 +224,7 @@ export default {
       username: "",
       email: "",
       password: "",
+      confirm_password: "",
     });
 
     let credentials = reactive({
@@ -766,6 +764,7 @@ main {
         border-radius: 0 0 0 60%;
       }
       .input {
+        margin: 10px auto !important;
         label {
           font-size: 15px;
         }
