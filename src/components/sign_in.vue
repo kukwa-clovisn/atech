@@ -159,7 +159,7 @@
                 ></label>
 
                 <input
-                  type="confirm_password"
+                  type="password"
                   name="confirm_password"
                   id="confirm_password"
                   placeholder=" "
@@ -191,23 +191,32 @@
       ><a href="/#contact" class="a"
         ><i class="fa-solid fa-person-circle-question"></i></a
     ></span>
+    <Spinner v-show="loader.state" :rate="loader.percent" :msg="loader.msg" />
   </main>
 </template>
 
 <script>
 // import { v4 as uuidv4 } from "uuid";
-import { inject } from "vue";
+import { computed, inject, watch } from "vue";
 import Header from "./header.vue";
-import { reactive } from "vue";
+import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
+import Spinner from "./spinner.vue";
 export default {
   name: "Sign_in",
   components: {
     Header,
+    Spinner,
   },
   setup() {
     const router = useRouter();
+
+    let loader = reactive({
+      percent: 0,
+      state: false,
+      msg: "",
+    });
 
     let user = reactive({
       username: "",
@@ -252,26 +261,37 @@ export default {
 
     function signupFunc() {
       if (user.password === user.confirm_password) {
+        loader.state = true;
+        loader.msg = "processing data.....";
         axios
-          .post("api/signup", user, config, {
+          .post("api/signup", user, {
             onUploadProgress: (uploadEvent) => {
               response.success = true;
               response.msg = `processing data: ${Math.round(
                 (uploadEvent.loaded / uploadEvent.total) * 100
               )} %`;
+              watch(
+                () => loader.percent,
+                (newValue, oldValue) => {
+                  console.log("new:", newValue);
+                  console.log("old:", oldValue);
+                }
+              );
 
-              if (
-                Math.round((uploadEvent.loaded / uploadEvent.total) * 100) ===
-                100
-              ) {
-                setTimeout(() => {
-                  response.success = false;
-                }, 3000);
+              loader.percent = computed(() => {
+                return Math.round(
+                  (uploadEvent.loaded / uploadEvent.total) * 100
+                );
+              });
+
+              if (loader.percent === 100) {
+                response.success = false;
               }
             },
           })
           .then((res) => {
             if (res.statusText === "Created") {
+              loader.state = false;
               response.msg = res.data.msg;
               response.success = true;
               response.to_signin = true;
@@ -287,6 +307,7 @@ export default {
                 credentials.username = res.data.username;
               }, 2000);
             } else {
+              loader.state = false;
               response.msg = res.data.msg;
               response.failed = true;
 
@@ -297,6 +318,7 @@ export default {
             }
           })
           .catch((err) => {
+            loader.state = false;
             response.msg = err.response.data.msg;
             response.failed = true;
 
@@ -315,10 +337,36 @@ export default {
     }
 
     function signinFunc() {
+      loader.state = true;
+      loader.msg = "verifying credentials....";
       axios
-        .post("api/signin", credentials, config)
+        .post("api/signin", credentials, {
+          onUploadProgress: (uploadEvent) => {
+            response.success = true;
+            response.msg = `processing data: ${Math.round(
+              (uploadEvent.loaded / uploadEvent.total) * 100
+            )} %`;
+            watch(
+              () => loader.percent,
+              (newValue, oldValue) => {
+                console.log("new:", newValue);
+                console.log("old:", oldValue);
+              }
+            );
+
+            loader.percent = computed(() => {
+              return Math.round((uploadEvent.loaded / uploadEvent.total) * 100);
+            });
+
+            if (loader.percent === 100) {
+              response.success = false;
+            }
+          },
+        })
         .then((res) => {
+          console.log(res);
           if (res.statusText === "OK") {
+            loader.state = false;
             response.success = true;
             response.msg = res.data.msg;
             localStorage.setItem("accessId", res.data.accessId);
@@ -335,6 +383,7 @@ export default {
               router.push("/course");
             }, 2000);
           } else {
+            loader.state = false;
             response.msg = res.data.msg;
             response.failed = true;
 
@@ -344,6 +393,7 @@ export default {
           }
         })
         .catch((err) => {
+          loader.state = false;
           response.msg = err.response.data.msg
             ? err
             : "Access Denied. Maybe network failure";
@@ -356,6 +406,7 @@ export default {
     }
 
     return {
+      loader,
       user,
       credentials,
       response,
