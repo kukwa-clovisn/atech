@@ -129,7 +129,6 @@ export default {
     onMounted(() => {
       axios("api/token")
         .then((res) => {
-          console.log(res);
           course.courseUser = res.data.username;
           course.courseUserEmail = res.data.email;
 

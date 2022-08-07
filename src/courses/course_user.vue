@@ -36,7 +36,7 @@
             <i class="fa-solid fa-camera-retro"></i>select photo
           </button>
           <button @click="onFileSubmit" v-show="profileImageUpdate.preview">
-            <i class="fa-solid fa-cloud-arrow-up"></i>update profile
+            <i class="fa-solid fa-cloud-arrow-up"></i>click update profile
           </button>
         </div>
         <div class="bottom-content">
@@ -45,11 +45,19 @@
           ></span>
           <div class="info">
             <h1>{{ profile.name }}</h1>
-            <p>{{ profile.email }}</p>
-            <h5>Profession:{{ profile.profession }}</h5>
-            <h5>location:{{ profile.location }}</h5>
-            <h5>DOB:{{ profile.dob }}</h5>
-            <h5>study/work at:{{ profile.school_company }}</h5>
+            <h2>{{ profile.email }}</h2>
+            <p>
+              Profession: <span>{{ profile.profession }}</span>
+            </p>
+            <p>
+              location: <span>{{ profile.location }}</span>
+            </p>
+            <p>
+              DOB: <span>{{ profile.dob }}</span>
+            </p>
+            <p>
+              study/work at: <span>{{ profile.school_company }}</span>
+            </p>
           </div>
         </div>
       </div>
@@ -128,6 +136,7 @@
               update your profile
               <span @click="updateProfile = !updateProfile">&times;</span>
             </h2>
+            <p>fill only the input fields you want to update.</p>
             <div class="credentials">
               <div class="input">
                 <div class="value">
@@ -141,25 +150,8 @@
                     id="name"
                     v-model="update_user.name"
                     placeholder=" "
-                    required
                   />
                   <label for="name" class="active">new Name</label>
-                </div>
-              </div>
-              <div class="input">
-                <div class="value">
-                  <label for="email" class="input-label">
-                    <i class="fa-solid fa-envelope"></i>
-                  </label>
-
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder=" "
-                    v-model="update_user.email"
-                  />
-                  <label for="email" class="active">new email</label>
                 </div>
               </div>
               <div class="input">
@@ -181,7 +173,7 @@
               <div class="input">
                 <div class="value">
                   <label for="school" class="input-label">
-                    <i class="fa-solid fa-user"></i
+                    <i class="fa-solid fa-school"></i
                   ></label>
 
                   <input
@@ -190,7 +182,6 @@
                     id="school"
                     v-model="update_user.school_company"
                     placeholder=" "
-                    required
                   />
                   <label for="school" class="active">school/company</label>
                 </div>
@@ -198,7 +189,7 @@
               <div class="input">
                 <div class="value">
                   <label for="profession" class="input-label">
-                    <i class="fa-solid fa-user"></i
+                    <i class="fa-solid fa-graduation-cap"></i
                   ></label>
 
                   <input
@@ -207,7 +198,6 @@
                     id="profession"
                     v-model="update_user.profession"
                     placeholder=" "
-                    required
                   />
                   <label for="profession" class="active"> profession</label>
                 </div>
@@ -226,38 +216,6 @@
                     v-model="update_user.dob"
                   />
                   <label for="dob" class="active">Birth day</label>
-                </div>
-              </div>
-              <div class="input">
-                <div class="value">
-                  <label for="password" class="input-label">
-                    <i class="fa-solid fa-key"></i>
-                  </label>
-
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder=" "
-                    v-model="update_user.password"
-                  />
-                  <label for="password" class="active"> Password</label>
-                </div>
-              </div>
-              <div class="input">
-                <div class="value">
-                  <label for="new_password" class="input-label">
-                    <i class="fa-solid fa-key"></i>
-                  </label>
-
-                  <input
-                    type="password"
-                    name="new_password"
-                    id="new_password"
-                    placeholder=" "
-                    v-model="update_user.new_password"
-                  />
-                  <label for="new_password" class="active">new password</label>
                 </div>
               </div>
               <button type="submit">Update Profile</button>
@@ -324,8 +282,6 @@ export default {
     });
     let update_user = reactive({
       name: "",
-      email: "",
-      password: "",
       profession: "",
       location: null,
       dob: null,
@@ -333,19 +289,14 @@ export default {
     });
     let updateProfile = ref(false);
     function checkToken() {
+      loader.state = true;
+      loader.msg = "Collecting data... please wait";
       axios("api/token", {
         onUploadProgress: (uploadEvent) => {
           response.success = true;
           response.msg = `processing data: ${Math.round(
             (uploadEvent.loaded / uploadEvent.total) * 100
           )} %`;
-          watch(
-            () => loader.percent,
-            (newValue, oldValue) => {
-              console.log("new:", newValue);
-              console.log("old:", oldValue);
-            }
-          );
 
           loader.percent = computed(() => {
             return Math.round((uploadEvent.loaded / uploadEvent.total) * 100);
@@ -357,8 +308,6 @@ export default {
         },
       })
         .then((res) => {
-          console.log(res);
-          loader.state = false;
           profile.name = res.data.username;
           profile.email = res.data.email;
           profile.location = res.data.location ? res.data.location : "_____ ";
@@ -371,6 +320,7 @@ export default {
             : "_____ ";
           profile.subscriptions = res.data.subscription;
           profile.savedCourses = res.data.Bookmarks;
+          loader.state = false;
           if (res.data.image) {
             profile.image = `data:image/png;base64,` + res.data.image;
           }
@@ -386,9 +336,17 @@ export default {
       store.dispatch("pagemode", mode);
     }
     function onChangeFunc(e) {
-      profileImageUpdate.preview = e.target.files[0];
-      preview.value = e.target.files[0];
-      console.log(e);
+      if (e.target.files[0].size < 1048576) {
+        profileImageUpdate.preview = e.target.files[0];
+        preview.value = e.target.files[0];
+      } else {
+        response.failed = true;
+        response.msg =
+          "Error: image size exceeded. image should be less than 1MB (<1mb)";
+        setTimeout(() => {
+          response.failed = false;
+        }, 3000);
+      }
     }
     watch(preview, (preview) => {
       let fileReader = new FileReader();
@@ -399,10 +357,9 @@ export default {
     });
     const onFileSubmit = () => {
       loader.state = true;
-      loader.msg = "uploading photo...";
+      loader.msg = "uploading photo...please wait";
       const formdata = new FormData();
       formdata.append("image", preview.value, preview.value.name);
-      console.log(preview.value);
       axios
         .post(`api/user/upload/`, formdata, {
           onUploadProgress: (uploadEvent) => {
@@ -410,13 +367,7 @@ export default {
             response.msg = `processing data: ${Math.round(
               (uploadEvent.loaded / uploadEvent.total) * 100
             )} %`;
-            watch(
-              () => loader.percent,
-              (newValue, oldValue) => {
-                console.log("new:", newValue);
-                console.log("old:", oldValue);
-              }
-            );
+
             loader.percent = computed(() => {
               return Math.round((uploadEvent.loaded / uploadEvent.total) * 100);
             });
@@ -426,8 +377,19 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res);
-          checkToken();
+          loader.state = false;
+          if (res.statusText === "OK") {
+            profile.image = `data:image/png;base64,` + res.data.image;
+            profileImageUpdate.preview =
+              `data:image/png;base64,` + res.data.image;
+
+            response.success = true;
+            response.msg = "profile photo successfully updated.";
+
+            setTimeout(() => {
+              response.success = false;
+            }, 3000);
+          }
         })
         .catch((err) => {
           loader.state = false;
@@ -435,7 +397,20 @@ export default {
     };
     function updateFunc() {
       loader.state = true;
-      loader.msg = "updating profile...";
+      loader.msg = "updating profile...please wait";
+
+      update_user.name = update_user.name ? update_user.name : profile.name;
+      update_user.profession = update_user.profession
+        ? update_user.profession
+        : profile.profession;
+      update_user.location = update_user.location
+        ? update_user.location
+        : profile.location;
+      update_user.school_company = update_user.school_company
+        ? update_user.school_company
+        : profile.school_company;
+
+      update_user.dob = update_user.dob ? update_user.dob : profile.dob;
       axios
         .post(
           `/api/user/update/${localStorage.getItem("accessId")}`,
@@ -446,13 +421,6 @@ export default {
               response.msg = `processing data: ${Math.round(
                 (uploadEvent.loaded / uploadEvent.total) * 100
               )} %`;
-              watch(
-                () => loader.percent,
-                (newValue, oldValue) => {
-                  console.log("new:", newValue);
-                  console.log("old:", oldValue);
-                }
-              );
 
               loader.percent = computed(() => {
                 return Math.round(
@@ -467,19 +435,23 @@ export default {
           }
         )
         .then((res) => {
-          loader.state = false;
           if (res.statusText === "OK") {
             localStorage.setItem("accessToken", res.data.accessToken);
             axios.defaults.headers.common[
               "Authorization"
             ] = `Bearer ${localStorage.getItem("accessToken")}`;
+
             updateProfile.value = false;
-            update_user.name = "";
-            update_user.email = "";
-            update_user.password = "";
+            profile.name = res.data.name;
+            profile.email = res.data.email;
+            profile.location = res.data.location;
+            profile.profession = res.data.profession;
+            profile.school_company = res.data.school_company;
+            profile.dob = res.data.dob;
+
+            loader.state = false;
             setTimeout(() => {
               response.success = false;
-              checkToken();
             }, 2000);
           } else {
             response.msg = res.data.msg;
@@ -491,8 +463,10 @@ export default {
         })
         .catch((err) => {
           loader.state = false;
-          response.msg = err.response.data.msg
-            ? err
+          response.msg = err.msg
+            ? err.msg
+            : err.response.data.msg
+            ? err.response.data.msg
             : "Access Denied. Maybe network failure";
           response.failed = true;
           setTimeout(() => {
@@ -677,10 +651,20 @@ export default {
       }
       .info {
         h1,
+        h2,
         h5,
         p {
           text-align: left;
           padding: 10px;
+
+          span {
+            font: 17px "Nunito Sans", sans-serif;
+            padding: 0 10px;
+          }
+        }
+        h2 {
+          font-size: 18px;
+          color: rgb(80, 79, 79);
         }
         @media screen and (max-width: 400px) {
           h1 {
@@ -1094,6 +1078,7 @@ export default {
       }
       h1,
       h5,
+      h2,
       p {
         color: rgb(227, 225, 225);
       }
@@ -1136,6 +1121,12 @@ export default {
     }
     .bottom-content {
       background: rgb(4, 138, 64);
+      h1,
+      h5,
+      h2,
+      p {
+        color: rgb(227, 225, 225);
+      }
     }
   }
 

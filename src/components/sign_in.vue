@@ -197,7 +197,7 @@
 
 <script>
 // import { v4 as uuidv4 } from "uuid";
-import { computed, inject, watch } from "vue";
+import { computed } from "vue";
 import Header from "./header.vue";
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
@@ -270,13 +270,6 @@ export default {
               response.msg = `processing data: ${Math.round(
                 (uploadEvent.loaded / uploadEvent.total) * 100
               )} %`;
-              watch(
-                () => loader.percent,
-                (newValue, oldValue) => {
-                  console.log("new:", newValue);
-                  console.log("old:", oldValue);
-                }
-              );
 
               loader.percent = computed(() => {
                 return Math.round(
@@ -338,7 +331,7 @@ export default {
 
     function signinFunc() {
       loader.state = true;
-      loader.msg = "verifying credentials....";
+      loader.msg = "checking user....please wait";
       axios
         .post("api/signin", credentials, {
           onUploadProgress: (uploadEvent) => {
@@ -346,13 +339,6 @@ export default {
             response.msg = `processing data: ${Math.round(
               (uploadEvent.loaded / uploadEvent.total) * 100
             )} %`;
-            watch(
-              () => loader.percent,
-              (newValue, oldValue) => {
-                console.log("new:", newValue);
-                console.log("old:", oldValue);
-              }
-            );
 
             loader.percent = computed(() => {
               return Math.round((uploadEvent.loaded / uploadEvent.total) * 100);
@@ -364,10 +350,7 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res);
           if (res.statusText === "OK") {
-            loader.state = false;
-            response.success = true;
             response.msg = res.data.msg;
             localStorage.setItem("accessId", res.data.accessId);
 
@@ -377,11 +360,12 @@ export default {
             axios.defaults.headers.common[
               "Authorization"
             ] = `Bearer ${localStorage.getItem("accessToken")}`;
-
+            loader.state = false;
+            response.success = true;
             setTimeout(() => {
               response.success = false;
               router.push("/course");
-            }, 2000);
+            }, 1000);
           } else {
             loader.state = false;
             response.msg = res.data.msg;
