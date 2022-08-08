@@ -442,7 +442,7 @@ export default {
             ] = `Bearer ${localStorage.getItem("accessToken")}`;
 
             updateProfile.value = false;
-            profile.name = res.data.name;
+            profile.name = res.data.username;
             profile.email = res.data.email;
             profile.location = res.data.location;
             profile.profession = res.data.profession;
