@@ -5,7 +5,7 @@
     </header>
 
     <div class="form-container">
-      <form @submit.prevent="registerData">
+      <form class="form" @submit.prevent="registerData">
         <div class="form-header">
           <h2>Register</h2>
           <span><router-link to="/" class="link">&times;</router-link> </span>
@@ -103,6 +103,7 @@
                 v-model="user.subscription.plan"
                 placeholder="Select a payment plan"
                 title="Select a payment plan"
+                @change="checkPay"
                 required
               >
                 <option value="free">free</option>
@@ -110,9 +111,22 @@
               </select>
             </div>
           </div>
-          <div class="form-input">
-            <button type="submit">continue</button>
-          </div>
+          <transition name="appear">
+            <div class="form-input">
+              <button type="submit">
+                <i class="fa-solid fa-money-check-dollar"></i>register for free
+              </button>
+            </div>
+          </transition>
+          <!-- <transition name="appear">
+            <div class="form-input" v-if="engagePay">
+              <button id="payunit-pay">
+                <i class="fa-solid fa-money-check-dollar"></i> continue with
+                payment
+              </button>
+            </div>
+          </transition> -->
+
           <p>
             not signed in yet?
             <router-link to="/login" class="link">sign up</router-link>
@@ -129,6 +143,7 @@
           </div>
         </transition>
       </form>
+      <Spinner v-show="loader.state" :rate="loader.percent" :msg="loader.msg" />
     </div>
   </div>
 </template>
@@ -136,11 +151,14 @@
 <script>
 import router from "@/router";
 import axios from "axios";
-import { reactive } from "vue";
+import { reactive, onMounted, ref } from "vue";
+import { PayUnit } from "payunitjs";
+import generatedToken from "../interceptors/token";
 import Header from "./header.vue";
+import Spinner from "./spinner.vue";
 export default {
   name: "Register",
-  components: { Header },
+  components: { Header, Spinner },
   setup() {
     const user = reactive({
       username: "",
@@ -148,6 +166,10 @@ export default {
       password: "",
       subscription: { plan: "free", course: "Forex" },
     });
+
+    let engagePay = ref(false);
+    let payunitBtn = ref(null);
+    let registerMsg = ref("register for free");
 
     const response = reactive({
       success: false,
@@ -160,13 +182,62 @@ export default {
       },
     };
 
+    let loader = reactive({
+      percent: 0,
+      state: false,
+      msg: "",
+    });
+
+    onMounted(() => {
+      PayUnit(
+        {
+          apiUsername: "payunit_VKdysPeWL",
+          apiPassword: "277bc276-de2e-4b47-a82e-6ea848e65062",
+          x_api_key: "14b4b34a9890e485e5fd60d1c519a86e6a505add",
+          mode: "live",
+        },
+        {
+          return_url: "http://localhost:9003",
+          notify_url: " ",
+          description: "payment from Advanced Tech Academy",
+          purchaseRef: "",
+          total_amount: "5000",
+          name: "vshop enterprise",
+          currency: "XAF",
+          transaction_id: generatedToken,
+        }
+      );
+    });
+
+    const checkPay = (e) => {
+      if (user.subscription.plan === "paid") {
+        registerMsg.value = "continue with payment";
+        engagePay.value = true;
+      } else {
+        engagePay.value = false;
+      }
+    };
+
     const registerData = () => {
+      loader.state = true;
+      loader.msg = "checking user....please wait";
       axios
-        .post("/api/register", user, config)
+        .post("/api/register", user, {
+          onUploadProgress: (uploadEvent) => {
+            loader.percent = computed(() => {
+              return Math.round((uploadEvent.loaded / uploadEvent.total) * 100);
+            });
+
+            if (loader.percent === 100) {
+              response.success = false;
+            }
+          },
+        })
         .then((res) => {
           if (res.statusText === "OK" || res.status === 201) {
             response.success = true;
             response.msg = res.data.msg;
+            loader.state = false;
             setTimeout(() => {
               response.success = false;
 
@@ -175,12 +246,14 @@ export default {
           } else {
             response.failed = true;
             response.msg = "Registration failed.";
+            loader.state = false;
             setTimeout(() => {
               response.failed = false;
             }, 4000);
           }
         })
         .catch((err) => {
+          loader.state = false;
           response.failed = true;
           response.msg = err.response.data.msg
             ? err.response.data.msg
@@ -193,6 +266,11 @@ export default {
     return {
       user,
       response,
+      engagePay,
+      payunitBtn,
+      loader,
+      registerMsg,
+      checkPay,
       registerData,
     };
   },
@@ -226,7 +304,7 @@ $baseColor: #1d375f;
     background-position: left;
     padding: 20px 2px;
 
-    form {
+    .form {
       width: 450px;
       height: fit-content;
       background: rgb(19, 37, 62);
@@ -319,18 +397,35 @@ $baseColor: #1d375f;
           select {
             cursor: pointer;
           }
-          button {
+          button,
+          #payunit-pay {
             width: 90%;
             height: 50px;
             border-radius: 3px;
             border: none;
-            background: transparent;
-            box-shadow: 0 0 2px 1px #7ca7e7;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgb(20, 92, 125);
+            box-shadow: 0 0 1px rgb(20, 92, 125);
             color: white;
+            text-transform: capitalize;
+            font-family: "Poppins", sans-serif;
+            gap: 7px;
+            margin: auto;
+
+            i {
+              font-size: 25px;
+            }
 
             &:hover {
-              background: #628ccb;
+              background: #5981be;
               box-shadow: none;
+              transform: none;
+            }
+            &:active {
+              transform: scale(0.9);
             }
           }
         }

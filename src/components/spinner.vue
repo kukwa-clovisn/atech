@@ -36,37 +36,42 @@ export default {
   }
 
   .spinner {
-    font-size: 150px;
+    font-size: 100px;
     animation: spin 1s infinite linear forwards;
     position: relative;
     display: block;
-    color: rgb(40, 223, 122);
+    color: tomato;
     cursor: pointer;
   }
 
   p {
+    width: fit-content;
+    height: fit-content;
+    border-radius: 5px;
+    background: mediumseagreen;
     padding: 20px;
-    color: rgb(150, 148, 148);
+    color: rgb(243, 243, 243);
     position: relative;
     font: 30px 500 "Poppins", sans-serif;
     animation: loading 1s infinite alternate forwards;
     opacity: 0.1;
+    margin-top: 10px;
   }
 }
 
 @keyframes spin {
-  from {
-    color: rgba(65, 140, 228, 1);
-  }
-  25% {
-    color: rgba(230, 101, 129, 1);
-  }
-  50% {
-    color: #072e54;
-  }
-  75% {
-    color: teal;
-  }
+  // from {
+  //   color: rgba(65, 140, 228, 1);
+  // }
+  // 25% {
+  //   color: rgba(230, 101, 129, 1);
+  // }
+  // 50% {
+  //   color: #072e54;
+  // }
+  // 75% {
+  //   color: teal;
+  // }
   to {
     transform: rotate(360deg);
   }
