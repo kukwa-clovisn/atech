@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="courses-div">
-      <h1>Explore our top courses</h1>
+      <h1>Advanced Tech Academy courses</h1>
       <p>
         Find out the best and outstanding courses in the area of your choice
         with the best and experienced instructors online. Also get online
@@ -736,15 +736,15 @@ main {
         }
       }
       h1 {
-        width: 90%;
+        width: 99%;
         margin: auto;
         padding: 20px;
-        font: 800 55px "Poppins", sans-serif;
+        font: 800 35px "Poppins", sans-serif;
         text-align: center;
         color: #393958;
 
-        @media screen and (max-width: 768px) {
-          font-size: 40px;
+        @media screen and (max-width: 508px) {
+          font-size: 22px;
         }
       }
       p {
@@ -801,6 +801,10 @@ main {
       font: 800 35px "Poppins", sans-serif;
       position: relative;
       color: #113b74;
+
+      @media screen and (max-width: 500px) {
+        font-size: 20px;
+      }
     }
     p {
       width: 95vw;
