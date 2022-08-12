@@ -228,7 +228,6 @@ export default {
         headers: { private: false, plan: plan },
       })
         .then((res) => {
-          console.log(res);
           if (res.statusText === "OK") {
             route.params.course = localStorage.getItem("courseId");
             response.courses = res.data;
@@ -246,7 +245,6 @@ export default {
     onMounted(() => {
       axios(`api/signup/subscription/${route.params.course}`)
         .then((res) => {
-          console.log(res);
           if (res.statusText === "OK") {
             for (let i = 0; i < res.data.data.length; i++) {
               if (
@@ -261,7 +259,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err);
           router.push("/course");
         });
     });
