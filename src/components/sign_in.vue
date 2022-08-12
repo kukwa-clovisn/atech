@@ -40,7 +40,7 @@
             <div class="input">
               <div class="value">
                 <label for="password" class="input-label">
-                  <i class="fa-solid fa-user"></i
+                  <i class="fa-solid fa-key"></i
                 ></label>
 
                 <input

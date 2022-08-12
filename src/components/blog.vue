@@ -97,13 +97,17 @@
         ><button @click="searchPosts()">Filter Post(s)</button>
       </header>
       <div class="post" v-for="post in post.postArr" :key="post.id">
+        <div class="img">
+          <img src="../assets/logo-white.jpg" alt="advanced tech academy" />
+        </div>
+
         <h1 class="title">{{ post.title }}</h1>
         <h3 class="sub-title">{{ post.subTitle }}</h3>
         <p v-html="post.message"></p>
         <h5 class="tags">
           <span v-for="tag in post.tags" :key="tag.id">#{{ tag }}</span>
         </h5>
-        <p class="author">author:{{ post.author }}</p>
+        <p class="author">{{ post.author }}</p>
       </div>
     </div>
     <span class="to-landing-page reach"
@@ -408,17 +412,32 @@ main {
     }
 
     .post {
-      width: 97%;
+      max-width: 95%;
       height: fit-content;
-      padding: 25px;
-      margin: 10px auto;
+      padding: 20px;
+      margin: 20px auto;
       border-radius: 5px;
       background: rgb(244, 244, 244);
+      box-shadow: 10px 10px 5px $fallback, -10px -10px 5px $fallback;
+
+      .img {
+        width: 200px;
+        height: 200px;
+        border-radius: 100%;
+        margin: auto;
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
 
       .title {
         font: 800 35px "Nunito sans", sans-serif;
         text-transform: capitalize;
         padding: 10px;
+        color: rgba(230, 101, 129, 1);
 
         @media screen and (max-width: 700px) {
           font-size: 25px;
@@ -426,7 +445,7 @@ main {
       }
 
       .sub-title {
-        font: 500 18px "Poppins", sans-serif;
+        font: 600 18px "Poppins", sans-serif;
       }
       h5 {
         text-align: left;
@@ -434,16 +453,19 @@ main {
         justify-content: flex-start;
         align-items: center;
         flex-wrap: wrap;
+        color: mediumaquamarine;
         span {
           padding: 5px;
           white-space: pre-wrap;
         }
       }
       p {
-        text-align: left;
+        width: 97%;
+        margin: auto;
+        text-align: center;
       }
       .author {
-        text-align: left;
+        text-align: center;
         text-transform: uppercase;
         padding: 10px;
         font: 600 15px "Poppins", sans-serif;

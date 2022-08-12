@@ -222,12 +222,13 @@ export default {
       bookmrk: true,
     });
 
-    function allCourses() {
+    function allCourses(plan) {
       response.showCourse = false;
       axios(`/api/user/course/all/${localStorage.getItem("courseId")}`, {
-        headers: { private: false },
+        headers: { private: false, plan: plan },
       })
         .then((res) => {
+          console.log(res);
           if (res.statusText === "OK") {
             route.params.course = localStorage.getItem("courseId");
             response.courses = res.data;
@@ -245,11 +246,22 @@ export default {
     onMounted(() => {
       axios(`api/signup/subscription/${route.params.course}`)
         .then((res) => {
+          console.log(res);
           if (res.statusText === "OK") {
-            allCourses();
+            for (let i = 0; i < res.data.data.length; i++) {
+              if (
+                res.data.data[i].course === localStorage.getItem("courseId") &&
+                res.data.data[i].plan === "paid"
+              ) {
+                return allCourses("paid");
+              }
+            }
+
+            allCourses("free");
           }
         })
         .catch((err) => {
+          console.log(err);
           router.push("/course");
         });
     });

@@ -36,11 +36,11 @@ export default {
   }
 
   .spinner {
-    font-size: 100px;
+    font-size: 70px;
     animation: spin 1s infinite linear forwards;
     position: relative;
     display: block;
-    color: tomato;
+    color: mediumseagreen;
     cursor: pointer;
   }
 

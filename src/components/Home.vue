@@ -1,5 +1,5 @@
 <template>
-  <main @scroll="animateFunc()">
+  <main>
     <div class="landing-page" id="home">
       <div class="blur" id="blur"></div>
       <Header />
@@ -43,7 +43,11 @@
         </transition>
       </div>
     </div>
-    <div class="advertisement">Learning never ends!</div>
+    <div class="advertisement">
+      Learning never ends!
+      <!-- <div class="g-signin2" data-onsuccess="onSignIn">sign in</div>
+      <button @click="signOut()">sign out</button> -->
+    </div>
     <div class="learn-more">
       <div class="info">
         <h1>Learn advanced professional skills online.</h1>
@@ -530,12 +534,7 @@
         </div>
       </div>
     </transition>
-    <!-- <span class="to-landing-page reach"
-      ><a href="#home" class="a"><i class="fa-solid fa-circle-arrow-up"></i></a
-    ></span> -->
-    <!-- <span class="to-landing-page"
-      ><a href="/#contact" class="a"><i class="fa-solid fa-paper-plane"></i></a
-    ></span> -->
+    <div class="toTop"><a href="#home">Back to the top</a></div>
     <span class="to-landing-page beamerTrigger"
       ><a href="" class="a"><i class="fa-solid fa-bell"></i></a
     ></span>
@@ -578,19 +577,6 @@ export default {
       number: "",
     });
 
-    let slideIn = ref(false);
-
-    const animateFunc = () => {
-      console.log("scrolling");
-      if (window.scrollY >= 1100) {
-        slideIn.value = true;
-        console.log("true");
-      } else {
-        console.log("false");
-        slideIn.value = false;
-      }
-    };
-
     onMounted(() => {
       setTimeout(() => {
         animate.value = true;
@@ -601,6 +587,22 @@ export default {
         expo2.value = !expo2.value;
       }, 15000);
     });
+
+    // function onSignIn(googleUser) {
+    //   console.log("this is for sign in");
+    //   let profile = googleUser.getBasicProfile();
+    //   console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    //   console.log("Name: " + profile.getName());
+    //   console.log("Image URL: " + profile.getImageUrl());
+    //   console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+    // }
+
+    // function signOut() {
+    //   var auth2 = gapi.auth2.getAuthInstance();
+    //   auth2.signOut().then(function () {
+    //     console.log("User signed out.");
+    //   });
+    // }
 
     function sendMessage() {
       axios
@@ -635,13 +637,13 @@ export default {
     }
 
     return {
-      slideIn,
       animate,
       expo1,
       expo2,
+      // signOut,
+      // onSignIn,
       response,
       user,
-      animateFunc,
       sendMessage,
     };
   },
@@ -1791,6 +1793,23 @@ main {
     }
     @media screen and (max-width: 500px) {
       top: 60vh;
+    }
+  }
+
+  .toTop {
+    width: 100vw;
+    height: max-content;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+      text-decoration: none;
+
+      &:hover {
+        color: mediumaquamarine;
+      }
     }
   }
 
