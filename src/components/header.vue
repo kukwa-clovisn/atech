@@ -22,9 +22,31 @@
           </div>
         </div>
         <nav class="routes">
-          <router-link to="#" class="route standard" @click="openDropdown()"
+          <router-link
+            to="#"
+            class="route standard"
+            @mouseenter="openDropdown()"
             >courses<i class="fa-solid fa-caret-down"></i
           ></router-link>
+          <router-link
+            to="#"
+            class="route standard effect"
+            @mouseenter="displayMentor()"
+            @mouseleave="hideMentor()"
+            >Mentorship<i class="fa-solid fa-caret-down"></i>
+          </router-link>
+          <transition name="fade">
+            <div class="mentor" v-if="showMentor">
+              <h1>Atech Mentorship</h1>
+              <p>
+                Sign up for our mentorship program to join our community and get
+                one on one lessons tutorials and trainings. You will also get to
+                join our live sessions and programs, In Forex you'll have the
+                chance to join live market chart analysis on weekly basis and
+                more.
+              </p>
+            </div>
+          </transition>
           <router-link to="/why-us" class="route standard"
             >why crypto?</router-link
           >
@@ -62,8 +84,37 @@
       </nav>
       <transition name="fade">
         <div class="courses-exp routes" v-if="showCourses">
+          <nav class="header bottom-nav">
+            <div class="logo-nav" @click="toHome()">
+              <h1>Atech</h1>
+              <div class="logo-name">
+                <span>Advanced</span><span>Tech</span><span>Acadmemy</span>
+              </div>
+            </div>
+            <nav class="routes">
+              <router-link to="/why-us" class="route standard"
+                >why crypto?</router-link
+              >
+              <router-link
+                to="#"
+                class="route standard"
+                @mouseenter="displayMentor()"
+                @mouseleave="hideMentor()"
+                >Mentorship<i class="fa-solid fa-caret-down"></i
+              ></router-link>
+              <router-link to="/blog" class="route standard">blog</router-link>
+              <a href="/#contact" class="route standard">contact</a>
+              <router-link to="/login" class="route special register"
+                >log in</router-link
+              >
+              <router-link to="/login" class="route register"
+                >sign up</router-link
+              >
+              <span @click="openDropdown()" class="route">&times;</span>
+            </nav>
+          </nav>
           <div class="blur" @click="showCourses = false">
-            <transition name="fade">
+            <transition name="appear">
               <div class="blur-container" v-show="course.app">
                 <h1>Get to use our applications</h1>
                 <p>
@@ -78,9 +129,12 @@
               </div>
             </transition>
 
-            <transition name="fade">
+            <transition name="appear">
               <div class="blur-container" v-show="course.forex">
                 <h1>Learn Forex Trading</h1>
+                <div class="img">
+                  <img src="../assets/forex.jpg" alt="" />
+                </div>
                 <p>
                   The world today is goind digital earnig a skill an forex
                   trading is a best idea. Having to work at home as part time
@@ -91,9 +145,12 @@
                 <button><a href="/course/forex">learn forex trading</a></button>
               </div>
             </transition>
-            <transition name="fade">
+            <transition name="appear">
               <div class="blur-container" v-show="course.web">
                 <h1>Become a web developer in less than no time</h1>
+                <div class="img">
+                  <img src="../assets/html-logo-removebg-preview.png" alt="" />
+                </div>
                 <p>
                   we have a good number of applications ready and set for you to
                   use them daily and improve you knowledge while learning
@@ -104,9 +161,12 @@
               </div>
             </transition>
 
-            <transition name="fade">
+            <transition name="appear">
               <div class="blur-container" v-show="course.music">
                 <h1>Learn about music and how to play musical instruments</h1>
+                <div class="img">
+                  <img src="../assets/pexels-pixabay-33597.jpg" alt="" />
+                </div>
                 <p>
                   we have a good number of applications ready and set for you to
                   use them daily and improve you knowledge while learning
@@ -168,7 +228,6 @@
               <router-link to="#music" class="link">music</router-link>
             </li>
           </ul>
-          <span @click="openDropdown()" class="closeDropdown">&times;</span>
         </div>
       </transition>
     </header>
@@ -326,6 +385,25 @@
                 </ul>
               </div>
             </transition>
+            <li>
+              <router-link to="#" class="link" @click="toggleMentor()"
+                >Mentorship<i class="fa-solid fa-caret-down"></i>
+              </router-link>
+            </li>
+
+            <transition name="fade">
+              <div class="mentor" v-if="showMentor">
+                <span @click="toggleMentor()">&times;</span>
+                <h1>Atech Mentorship</h1>
+                <p>
+                  Sign up for our mentorship program to join our community and
+                  get one on one lessons tutorials and trainings. You will also
+                  get to join our live sessions and programs, In Forex you'll
+                  have the chance to join live market chart analysis on weekly
+                  basis and more.
+                </p>
+              </div>
+            </transition>
 
             <li>
               <router-link to="/why-us" class="link">why crypto?</router-link>
@@ -361,6 +439,8 @@ export default {
       music: false,
     });
 
+    let showMentor = ref(false);
+
     function menuFunction() {
       onDropdown.value = true;
       noDropdown.value = false;
@@ -395,8 +475,22 @@ export default {
       light: false,
       cafe: true,
     });
+
+    function displayMentor() {
+      showMentor.value = true;
+    }
+    function hideMentor() {
+      showMentor.value = false;
+    }
+    function toggleMentor() {
+      showMentor.value = !showMentor.value;
+    }
     return {
       dropRoute,
+      showMentor,
+      displayMentor,
+      hideMentor,
+      toggleMentor,
       onDropdown,
       noDropdown,
       showCourses,
@@ -564,6 +658,7 @@ header {
       display: flex;
       justify-content: space-around;
       align-items: center;
+      position: relative;
       .route {
         flex-basis: 1;
         padding: 0 7px;
@@ -629,7 +724,6 @@ header {
         }
         to {
           width: 100%;
-          // background: rgb(213, 246, 254);
         }
       }
       @keyframes coloring {
@@ -674,6 +768,35 @@ header {
           }
         }
       }
+
+      .mentor {
+        width: 400px;
+        height: fit-content;
+        border-radius: 2px;
+        background: white;
+        position: fixed;
+        top: 17vh;
+        left: 45vw;
+        z-index: 1;
+        box-shadow: 0px 0px 1px rgb(230, 230, 230);
+        padding: 10px;
+
+        h1 {
+          font-size: 20px;
+          padding: 10px;
+          text-transform: capitalize;
+        }
+        p {
+          font-size: 15px;
+          padding: 10px;
+        }
+
+        @media screen and (max-width: 917px) {
+          top: 25vh;
+          left: 10vw;
+          width: 80vw;
+        }
+      }
     }
 
     .large-screen-course-list.courses-list {
@@ -695,36 +818,99 @@ header {
   .courses-exp {
     width: 100vw;
     height: 100vh;
-    background: transparent;
-    z-index: 1;
+    background: white;
+    // z-index: 1;
     position: fixed;
     top: 0;
     left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     flex-direction: row-reverse;
 
+    .header {
+      width: 100vw;
+      height: 15vh;
+      position: relative;
+      background: white;
+      box-shadow: 3px 0px 3px rgb(244, 243, 243);
+
+      .logo-nav {
+        width: 20%;
+
+        .logo-name span {
+          color: rgb(106, 104, 104);
+        }
+      }
+
+      .routes {
+        width: 70%;
+        .route {
+          color: rgb(54, 54, 54);
+          i {
+            color: rgb(53, 52, 52);
+          }
+        }
+      }
+
+      .route.register {
+        background: rgb(213, 67, 96);
+        color: white;
+        height: 40px;
+      }
+      .route.special {
+        background: transparent;
+        color: rgb(67, 70, 72);
+        border: 1px solid rgb(152, 152, 152);
+
+        &:hover {
+          border: 2px solid rgb(152, 152, 152);
+        }
+      }
+      span.route {
+        font-size: 30px;
+        cursor: pointer;
+      }
+    }
     .blur {
       width: 75%;
-      height: 100%;
+      height: 85vh;
       position: relative;
       cursor: pointer;
-      opacity: 0.95;
+      opacity: 0.9;
       display: flex;
       justify-content: center;
       align-items: center;
+      background: rgb(227, 226, 226);
+      overflow: hidden;
+      overflow-y: auto;
+      padding: 40px 0;
 
       .blur-container {
-        width: 70%;
+        width: 80%;
         height: fit-content;
         background: white;
         padding: 20px;
         border-radius: 5px;
+        margin-top: 10px;
 
         h1 {
           padding: 20px;
           font: 50px 700 "Poppins", sans-serif;
+        }
+        .img {
+          width: auto;
+          height: 200px;
+          overflow: hidden;
+          border-radius: 3px;
+          margin: 10px auto;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
         }
         p {
           padding: 10px;
@@ -734,8 +920,9 @@ header {
           min-width: 200px;
           height: 50px;
           border-radius: 10px;
+          border: none;
           margin: 10px auto;
-
+          box-shadow: 5px 5px 10px rgb(191, 190, 190);
           overflow: hidden;
           a {
             width: 100%;
@@ -752,34 +939,18 @@ header {
               background: transparent;
             }
           }
+
+          &:hover {
+            box-shadow: inset -5px -5px 10px rgb(191, 190, 190);
+          }
         }
-      }
-    }
-
-    .closeDropdown {
-      width: 80px;
-      height: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 35px;
-      color: rgb(93, 171, 208);
-      cursor: pointer;
-      transition: all 0.5s ease;
-      margin-top: 6px;
-      position: absolute;
-      top: 30px;
-      right: 30px;
-
-      &:hover {
-        color: white;
       }
     }
 
     ul {
       width: 25%;
-      height: 100%;
-      background: rgb(7, 43, 74);
+      height: 85vh;
+      background: white;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -804,7 +975,7 @@ header {
           text-decoration: none;
           text-transform: capitalize;
           font: 600 17px "Poppins", sans-serif;
-          color: white;
+          color: rgb(70, 69, 69);
 
           i {
             padding-right: 5px;
@@ -816,45 +987,19 @@ header {
           }
         }
 
-        &::before {
-          content: "";
-          width: 100%;
-          height: 3px;
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          border-radius: 30px 0 0 30px;
-          background: rgb(186, 186, 186);
-          display: none;
-        }
-        &::after {
-          content: "";
-          width: 100%;
-          height: 3px;
-          position: absolute;
-          top: 0;
-          right: 0;
-          border-radius: 0 30px 30px 0;
-          background: white;
-          display: none;
-        }
         &:hover {
-          background: rgb(10, 56, 97);
-          &::before {
-            display: block;
-            animation: hovering 0.3s 1 linear alternate forwards;
-          }
-          &::after {
-            display: block;
-            animation: hovering 0.3s 1 linear alternate forwards;
-          }
+          box-shadow: inset 15px 15px 20px #ececec, inset -5px -5px 20px #ececec;
+          border-right: 5px solid rgba(230, 101, 129, 1);
         }
       }
 
       li.active {
-        background: rgba(230, 101, 129, 1);
-        border-top: 1px solid white;
-        border-bottom: 1px solid white;
+        box-shadow: 10px 10px 20px #ececec;
+        border-right: 5px solid rgba(230, 101, 129, 1);
+
+        a {
+          color: rgba(230, 101, 129, 1);
+        }
       }
     }
   }
@@ -994,15 +1139,42 @@ header {
 
             li {
               width: 100%;
-              height: 40px;
+              height: 45px;
               border-radius: 10px;
-              margin: 5px auto;
+              margin: 8px auto;
               background: rgb(11, 50, 83);
 
               .link {
                 font-size: 13px;
               }
             }
+          }
+        }
+        .mentor {
+          width: 80vw;
+          height: fit-content;
+          border-radius: 2px;
+          background: white;
+          position: fixed;
+          top: 20vh;
+          left: 10vw;
+          z-index: 1;
+          box-shadow: 0px 0px 1px rgb(230, 230, 230);
+          padding: 10px;
+          span {
+            font-size: 25px;
+            padding: 10px;
+            cursor: pointer;
+          }
+
+          h1 {
+            font-size: 20px;
+            padding: 10px;
+            text-transform: capitalize;
+          }
+          p {
+            font-size: 15px;
+            padding: 10px;
           }
         }
       }

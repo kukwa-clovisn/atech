@@ -41,7 +41,7 @@
         </transition>
       </div>
     </div>
-    <div class="section-1" v-if="post.open">
+    <div class="section-1">
       <h1>Advanced crypto & forex trading community blog</h1>
       <p>
         Here we update our latest news titles and all that has to do with our
@@ -79,7 +79,7 @@
         </div>
       </div>
     </div>
-    <div class="section-2" v-if="post.open">
+    <div class="section-2">
       <section>
         <h2>want to get life changing updates??</h2>
         <p>
@@ -91,24 +91,103 @@
         <button><a href="/login">start now!</a></button>
       </section>
     </div>
+    <!-- <div class="testimonials">
+      <h1>Atech Testimonials</h1>
+      <h2>what our clients say:</h2>
+      <div class="users">
+        <div class="user">
+          <div class="img">
+            <img src="../assets/p.jpg" alt="atech testimonials" />
+          </div>
+          <h2>user name here</h2>
+          <h3>| advanced tech academy | proffession</h3>
+          <p>
+            user testimonils here Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Inventore veniam adipisci id dolores eveniet hic
+            ut reprehenderit? Illo, consequuntur temporibus.
+          </p>
+        </div>
+        <div class="user">
+          <div class="img">
+            <img src="../assets/p.jpg" alt="atech testimonials" />
+          </div>
+          <h2>user name here</h2>
+          <h3>| advanced tech academy | proffession</h3>
+          <p>
+            user testimonils here Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Inventore veniam adipisci id dolores eveniet hic
+            ut reprehenderit? Illo, consequuntur temporibus.
+          </p>
+        </div>
+        <div class="user">
+          <div class="img">
+            <img src="../assets/p.jpg" alt="atech testimonials" />
+          </div>
+          <h2>user name here</h2>
+          <h3>| advanced tech academy | proffession</h3>
+          <p>
+            user testimonils here Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Inventore veniam adipisci id dolores eveniet hic
+            ut reprehenderit? Illo, consequuntur temporibus.
+          </p>
+        </div>
+        <div class="user">
+          <div class="img">
+            <img src="../assets/p.jpg" alt="atech testimonials" />
+          </div>
+          <h2>user name here</h2>
+          <h3>| advanced tech academy | proffession</h3>
+          <p>
+            user testimonils here Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Inventore veniam adipisci id dolores eveniet hic
+            ut reprehenderit? Illo, consequuntur temporibus.
+          </p>
+        </div>
+      </div>
+    </div> -->
     <div class="posts" id="posts">
       <header>
-        <a href="/blog">return</a> <button @click="getPosts()">All Posts</button
-        ><button @click="searchPosts()">Filter Post(s)</button>
+        <button @click="getPosts()">All Posts</button>
       </header>
-      <div class="post" v-for="post in post.postArr" :key="post.id">
-        <div class="img">
-          <img src="../assets/logo-white.jpg" alt="advanced tech academy" />
-        </div>
+      <h1>
+        | Atech Daily | <span>{{ post.total }}posts</span>
+      </h1>
+      <transition name="appear">
+        <form @submit.prevent="searchPosts()" class="research">
+          <input
+            type="search"
+            name="search"
+            id="search"
+            v-model="post.title"
+            @keypress="showSearch()"
+            placeholder="Search by post heading...."
+            required
+          />
+          <button type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </transition>
+      <transition name="appear">
+        <p class="search-p" v-show="post.open">search for "{{ post.title }}"</p>
+      </transition>
+      <transition name="appear">
+        <div class="all-posts">
+          <div class="post" v-for="post in post.postArr" :key="post.id">
+            <div class="img">
+              <img src="../assets/logo-white.jpg" alt="advanced tech academy" />
+            </div>
 
-        <h1 class="title">{{ post.title }}</h1>
-        <h3 class="sub-title">{{ post.subTitle }}</h3>
-        <p v-html="post.message"></p>
-        <h5 class="tags">
-          <span v-for="tag in post.tags" :key="tag.id">#{{ tag }}</span>
-        </h5>
-        <p class="author">{{ post.author }}</p>
-      </div>
+            <h1 class="title">{{ post.title }}</h1>
+            <h3 class="sub-title">|{{ post.subTitle }}|</h3>
+            <p v-html="post.message"></p>
+            <h5 class="tags">
+              <span v-for="tag in post.tags" :key="tag.id">{{ tag }} |</span>
+            </h5>
+            <p class="author">{{ post.author }}</p>
+          </div>
+        </div>
+      </transition>
     </div>
     <span class="to-landing-page reach"
       ><a href="/#contact" class="a"
@@ -121,7 +200,6 @@
 <script>
 import axios from "axios";
 import { reactive, onMounted, ref } from "vue";
-import { useRouter } from "vue-router";
 import Header from "./header.vue";
 import Footer from "./footer.vue";
 export default {
@@ -131,20 +209,31 @@ export default {
     Footer,
   },
   setup() {
-    const router = useRouter();
     let animate = ref(false);
     const post = reactive({
       title: "",
       postArr: [],
-      open: true,
+      total: 0,
+      open: false,
     });
 
     function getPosts() {
       axios("api/post")
         .then((res) => {
           post.postArr = res.data;
+          post.total = post.postArr.length;
+          post.title = "";
+          post.open = false;
         })
-        .catch((err) => console.log(err.status));
+        .catch((err) => err);
+    }
+
+    function showSearch() {
+      if (post.title) {
+        post.open = true;
+      } else {
+        post.open = false;
+      }
     }
 
     onMounted(() => {
@@ -159,14 +248,13 @@ export default {
       axios("api/post/" + `${post.title}`)
         .then((res) => {
           post.postArr = res.data;
-          post.open = false;
+
+          post.total = post.postArr.length;
         })
-        .catch((err) => console.log(res));
-      post.title = "";
-      router.push("#posts");
+        .catch((err) => err);
     }
 
-    return { post, animate, searchPosts, getPosts };
+    return { post, animate, showSearch, searchPosts, getPosts };
   },
 };
 </script>
@@ -383,96 +471,221 @@ main {
     }
   }
 
-  .posts {
-    width: 100%;
+  .testimonials {
+    width: 97vw;
     height: fit-content;
-    padding: 3px;
-    background: $fallback;
+    padding: 20px 10px;
+    padding-bottom: 2px;
+    margin: auto;
+    margin-bottom: 5px;
+    overflow: hidden;
+    overflow-x: auto;
+    .users {
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: row;
+      padding: 20px 10px;
+      position: relative;
+      margin: auto;
+      gap: 20px;
 
+      .user {
+        width: 330px;
+        min-height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px;
+        border-radius: 5px;
+        gap: 5px;
+        background: $fallback;
+        box-shadow: 0px 0px 3px 5px white, 0px 0px 3px 5px $fallback;
+
+        .img {
+          width: 150px;
+          height: 150px;
+          border-radius: 100%;
+          overflow: hidden;
+          margin: 0;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+        h2 {
+          font: 500 19px "Poppins", sans-serif;
+          color: rgb(239, 239, 239);
+          text-transform: capitalize;
+        }
+        h3 {
+          font: 500 16px "Nunito Sans", sans-serif;
+          color: mediumspringgreen;
+        }
+        p {
+          font: 400 12px "Poppins", sans-serif;
+          color: rgb(220, 218, 218);
+          line-height: 25px;
+        }
+      }
+    }
+  }
+
+  .posts {
+    width: 97vw;
+    height: fit-content;
+    padding: 10px;
+    background: $fallback;
+    overflow: hidden;
+    overflow-x: auto;
+    border-radius: 6px;
+    margin: 10px auto;
     header {
       display: flex;
       justify-content: center;
       align-items: center;
+      margin: 10px auto;
 
       button,
       a {
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
         text-decoration: none;
         text-transform: capitalize;
-        width: 100px;
+        min-width: 100px;
         height: 40px;
+        padding: 5px 15px;
         border: none;
-        border-radius: 3px;
+        border-radius: 30px;
         background: white;
+        font-weight: 600;
+
         color: $fallback;
         margin: 10px 20px;
       }
     }
+    h1 {
+      color: white;
+      font-family: "Grand Hotel", cursive;
 
-    .post {
-      max-width: 95%;
-      height: fit-content;
-      padding: 20px;
-      margin: 20px auto;
-      border-radius: 5px;
-      background: rgb(244, 244, 244);
-      box-shadow: 10px 10px 5px $fallback, -10px -10px 5px $fallback;
-
-      .img {
-        width: 200px;
-        height: 200px;
-        border-radius: 100%;
-        margin: auto;
-        overflow: hidden;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
+      span {
+        font-size: 17px;
+        color: mediumspringgreen;
       }
+    }
 
-      .title {
-        font: 800 35px "Nunito sans", sans-serif;
-        text-transform: capitalize;
-        padding: 10px;
-        color: rgba(230, 101, 129, 1);
+    form {
+      width: 400px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 10px;
+      margin: 5px auto;
+      background: white;
 
-        @media screen and (max-width: 700px) {
-          font-size: 25px;
-        }
+      input {
+        width: 80%;
+        height: 100%;
+        outline: none;
+        background: transparent;
+        border: none;
+        padding: 3px 5px 3px 15px;
       }
-
-      .sub-title {
-        font: 600 18px "Poppins", sans-serif;
-      }
-      h5 {
-        text-align: left;
+      button {
+        width: 30%;
+        height: 100%;
+        border: none;
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
-        flex-wrap: wrap;
-        color: mediumaquamarine;
-        span {
-          padding: 5px;
-          white-space: pre-wrap;
-        }
-      }
-      p {
-        width: 97%;
-        margin: auto;
-        text-align: center;
-      }
-      .author {
-        text-align: center;
-        text-transform: uppercase;
-        padding: 10px;
-        font: 600 15px "Poppins", sans-serif;
+        background: transparent;
       }
 
-      @media screen and (max-width: 650px) {
-        width: 98%;
+      @media screen and (max-width: 450px) {
+        width: 96vw;
+      }
+    }
+    .search-p {
+      color: rgb(202, 201, 201);
+    }
+
+    .all-posts {
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 10px;
+      .post {
+        width: 330px;
+        min-height: 450px;
+        padding: 20px;
+        margin: 20px auto;
+        border-radius: 5px;
+        background: rgb(244, 244, 244);
+        box-shadow: 0 0 5px $fallback, 0 0 3px white;
+
+        .img {
+          width: 150px;
+          height: 150px;
+          border-radius: 100%;
+          margin: auto;
+          overflow: hidden;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+
+        .title {
+          font: 600 20px "Poppins", sans-serif;
+          text-transform: capitalize;
+          color: rgba(230, 101, 129, 1);
+        }
+
+        .sub-title {
+          font: 600 17px "Poppins", sans-serif;
+          color: rgb(4, 158, 99);
+          padding: 10px;
+        }
+        h5 {
+          text-align: center;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          flex-wrap: wrap;
+          color: rgb(4, 158, 99);
+          span {
+            padding: 5px;
+            white-space: pre-wrap;
+          }
+        }
+        p {
+          width: 97%;
+          margin: auto;
+          text-align: center;
+          font-size: 14px;
+        }
+        .author {
+          text-align: center;
+          text-transform: capitalize;
+          padding: 10px;
+          font: 600 15px "Poppins", sans-serif;
+        }
+
+        @media screen and (max-width: 650px) {
+          width: 90vw;
+        }
       }
     }
   }
