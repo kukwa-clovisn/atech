@@ -778,7 +778,7 @@ header {
         top: 17vh;
         left: 45vw;
         z-index: 1;
-        box-shadow: 0px 0px 1px rgb(230, 230, 230);
+        border: 1px solid rgb(219, 217, 217);
         padding: 10px;
 
         h1 {
@@ -1159,7 +1159,6 @@ header {
           top: 20vh;
           left: 10vw;
           z-index: 1;
-          box-shadow: 0px 0px 1px rgb(230, 230, 230);
           padding: 10px;
           span {
             font-size: 25px;
