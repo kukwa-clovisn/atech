@@ -26,17 +26,7 @@
                 >
               </div>
             </div>
-            <!-- <div class="input">
-              <label for="username">Name:</label
-              ><input
-                type="text"
-                name="username"
-                id="username"
-                v-model="credentials.username"
-                placeholder="Enter username...."
-                
-              />
-            </div> -->
+
             <div class="input">
               <div class="value">
                 <label for="password" class="input-label">

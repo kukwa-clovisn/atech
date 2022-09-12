@@ -361,7 +361,7 @@ export default {
       const formdata = new FormData();
       formdata.append("image", preview.value, preview.value.name);
       axios
-        .post(`api/user/upload/`, formdata, {
+        .post(`api/user/upload/store`, formdata, {
           onUploadProgress: (uploadEvent) => {
             response.success = true;
             response.msg = `processing data: ${Math.round(

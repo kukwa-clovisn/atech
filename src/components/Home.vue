@@ -43,11 +43,7 @@
         </transition>
       </div>
     </div>
-    <div class="advertisement">
-      Learning never ends!
-      <!-- <div class="g-signin2" data-onsuccess="onSignIn">sign in</div>
-      <button @click="signOut()">sign out</button> -->
-    </div>
+    <div class="advertisement">Learning never ends!</div>
     <div class="learn-more">
       <div class="info">
         <h1>Learn advanced professional skills online.</h1>
