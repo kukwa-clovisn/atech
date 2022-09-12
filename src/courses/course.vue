@@ -8,19 +8,26 @@
     }"
   >
     <div class="courses" v-if="!response.showCourse">
-      <div class="course-container">
+      <div class="course-container" data-aos="slide-up">
         <router-link to="/course" class="btn-courses"> Course page</router-link>
-        <h2>{{ response.course }} courses</h2>
+        <h2 data-aos="slide-up">{{ response.course }} courses</h2>
         <ul>
-          <li v-for="(course, index) in response.courses" :key="index">
+          <li
+            data-aos="slide-up"
+            v-for="(course, index) in response.courses"
+            :key="index"
+          >
             <span class="course-number">{{ index + 1 }}</span>
 
-            <p class="title">{{ course.title }}</p>
-            <p class="intro">{{ course.intro }}</p>
-            <button @click="getCourse(course._id, course.name)">
+            <p data-aos="slide-up" class="title">{{ course.title }}</p>
+            <p data-aos="slide-up" class="intro">{{ course.intro }}</p>
+            <button
+              data-aos="slide-up"
+              @click="getCourse(course._id, course.name)"
+            >
               start course
             </button>
-            <footer>By: {{ course.author }}</footer>
+            <footer data-aos="fade">By: {{ course.author }}</footer>
           </li>
         </ul>
       </div>
@@ -29,28 +36,36 @@
         v-if="desc.course || desc.bookmrk || desc.subs"
       >
         <transition name="appear">
-          <div class="content" v-if="desc.course">
+          <div data-aos="slide-up" class="content" v-if="desc.course">
             <span class="close" @click="desc.course = false">&times;</span>
-            <h3><i class="fa-solid fa-book-open"></i>Courses</h3>
-            <p>
+            <h3 data-aos="fade">
+              <i class="fa-solid fa-book-open"></i>Courses
+            </h3>
+            <p data-aos="slide-up">
               <a>{{ response.courses.length }}</a> Courses
             </p>
           </div>
         </transition>
         <transition name="appear">
-          <div class="content" v-if="desc.bookmrk">
+          <div data-aos="slide-up" class="content" v-if="desc.bookmrk">
             <span class="close" @click="desc.bookmrk = false">&times;</span>
-            <h3><i class="fa-regular fa-star"></i>Boomark</h3>
-            <p>
+            <h3 data-aos="slide-up">
+              <i class="fa-regular fa-star"></i>Boomark
+            </h3>
+            <p data-aos="slide-up">
               Save some courses to study later. You can also find those courses
               in your profile
             </p>
           </div>
         </transition>
         <transition name="appear">
-          <div class="content" v-if="desc.subs">
-            <span class="close" @click="desc.subs = false">&times;</span>
-            <h3><i class="fa-regular fa-bookmark"></i>Subscriptions</h3>
+          <div data-aos="slide-up" class="content" v-if="desc.subs">
+            <span data-aos="zoom-out" class="close" @click="desc.subs = false"
+              >&times;</span
+            >
+            <h3 data-aos="slide-up">
+              <i class="fa-regular fa-bookmark"></i>Subscriptions
+            </h3>
             <p>
               Register for courses to be able to study them. You can find a list
               of your registered courses in your profile
