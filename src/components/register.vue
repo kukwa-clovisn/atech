@@ -310,7 +310,7 @@ $baseColor: #1d375f;
       background: rgb(19, 37, 62);
       border-radius: 5px;
       padding: 20px;
-      box-shadow: -10px -10px 15px #234270, 10px 10px 15px #1e3e6d;
+      box-shadow: 0 0 2px #193257;
 
       .form-header {
         width: 95%;

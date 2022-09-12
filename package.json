@@ -10,6 +10,7 @@
     "@tinymce/tinymce-vue": "^4.0.7",
     "@vueuse/core": "^8.9.4",
     "@vueuse/motion": "^2.0.0-beta.12",
+    "aos": "^2.3.4",
     "axios": "^0.27.2",
     "payunitjs": "^1.0.8",
     "vue": "^3.2.13",

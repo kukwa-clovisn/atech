@@ -43,36 +43,38 @@
         </transition>
       </div>
     </div>
-    <div class="advertisement">Learning never ends!</div>
+    <div class="advertisement" data-aos="slide-up">Learning never ends!</div>
     <div class="learn-more">
       <div class="info">
-        <h1>Learn advanced professional skills online.</h1>
-        <div class="image"><img src="../assets/mtn-computer.png" alt="" /></div>
-        <p>
+        <h1 data-aos="slide-up">Learn advanced professional skills online.</h1>
+        <div class="image" data-aos="slide-up">
+          <img src="../assets/mtn-computer.png" alt="" />
+        </div>
+        <p data-aos="slide-up">
           Our academy has multiple courses to start your skill edifying journey.
           <br />Choose any of the courses and start adding value to your
           portfolio right away.
         </p>
-        <button>
+        <button data-aos="slide-up">
           <router-link to="/login" class="btn-route">start now!</router-link>
         </button>
       </div>
     </div>
-    <div class="courses-div">
-      <h1>Advanced Tech Academy courses</h1>
-      <p>
+    <div class="courses-div" data-aos="slide-up">
+      <h1 data-aos="slide-up">Advanced Tech Academy courses</h1>
+      <p data-aos="slide-up">
         Find out the best and outstanding courses in the area of your choice
         with the best and experienced instructors online. Also get online
         mentorship for your course of choice
       </p>
       <transition name="slide-in">
         <div id="container">
-          <div class="card-container">
+          <div class="card-container" data-aos="slide-left">
             <div class="card-header">
-              <div class="img">
+              <div class="img" data-aos="slide-up">
                 <img src="../assets/html-logo-removebg-preview.png" alt="" />
               </div>
-              <div class="card-media">
+              <div class="card-media" data-aos="fade-up">
                 <a href="https://www.facebook.com/237atech/" class="route">
                   <i class="fa-brands fa-facebook"></i></a
                 ><a href="https://wa.link/geye6o" class="route"
@@ -87,23 +89,25 @@
               </div>
             </div>
             <div class="card-body">
-              <h2 class="card-title">Learning web development</h2>
-              <p class="card-description">
+              <h2 class="card-title" data-aos="slide-up">
+                Learning web development
+              </h2>
+              <p class="card-description" data-aos="fade-up">
                 this is an online web developmenet course for free to master and
                 get to learn new skills to add to your portfolio
               </p>
-              <div class="card-buttons">
+              <div class="card-buttons" data-aos="slide-up">
                 <router-link to="/login" class="btn">learn more</router-link>
                 <router-link to="/register" class="btn">Enroll Now</router-link>
               </div>
             </div>
           </div>
-          <div class="card-container">
+          <div class="card-container" data-aos="slide-up">
             <div class="card-header">
-              <div class="img">
+              <div class="img" data-aos="fade-up">
                 <img src="../assets/pexels-pixabay-33597.jpg" alt="" />
               </div>
-              <div class="card-media">
+              <div class="card-media" data-aos="slide-up">
                 <a href="https://www.facebook.com/237atech/" class="route">
                   <i class="fa-brands fa-facebook"></i
                 ></a>
@@ -119,22 +123,22 @@
               </div>
             </div>
             <div class="card-body">
-              <h2 class="card-title">Team Jesus Music</h2>
-              <p class="card-description">
+              <h2 class="card-title" data-aos="fade">Team Jesus Music</h2>
+              <p class="card-description" data-aos="slide-up">
                 Learn how to play instruments professionally. Learn more below
               </p>
-              <div class="card-buttons">
+              <div class="card-buttons" data-aos="slide-up">
                 <router-link to="/login" class="btn">learn more</router-link>
                 <router-link to="/register" class="btn">Enroll Now</router-link>
               </div>
             </div>
           </div>
-          <div class="card-container">
+          <div class="card-container" data-aos="slide-right">
             <div class="card-header">
-              <div class="img">
+              <div class="img" data-aos="fade">
                 <img src="../assets/team.jpg" alt="" />
               </div>
-              <div class="card-media">
+              <div class="card-media" data-aos="slide-up">
                 <a href="https://www.facebook.com/237atech/" class="route">
                   <i class="fa-brands fa-facebook"></i></a
                 ><a href="https://wa.link/geye6o" class="route"
@@ -149,11 +153,13 @@
               </div>
             </div>
             <div class="card-body">
-              <h2 class="card-title">FOREX TRADING COMMUNITY</h2>
-              <p class="card-description">
+              <h2 class="card-title" data-aos="fade-up">
+                FOREX TRADING COMMUNITY
+              </h2>
+              <p class="card-description" data-aos="slide-up">
                 Learn how to trade Forex professionally and profitably
               </p>
-              <div class="card-buttons">
+              <div class="card-buttons" data-aos="slide-up">
                 <router-link to="/login" class="btn">learn more</router-link>
                 <router-link to="/register" class="btn">Enroll Now</router-link>
               </div>
@@ -162,93 +168,95 @@
         </div>
       </transition>
     </div>
-    <div class="mission">
-      <h1>our mission</h1>
-      <p>
+    <div class="mission" data-aos="slide-right">
+      <h1 data-aos="fade-up">our mission</h1>
+      <p data-aos="slide-up">
         The mission of Advanced Tech Academy is here to help you out with your
         studies online and provide the best learning experience that you need
         <br />Happy learning...
       </p>
-      <div class="img">
+      <div class="img" data-aos="slide-up">
         <img src="../assets/logo-white.jpg" alt="" />
       </div>
-      <h1>our programs</h1>
+      <h1 data-aos="slide-up">our programs</h1>
       <div class="programs">
-        <div class="program">
-          <i class="fa-solid fa-chart-line"></i>
-          <p>crypto & forex</p>
+        <div class="program" data-aos="slide-up">
+          <i data-aos="fade" class="fa-solid fa-chart-line"></i>
+          <p data-aos="slide-up">crypto & forex</p>
         </div>
-        <div class="program">
-          <i class="fa-solid fa-code"></i>
-          <p>web development</p>
+        <div class="program" data-aos="slide-up">
+          <i data-aos="fade" class="fa-solid fa-code"></i>
+          <p data-aos="slide-up">web development</p>
         </div>
-        <div class="program">
-          <i class="fa-solid fa-music"></i>
-          <p>Music</p>
+        <div class="program" data-aos="fade">
+          <i data-aos="fade" class="fa-solid fa-music"></i>
+          <p data-aos="slide-up">Music</p>
         </div>
       </div>
-      <button><a href="/register">take a course</a></button>
+      <button data-aos="slide-up"><a href="/register">take a course</a></button>
     </div>
     <div class="benefit">
-      <h1>Benefits of our programs and mentorships</h1>
-      <div class="container">
+      <h1 data-aos="slide-up">Benefits of our programs and mentorships</h1>
+      <div class="container" data-aos="slide-left">
         <div class="content">
-          <div class="img">
+          <div class="img" data-aos="slide-up">
             <img src="../assets/Person-Laptop_blue.png" alt="" />
           </div>
-          <h2>Learn at your own convinience</h2>
-          <p>
+          <h2 data-aos="slide-up">Learn at your own convinience</h2>
+          <p data-aos="slide-up">
             Learning at the comfort of your home and at your pace with no
             pressure. Learning at your convinience while gaining experience and
             building up your portfolio
           </p>
         </div>
-        <div class="content">
-          <div class="img">
+        <div class="content" data-aos="slide-up">
+          <div class="img" data-aos="fade">
             <img src="../assets/Responsive_blue.png" alt="" />
           </div>
-          <h2>Learn with the device of your choice</h2>
-          <p>
+          <h2 data-aos="slide-up">Learn with the device of your choice</h2>
+          <p data-aos="slide-up">
             Learning from all media devices. You can learn while shoping or
             while taking a walk anywhere with any media device from a phone to a
             computer.
           </p>
         </div>
-        <div class="content">
-          <div class="img">
+        <div class="content" data-aos="slide-up">
+          <div class="img" data-aos="fade">
             <img src="../assets/Profile_blue-1.png" alt="" />
           </div>
-          <h2>Build your portfolio</h2>
-          <p>
+          <h2 data-aos="slide-up">Build your portfolio</h2>
+          <p data-aos="slide-up">
             Build your portfolio that showcases your new abilities and
             capabilities. Get certified
           </p>
         </div>
-        <div class="content">
-          <div class="img">
+        <div class="content" data-aos="slide-up">
+          <div class="img" data-aos="fade">
             <img src="../assets/star_blue.png" alt="" />
           </div>
-          <h2>Be the best.</h2>
-          <p>Learn a skill and stand out. Be the best in what your do.</p>
+          <h2 data-aos="slide-up">Be the best.</h2>
+          <p data-aos="slide-up">
+            Learn a skill and stand out. Be the best in what your do.
+          </p>
         </div>
       </div>
     </div>
-    <div class="design">
+    <div class="design" data-aos="fade">
       <Carousel />
     </div>
     <div class="course-expo">
-      <div class="img">
-        <img src="../assets/team.jpg" alt="" />
+      <div class="img" data-aos="slide-right">
+        <img data-aos="slide-right" src="../assets/team.jpg" alt="" />
       </div>
-      <div class="expo">
+      <div class="expo" data-aos="slide-left">
         <div class="expo-level">
-          <h3>beginners</h3>
+          <h3 data-aos="slide-up">beginners</h3>
           <div class="content">
-            <p>
+            <p data-aos="slide-up">
               Basics and fundamentals of the Blockchain and the essentials
               therein.
             </p>
-            <button>
+            <button data-aos="slide-up">
               <router-link to="/login"
                 ><i class="fa-solid fa-arrow-right"></i
               ></router-link>
@@ -256,10 +264,10 @@
           </div>
         </div>
         <div class="expo-level">
-          <h3>intermediates</h3>
+          <h3 data-aos="slide-up">intermediates</h3>
           <div class="content">
-            <p>Trading strategies and market structures</p>
-            <button>
+            <p data-aos="slide-up">Trading strategies and market structures</p>
+            <button data-aos="slide-up">
               <router-link to="/login"
                 ><i class="fa-solid fa-arrow-right"></i
               ></router-link>
@@ -267,12 +275,12 @@
           </div>
         </div>
         <div class="expo-level">
-          <h3>Advanced</h3>
+          <h3 data-aos="slide-up">Advanced</h3>
           <div class="content">
-            <p>
+            <p data-aos="slide-up">
               Risk management and ways to become a profitable trader and more.
             </p>
-            <button>
+            <button data-aos="slide-up">
               <router-link to="/login"
                 ><i class="fa-solid fa-arrow-right"></i
               ></router-link>
@@ -281,124 +289,132 @@
         </div>
       </div>
     </div>
-    <div class="social-sample">
+    <div class="social-sample" data-aos="slide-left">
       <div class="blur"></div>
-      <div class="left-content">
-        <h2>investing in yourself</h2>
-        <h4>Great men are men who are never scared of learning...</h4>
-        <p>
+      <div class="left-content" data-aos="slide-up">
+        <h2 data-aos="slide-up">investing in yourself</h2>
+        <h4 data-aos="slide-up">
+          Great men are men who are never scared of learning...
+        </h4>
+        <p data-aos="slide-up">
           If you've come this far then you really are curious to learn. Why not
           join the moving train now and start learning!!
         </p>
-        <div class="btns">
+        <div class="btns" data-aos="slide-up">
           <button>
             <router-link to="/login" class="route">start now!</router-link>
           </button>
         </div>
       </div>
-      <div class="right-content">
+      <div class="right-content" data-aos="fade">
         <div class="img">
-          <img src="../assets/group.jpeg" alt="" />
+          <img data-aos="fade" src="../assets/group.jpeg" alt="" />
         </div>
       </div>
     </div>
-    <div class="section-2">
-      <h2>Real investment is investing in knowledge(learning)</h2>
-      <p>
+    <div class="section-2" data-aos="slide-up">
+      <h2 data-aos="slide-up">
+        Real investment is investing in knowledge(learning)
+      </h2>
+      <p data-aos="slide-up">
         Why not try out our courses prepared to see you through your learning!
       </p>
-      <button>
+      <button data-aos="slide-up">
         <router-link to="/login" class="route">start learning</router-link>
       </button>
     </div>
     <div class="piano-expo large-screen">
-      <div class="left-expo"></div>
-      <div class="right-expo">
+      <div class="left-expo" data-aos="slide-right"></div>
+      <div class="right-expo" data-aos="slide-up">
         <div class="blur"></div>
-        <h1>
+        <h1 data-aos="slide-up">
           Learn from the basics of how to play the piano to an outstanding
           professional
         </h1>
-        <p>
+        <p data-aos="slide-up">
           Get to know more about <br />piona scales, piano chords, piano
           structure and many more
         </p>
-        <p>
+        <p data-aos="slide-up">
           Gender or age or size or anything, can't stop you from doing what
           makes you happy and fulfilled.
         </p>
-        <p>seize this opportunity and learn</p>
-        <button><a href="/login">start learning</a></button>
+        <p data-aos="slide-up">seize this opportunity and learn</p>
+        <button data-aos="slide-up"><a href="/login">start learning</a></button>
       </div>
-      <div class="bottom-expo">
+      <div class="bottom-expo" data-aos="slide-left">
         <div class="blur"></div>
-        <p>
+        <p data-aos="slide-up">
           Start your lessons today and migrat from a beginner to an outstanding
           instrumentalist in your church or community.
         </p>
-        <button><a href="/login">start a course</a></button>
+        <button data-aos="slide-up"><a href="/login">start a course</a></button>
       </div>
     </div>
     <div class="piano-expo small-screen">
       <transition name="appear">
         <div class="right-expo" v-if="expo1">
           <div class="blur"></div>
-          <h1>
+          <h1 data-aos="slide-up">
             Learn from the basics of how to play the piano to an outstanding
             professional
           </h1>
-          <p>
+          <p data-aos="slide-up">
             Get to know more about <br />piona scales, piano chords, piano
             structure and many more
           </p>
-          <p>
+          <p data-aos="slide-up">
             Gender or age or size or anything, can't stop you from doing what
             makes you happy and fulfilled.
           </p>
-          <p>seize this opportunity and learn</p>
-          <button><a href="/login">start learning</a></button>
+          <p data-aos="slide-up">seize this opportunity and learn</p>
+          <button data-aos="slide-up">
+            <a href="/login">start learning</a>
+          </button>
         </div>
       </transition>
       <transition name="appear">
         <div class="bottom-expo" v-if="expo2">
           <div class="blur"></div>
-          <p>
+          <p data-aos="slide-up">
             Start your lessons today and migrat from a beginner to an
             outstanding instrumentalist in your church or community.
           </p>
-          <button><a href="/login">start a course</a></button>
+          <button data-aos="slide-up">
+            <a href="/login">start a course</a>
+          </button>
         </div>
       </transition>
     </div>
     <div class="bitquery">
       <div class="content">
-        <div class="left-div">
-          <h1>
-            <sup>*</sup> Learning from the best
-            <sup>*</sup>
+        <div class="left-div" data-aos="fade">
+          <h1 data-aos="fade">
+            <sup data-aos="slide-down">*</sup> Learning from the best
+            <sup data-aos="slide-up">*</sup>
           </h1>
-          <p>
+          <p data-aos="slide-right">
             Learning can really be awesome expecially when you learn from an
             experienced and well structured source. We provide valid and timely
             lessons that you need in order to change your world.
           </p>
-          <h2>experience</h2>
-          <p>
+          <h2 data-aos="slide-up">experience</h2>
+          <p data-aos="slide-right">
             In the world and field of technology nothing really counts as much
             as experience. Having adequate experience in the field is what we
             offer. We teach with experience and we offer you the experience you
             need to take of in the field you desire.
           </p>
-          <h2>practise</h2>
-          <p>
+          <h2 data-aos="slide-up">practise</h2>
+          <p data-aos="slide-right">
             Learning practically so far has been proven the best method of
             learning. Not only do we offer you the course but we offer you the
             reality of what you are in for. The highest achievement in learning
             is being able to apply and use what you've learnt in your daily life
             and that's our goal and target.
           </p>
-          <h2>application</h2>
-          <p>
+          <h2 data-aos="slide-up">application</h2>
+          <p data-aos="slide-right">
             It is needless to learn a skill that won't be of help to you or that
             won't be solving a problem in your life. We offer applicable ways to
             use our courses in solving your problems or in polishing your skill
@@ -407,15 +423,15 @@
           </p>
         </div>
         <div class="right-div">
-          <img src="../assets/Group-1-1.png" alt="" />
+          <img data-aos="slide-left" src="../assets/Group-1-1.png" alt="" />
         </div>
       </div>
     </div>
-    <div class="contact-form" id="contact">
+    <div class="contact-form" id="contact" data-aos="fade-up">
       <div class="bubble"></div>
       <div class="blur"></div>
-      <h1>get in touch!</h1>
-      <h6>
+      <h1 data-aos="slide-up">get in touch!</h1>
+      <h6 data-aos="slide-up">
         We deal and handle many businesses that will interest you. Check out our
         list of services we offer...
       </h6>
