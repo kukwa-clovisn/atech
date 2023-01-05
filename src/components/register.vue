@@ -5,16 +5,15 @@
     </header>
 
     <div class="form-container">
-      <form class="form" @submit.prevent="registerData">
+      <div class="form">
         <div class="form-header">
           <h2>Register</h2>
-          <span><router-link to="/" class="link">&times;</router-link> </span>
         </div>
         <div class="form-logo">
           <h1>Atech-Academy</h1>
         </div>
         <hr />
-        <div class="form-inputs">
+        <form class="form-inputs">
           <div class="input">
             <div class="value">
               <label for="username" class="input-label">
@@ -112,26 +111,27 @@
             </div>
           </div>
           <transition name="appear">
-            <div class="form-input">
+            <div class="form-input" v-if="!engagePay">
               <button type="submit">
-                <i class="fa-solid fa-money-check-dollar"></i>register for free
+                <i class="fa-solid fa-money-check-dollar"></i>create a free
+                account
               </button>
             </div>
           </transition>
-          <!-- <transition name="appear">
-            <div class="form-input" v-if="engagePay">
-              <button id="payunit-pay">
-                <i class="fa-solid fa-money-check-dollar"></i> continue with
-                payment
-              </button>
-            </div>
-          </transition> -->
+        </form>
+        <transition name="appear">
+          <div class="form-input" v-if="engagePay">
+            <button id="payunit-pay">
+              <i class="fa-solid fa-money-check-dollar"></i> continue with
+              payment
+            </button>
+          </div>
+        </transition>
 
-          <p>
-            not signed in yet?
-            <router-link to="/login" class="link">sign up</router-link>
-          </p>
-        </div>
+        <p>
+          not signed in yet?
+          <router-link to="/login" class="link">sign up</router-link>
+        </p>
         <transition name="pop">
           <div class="response-div" v-if="response.success || response.failed">
             <div class="success" v-if="response.success">
@@ -142,7 +142,7 @@
             </div>
           </div>
         </transition>
-      </form>
+      </div>
       <Spinner v-show="loader.state" :rate="loader.percent" :msg="loader.msg" />
     </div>
   </div>
@@ -151,7 +151,7 @@
 <script>
 import router from "@/router";
 import axios from "axios";
-import { reactive, onMounted, ref } from "vue";
+import { reactive, onMounted, computed, ref } from "vue";
 import { PayUnit } from "payunitjs";
 import generatedToken from "../interceptors/token";
 import Header from "./header.vue";
@@ -197,12 +197,12 @@ export default {
           mode: "live",
         },
         {
-          return_url: "http://localhost:9003",
-          notify_url: " ",
+          return_url: "http://localhost:9003/register",
+          notify_url: "http://localhost:9003/register",
           description: "payment from Advanced Tech Academy",
           purchaseRef: "",
-          total_amount: "5000",
-          name: "vshop enterprise",
+          total_amount: "2000",
+          name: "Advanced Tech Academy",
           currency: "XAF",
           transaction_id: generatedToken,
         }
@@ -295,14 +295,15 @@ $baseColor: #1d375f;
     width: 90%;
     height: fit-content;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
     background: url(../assets/login.png);
     background-repeat: no-repeat;
     background-attachment: scroll;
-    background-size: contain;
-    background-position: left;
+    background-size: 50% auto;
+    background-position: right;
     padding: 20px 2px;
+    margin: 0 auto;
 
     .form {
       width: 450px;
@@ -313,7 +314,7 @@ $baseColor: #1d375f;
       box-shadow: 0 0 2px #193257;
 
       .form-header {
-        width: 95%;
+        width: 90%;
         height: fit-content;
         display: flex;
         justify-content: space-between;
@@ -322,32 +323,12 @@ $baseColor: #1d375f;
 
         h2 {
           color: white;
-          font: 500 19px "Nunito Sans", sans-serif;
-        }
-        span {
-          width: 20px;
-          height: 20px;
-          border-radius: 100%;
-          box-shadow: 0 0 3px 2px rgb(215, 213, 213);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          cursor: pointer;
-
-          .link {
-            text-decoration: none;
-            color: whitesmoke;
-            font-size: 22px;
-          }
-          &:active {
-            transform: scale(0.9);
-          }
+          font: 600 19px "Nunito Sans", sans-serif;
         }
       }
       .form-logo {
         background: white;
-        width: 80%;
+        width: 95%;
         height: fit-content;
         border-radius: 30px;
         margin: 20px auto;
@@ -547,16 +528,15 @@ $baseColor: #1d375f;
             }
           }
         }
-        p {
-          font-size: 13px;
-          color: whitesmoke;
+      }
+      p {
+        font-size: 13px;
+        color: whitesmoke;
 
-          .link {
-            color: #7ca7e7;
-          }
+        .link {
+          color: #7ca7e7;
         }
       }
-
       @media screen and (max-width: 500px) {
         width: 100%;
       }

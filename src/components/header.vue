@@ -315,7 +315,6 @@
             <span>Advanced</span><span>Tech</span><span>Acadmemy</span>
           </div>
         </div>
-        <!-- 681958002 -->
 
         <nav class="menu-bars">
           <button @click="closeDropdown()">&times;</button>
@@ -819,6 +818,7 @@ header {
     width: 100vw;
     height: 100vh;
     background: white;
+    background: #23426e;
     // z-index: 1;
     position: fixed;
     top: 0;
@@ -834,13 +834,15 @@ header {
       height: 15vh;
       position: relative;
       background: white;
-      box-shadow: 3px 0px 3px rgb(244, 243, 243);
+      background: #1b3456;
+      // box-shadow: 3px 0px 3px rgb(244, 243, 243);
 
       .logo-nav {
         width: 20%;
 
         .logo-name span {
           color: rgb(106, 104, 104);
+          color: white;
         }
       }
 
@@ -848,8 +850,10 @@ header {
         width: 70%;
         .route {
           color: rgb(54, 54, 54);
+          color: white;
           i {
             color: rgb(53, 52, 52);
+            color: white;
           }
         }
       }
@@ -862,6 +866,7 @@ header {
       .route.special {
         background: transparent;
         color: rgb(67, 70, 72);
+        color: white;
         border: 1px solid rgb(152, 152, 152);
 
         &:hover {
@@ -883,17 +888,19 @@ header {
       justify-content: center;
       align-items: center;
       background: rgb(227, 226, 226);
-      overflow: hidden;
-      overflow-y: auto;
+      background: #23426e;
+
       padding: 40px 0;
 
       .blur-container {
         width: 80%;
-        height: fit-content;
+        height: 100%;
         background: white;
         padding: 20px;
         border-radius: 5px;
         margin-top: 10px;
+        overflow: hidden;
+        overflow-y: auto;
 
         h1 {
           padding: 20px;
@@ -951,6 +958,7 @@ header {
       width: 25%;
       height: 85vh;
       background: white;
+      background: #1b3456;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -976,6 +984,7 @@ header {
           text-transform: capitalize;
           font: 600 17px "Poppins", sans-serif;
           color: rgb(70, 69, 69);
+          color: white;
 
           i {
             padding-right: 5px;
@@ -988,14 +997,15 @@ header {
         }
 
         &:hover {
-          box-shadow: inset 15px 15px 20px #ececec, inset -5px -5px 20px #ececec;
+          background: #2d548b;
           border-right: 5px solid rgba(230, 101, 129, 1);
         }
       }
 
       li.active {
-        box-shadow: 10px 10px 20px #ececec;
+        // box-shadow: 10px 10px 20px #ececec;
         border-right: 5px solid rgba(230, 101, 129, 1);
+        background: white;
 
         a {
           color: rgba(230, 101, 129, 1);
