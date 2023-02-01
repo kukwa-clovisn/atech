@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --port 5000",
+    "serve": "vue-cli-service serve --port 9003",
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@tinymce/tinymce-vue": "^4.0.7",
     "@vueuse/core": "^8.9.4",
     "@vueuse/motion": "^2.0.0-beta.12",
     "aos": "^2.3.4",
     "axios": "^0.27.2",
-    "element-plus": "^2.2.28",
     "payunitjs": "^1.0.8",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
