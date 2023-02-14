@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="section-1">
-      <h1>Advanced crypto & forex trading community blog</h1>
+      <h1>Advanced Technology blog</h1>
       <p>
         Here we update our latest news titles and all that has to do with our
         academy. stay tunned and follow us even on our social media platforms to
@@ -258,7 +258,7 @@ main {
 
     header {
       width: 100vw;
-      height: 12vh;
+      height: 14vh;
       background: $fallback;
       display: flex;
       justify-content: space-between;
@@ -286,6 +286,7 @@ main {
             color: white;
             text-decoration: none;
             text-transform: capitalize;
+            font-size:18px;
           }
         }
       }
@@ -299,13 +300,37 @@ main {
       width: 60vw;
       height: fit-content;
       padding: 10px;
+
+      h1{
+        font-size:30px;
+        padding:20px;
+
+       }
+       p{ 
+        width:80%;
+        margin:0 auto;
+        padding:5px;
+       }
+
+       a{ 
+        display:block;
+        width:300px;
+        height:70px;
+        border-radius:30px;
+        margin:5px auto;
+        color:white;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        text-transform: uppercase;
+       }
     }
   }
 
   .section-1 {
     width: 100vw;
     min-height: 100vh;
-    background: $fallback;
+    background: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -313,10 +338,10 @@ main {
     padding: 40px 5px;
 
     h1 {
-      padding: 10px;
+      padding: 20px;
       font: 500 50px "Nunito sans", "Poppins", sans-serif;
       font-family: "Jacques Francois Shadow", cursive;
-      color: white;
+      color: $fallback;
       text-transform: capitalize;
       padding-top: 50px;
 
@@ -325,7 +350,7 @@ main {
       }
     }
     p {
-      width: 97%;
+      width: 80%;
       font-family: "Noto sans", "Poppins", sans-serif;
       margin: auto;
       line-height: 23px;
@@ -341,9 +366,9 @@ main {
       width: 90vw;
 
       .flex-content {
-        width: 350px;
-        height: 400px;
-        border-radius: 5px;
+        width: 300px;
+        height: 300px;
+        border-radius: 3px;
         margin: 10px;
         padding: 20px;
         background: rgb(22, 46, 76);
@@ -365,13 +390,14 @@ main {
 
         h2 {
           text-transform: capitalize;
-          font: 600 30px "Nunito sans", "Poppins", sans-serif;
+          font: 600 26px "Nunito sans", "Poppins", sans-serif;
           color: white;
         }
 
         p {
           padding: 10px;
           color: rgb(194, 194, 194);
+          font-size:17px;
         }
 
         @media screen and(max-width: 1250px) {
