@@ -5,7 +5,8 @@ import "./interceptors/axios";
 import store from "./store";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
+import ElementPlus from "element-plus";
+import "element-plus/dist/index.css";
 // const gAuthOptions = {
 //   clientId:
 //     "715591355963-9br97sg1ug28v086m0egutn2e7vuc57g.apps.googleusercontent.com",
@@ -27,4 +28,4 @@ AOS.init({
 
 // app.use(GAuth, gAuthOptions);
 
-app.use(store).use(router).mount("#app");
+app.use(store).use(router).use(ElementPlus).mount("#app");

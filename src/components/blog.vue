@@ -1,44 +1,34 @@
 <template>
   <main>
     <div class="landing-page">
-      <div class="blur"></div>
-      <Header />
+      <header>
+        <div class="logo">
+          <div class="logo-img">logo</div>
+        </div>
+        <div class="routes">
+          <div class="route"><router-link to="/home">Home</router-link></div>
+          <div class="route"><router-link to="/about">about</router-link></div>
+          <div class="route"><router-link to="/home">why-us</router-link></div>
+          <div class="route"><router-link to="/home">contact</router-link></div>
+        </div>
+        <div class="logins">
+          <div class="route"><router-link to="/login">signin</router-link></div>
+          <div class="route">
+            <router-link to="/register">register</router-link>
+          </div>
+        </div>
+      </header>
+      <div class="landing-page-content">
+        <h1>Advanced Technology Academy</h1>
+        <p>
+          Be the first to get updated with our latest updates, changes and new
+          developments.
+        </p>
+        <router-link to="/signup">sign up</router-link>
+      </div>
       <div class="animation">
         <div class="animate1"></div>
         <div class="animate2"></div>
-      </div>
-      <div class="title">
-        <transition name="move-in">
-          <h1 v-if="animate">
-            Advanced <br />
-            Tech Academy
-          </h1>
-        </transition>
-        <transition name="appear">
-          <p v-if="animate">
-            Read the latest updates, research, and articles by our team
-          </p>
-        </transition>
-        <transition name="refresh">
-          <div class="intro-btn" v-if="animate">
-            <router-link to="/login" class="start-btn">sign up</router-link>
-          </div>
-        </transition>
-        <transition name="appear">
-          <form @submit.prevent="searchPosts()" class="research" v-if="animate">
-            <input
-              type="search"
-              name="search"
-              id="search"
-              v-model="post.title"
-              placeholder="Search...."
-              required
-            />
-            <button type="submit">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </form>
-        </transition>
       </div>
     </div>
     <div class="section-1">
@@ -263,74 +253,52 @@ export default {
 $fallback: rgb(19, 37, 62);
 main {
   .landing-page {
-    background: url(../assets/learn-b.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     height: fit-content;
+    background: rgb(241, 241, 241);
 
-    .blur {
-      height: 100% !important;
-      bottom: 0;
-    }
+    header {
+      width: 100vw;
+      height: 12vh;
+      background: $fallback;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-    .title {
-      h1 {
-        padding: 25px 0;
-        padding-bottom: 10px;
-        width: 95%;
-        margin: auto;
-      }
-      p {
-        padding: 10px;
-        width: 90vw;
-        margin: auto;
-        color: rgb(222, 221, 221);
-        font: 600 27px "Poppins", sans-serif;
-      }
-
-      .research {
-        width: 70vw;
-        height: 50px;
+      .logo {
+        width: 15vw;
+        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 20px auto;
+        color: white;
+      }
 
-        input {
-          width: 80%;
-          height: 100%;
-          border: none;
-          outline: none;
-          border-radius: 30px 0 0 30px;
-          padding: 3px 0 3px 20px;
-        }
-        button {
-          width: 20%;
-          height: 100%;
-          margin: 0;
-          background: white;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border: none;
-          border-radius: 0 30px 30px 0;
-          padding: 3px 0 3px 0;
+      .routes,
+      .logins {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
 
-          &:hover {
-            transform: none;
+        .route {
+          a {
+            color: white;
+            text-decoration: none;
+            text-transform: capitalize;
           }
-
-          i {
-            font-size: 23px;
-          }
-        }
-
-        @media screen and (max-width: 550px) {
-          width: 90vw;
-          margin-top: 40px;
         }
       }
+
+      .logins {
+        width: 35%;
+      }
+    }
+
+    .landing-page-content {
+      width: 60vw;
+      height: fit-content;
+      padding: 10px;
     }
   }
 

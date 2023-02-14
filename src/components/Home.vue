@@ -242,7 +242,7 @@
       </div>
     </div>
     <div class="design" data-aos="fade">
-      <Carousel />
+      <Carousel :images="carousel_images" />
     </div>
     <div class="course-expo">
       <div class="img" data-aos="slide-right">
@@ -561,6 +561,10 @@ import Header from "./header.vue";
 import Footer from "./footer.vue";
 import Carousel from "./carousel.vue";
 import axios from "axios";
+import image1 from "../assets/graphic-design.jpg";
+import image2 from "../assets/group.jpeg";
+import image3 from "../assets/learn-b.jpg";
+import image4 from "../assets/jugos.jpeg";
 
 import "../utils/style.css";
 
@@ -599,6 +603,8 @@ export default {
         expo2.value = !expo2.value;
       }, 15000);
     });
+
+    const carousel_images = [image1, image2, image3, image4];
 
     // function onSignIn(googleUser) {
     //   console.log("this is for sign in");
@@ -657,6 +663,7 @@ export default {
       response,
       user,
       sendMessage,
+      carousel_images,
     };
   },
 };
@@ -956,6 +963,10 @@ main {
     }
   }
 
+  .design {
+    width: 100vw;
+    height: 95vh;
+  }
   .course-expo {
     width: 100vw;
     height: 100vh;
