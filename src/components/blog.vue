@@ -6,10 +6,10 @@
           <div class="logo-img">logo</div>
         </div>
         <div class="routes">
-          <div class="route"><router-link to="/home">Home</router-link></div>
+          <div class="route"><router-link to="/">Home</router-link></div>
           <div class="route"><router-link to="/about">about</router-link></div>
-          <div class="route"><router-link to="/home">why-us</router-link></div>
-          <div class="route"><router-link to="/home">contact</router-link></div>
+          <div class="route"><router-link to="/">why-us</router-link></div>
+          <div class="route"><router-link to="/">contact</router-link></div>
         </div>
         <div class="logins">
           <div class="route"><router-link to="/login">signin</router-link></div>
@@ -32,12 +32,6 @@
       </div>
     </div>
     <div class="section-1">
-      <h1>Advanced Technology blog</h1>
-      <p>
-        Here we update our latest news titles and all that has to do with our
-        academy. stay tunned and follow us even on our social media platforms to
-        find out what we have in store for you!
-      </p>
       <div class="flex-div">
         <div class="flex-content">
           <div class="icon">
@@ -251,15 +245,16 @@ export default {
 
 <style lang="scss" scoped>
 $fallback: rgb(19, 37, 62);
+$basecolor: #23426e;
 main {
   .landing-page {
     height: fit-content;
-    background: rgb(241, 241, 241);
+    background: rgb(239, 239, 239);
 
     header {
       width: 100vw;
       height: 14vh;
-      background: $fallback;
+      background: linear-gradient(to bottom left, $fallback, $basecolor);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -286,7 +281,7 @@ main {
             color: white;
             text-decoration: none;
             text-transform: capitalize;
-            font-size:18px;
+            font-size: 13px;
           }
         }
       }
@@ -297,40 +292,44 @@ main {
     }
 
     .landing-page-content {
-      width: 60vw;
+      width: 70vw;
       height: fit-content;
       padding: 10px;
+      margin: 20px auto;
+      margin-top: 25vh;
 
-      h1{
-        font-size:30px;
-        padding:20px;
+      h1 {
+        font-size: 40px;
+        padding: 30px 20px;
+      }
+      p {
+        width: 80%;
+        margin: 0 auto;
+        padding: 5px;
+      }
 
-       }
-       p{ 
-        width:80%;
-        margin:0 auto;
-        padding:5px;
-       }
+      a {
+        display: block;
+        width: 300px;
+        height: 60px;
+        border-radius: 30px;
+        margin: 5px auto;
+        color: white;
+        background: linear-gradient(to bottom left, $fallback, $basecolor);
 
-       a{ 
-        display:block;
-        width:300px;
-        height:70px;
-        border-radius:30px;
-        margin:5px auto;
-        color:white;
-        display:flex;
-        justify-content:center;
-        align-items:center;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         text-transform: uppercase;
-       }
+      }
     }
   }
 
   .section-1 {
     width: 100vw;
     min-height: 100vh;
-    background: white;
+    background: rgb(241, 241, 241);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -340,7 +339,6 @@ main {
     h1 {
       padding: 20px;
       font: 500 50px "Nunito sans", "Poppins", sans-serif;
-      font-family: "Jacques Francois Shadow", cursive;
       color: $fallback;
       text-transform: capitalize;
       padding-top: 50px;
@@ -366,12 +364,11 @@ main {
       width: 90vw;
 
       .flex-content {
-        width: 300px;
-        height: 300px;
+        width: 30%;
+        height: fit-content;
         border-radius: 3px;
-        margin: 10px;
-        padding: 20px;
-        background: rgb(22, 46, 76);
+        margin: 4px;
+        background: inherit;
 
         .icon {
           width: 100px;
@@ -381,7 +378,8 @@ main {
           display: flex;
           justify-content: center;
           align-items: center;
-          background: rgb(182, 189, 196);
+          // background: rgb(182, 189, 196);
+          border: 1px solid rgb(215, 214, 214);
 
           i {
             font-size: 40px;
@@ -391,22 +389,27 @@ main {
         h2 {
           text-transform: capitalize;
           font: 600 26px "Nunito sans", "Poppins", sans-serif;
-          color: white;
+          color: $fallback;
         }
 
         p {
-          padding: 10px;
-          color: rgb(194, 194, 194);
-          font-size:17px;
+          color: $fallback;
+          font-size: 15px;
         }
 
         @media screen and(max-width: 1250px) {
-          width: 400px;
+          width: 30%;
 
           @media screen and (max-width: 935px) {
             width: 90%;
             margin: 20px auto;
           }
+        }
+
+        &:hover {
+          cursor: pointer;
+          box-shadow: 0 0 2px 1px rgb(215, 214, 214);
+          transform: scale(1.1);
         }
       }
     }
@@ -474,6 +477,7 @@ main {
     margin-bottom: 5px;
     overflow: hidden;
     overflow-x: auto;
+    background: $fallback;
     .users {
       width: fit-content;
       height: fit-content;
@@ -531,14 +535,13 @@ main {
   }
 
   .posts {
-    width: 97vw;
+    width: 100vw;
     height: fit-content;
     padding: 10px;
     background: $fallback;
     overflow: hidden;
     overflow-x: auto;
-    border-radius: 6px;
-    margin: 10px auto;
+    margin: 0 auto;
     header {
       display: flex;
       justify-content: center;
