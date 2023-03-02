@@ -131,6 +131,7 @@ export default {
         .then((res) => {
           course.courseUser = res.data.username;
           course.courseUserEmail = res.data.email;
+
           console.log(res);
 
           if (res.data.image) {

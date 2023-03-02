@@ -189,7 +189,7 @@
 // import { v4 as uuidv4 } from "uuid";
 import { computed } from "vue";
 import Header from "./header.vue";
-import { ref, reactive } from "vue";
+import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import Spinner from "./spinner.vue";
@@ -340,7 +340,12 @@ export default {
           },
         })
         .then((res) => {
-          if (res.statusText === "OK") {
+          console.log(res);
+          if (
+            res.statusText === "OK" ||
+            res.status === 200 ||
+            res.status === 201
+          ) {
             response.msg = res.data.msg;
             localStorage.setItem("accessId", res.data.accessId);
 
@@ -352,9 +357,10 @@ export default {
             ] = `Bearer ${localStorage.getItem("accessToken")}`;
             loader.state = false;
             response.success = true;
+            router.push("/course");
+
             setTimeout(() => {
               response.success = false;
-              router.push("/course");
             }, 1000);
           } else {
             loader.state = false;
