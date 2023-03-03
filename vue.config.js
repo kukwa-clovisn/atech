@@ -5,7 +5,7 @@ module.exports = {
   devServer: {
     proxy: {
       "/api": {
-        target: "https://advancedtechacademy.onrender.com/",
+        target: "https://advancedtechacademy-api.onrender.com/",
       },
     },
   },
