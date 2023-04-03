@@ -124,7 +124,7 @@
                   availble applications for free.
                 </p>
                 <button>
-                  <a href="https://codingherald.herokuapp.com">view apps</a>
+                  <a href="https://codingherald.netlify.app">view apps</a>
                 </button>
               </div>
             </transition>
@@ -333,7 +333,7 @@
                 <h1>our courses and services</h1>
                 <ul>
                   <li>
-                    <a href="https://codingherald.herokuapp.com" class="link"
+                    <a href="https://codingherald.netlify.app" class="link"
                       ><i class="fa-solid fa-chart-line"></i>apps</a
                     >
                   </li>
