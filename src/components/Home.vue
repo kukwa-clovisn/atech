@@ -25,7 +25,9 @@
         <transition name="appear">
           <div class="intro-btn" v-if="animate">
             <router-link to="/login" class="start-btn">start now!</router-link>
-            <router-link to="/login" class="start-btn">learn more</router-link>
+            <a href="https://codingherald.netlify.app" class="start-btn"
+              >view portfolio</a
+            >
           </div>
         </transition>
         <transition name="refresh">
