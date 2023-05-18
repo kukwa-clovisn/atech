@@ -10,6 +10,10 @@ const store = createStore({
         edit: false,
         cafe: false,
       },
+      chat: {
+        start: false,
+      },
+      menuState: false,
       course_mode: {
         light: false,
         dark: true,

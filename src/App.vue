@@ -1,31 +1,29 @@
 <template>
-  <router-view v-slot="{ Component }">
-    <transition name="routes">
-      <component :is="Component" :class="{ 'cafe-mode': cafe }" />
-    </transition>
-  </router-view>
+  <div id="main-component">
+    <router-view v-slot="{ Component }">
+      <transition name="routes">
+        <component :is="Component" :class="{ 'cafe-mode': cafe }" />
+      </transition>
+    </router-view>
+
+    <menuComponent />
+  </div>
 </template>
-<script >
+<script setup>
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import menuComponent from "./components/menu-component.vue";
 
-export default {
-  name: "App",
-  setup() {
-    const store = useStore();
+const store = useStore();
 
-    const page_mode = store.state.mode;
-    const cafe = ref(false);
+const page_mode = store.state.mode;
+const cafe = ref(false);
 
-    computed(() => {
-      if (store.state.mode.cafe) {
-        cafe.value = true;
-      }
-    });
-
-    return { cafe };
-  },
-};
+computed(() => {
+  if (store.state.mode.cafe) {
+    cafe.value = true;
+  }
+});
 </script>
 
 <style lang="scss">
@@ -210,7 +208,8 @@ nav a.router-link-exact-active {
   }
 }
 
-.blur {
+.blur,
+.blur-wrapper {
   width: 100%;
   height: 100%;
   background: #1f1c2d;
@@ -223,7 +222,7 @@ nav a.router-link-exact-active {
 
 .landing-page {
   width: 100vw;
-  min-height: 100vh;
+  min-height: 90vh;
   background: url(./assets/social.jpg);
   background-attachment: fixed;
   background-size: cover;
@@ -383,7 +382,7 @@ nav a.router-link-exact-active {
         }
 
         &:last-child {
-          background: rgb(20, 92, 125);
+          background: rgb(22, 81, 109);
           box-shadow: none;
           &:hover {
             background: linear-gradient(
@@ -391,6 +390,7 @@ nav a.router-link-exact-active {
               rgb(20, 92, 125),
               #13253e
             );
+            color: white;
           }
         }
       }

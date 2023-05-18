@@ -10,12 +10,18 @@
       <div class="right-content">
         <ul>
           <li>
-            <a href="https://codingherald.netlify.app" class="route">apps</a>
+            <a
+              href="https://codingherald.netlify.app"
+              class="route"
+              target="_blank"
+              rel="noopener noreferrer"
+              >apps</a
+            >
           </li>
           <li><router-link to="/login" class="route">sign up</router-link></li>
           <li><router-link to="/login" class="route">sign in</router-link></li>
           <li>
-            <router-link to="/why-us" class="route">why crypto?</router-link>
+            <router-link to="/why-us" class="route">about</router-link>
           </li>
           <li><router-link to="/course" class="route">courses</router-link></li>
           <li>
@@ -25,7 +31,11 @@
             <a href="/admin/dashboard" class="route">admin</a>
           </li>
           <li>
-            <a href="https://wa.link/geye6o" class="route"
+            <a
+              href="https://wa.link/geye6o"
+              class="route"
+              target="_blank"
+              rel="noopener noreferrer"
               ><i class="fa-brands fa-whatsapp"></i> whatsapp</a
             >
           </li>

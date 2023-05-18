@@ -1,37 +1,39 @@
 <template>
   <main>
     <div class="landing-page">
-      <header>
-        <div class="logo">
-          <div class="logo-img">logo</div>
-        </div>
-        <div class="routes">
-          <div class="route"><router-link to="/">Home</router-link></div>
-          <div class="route"><router-link to="/about">about</router-link></div>
-          <div class="route"><router-link to="/">why-us</router-link></div>
-          <div class="route"><router-link to="/">contact</router-link></div>
-        </div>
-        <div class="logins">
-          <div class="route"><router-link to="/login">signin</router-link></div>
-          <div class="route">
-            <router-link to="/register">register</router-link>
-          </div>
-        </div>
-      </header>
+      <div class="blur"></div>
+      <pageHeaderComponent />
       <div class="landing-page-content">
         <h1>Advanced Technology Academy</h1>
         <p>
           Be the first to get updated with our latest updates, changes and new
           developments.
         </p>
-        <router-link to="/signup">sign up</router-link>
+        <router-link to="/login">sign up</router-link>
       </div>
+
       <div class="animation">
         <div class="animate1"></div>
         <div class="animate2"></div>
       </div>
     </div>
+    <navbar />
     <div class="section-1">
+      <h1>Atech Blog</h1>
+      <p>Get updated about us here!</p>
+
+      <form>
+        <h3>sign up for our newsletter and updates</h3>
+        <div class="form-data">
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter email address"
+            required
+          />
+          <button type="submit">sign up</button>
+        </div>
+      </form>
       <div class="flex-div">
         <div class="flex-content">
           <div class="icon">
@@ -181,66 +183,58 @@
   </main>
 </template>
 
-<script>
+<script setup>
 import axios from "axios";
 import { reactive, onMounted, ref } from "vue";
 import Header from "./header.vue";
 import Footer from "./footer.vue";
-export default {
-  name: "Blog",
-  components: {
-    Header,
-    Footer,
-  },
-  setup() {
-    let animate = ref(false);
-    const post = reactive({
-      title: "",
-      postArr: [],
-      total: 0,
-      open: false,
-    });
+import navbar from "./navbar.vue";
+import pageHeaderComponent from "./page-header-component.vue";
 
-    function getPosts() {
-      axios("api/post")
-        .then((res) => {
-          post.postArr = res.data;
-          post.total = post.postArr.length;
-          post.title = "";
-          post.open = false;
-        })
-        .catch((err) => err);
-    }
+let animate = ref(false);
+const post = reactive({
+  title: "",
+  postArr: [],
+  total: 0,
+  open: false,
+});
 
-    function showSearch() {
-      if (post.title) {
-        post.open = true;
-      } else {
-        post.open = false;
-      }
-    }
+function getPosts() {
+  axios("api/post")
+    .then((res) => {
+      post.postArr = res.data;
+      post.total = post.postArr.length;
+      post.title = "";
+      post.open = false;
+    })
+    .catch((err) => err);
+}
 
-    onMounted(() => {
-      getPosts();
+function showSearch() {
+  if (post.title) {
+    post.open = true;
+  } else {
+    post.open = false;
+  }
+}
 
-      setTimeout(() => {
-        animate.value = true;
-      }, 500);
-    });
+onMounted(() => {
+  getPosts();
 
-    function searchPosts() {
-      axios("api/post/" + `${post.title}`)
-        .then((res) => {
-          post.postArr = res.data;
+  setTimeout(() => {
+    animate.value = true;
+  }, 500);
+});
 
-          post.total = post.postArr.length;
-        })
-        .catch((err) => err);
-    }
+function searchPosts() {
+  axios("api/post/" + `${post.title}`)
+    .then((res) => {
+      post.postArr = res.data;
 
-    return { post, animate, showSearch, searchPosts, getPosts };
-  },
-};
+      post.total = post.postArr.length;
+    })
+    .catch((err) => err);
+}
 </script>
 
 <style lang="scss" scoped>
@@ -249,63 +243,33 @@ $basecolor: #23426e;
 main {
   .landing-page {
     height: fit-content;
-    background: rgb(239, 239, 239);
-
-    header {
-      width: 100vw;
-      height: 14vh;
-      background: linear-gradient(to bottom left, $fallback, $basecolor);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .logo {
-        width: 15vw;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
-      }
-
-      .routes,
-      .logins {
-        width: 50%;
-        height: 100%;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-
-        .route {
-          a {
-            color: white;
-            text-decoration: none;
-            text-transform: capitalize;
-            font-size: 13px;
-          }
-        }
-      }
-
-      .logins {
-        width: 35%;
-      }
-    }
+    background: url(../assets/book.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 
     .landing-page-content {
       width: 70vw;
       height: fit-content;
-      padding: 10px;
-      margin: 20px auto;
-      margin-top: 25vh;
+      padding-top: 30px;
+      position: relative;
 
       h1 {
-        font-size: 40px;
+        font: 700 50px "Montserrat", "Poppins", sans-serif;
         padding: 30px 20px;
+        color: white;
       }
       p {
         width: 80%;
-        margin: 0 auto;
-        padding: 5px;
+        margin: 10px auto;
+        padding: 10px;
+        color: rgb(225, 225, 225);
+        font: 400 19px/32px "Montserrat", "Poppins", sans-serif;
       }
 
       a {
@@ -313,7 +277,7 @@ main {
         width: 300px;
         height: 60px;
         border-radius: 30px;
-        margin: 5px auto;
+        margin: 20px auto;
         color: white;
         background: linear-gradient(to bottom left, $fallback, $basecolor);
 
@@ -338,7 +302,7 @@ main {
 
     h1 {
       padding: 20px;
-      font: 500 50px "Nunito sans", "Poppins", sans-serif;
+      font: 600 50px "Nunito sans", "Poppins", sans-serif;
       color: $fallback;
       text-transform: capitalize;
       padding-top: 50px;
@@ -352,8 +316,60 @@ main {
       font-family: "Noto sans", "Poppins", sans-serif;
       margin: auto;
       line-height: 23px;
-      padding: 20px 10px;
-      color: rgb(166, 193, 206);
+      padding: 10px;
+      color: rgb(85, 93, 98);
+    }
+
+    form {
+      width: fit-content;
+      height: fit-content;
+      padding: 10px;
+      margin: 10px auto;
+
+      h3 {
+        text-transform: capitalize;
+        padding: 20px;
+        text-align: center;
+        color: #e66581;
+        font: 500 20px "Nunito Sans", sans-serif;
+      }
+
+      .form-data {
+        width: 350px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: white;
+        border: 1px solid rgb(237, 233, 233);
+        box-shadow: 0 0 16px 7px rgb(228, 228, 228);
+        margin: 10px auto;
+        border-radius: 5px;
+        overflow: hidden;
+
+        input {
+          width: 75%;
+          height: 100%;
+          border: none;
+          background: transparent;
+          padding: 4px 10px;
+          outline: none;
+        }
+
+        button {
+          width: 25%;
+          height: 100%;
+          background: $basecolor;
+          color: white;
+          text-transform: uppercase;
+          border: none;
+
+          &:hover {
+            background: #e66581;
+            transform: none;
+          }
+        }
+      }
     }
 
     .flex-div {
@@ -362,13 +378,16 @@ main {
       align-items: center;
       flex-wrap: wrap;
       width: 90vw;
+      gap: 20px;
 
       .flex-content {
         width: 30%;
-        height: fit-content;
-        border-radius: 3px;
-        margin: 4px;
-        background: inherit;
+        height: 380px;
+        padding: 20px 10px;
+        background: white;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 20px 10px rgb(226, 226, 226);
 
         .icon {
           width: 100px;
@@ -378,7 +397,6 @@ main {
           display: flex;
           justify-content: center;
           align-items: center;
-          // background: rgb(182, 189, 196);
           border: 1px solid rgb(215, 214, 214);
 
           i {
@@ -388,13 +406,13 @@ main {
 
         h2 {
           text-transform: capitalize;
-          font: 600 26px "Nunito sans", "Poppins", sans-serif;
+          font: 600 26px "Montserrat", "Nunito sans", "Poppins", sans-serif;
           color: $fallback;
         }
 
         p {
           color: $fallback;
-          font-size: 15px;
+          font: 400 17px/28px "Montserrat", "Nunito Sans", sans-serif;
         }
 
         @media screen and(max-width: 1250px) {
@@ -408,8 +426,20 @@ main {
 
         &:hover {
           cursor: pointer;
-          box-shadow: 0 0 2px 1px rgb(215, 214, 214);
-          transform: scale(1.1);
+          border: 1px solid #e66581;
+          transform: translateY(-10px);
+
+          .icon {
+            border: 1px solid #e66581;
+
+            i {
+              color: #e66581;
+            }
+          }
+
+          h2 {
+            color: #e66581;
+          }
         }
       }
     }
@@ -430,12 +460,14 @@ main {
 
       h2 {
         font: 600 25px "Poppins", sans-serif;
-        padding: 10px;
+        padding: 20px;
+        text-transform: capitalize;
         color: white;
       }
 
       p {
-        padding: 10px;
+        padding: 20px 10px;
+        line-height: 26px;
         color: rgb(189, 187, 187);
       }
       button {

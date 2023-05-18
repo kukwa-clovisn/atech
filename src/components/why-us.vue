@@ -2,7 +2,7 @@
   <main>
     <div class="landing-page">
       <div class="blur"></div>
-      <Header />
+      <pageHeaderComponent />
       <div class="animation">
         <div class="animate1"></div>
         <div class="animate2"></div>
@@ -27,11 +27,12 @@
         </transition>
       </div>
     </div>
+    <navbar />
     <div class="why-us">
       <h1>importance and future of blockchain</h1>
       <div class="logo-display">
         <div class="left-content">
-          <img src="../assets/logo-white.jpg" alt="crypto & forex" />
+          <img src="../assets/logo-white.jpg" alt="forex" />
         </div>
         <div class="right-content">
           <h3>The future of Billionaires lies in the digital economy</h3>
@@ -164,28 +165,19 @@
   </main>
 </template>
 
-<script>
+<script setup>
 import { ref, onMounted } from "vue";
-import Header from "./header.vue";
+import pageHeaderComponent from "./page-header-component.vue";
 import Footer from "./footer.vue";
-export default {
-  name: "Why-us",
-  components: {
-    Header,
-    Footer,
-  },
-  setup() {
-    let animate = ref(false);
+import navbar from "./navbar.vue";
 
-    onMounted(() => {
-      setTimeout(() => {
-        animate.value = true;
-      }, 3000);
-    });
+let animate = ref(false);
 
-    return { animate };
-  },
-};
+onMounted(() => {
+  setTimeout(() => {
+    animate.value = true;
+  }, 3000);
+});
 </script>
 
 <style lang="scss" scoped>
@@ -200,6 +192,8 @@ main {
   width: 100vw;
 
   .landing-page {
+    width: 100%;
+    height: 90vh;
     background: url(../assets/learn.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -207,6 +201,10 @@ main {
     height: fit-content;
     padding-bottom: 20px;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
     .blur {
       height: 100%;
@@ -234,6 +232,10 @@ main {
         height: 50px;
         margin: 30px auto;
         margin-bottom: 5px;
+
+        &:hover {
+          color: white;
+        }
       }
     }
   }
@@ -380,15 +382,18 @@ main {
         li {
           list-style-type: none;
           text-transform: uppercase;
-          font: 700 30px "Nunito sans", "Poppins", sans-serif;
+          font: 600 30px "Montserrat", "Nunito sans", "Poppins", sans-serif;
           text-align: left;
         }
 
         dl {
-          width: 98%;
-          background: rgb(241, 241, 241);
+          width: 100%;
+          background: rgb(255, 255, 255);
+          box-shadow: 0 0 19px 9px rgb(234, 234, 234);
           padding: 20px;
-          border-radius: 3px;
+          margin: 10px auto;
+          border-radius: 5px;
+          font: 400 17px/29px "Montserrat", sans-serif;
         }
       }
     }
@@ -416,28 +421,29 @@ main {
     }
 
     h3 {
-      font: 700 23px "Poppins", sans-serif;
-      padding: 10px;
-      padding-top: 20px;
+      font: 700 23px "Montserrat", "Poppins", sans-serif;
+      padding: 20px;
       color: white;
       position: relative;
 
       span {
         font-size: 55px;
+        padding: 20px;
       }
     }
 
     p {
-      padding: 21px;
-      color: rgb(218, 215, 215);
+      padding: 10px;
+      font-family: "Montserrat", sans-serif;
+      color: rgb(255, 255, 255);
       position: relative;
     }
 
     button {
       width: 400px;
-      height: 100px;
+      height: 60px;
       border: none;
-      border-radius: 15px;
+      border-radius: 30px;
       position: relative;
       margin: 20px auto;
       background: $SecondaryColor;

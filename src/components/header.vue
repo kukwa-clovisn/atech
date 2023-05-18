@@ -3,7 +3,11 @@
     <header class="large-screen-header">
       <nav class="topNav">
         <div class="left-topNav">
-          <a href="https://wa.link/geye6o" class="route"
+          <a
+            href="https://wa.link/geye6o"
+            class="route"
+            target="_blank"
+            rel="noopener noreferrer"
             ><i class="fa-brands fa-whatsapp icon"></i> whatsapp</a
           >
         </div>
@@ -22,12 +26,20 @@
           </div>
         </div>
         <nav class="routes">
-          <router-link
+          <!-- <router-link
             to="#"
             class="route standard"
             @mouseenter="openDropdown()"
             >courses<i class="fa-solid fa-caret-down"></i
-          ></router-link>
+          ></router-link> -->
+          <router-link to="/courses">
+            <Dropdown
+              :items="courses"
+              name="courses"
+              message="redirecting to courses page..."
+            />
+          </router-link>
+          <router-link to="/why-us" class="route standard">about</router-link>
           <router-link
             to="#"
             class="route standard effect"
@@ -47,14 +59,12 @@
               </p>
             </div>
           </transition>
-          <router-link to="/why-us" class="route standard"
-            >why crypto?</router-link
-          >
+
           <router-link to="/blog" class="route standard">blog</router-link>
           <a href="/#contact" class="route standard">contact</a>
           <router-link to="/login" class="route special">sign in</router-link>
-          <router-link to="/register" class="route register"
-            >register</router-link
+          <router-link to="/chatgpt" class="route chatgpt register"
+            >chatgpt</router-link
           >
           <div class="pagemodes" title="change page mode">
             <button
@@ -93,7 +103,7 @@
             </div>
             <nav class="routes">
               <router-link to="/why-us" class="route standard"
-                >why crypto?</router-link
+                >about</router-link
               >
               <router-link
                 to="#"
@@ -124,7 +134,12 @@
                   availble applications for free.
                 </p>
                 <button>
-                  <a href="https://codingherald.netlify.app">view apps</a>
+                  <a
+                    href="https://codingherald.netlify.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >view apps</a
+                  >
                 </button>
               </div>
             </transition>
@@ -234,13 +249,17 @@
     <header class="small-screen-header" :class="{ active: onDropdown }">
       <nav class="topNav">
         <div class="left-topNav">
-          <a href="/">
+          <a href="tel:+237682449347">
             <i class="fa-solid fa-phone icon"></i><br />
             +237682449347</a
           >
         </div>
         <div class="right-topNav">
-          <a href="">
+          <a
+            href="mailto:kukwaclovisngong3@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <i class="fa-solid fa-envelope icon"></i><br />
             kukwaclovisngong3@gmail.com</a
           >
@@ -333,7 +352,11 @@
                 <h1>our courses and services</h1>
                 <ul>
                   <li>
-                    <a href="https://codingherald.netlify.app" class="link"
+                    <a
+                      href="https://codingherald.netlify.app"
+                      class="link"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       ><i class="fa-solid fa-chart-line"></i>apps</a
                     >
                   </li>
@@ -376,14 +399,17 @@
                     >
                   </li>
                   <li>
-                    <router-link to="/register" class="link"
-                      ><i class="fa-solid fa-registered"></i
-                      >register</router-link
+                    <router-link to="/chatgpt" class="link register"
+                      >chatGPT</router-link
                     >
                   </li>
                 </ul>
               </div>
             </transition>
+
+            <li>
+              <router-link to="/why-us" class="link">about</router-link>
+            </li>
             <li>
               <router-link to="#" class="link" @click="toggleMentor()"
                 >Mentorship<i class="fa-solid fa-caret-down"></i>
@@ -404,9 +430,6 @@
               </div>
             </transition>
 
-            <li>
-              <router-link to="/why-us" class="link">why crypto?</router-link>
-            </li>
             <li><router-link to="/blog" class="link">blog</router-link></li>
             <li><a href="/#contact" class="link">contact</a></li>
           </ul>
@@ -421,8 +444,13 @@
 import { useColorMode } from "@vueuse/core";
 import { useRouter } from "vue-router";
 import { reactive, ref } from "vue";
+import Dropdown from "./Dropdown.vue";
+
 export default {
   name: "Header",
+  components: {
+    Dropdown,
+  },
   setup() {
     const router = useRouter();
     let onDropdown = ref(false);
@@ -437,6 +465,21 @@ export default {
       web: false,
       music: false,
     });
+
+    const courses = ref([
+      {
+        name: "Web Development",
+        path: "/course",
+      },
+      {
+        name: "Piano Tutorials",
+        path: "/course",
+      },
+      {
+        name: "Forex",
+        path: "/course",
+      },
+    ]);
 
     let showMentor = ref(false);
 
@@ -497,6 +540,7 @@ export default {
       colorMode,
       engagements,
       course,
+      courses,
       menuFunction,
       closeDropdown,
       openDropdown,
@@ -617,7 +661,7 @@ header {
       h1 {
         text-transform: uppercase;
         font: 600 30px "Nunito Sans", sans-serif;
-        background: linear-gradient(to bottom left, rgb(28, 160, 222), #0c1725);
+        background: linear-gradient(to bottom left, rgb(28, 160, 222), #172d4a);
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;

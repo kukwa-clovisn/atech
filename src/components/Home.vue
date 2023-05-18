@@ -45,7 +45,8 @@
         </transition>
       </div>
     </div>
-    <div class="advertisement" data-aos="slide-up">Learning never ends!</div>
+    <navbar />
+
     <div class="learn-more">
       <div class="info">
         <h1 data-aos="slide-up">Learn advanced professional skills online.</h1>
@@ -243,9 +244,9 @@
         </div>
       </div>
     </div>
-    <div class="design" data-aos="fade">
+    <!-- <div class="design" data-aos="fade">
       <Carousel :images="carousel_images" />
-    </div>
+    </div> -->
     <div class="course-expo">
       <div class="img" data-aos="slide-right">
         <img data-aos="slide-right" src="../assets/team.jpg" alt="" />
@@ -429,115 +430,7 @@
         </div>
       </div>
     </div>
-    <div class="contact-form" id="contact" data-aos="fade-up">
-      <div class="bubble"></div>
-      <div class="blur"></div>
-      <h1 data-aos="slide-up">get in touch!</h1>
-      <h6 data-aos="slide-up">
-        We deal and handle many businesses that will interest you. Check out our
-        list of services we offer...
-      </h6>
-      <div class="contact-header">
-        <nav>
-          <a href="https://wa.link/geye6o" class="icon"
-            ><i class="fa-brands fa-whatsapp icon"></i>
-            <p>click to contact us on whatsapp</p></a
-          >
-        </nav>
-        <nav class="nav">
-          <a
-            href="mailto:kukwaclovisngong3@gmail.com?subject=From Atech"
-            class="icon"
-          >
-            <i class="fa-solid fa-envelope icon"></i>
-            <p>kukwaclovisngong3@gmail.com</p>
-          </a>
-        </nav>
-      </div>
-      <form @submit.prevent="sendMessage()">
-        <h2>contact us!</h2>
-        <div class="top-form">
-          <div class="credentials">
-            <div class="input">
-              <label for="name">Name:</label>
-              <div class="input-field">
-                <i class="fa-regular fa-user"></i
-                ><input
-                  type="text"
-                  name="name"
-                  id="name"
-                  v-model="user.username"
-                  placeholder="Enter name..."
-                  required
-                />
-              </div>
-            </div>
-            <div class="input">
-              <label for="email">email:</label>
-              <div class="input-field">
-                <i class="fa-solid fa-envelope icon"></i
-                ><input
-                  type="email"
-                  name="email"
-                  id="email"
-                  v-model="user.email"
-                  placeholder="Enter Email.."
-                  required
-                />
-              </div>
-            </div>
-            <div class="input">
-              <label for="subject">subject:</label>
-              <div class="input-field">
-                <i class="fa-solid fa-file-word"></i
-                ><input
-                  type="text"
-                  name="number"
-                  id="phone"
-                  v-model="user.number"
-                  placeholder="Enter whatsapp contact..."
-                  required
-                />
-              </div>
-            </div>
-          </div>
-          <div class="message">
-            <label for="message">message:</label
-            ><textarea
-              name="message"
-              id="message"
-              cols="30"
-              rows="10"
-              v-model="user.message"
-              placeholder="Your message here!"
-              required
-            ></textarea>
-          </div>
-        </div>
-        <div class="bottom-form">
-          <h3>services</h3>
-          <div class="form-services">
-            <div class="service">
-              <span>web developement</span>
-            </div>
-            <div class="service">
-              <span>graphic design</span>
-            </div>
-            <div class="service">
-              <span>crypto &amp; forex</span>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-          <button type="reset">
-            <i class="fa-solid fa-ban"></i><span>cancel</span></button
-          ><button type="submit">
-            <i class="fa-regular fa-paper-plane"></i>
-            <span>send message</span>
-          </button>
-        </div>
-      </form>
-    </div>
+    <contactForm />
     <transition name="pop">
       <div class="response-div" v-if="response.success || response.failed">
         <div class="success" v-if="response.success">
@@ -548,21 +441,30 @@
         </div>
       </div>
     </transition>
-    <div class="toTop"><a href="#home">Back to the top</a></div>
+
     <span class="to-landing-page beamerTrigger"
       ><a href="" class="a"><i class="fa-solid fa-bell"></i></a
     ></span>
+    <chatbox />
 
+    <popchat />
+    <div class="advertisement" data-aos="slide-up">
+      Learning never ends!
+      <div class="toTop"><a href="#home">Back to the top</a></div>
+    </div>
     <Footer />
   </main>
 </template>
 
-<script>
+<script setup>
 import { ref, onMounted, reactive } from "vue";
 import Header from "./header.vue";
 import Footer from "./footer.vue";
 import Carousel from "./carousel.vue";
-import axios from "axios";
+import chatbox from "./chatbox.vue";
+import popchat from "./popchat.vue";
+import navbar from "./navbar.vue";
+import contactForm from "./contactForm";
 import image1 from "../assets/graphic-design.jpg";
 import image2 from "../assets/group.jpeg";
 import image3 from "../assets/learn-b.jpg";
@@ -570,14 +472,6 @@ import image4 from "../assets/jugos.jpeg";
 
 import "../utils/style.css";
 
-export default {
-  name: "Home",
-  components: {
-    Header,
-    Footer,
-    Carousel,
-  },
-  setup() {
     let animate = ref(false);
     let expo1 = ref(false);
     let expo2 = ref(true);
@@ -588,13 +482,9 @@ export default {
       msg: "",
     });
 
-    let user = reactive({
-      username: "",
-      email: "",
-      message: "",
-      number: "",
-    });
-
+    const reqData = {
+      question: "cheapest web hosting service providers for nuxt.js websites",
+    };
     onMounted(() => {
       setTimeout(() => {
         animate.value = true;
@@ -624,51 +514,6 @@ export default {
     //   });
     // }
 
-    function sendMessage() {
-      axios
-        .post("api/admin/contact", user, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          if (res.statusText === "OK") {
-            response.success = true;
-            response.msg = res.data.msg;
-
-            user.username = "";
-            user.email = "";
-            user.number = "";
-            user.message = "";
-
-            setTimeout(() => {
-              response.success = false;
-            }, 3000);
-          }
-        })
-        .catch((err) => {
-          response.failed = true;
-          response.msg = err.response.data.msg;
-
-          setTimeout(() => {
-            response.failed = false;
-          }, 3000);
-        });
-    }
-
-    return {
-      animate,
-      expo1,
-      expo2,
-      // signOut,
-      // onSignIn,
-      response,
-      user,
-      sendMessage,
-      carousel_images,
-    };
-  },
-};
 </script>
 
 <style lang="scss" scoped>
@@ -726,15 +571,7 @@ main {
   height: auto;
   padding: 0;
   margin: 0;
-  .advertisement {
-    width: 100vw;
-    height: 10vh;
-    background: #0c1725;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+
   .learn-more {
     width: 100%;
     height: 100%;
@@ -747,6 +584,7 @@ main {
       width: 100%;
       height: 100%;
       display: block;
+      padding: 20px 0;
       .image {
         width: auto;
         height: 200px;
@@ -762,9 +600,10 @@ main {
         width: 99%;
         margin: auto;
         padding: 20px;
-        font: 800 35px "Poppins", sans-serif;
+        font: 700 45px "Montserrat", "Poppins", sans-serif;
         text-align: center;
-        color: #393958;
+        color: #0d4c76;
+        text-transform: capitalize;
 
         @media screen and (max-width: 508px) {
           font-size: 22px;
@@ -784,7 +623,7 @@ main {
         height: 45px;
         display: block;
         border-radius: 7px;
-        background: rgb(28, 160, 222);
+        background: #183c6b;
         margin: 20px auto;
         border: none;
         .btn-route {
@@ -830,11 +669,11 @@ main {
       }
     }
     p {
-      width: 95vw;
+      width: 80vw;
       padding: 10px;
       padding-bottom: 40px;
       position: relative;
-      margin: auto;
+      margin: 10px auto;
       color: #113b74;
     }
   }
@@ -922,21 +761,22 @@ main {
   .benefit {
     width: 100%;
     height: fit-content;
-    padding: 10px;
+    padding: 30px 0;
     background: transparent;
 
     h1 {
       padding: 10px;
-      font: 600 30px "Nunito Sans", sans-serif;
+      font: 600 30px "Montserrat", "Nunito Sans", sans-serif;
     }
 
     .container {
-      width: 100%;
+      width: 90%;
       height: fit-content;
       display: flex;
       justify-content: space-around;
       align-items: flex-start;
       flex-wrap: wrap;
+      margin: 10px auto;
 
       .content {
         width: 330px;
@@ -965,10 +805,6 @@ main {
     }
   }
 
-  .design {
-    width: 100vw;
-    height: 95vh;
-  }
   .course-expo {
     width: 100vw;
     height: 100vh;
@@ -1028,7 +864,7 @@ main {
 
           p {
             text-align: left;
-            font: 700 23px "Poppins", sans-serif;
+            font: 400 20px "Montserrat", "Poppins", sans-serif;
             width: 80%;
             color: #d4d3d3;
           }
@@ -1464,325 +1300,6 @@ main {
     }
   }
 
-  .contact-form {
-    width: 100vw;
-    height: fit-content;
-    padding: 30px 5px 20px 5px;
-    position: relative;
-    margin-bottom: 0;
-    background: linear-gradient(
-      to bottom right,
-      #390764,
-      #b93e82,
-      $primaryColor
-    );
-
-    .bubble {
-      width: 200px;
-      height: 200px;
-      border-radius: 100%;
-      background: #fff;
-      position: absolute;
-      top: 10%;
-      opacity: 0.2;
-      left: 5%;
-    }
-
-    .blur {
-      position: absolute;
-      height: 50%;
-      top: 50%;
-      bottom: 0 !important;
-      left: 0;
-      overflow: hidden;
-      opacity: 1;
-      border-radius: 70% 0 0 0;
-      background: linear-gradient(90deg, #2d548a, $baseColor);
-    }
-
-    h1 {
-      padding: 20px;
-      padding-bottom: 10px;
-      text-transform: capitalize;
-      color: #fff;
-    }
-
-    h6 {
-      color: #c2c2c2;
-      padding: 10px;
-      font: 400 13px "Poppins", sans-serif;
-    }
-
-    .contact-header {
-      width: 850px;
-      margin: 10px auto;
-      margin-bottom: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-
-      nav {
-        width: 350px;
-        height: 70px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        flex-direction: column;
-        padding: 0;
-        transition: all 0.3s ease;
-
-        a {
-          width: 100%;
-          height: 100%;
-          text-decoration: none;
-          color: white;
-          font-size: 24px;
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-          flex-direction: column;
-          padding: 0;
-          transition: all 0.3s ease;
-
-          p {
-            font-size: 16px;
-          }
-        }
-
-        i {
-          color: white;
-        }
-        p {
-          padding: 0;
-          color: #dbd9d9;
-        }
-
-        &:hover {
-          background: rgb(216, 215, 215);
-          border-radius: 5px;
-          a {
-            i,
-            p {
-              color: $primaryColor;
-            }
-          }
-          i,
-          p {
-            color: $primaryColor;
-          }
-        }
-      }
-
-      @media screen and (max-width: 868px) {
-        width: 100%;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-    }
-
-    form {
-      width: 900px;
-      height: fit-content;
-      background: #fff;
-      position: relative;
-      margin: 10px auto;
-      padding: 20px;
-      border-radius: 5px;
-
-      h2 {
-        padding: 10px;
-        text-transform: capitalize;
-        width: 100%;
-        text-align: center;
-        color: #16367b;
-      }
-
-      .top-form {
-        width: 95%;
-        margin: auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .credentials {
-          width: 48%;
-          height: 300px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          flex-direction: column;
-
-          .input {
-            width: 100%;
-            height: 85px;
-
-            label {
-              text-align: left;
-              text-transform: capitalize;
-              display: block;
-              color: #16367b;
-              font: 700 18px "Poppins", sans-serif;
-              width: 100%;
-              padding: 2px 0 4px 0;
-            }
-
-            .input-field {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              border-radius: 3px;
-              background: #fffbfb;
-              box-shadow: 0 0 0.3px 1px #faf0f0;
-
-              i {
-                width: 15%;
-                height: 100%;
-                color: rgba(25, 24, 81, 0.7);
-              }
-
-              input {
-                width: 100%;
-                height: 50px;
-                display: block;
-                border: none;
-                background: inherit;
-                color: rgba(22, 53, 123, 0.54);
-                outline: none;
-              }
-            }
-          }
-        }
-
-        .message {
-          width: 48%;
-          height: 300px;
-
-          label {
-            text-align: left;
-            text-transform: capitalize;
-            display: block;
-            color: #16367b;
-            font: 800 18px "Poppins", sans-serif;
-            width: 100%;
-            padding: 2px 0 4px 0;
-          }
-
-          #message {
-            display: block;
-            width: 100%;
-            height: 90%;
-            padding: 10px 20px;
-            border: none;
-            background: #fffbfb;
-            box-shadow: 0 0 0.5px 3px #fffbfb;
-            border-radius: 3px;
-            box-shadow: 0 0 0.3px 1px #faf0f0;
-            outline: none;
-          }
-        }
-
-        @media screen and (max-width: 600px) {
-          flex-direction: column;
-          .credentials,
-          .message {
-            width: 100%;
-
-            input {
-              height: 95px;
-            }
-          }
-        }
-      }
-
-      .bottom-form {
-        width: 95%;
-        margin: auto;
-
-        h3 {
-          text-align: left;
-          text-transform: capitalize;
-          color: #16367b;
-          font: 800 19px "Poppins", sans-serif;
-          padding: 10px;
-          padding-left: 0;
-        }
-        .form-services {
-          width: 100%;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-
-          .service {
-            width: 31%;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 3px;
-            background: #f1f5f5;
-            cursor: pointer;
-
-            span {
-              text-transform: capitalize;
-              color: #16367b;
-              font: 500 16px Poppins, sans-serif;
-
-              @media screen and (max-width: 600px) {
-                font-size: 10px;
-
-                @media screen and (max-width: 300px) {
-                  font-size: 8px;
-                }
-              }
-            }
-          }
-        }
-      }
-      .btns {
-        width: 95%;
-        margin: auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 20px;
-
-        button {
-          width: 47%;
-          height: 60px;
-          background: #da7979;
-          border-radius: 3px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border: none;
-
-          i {
-            color: #fff;
-            margin-right: 10px;
-            font-size: 20px;
-          }
-          span {
-            color: #fff;
-            font: 500 18px "Poppins", sans-serif;
-            text-transform: capitalize;
-          }
-        }
-        @media screen and (max-width: 600px) {
-          flex-direction: column;
-          button {
-            width: 100%;
-            margin-bottom: 10px;
-          }
-        }
-      }
-
-      @media screen and (max-width: 905px) {
-        width: 99vw;
-      }
-    }
-  }
-
   .response-div {
     width: 100vw;
     height: fit-content;
@@ -1820,20 +1337,40 @@ main {
       top: 60vh;
     }
   }
-
-  .toTop {
+  .advertisement {
     width: 100vw;
-    height: max-content;
-    padding: 10px;
+    height: fit-content;
+    background: #072e54;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    margin: 0;
 
-    a {
-      text-decoration: none;
+    .toTop {
+      width: fit-content;
+      height: max-content;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-      &:hover {
-        color: mediumaquamarine;
+      a {
+        background: white;
+        padding: 5px 20px;
+        width: max-content;
+        height: max-content;
+        display: block;
+        border-radius: 6px;
+        text-decoration: none;
+        color: rgb(15, 66, 79);
+
+        &:hover {
+          color: rgb(240, 129, 157);
+        }
       }
     }
   }
