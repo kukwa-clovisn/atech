@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // axios.defaults.baseURL = "https://advancedtechacademy.herokuapp.com/";
-axios.defaults.baseURL = "http://localhost:9002";
-// axios.defaults.baseURL = "https://advancedtechacademy-api.onrender.com/";
+// axios.defaults.baseURL = "http://localhost:9002";
+axios.defaults.baseURL = "https://codingherald-api.biscaminvestmentsarl.com/";
 
 axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
   "accessToken"
