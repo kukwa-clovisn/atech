@@ -5,8 +5,8 @@ module.exports = {
   devServer: {
     proxy: {
       "/api": {
-        target: "http://localhost:9002",
-        // target: "https://codingherald.biscaminvestmentsarl.com",
+        // target: "http://localhost:9002",
+        target: "https://advancedtechacademy.netlify.app",
       },
     },
   },

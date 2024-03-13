@@ -406,7 +406,7 @@ main {
   background: #e7e7e7;
   background: #13253e;
   background: linear-gradient(to bottom, rgb(20, 92, 125), #13253e);
-
+  background: rgb(33, 85, 100);
   .fade-enter-from {
     transform: translateX(120vw);
   }
