@@ -124,12 +124,10 @@ export default {
       axios
         .post("api/forget_password", { email: user.email }, config)
         .then((res) => {
-          if (res.statusText === "OK") {
-            localStorage.setItem("updateToken", res.data.updateToken);
-            user.step1 = false;
-            user.step2 = true;
-            countdown();
-          }
+          localStorage.setItem("updateToken", res.data.updateToken);
+          user.step1 = false;
+          user.step2 = true;
+          countdown();
         })
         .catch((err) => {
           user.failed = true;
@@ -145,10 +143,8 @@ export default {
           config
         )
         .then((res) => {
-          if (res.statusText === "OK") {
-            user.step2 = false;
-            user.step3 = true;
-          }
+          user.step2 = false;
+          user.step3 = true;
         })
         .catch((err) => {
           user.failed = true;
@@ -168,11 +164,9 @@ export default {
           config
         )
         .then((res) => {
-          if (res.statusText === "OK") {
-            user.success = true;
-            user.msg = res.data.msg;
-            setTimeout(pop, 3000);
-          }
+          user.success = true;
+          user.msg = res.data.msg;
+          setTimeout(pop, 3000);
         })
         .catch((err) => {
           user.failed = true;
